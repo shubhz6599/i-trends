@@ -172,6 +172,55 @@
   }
 }
 
+/* Hover effect for the first card */
+.container1Main .card.hover-trigger-active:before {
+  clip-path: circle(300px at 80% -20%);
+}
+
+.container1Main .card.hover-trigger-active .imgBx {
+  top: 10%;
+  left: 10%;
+  transform: translateY(-60%);
+}
+
+.container1Main .card.hover-trigger-active .contentBx {
+  height: 210px;
+}
+
+.container1Main .card.hover-trigger-active .contentBx .color {
+  opacity: 1;
+  visibility: visible;
+}
+
+.container1Main .card.hover-trigger-active .contentBx a {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+/* Hover effect for the second card */
+.trans2.hover-trigger-active article {
+  --hover: 1;
+}
+
+.trans2.hover-trigger-active figure:after {
+  transform: translateX(calc(var(--hover) * 15%)) scale(calc(1 + (var(--hover) * 0.2)));
+}
+
+.trans2.hover-trigger-active img {
+  transform: translateX(calc(var(--hover) * -10%)) scale(calc(1 + (var(--hover) * 0.9)));
+}
+
+
+/* Hover effect for the third card */
+.maincardDoctor.hover-trigger-active::before {
+  top: -70%;
+  transform: skewY(390deg);
+}
+
+.maincardDoctor.hover-trigger-active .imgBox img {
+  max-width: 50%;
+}
+
 .container1Main {
   position: relative;
 }
