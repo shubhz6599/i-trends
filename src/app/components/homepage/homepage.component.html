@@ -1,0 +1,334 @@
+<nav class="fnav">
+    <!-- Logo -->
+    <img src="../../../assets/Images/itrendsLogo.png" alt="i-trends Logo" class="logo">
+
+    <!-- Hamburger Menu Button (for mobile) -->
+    <button class="hamburger" (click)="toggleMenu()">☰</button>
+
+    <!-- Search Bar and Menu Items -->
+    <div class="nav-content customFlex" [ngClass]="{ 'active': isMenuOpen }">
+        <div class="search-container">
+            <input type="text" placeholder="What are you looking for" class="search-bar">
+            <button class="search-button">🔍</button>
+        </div>
+        <div class="menu-items">
+            <p>Track Order</p>
+            <p>Cart</p>
+        </div>
+    </div>
+</nav>
+
+<nav class="snav">
+    <div class="nav-links">
+        <p>EYEGLASSES</p>
+        <p>KIDS GLASSES</p>
+        <p>COMPUTER GLASSES</p>
+        <p>SUNGLASSES</p>
+        <p>CONTACT LENSES</p>
+        <p>HOME EYE-TEST</p>
+        <p>STORE LOCATION</p>
+    </div>
+    <!-- <div class="nav-image">
+        <img src="https://static1.lenskart.com/media/desktop/img/May22/3dtryon1.png" alt="3D Try On">
+    </div> -->
+</nav>
+
+<div class="container1Main">
+    <div class="card">
+        <div class="imgBx">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/023/529/218/small/black-gold-glasses-isolated-png.png" alt="nike-air-shoe">
+        </div>
+
+        <div class="contentBx">
+
+            <h2>Trendy Specs</h2>
+
+    
+
+            <div class="color">
+
+                <h3>Color :</h3>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a routerLink="/buyProduct">Buy Now</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="trans2">
+    <article>
+        <figure>
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/049/589/946/small_2x/man-adjusting-his-glasses-focusing-intently-on-his-task-png.png" alt="">
+            <div class="cardDetails">
+                <h4>Cool Eyewears <br> Starting<span> <br> @149</span></h4>
+                <button class="trans2Btn">Buy Now</button>
+            </div>
+        </figure>
+    </article>
+</div>
+  
+
+<div class="lens">
+    <!-- <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
+    <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e10235-c7-eyeglasses_g_2374.jpg">
+    <img src="https://static1.lenskart.com/media/desktop/img/Sep21/image179.png">
+    <img src="https://static1.lenskart.com/media/desktop/img/Apr22/a2.png"> -->
+        <div class="card">
+            <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
+            <h4 class="customFont12">Test Sunglass Name</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
+            <div class="actions">
+                <button (click)="addToCart()" class="customBtn addTocart">Add to Cart</button>
+                <button (click)="buyNow()" class="customBtn buyNow">Buy Now</button>
+                <!-- <div class="quantity">
+                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
+                    <span>{{ quantity }}</span>
+                    <button (click)="increaseQuantity()" class="plusBtn">+</button>
+                </div> -->
+            </div>
+        </div>
+        <!-- Repeat the card structure for other items -->
+        <div class="card">
+            <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e10235-c7-eyeglasses_g_2374.jpg">
+            <h4 class="customFont12">Test Sunglass Name</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
+            <div class="actions">
+                <button (click)="addToCart()" class="customBtn addTocart">Add to Cart</button>
+                <button (click)="buyNow()" class="customBtn buyNow">Buy Now</button>
+                <!-- <div class="quantity">
+                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
+                    <span>{{ quantity }}</span>
+                    <button (click)="increaseQuantity()" class="plusBtn">+</button>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://static1.lenskart.com/media/desktop/img/Sep21/image179.png">
+            <h4 class="customFont12">Test Sunglass Name</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
+            <div class="actions">
+                <button (click)="addToCart()" class="customBtn addTocart">Add to Cart</button>
+                <button (click)="buyNow()" class="customBtn buyNow">Buy Now</button>
+                <!-- <div class="quantity">
+                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
+                    <span>{{ quantity }}</span>
+                    <button (click)="increaseQuantity()" class="plusBtn">+</button>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://static1.lenskart.com/media/desktop/img/Apr22/a2.png">
+            <h4 class="customFont12">Test Sunglass Name</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
+            <div class="actions">
+                <button (click)="addToCart()" class="customBtn addTocart">Add to Cart</button>
+                <button (click)="buyNow()" class="customBtn buyNow">Buy Now</button>
+                <!-- <div class="quantity">
+                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
+                    <span>{{ quantity }}</span>
+                    <button (click)="increaseQuantity()" class="plusBtn">+</button>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
+            <h4 class="customFont12">Test Sunglass Name</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
+            <div class="actions">
+                <button (click)="addToCart()" class="customBtn addTocart">Add to Cart</button>
+                <button (click)="buyNow()" class="customBtn buyNow">Buy Now</button>
+                <!-- <div class="quantity">
+                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
+                    <span>{{ quantity }}</span>
+                    <button (click)="increaseQuantity()" class="plusBtn" >+</button>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
+            <h4 class="customFont12">Test Sunglass Name</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
+            <div class="actions">
+                <button (click)="addToCart()" class="customBtn addTocart">Add to Cart</button>
+                <button (click)="buyNow()" class="customBtn buyNow">Buy Now</button>
+                <!-- <div class="quantity">
+                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
+                    <span>{{ quantity }}</span>
+                    <button (click)="increaseQuantity()" class="plusBtn" >+</button>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
+            <h4 class="customFont12">Test Sunglass Name</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
+            <div class="actions">
+                <button (click)="addToCart()" class="customBtn addTocart">Add to Cart</button>
+                <button (click)="buyNow()" class="customBtn buyNow">Buy Now</button>
+                <!-- <div class="quantity">
+                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
+                    <span>{{ quantity }}</span>
+                    <button (click)="increaseQuantity()" class="plusBtn" >+</button>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
+            <h4 class="customFont12">Test Sunglass Name</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
+            <div class="actions">
+                <button (click)="addToCart()" class="customBtn addTocart">Add to Cart</button>
+                <button (click)="buyNow()" class="customBtn buyNow">Buy Now</button>
+                <!-- <div class="quantity">
+                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
+                    <span>{{ quantity }}</span>
+                    <button (click)="increaseQuantity()" class="plusBtn" >+</button>
+                </div> -->
+            </div>
+        </div>
+</div>
+
+<div class="maincardDoctor">
+
+    <div class="imgBox">
+      <img src="https://srmglobalhospitals.com/wp-content/uploads/2023/12/Dr.-Venkatesan.png" alt="Specs" class="mouse">
+    </div>
+  
+    <div class="contentBox">
+      <h3>Book Experts Consultation</h3>
+      <h3>At Just</h3>
+      <h2 class="price">650<span>*</span></h2>
+      <a href="#" class="buy">Book Now</a>
+    </div>
+  
+  </div>
+
+
+
+
+
+<div class="main">
+    <img src="https://static1.lenskart.com/media/desktop/img/Oct22/kiara/Refresh-Banner-Web.gif">
+</div>
+<div class="main hidedesktop">
+    <div class="customD"></div>
+    <img src="../../../assets/Images/eyeglasses-wear-VEED.gif">
+</div>
+
+<div class ="cart">
+    <div class="card">
+        <img src="https://static1.lenskart.com/media/desktop/img/Apr22/b2.png">
+        <p>Rectangular</p>
+        <button class="exploreBtn">EXPLORE</button>
+    </div>
+
+    <div class="card">
+        <img src="https://static1.lenskart.com/media/desktop/img/Apr22/d2.png">
+        <p>Rounded</p>
+        <button class="exploreBtn">EXPLORE</button>
+    </div>
+
+    <div class="card">
+        <img src="https://static1.lenskart.com/media/desktop/img/June22/prog11.jpg">
+        <p>Rounded</p>
+        <button class="exploreBtn">EXPLORE</button>
+    </div>
+
+    <div class="card">
+        <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e10235-c7-eyeglasses_g_2374.jpg">
+        <p>Rounded</p>
+        <button class="exploreBtn">EXPLORE</button>
+    </div>
+</div>
+<div class="banner">
+    <h2>As Seen At New York Fashion Week</h2>
+    <div class="img">
+        <img src="https://static1.lenskart.com/media/desktop/img/Oct22/nyfw/web%20banner.gif">
+    </div>
+</div>
+
+<div class="banner">
+    <h2>FIND THE PERFECT FIT</h2>
+    <div class="two-img">
+        <img src="https://static1.lenskart.com/media/desktop/img/Nov20/25-Nov/Banner03_TileDesktop.jpg">
+        <img src="https://static1.lenskart.com/media/desktop/img/Aug21/Desktop/ce-square.jpg">
+    </div>
+</div>
+
+<div class="banner">
+    <h2>INTRODUCTION OJOS Wear - SAVE & SUBSCRIBE</h2>
+    <div class="img">
+        <img src="https://static1.lenskart.com/media/desktop/img/May22/ojos-web.jpg">
+    </div>
+</div>
+
+<div class="banner">
+    <h2>OUR BRANDS</h2>
+    <div class="img">
+        <img src="https://static1.lenskart.com/media/desktop/img/Aug21/Desktop/VC-Banner.jpg">
+    </div>
+</div>
+
+
+
+<div class="main-img">
+    <img src="https://static1.lenskart.com/media/desktop/img/Aug21/25-Aug/LK-AIR-Banner.jpg">
+</div>
+
+
+
+<div class="footer">
+    <div class="list">
+        <ul>
+            <li>
+                <h2>SERVICES</h2><br><br>
+                    <a>Visit Store</a><br><br>
+                    <a>Buying Guide</a><br><br>
+                    <a>Frame Size</a><br><br>
+                    <a>Check Power</a><br><br>
+            </li>
+        </ul>
+    </div>
+
+    <div class="list">
+        <ul>
+            <li>
+                <h2>ABOUT US</h2><br><br>
+                    <a>We Are Hiring</a><br><br>
+                    <a>Refer & Earn</a><br><br>
+                    <a>Follow Us</a><br><br>
+                    <a>i-trends Coupons</a><br><br>
+            </li>
+        </ul>
+    </div>
+
+    <div class="list">
+        <ul>
+            <li>
+                <h2>HELP</h2><br><br>
+                <a>Contact</a><br><br>
+                <a>Feedback</a><br><br>
+                <a>Details</a><br><br>
+            </li>
+        </ul>
+    </div>
+
+    <div class="list">
+        <ul>
+            <li>
+                <img src="https://static.lenskart.com/media/desktop/img/play-store.svg"><br><br>
+                <a>Designed By : Raj Mandal</a><br><br>
+            </li>
+        </ul>
+    </div>
+</div>
+
