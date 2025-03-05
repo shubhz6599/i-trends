@@ -1,162 +1,215 @@
-.w100{
-    width: 100%;
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,700);
+
+* {
+  box-sizing: border-box;
 }
-  h3 {
-    font-size: 0.7em;
-    letter-spacing: 1.2px;
-    color: #a6a6a6;
-  }
-  
-  img {
-    max-width: 100%;
-    filter: drop-shadow(1px 1px 3px #a6a6a6);
-  }
-  
-  /* ----- Product Section ----- */
-  .product {
-    display: grid;
-    grid-template-columns: 0.9fr 1fr;
-    margin: auto;
-    padding: 2.5em 0;
-    min-width: 100%;
-    background-color: white;
-    border-radius: 5px;
-  }
-  
-  /* ----- Photo Section ----- */
-  .product__photo {
-    position: relative;
-  }
-  
-  .photo-container {
-    position: absolute;
-    left: -2.5em;
-    display: grid;
-    grid-template-rows: 1fr;
-    width: 100%;
-    height: 100%;
-    border-radius: 6px;
-    box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
-  }
-  
-  .photo-main {
-    border-radius: 6px 6px 0 0;
-    background-color: #9be010;
-    background: radial-gradient(#e5f89e, #96e001);
-  }
-  .photo-main .controls {
+
+.mDiv {
+  /* background: #aedaa6; */
+  font-family: "Raleway";
+  padding: 20px;
+}
+
+.mDiv .card {
+  max-width: 650px;
+  width: 100%;
+  position: relative;
+  background: white;
+  margin: 0 auto;
+  top: 50%;
+  /* transform: translateY(-50%); */
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: all 0.3s;
+}
+
+.mDiv .card:hover {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.mDiv .card nav {
+  width: 100%;
+  color: #727272;
+  text-transform: uppercase;
+  padding: 20px;
+  border-bottom: 2px solid #efefef;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.mDiv .card nav svg.arrow {
+  float: left;
+  height: 15px;
+  width: 15px;
+  margin-right: 10px;
+}
+
+.mDiv .card .photo {
+  padding: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.mDiv .card .photo img {
+  max-height: 240px;
+  width: 100%;
+  height: auto;
+}
+
+.mDiv .card .description {
+  padding: 30px;
+  width: 100%;
+}
+
+.mDiv .card .description h1 {
+  color: #515151;
+  font-weight: 300;
+  padding-top: 15px;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+
+.mDiv .card .description h2 {
+  color: #515151;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.mDiv .card .description h4 {
+  margin: 0;
+  color: #727272;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.mDiv .card .description p {
+  font-size: 12px;
+  line-height: 20px;
+  color: #727272;
+  padding: 20px 0;
+  margin: 0;
+}
+
+.mDiv .card .description button {
+  outline: 0;
+  border: 0;
+  background: none;
+  border: 1px solid #d9d9d9;
+  padding: 8px 0px;
+  margin-bottom: 30px;
+  color: #515151;
+  text-transform: uppercase;
+  width: 100%;
+  font-family: inherit;
+  margin-right: 5px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.mDiv .card .description button:hover {
+  border: 1px solid #aedaa6;
+  color: #aedaa6;
+  cursor: pointer;
+}
+
+.quantity-selector {
+  margin-bottom: 10px;
+}
+
+.customBtn {
+  background-color: darkgray !important;
+  color: white !important;
+  margin-bottom: 10px !important;
+}
+
+.select {
+  position: relative;
+  min-width: 200px;
+}
+
+.select img {
+  position: absolute;
+  right: 12px;
+  top: calc(50% - 3px);
+  width: 10px;
+  height: 6px;
+  stroke-width: 2px;
+  stroke: #9098a9;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.select select {
+  -webkit-appearance: none;
+  padding: 7px 40px 7px 12px;
+  width: 100%;
+  border: 1px solid #e8eaed;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 1px 3px -2px #9098a9;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  transition: all 150ms ease;
+}
+
+.select select:required:invalid {
+  color: #5a667f;
+}
+
+.select select option {
+  color: #223254;
+}
+
+.select select option[value=""][disabled] {
+  display: none;
+}
+
+.select select:focus {
+  outline: none;
+  border-color: #07f;
+  box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.2);
+}
+
+
+.mDiv .card .description .color-options {
+  margin: 20px 0;
+}
+
+
+
+.mDiv .card .description .color-options .color-option {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #ddd;
+}
+
+.mDiv .card .description .color-options .color-option:hover {
+  border: 2px solid #aedaa6;
+}
+
+@media (min-width: 768px) {
+  .mDiv .card {
     display: flex;
-    justify-content: space-between;
-    padding: 0.8em;
-    color: #fff;
+    flex-wrap: wrap;
   }
-  .photo-main .controls i {
-    cursor: pointer;
+
+  .mDiv .card .photo {
+    width: 45%;
   }
-  .photo-main img {
-    position: absolute;
-    left: -3.5em;
-    top: 2em;
-    max-width: 100%;
-    filter: saturate(150%) contrast(120%) hue-rotate(10deg) drop-shadow(1px 20px 10px rgba(0, 0, 0, 0.3));
+
+  .mDiv .card .description {
+    width: 55%;
+    border-left: 2px solid #efefef;
   }
-  
-  .photo-album {
-    padding: 0.7em 1em;
-    border-radius: 0 0 6px 6px;
-    background-color: #fff;
-  }
-  .photo-album ul {
-    display: flex;
-    justify-content: space-around;
-  }
-  .photo-album li {
-    float: left;
-    width: 55px;
-    height: 55px;
-    padding: 7px;
-    border: 1px solid #a6a6a6;
-    border-radius: 3px;
-  }
-  
-  /* ----- Informations Section ----- */
-  .product__info {
-    padding: 0.8em 0;
-  }
-  
-  .title h1 {
-    margin-bottom: 0.1em;
-    color: #4c4c4c;
-    font-size: 1.5em;
-    font-weight: 900;
-  }
-  .title span {
-    font-size: 0.7em;
-    color: #a6a6a6;
-  }
-  
-  .price {
-    margin: 1.5em 0;
-    color: #ff3f40;
-    font-size: 1.2em;
-  }
-  .price span {
-    padding-left: 0.15em;
-    font-size: 2.9em;
-  }
-  
-  .variant {
-    overflow: auto;
-  }
-  .variant h3 {
-    margin-bottom: 1.1em;
-  }
-  .variant li {
-    float: left;
-    width: 35px;
-    height: 35px;
-    padding: 3px;
-    border: 1px solid transparent;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  .variant li:first-child, .variant li:hover {
-    border: 1px solid #a6a6a6;
-  }
-  .variant li:not(:first-child) {
-    margin-left: 0.1em;
-  }
-  
-  .description {
-    clear: left;
-    margin: 2em 0;
-  }
-  .description h3 {
-    margin-bottom: 1em;
-  }
-  .description ul {
-    font-size: 0.8em;
-    list-style: disc;
-    margin-left: 1em;
-  }
-  .description li {
-    text-indent: -0.6em;
-    margin-bottom: 0.5em;
-  }
-  
-  .buy--btn {
-    padding: 1.5em 3.1em;
-    border: none;
-    border-radius: 7px;
-    font-size: 0.8em;
-    font-weight: 700;
-    letter-spacing: 1.3px;
-    color: #fff;
-    background-color: #ff3f40;
-    box-shadow: 2px 2px 25px -7px #4c4c4c;
-    cursor: pointer;
-  }
-  .buy--btn:active {
-    transform: scale(0.97);
-  }
-  
+}
