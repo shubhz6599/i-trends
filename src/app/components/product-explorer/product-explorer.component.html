@@ -1,0 +1,81 @@
+<div class="explorer-container">
+  <!-- Category Header -->
+  <div class="category-header" *ngIf="currentCategory">
+    <h1>{{currentCategory.name}}</h1>
+    <p class="category-description">{{currentCategory.description}}</p>
+  </div>
+  <!-- <div class="color-filter">
+    <button class="color-option all-colors" (click)="filterByColor('')" [class.active]="!selectedColor">
+      All Colors
+    </button>
+    <button *ngFor="let color of availableColors" class="color-option" [style.background]="getColorCode(color)"
+      (click)="filterByColor(color)" [class.active]="selectedColor === color" [title]="color"></button>
+  </div> -->
+</div>
+
+<!-- Products Grid View -->
+<div class="products-grid" *ngIf="!selectedProduct">
+  <div class="product-card" *ngFor="let product of filteredProducts" (click)="selectProduct(product)">
+    <div class="image-container">
+      <img [src]="product.variants[0].images[0]" [alt]="product.name">
+    </div>
+    <div class="product-info">
+      <h3>{{product.name}}</h3>
+      <p class="price">From ₹{{product.basePrice}}</p>
+      <div class="color-options">
+        <span *ngFor="let variant of product.variants" class="color-dot" [style.background]="variant.colorCode"
+          [title]="variant.color"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Detail View -->
+<div class="product-detail" *ngIf="selectedProduct && selectedVariant">
+  <button class="back-button" (click)="resetSelections()">
+    ← Back to Collection
+  </button>
+
+  <div class="detail-container">
+    <div class="image-gallery">
+      <div class="main-image">
+        <img [src]="currentMainImage || selectedVariant.images[0]" [alt]="selectedProduct.name">
+      </div>
+      <div class="thumbnail-container">
+        <div class="thumbnail" *ngFor="let img of selectedVariant.images" (click)="setMainImage(img)"
+          [class.active]="currentMainImage === img || (!currentMainImage && img === selectedVariant.images[0])">
+          <img [src]="img" [alt]="selectedProduct.name + ' thumbnail'">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <h2>{{selectedProduct.name}}</h2>
+      <p class="price">₹{{getFinalPrice()}}</p>
+      <p class="description">{{selectedProduct.description}}</p>
+
+      <!-- Color Variant Selector -->
+      <div class="variant-selector">
+        <h4>Select Color:</h4>
+        <div class="color-options">
+          <button *ngFor="let color of availableColors" class="color-option" [style.background]="getColorCode(color)"
+            (click)="selectColor(color)" [class.active]="selectedColor === color" [title]="color"></button>
+        </div>
+      </div>
+
+
+      <!-- Features -->
+      <div class="features">
+        <h4>Features</h4>
+        <ul>
+          <li *ngFor="let feature of selectedProduct.features">{{feature}}</li>
+        </ul>
+      </div>
+
+      <!-- Add to Cart -->
+      <button class="add-to-cart" [disabled]="!selectedVariant.inStock">
+        {{selectedVariant.inStock ? 'Add to Cart' : 'Out of Stock'}}
+      </button>
+    </div>
+  </div>
+</div>

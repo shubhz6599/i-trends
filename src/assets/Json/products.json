@@ -1,0 +1,110 @@
+{
+  "categories": [
+    {
+      "id": "Square",
+      "name": "Square Frames",
+      "description": "Classic Square eyewear for all face shapes",
+      "products": [
+        {
+          "id": "rd-101",
+          "name": "Vintage Square",
+          "description": "Retro-inspired Square frames with modern comfort",
+          "basePrice": 1799,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "../../../assets/Images/Square/DSC_0192.jpg",
+                "../../../assets/Images/Square/DSC_0193.jpg"
+              ],
+              "inStock": true,
+              "priceModifier": 0
+            },
+            {
+              "color": "Light Cyan",
+              "colorCode": "#008B8B",
+              "images": ["../../../assets/Images/Square/DSC_0191.jpg"],
+              "inStock": true,
+              "priceModifier": 0
+            },
+            {
+              "color": "Blue",
+              "colorCode": "#090979",
+              "images": [
+                "../../../assets/Images/Square/DSC_0190.jpg",
+                "../../../assets/Images/Square/DSC_0196.jpg",
+                "../../../assets/Images/Square/DSC_0197.jpg"
+              ],
+              "inStock": true,
+              "priceModifier": 0
+            }
+          ],
+          "features": ["Acetate frame", "Spring hinges", "UV400 protection"]
+        },
+        {
+          "id": "rd-102",
+          "name": "Transparent Square - Dual Tone",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2199,
+          "variants": [
+            {
+              "color": "Transparent - Dual Tone",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "../../../assets/Images/DualTone/DSC_0194.jpg",
+                "../../../assets/Images/DualTone/DSC_0195.jpg",
+                "../../../assets/Images/DualTone/DSC_0198.jpg",
+                "../../../assets/Images/DualTone/DSC_0199.jpg",
+                "../../../assets/Images/DualTone/DSC_0200.jpg",
+                "../../../assets/Images/DualTone/DSC_0201.jpg",
+                "../../../assets/Images/DualTone/DSC_0216.jpg",
+                "../../../assets/Images/DualTone/DSC_0217.jpg"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            },
+            {
+              "color": "Transparent - Dual Tone",
+              "colorCode": "#FFFFFF00",
+              "images": [],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        }
+      ]
+    },
+    {
+      "id": "square",
+      "name": "Square Frames",
+      "description": "Bold square frames for a statement look",
+      "products": [
+        {
+          "id": "sq-201",
+          "name": "Classic Square",
+          "description": "Timeless square frames with thin profile",
+          "basePrice": 1599,
+          "variants": [
+            {
+              "color": "Silver",
+              "colorCode": "#C0C0C0",
+              "images": [
+                "assets/square/classic-silver-1.jpg",
+                "assets/square/classic-silver-2.jpg"
+              ],
+              "inStock": true,
+              "priceModifier": 0
+            }
+          ],
+          "features": [
+            "Stainless steel",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        }
+      ]
+    }
+  ]
+}

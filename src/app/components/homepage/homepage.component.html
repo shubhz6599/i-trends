@@ -9,7 +9,7 @@
   <div class="nav-content customFlex" [ngClass]="{ 'active': isMenuOpen }">
     <div class="search-container">
       <input type="text" placeholder="What are you looking for" class="search-bar">
-      <button class="search-button">🔍</button>
+      <button class="search-button"></button>
     </div>
     <div class="menu-items">
       <p>Track Order</p>
@@ -75,11 +75,8 @@
 </div>
 
 
-<div class="lens">
-  <!-- <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
-    <img src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e10235-c7-eyeglasses_g_2374.jpg">
-    <img src="https://static1.lenskart.com/media/desktop/img/Sep21/image179.png">
-    <img src="https://static1.lenskart.com/media/desktop/img/Apr22/a2.png"> -->
+<!-- <div class="lens">
+
   <div class="card">
     <img
       src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
@@ -89,14 +86,9 @@
       <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
       <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow" routerLink="/buyProduct">Buy
         Now</button>
-      <!-- <div class="quantity">
-                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
-                    <span>{{ quantity }}</span>
-                    <button (click)="increaseQuantity()" class="plusBtn">+</button>
-                </div> -->
+
     </div>
   </div>
-  <!-- Repeat the card structure for other items -->
   <div class="card">
     <img
       src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e10235-c7-eyeglasses_g_2374.jpg">
@@ -105,11 +97,6 @@
     <div class="actions">
       <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
       <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-      <!-- <div class="quantity">
-                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
-                    <span>{{ quantity }}</span>
-                    <button (click)="increaseQuantity()" class="plusBtn">+</button>
-                </div> -->
     </div>
   </div>
 
@@ -120,11 +107,6 @@
     <div class="actions">
       <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
       <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-      <!-- <div class="quantity">
-                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
-                    <span>{{ quantity }}</span>
-                    <button (click)="increaseQuantity()" class="plusBtn">+</button>
-                </div> -->
     </div>
   </div>
 
@@ -135,11 +117,6 @@
     <div class="actions">
       <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
       <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-      <!-- <div class="quantity">
-                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
-                    <span>{{ quantity }}</span>
-                    <button (click)="increaseQuantity()" class="plusBtn">+</button>
-                </div> -->
     </div>
   </div>
 
@@ -151,11 +128,6 @@
     <div class="actions">
       <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
       <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-      <!-- <div class="quantity">
-                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
-                    <span>{{ quantity }}</span>
-                    <button (click)="increaseQuantity()" class="plusBtn" >+</button>
-                </div> -->
     </div>
   </div>
 
@@ -167,11 +139,6 @@
     <div class="actions">
       <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
       <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-      <!-- <div class="quantity">
-                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
-                    <span>{{ quantity }}</span>
-                    <button (click)="increaseQuantity()" class="plusBtn" >+</button>
-                </div> -->
     </div>
   </div>
 
@@ -183,11 +150,6 @@
     <div class="actions">
       <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
       <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-      <!-- <div class="quantity">
-                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
-                    <span>{{ quantity }}</span>
-                    <button (click)="increaseQuantity()" class="plusBtn" >+</button>
-                </div> -->
     </div>
   </div>
 
@@ -199,14 +161,9 @@
     <div class="actions">
       <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
       <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-      <!-- <div class="quantity">
-                    <button (click)="decreaseQuantity()" class="minusBtn">-</button>
-                    <span>{{ quantity }}</span>
-                    <button (click)="increaseQuantity()" class="plusBtn" >+</button>
-                </div> -->
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="maincardDoctor hover-trigger">
 
@@ -237,29 +194,62 @@
 
 <div class="cart">
   <div class="card">
-    <img src="https://static1.lenskart.com/media/desktop/img/Apr22/b2.png">
-    <p>Rectangular</p>
+    <div class="image-flipper">
+      <img src="../../../assets/Images/Frames/SquareMain.JPG" class="flipper-image front">
+      <img src="../../../assets/Images/Frames/SquareMain2.jpg" class="flipper-image back" alt="Square Frame Alternate">
+    </div>
+    <p>Square</p>
+    <button class="exploreBtn" (click)="navigate('Square')">EXPLORE</button>
+  </div>
+
+  <div class="card">
+    <div class="image-flipper">
+      <img src="../../../assets/Images/Frames/SquareMain12X.JPG" class="flipper-image front">
+      <img src="../../../assets/Images/Frames/SquareMain12X2.JPG" class="flipper-image back"
+        alt="Square Frame Alternate">
+    </div>
+    <p>12X Square</p>
     <button class="exploreBtn">EXPLORE</button>
   </div>
 
   <div class="card">
-    <img src="https://static1.lenskart.com/media/desktop/img/Apr22/d2.png">
-    <p>Rounded</p>
+    <div class="image-flipper">
+      <img src="../../../assets/Images/Frames/Rimless.jpg" class="flipper-image front">
+      <img src="../../../assets/Images/Frames/Rimless2.jpg" class="flipper-image back" alt="Square Frame Alternate">
+    </div>
+    <p>Rim Less</p>
     <button class="exploreBtn">EXPLORE</button>
   </div>
 
   <div class="card">
-    <img src="https://static1.lenskart.com/media/desktop/img/June22/prog11.jpg">
+    <div class="image-flipper">
+      <img src="../../../assets/Images/Frames/Rounded.jpg" class="flipper-image front">
+      <img src="../../../assets/Images/Frames/Rounded2.jpg" class="flipper-image back" alt="Square Frame Alternate">
+    </div>
     <p>Rounded</p>
     <button class="exploreBtn">EXPLORE</button>
   </div>
 
+
   <div class="card">
-    <img
-      src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e10235-c7-eyeglasses_g_2374.jpg">
-    <p>Rounded</p>
+    <div class="image-flipper">
+      <img src="../../../assets/Images/Frames/Huslr.jpg" class="flipper-image front">
+      <img src="../../../assets/Images/Frames/Huslr2.jpg" class="flipper-image back" alt="Square Frame Alternate">
+    </div>
+    <p>Huslr</p>
     <button class="exploreBtn">EXPLORE</button>
   </div>
+
+  <div class="card">
+    <div class="image-flipper">
+      <img src="../../../assets/Images/Frames/Unisex.jpg" class="flipper-image front">
+      <img src="../../../assets/Images/Frames/Unisex2.jpg" class="flipper-image back" alt="Square Frame Alternate">
+    </div>
+    <p>Unisex Sunglasses</p>
+    <button class="exploreBtn">EXPLORE</button>
+  </div>
+
+
 </div>
 <div class="banner">
   <h2>As Seen At New York Fashion Week</h2>

@@ -9,6 +9,7 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
 import { LayoutComponent } from './components/layout/layout.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductExplorerComponent } from './components/product-explorer/product-explorer.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BottomNavbarComponent,
     LayoutComponent,
     ProductDetailsComponent,
+    ProductExplorerComponent,
   ],
   imports: [
     BrowserModule,

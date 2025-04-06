@@ -821,7 +821,7 @@
   height: 10%;
   z-index: 99;
   position: absolute;
-  top: 274%;
+  top: 235%;
 }
 
 /* Common Styles */
@@ -864,58 +864,121 @@
 
 /* Card styling */
 .cart .card {
-  border: 1px solid #e0e0e0;
+  width: 220px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  margin: 15px;
+  background: white;
   display: flex;
   flex-direction: column;
+  height: auto;
+  /* Remove fixed height */
+}
+
+
+.image-flipper {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  /* Fixed height for container */
+  display: flex;
+  justify-content: center;
   align-items: center;
-  /* Center content horizontally */
-  width: 100%;
-  /* Adjust width as needed */
-  background: #fff;
-  padding: 10px;
-  text-align: center;
-  /* Center text */
+  background: #f8f8f8;
+  /* Neutral background */
+  padding: 15px;
+  /* Add some padding */
 }
 
-/* Card image */
-.cart .card img {
-  width: 100%;
-  height: 150px;
-  /* Fixed height for images */
-  object-fit: cover;
-  /* Ensure images cover the area */
-  border-radius: 10px 10px 0 0;
-  /* Rounded corners for the top */
+/* Image styles */
+.flipper-image {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  /* Ensures full image is visible */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  will-change: transform, opacity;
+  /* Improves performance */
 }
 
-/* Paragraph styling */
+/* Front image */
+.flipper-image.front {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+
+/* Back image */
+.flipper-image.back {
+  opacity: 0;
+  transform: scale(0.95);
+  z-index: 1;
+}
+
+/* Animation */
+@keyframes smoothFlip {
+
+  0%,
+  45% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50%,
+  95% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.flipper-image.front {
+  animation: smoothFlip 4s infinite;
+}
+
+.flipper-image.back {
+  animation: smoothFlip 4s infinite reverse;
+}
+
+/* Card content */
 .cart .card p {
-  font-size: 1rem;
-  margin: 10px 0;
+  font-size: 14px;
+  font-weight: 600;
   color: #333;
+  margin: 12px 0 8px;
+  padding: 0 10px;
+  text-align: center;
 }
 
 /* Explore button */
 .cart .card .exploreBtn {
-  padding: 10px 20px;
+  display: block;
+  width: 80%;
+  margin: 0 auto 15px;
+  padding: 8px 0;
+  background: #1abc9c;
+  color: white;
   border: none;
-  border-radius: 5px;
-  background: #007bff;
-  /* Blue color */
-  color: #fff;
-  font-size: 0.9rem;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: auto;
-  /* Push button to the bottom */
+  transition: all 0.3s ease;
 }
 
 .cart .card .exploreBtn:hover {
-  background: #0056b3;
-  /* Darker blue on hover */
+  background: #16a085;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .banner h2 {
@@ -967,6 +1030,7 @@
   }
 
   .nav-content {
+    z-index: 10000;
     display: none;
     flex-direction: column;
     width: 100%;
@@ -1037,6 +1101,7 @@
   .menu-items {
     flex-direction: column;
     gap: 10px;
+    color: black;
   }
 
   /* Show the nav content when the menu is open */

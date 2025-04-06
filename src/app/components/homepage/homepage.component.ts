@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -7,9 +8,33 @@ import { AfterViewInit, Component } from '@angular/core';
 })
 export class HomepageComponent implements AfterViewInit {
   isMenuOpen = false; // State to track menu visibility
-
+  constructor(private router: Router) { }
   ngAfterViewInit(): void {
     this.observeCards();
+    this.initImageFlipper();
+  }
+  initImageFlipper() {
+    const flippers = document.querySelectorAll('.image-flipper');
+
+    Array.from(flippers).forEach((flipper: Element) => {
+      const images = flipper.querySelectorAll('.flipper-image');
+      if (images.length !== 2) return; // Ensure we have exactly 2 images
+
+      const frontImg = images[0] as HTMLElement;
+      const backImg = images[1] as HTMLElement;
+      let showFront = true;
+
+      setInterval(() => {
+        if (showFront) {
+          frontImg.style.opacity = '0';
+          backImg.style.opacity = '1';
+        } else {
+          frontImg.style.opacity = '1';
+          backImg.style.opacity = '0';
+        }
+        showFront = !showFront;
+      }, 1000);
+    });
   }
 
   observeCards(): void {
@@ -61,5 +86,9 @@ export class HomepageComponent implements AfterViewInit {
     if (this.quantity > 1) {
       this.quantity--;
     }
+  }
+
+  navigate(name: any) {
+    this.router.navigateByUrl(`category/${name}`)
   }
 }
