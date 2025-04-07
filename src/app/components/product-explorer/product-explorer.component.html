@@ -4,6 +4,11 @@
     <h1>{{currentCategory.name}}</h1>
     <p class="category-description">{{currentCategory.description}}</p>
   </div>
+  <div class="product-detail" *ngIf="!selectedProduct && !selectedVariant">
+    <button class="back-button" (click)="navigateToHome()">
+      ← Back to Collection
+    </button>
+  </div>
   <!-- <div class="color-filter">
     <button class="color-option all-colors" (click)="filterByColor('')" [class.active]="!selectedColor">
       All Colors
@@ -31,6 +36,7 @@
 </div>
 
 <!-- Product Detail View -->
+
 <div class="product-detail" *ngIf="selectedProduct && selectedVariant">
   <button class="back-button" (click)="resetSelections()">
     ← Back to Collection

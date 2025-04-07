@@ -15,8 +15,8 @@
               "color": "Black",
               "colorCode": "#000000",
               "images": [
-                "../../../assets/Images/Square/DSC_0192.jpg",
-                "../../../assets/Images/Square/DSC_0193.jpg"
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0192.jpg?alt=media&token=fa9ea1c2-f622-4da7-a14e-7f20176beab7",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0193.jpg?alt=media&token=b6384044-de1f-4988-831f-b81dab5a8fc6"
               ],
               "inStock": true,
               "priceModifier": 0
@@ -24,7 +24,9 @@
             {
               "color": "Light Cyan",
               "colorCode": "#008B8B",
-              "images": ["../../../assets/Images/Square/DSC_0191.jpg"],
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0191.jpg?alt=media&token=1d6d90a6-c063-45ba-a732-582e13b4fecc"
+              ],
               "inStock": true,
               "priceModifier": 0
             },
@@ -32,9 +34,9 @@
               "color": "Blue",
               "colorCode": "#090979",
               "images": [
-                "../../../assets/Images/Square/DSC_0190.jpg",
-                "../../../assets/Images/Square/DSC_0196.jpg",
-                "../../../assets/Images/Square/DSC_0197.jpg"
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0190.jpg?alt=media&token=b3d83bdf-307f-4b5c-9800-01d544fa64e3",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0196.jpg?alt=media&token=8d66b7fa-8a95-48f2-bc91-c0c08798bf87",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0197.jpg?alt=media&token=025bccbe-e329-45e8-a684-240789fb00b4"
               ],
               "inStock": true,
               "priceModifier": 0
@@ -44,35 +46,408 @@
         },
         {
           "id": "rd-102",
-          "name": "Transparent Square - Dual Tone",
+          "name": "Transparent Square - Dual Tone(Silver & Black )",
           "description": "Contemporary take on Square frames",
           "basePrice": 2199,
           "variants": [
             {
-              "color": "Transparent - Dual Tone",
+              "color": "Silver&Black",
               "colorCode": "#FFFFFF00",
               "images": [
-                "../../../assets/Images/DualTone/DSC_0194.jpg",
-                "../../../assets/Images/DualTone/DSC_0195.jpg",
-                "../../../assets/Images/DualTone/DSC_0198.jpg",
-                "../../../assets/Images/DualTone/DSC_0199.jpg",
-                "../../../assets/Images/DualTone/DSC_0200.jpg",
-                "../../../assets/Images/DualTone/DSC_0201.jpg",
-                "../../../assets/Images/DualTone/DSC_0216.jpg",
-                "../../../assets/Images/DualTone/DSC_0217.jpg"
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/DualTone%2FDSC_0198.jpg?alt=media&token=ca9d05f8-c7ac-4d1d-b147-4b20adb38e28",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/DualTone%2FDSC_0199.jpg?alt=media&token=8119ff09-2316-4ee6-828c-e84782c5272e"
               ],
-              "inStock": true,
-              "priceModifier": 200
-            },
-            {
-              "color": "Transparent - Dual Tone",
-              "colorCode": "#FFFFFF00",
-              "images": [],
               "inStock": true,
               "priceModifier": 200
             }
           ],
           "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-103",
+          "name": "Transparent Square - Dual Tone(Gold & Black)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2199,
+          "variants": [
+            {
+              "color": "Gold&Black",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/DualTone%2FDSC_0200.jpg?alt=media&token=49804769-e21e-4e89-b538-fe1e3800ee56",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/DualTone%2FDSC_0201.jpg?alt=media&token=a1c48d28-9a4e-48a2-977b-23ce20a17eab"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-104",
+          "name": "Transparent Square - Mix Tone",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Mix",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/DualTone%2FDSC_0216.jpg?alt=media&token=4f8f0a17-a556-4fc1-8e4e-1f65d5602ddb",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/DualTone%2FDSC_0217.jpg?alt=media&token=e5d38163-11e3-403f-a167-4ca13d826ad1"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-105",
+          "name": "Transparent Square - Single Tone(Pistachio green)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "PistachioGreen",
+              "colorCode": "#ACD3A8",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0202.jpg?alt=media&token=d3d8b72b-255a-444f-bf63-7002dac23a77",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0203.jpg?alt=media&token=e08562cd-fd9e-4e48-94bc-d6df2e213e3f"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-106",
+          "name": "Transparent Square - Double Tone",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2099,
+          "variants": [
+            {
+              "color": "Blue&Gold",
+              "colorCode": "#090979",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0206.jpg?alt=media&token=7e0f3b57-7d6a-415f-9afd-2d84ef52f887",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0207.jpg?alt=media&token=7a53250b-cc44-4b2b-a6c6-7a21fa003c26"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            },
+            {
+              "color": "Purple&Gold",
+              "colorCode": "#C599B6",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0210.jpg?alt=media&token=7209e9cf-2f95-4cac-b82b-7e506e478e81",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0213.jpg?alt=media&token=fd7fdf90-c41c-4e3b-95b5-7f84b7722918"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            },
+            {
+              "color": "Silver&Gold",
+              "colorCode": "#FFF085",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0208.jpg?alt=media&token=088a9fbc-f376-411d-ae1a-9fdf542bde75",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0209.jpg?alt=media&token=75823ac9-dead-4419-b504-f1ee5f9f98c8"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            },
+            {
+              "color": "PistachioGold",
+              "colorCode": "#ACD3A8",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0214.jpg?alt=media&token=867bc8b5-7b44-4ed4-9b3a-83add19b6af9",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0215.jpg?alt=media&token=c760d9cf-4de5-4f5d-85e5-7c53486b7438"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            },
+            {
+              "color": "BeigeGold",
+              "colorCode": "#F8F4E1",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0204.jpg?alt=media&token=2b0f847f-8c04-4644-af5e-2e4db593e57a",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0205.jpg?alt=media&token=e24791d9-032e-488d-9aa5-87a1f3708597"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-110",
+          "name": "Transparent Square - Tripple Tone(Black Brown Blue)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "BlackBrownBlue",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0216.jpg?alt=media&token=65192212-d523-4fa1-b34a-f62f4e489cb8",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0217.jpg?alt=media&token=08a3ed13-3a1f-436c-b351-e70b7515c11d"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-111",
+          "name": "Transparent Square - Double Tone(Light-Purple Gold)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Light&Purple",
+              "colorCode": "#CDC1FF",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0218.jpg?alt=media&token=6f77db4d-7aa0-4a65-b841-61ff7048e3d5",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0219.jpg?alt=media&token=f944d971-6e45-4985-81a0-2e52d8375ce7"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-112",
+          "name": "Vintage Square - Double Tone(Black Silver)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0220.jpg?alt=media&token=57b89290-d5c2-4342-99b9-42a2d7a9464b",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0221.jpg?alt=media&token=85d311e2-eb90-4ab6-9538-d9f225ea2486"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            },
+            {
+              "color": "Silver",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0222.jpg?alt=media&token=c73312cb-1a50-4177-a7bb-79eda15381d4",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0223.jpg?alt=media&token=7e8516b3-6b6e-486e-b673-8962a4837c1c"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-114",
+          "name": "Transparent Square - Double Tone(Transparent Black)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "TransparentBlack",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0224.jpg?alt=media&token=50dc8beb-9dfd-4d68-ad66-6f7e5e348731",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0225.jpg?alt=media&token=4e8dbdc4-e934-4ba3-9b43-eeddd9a74c41"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-115",
+          "name": "Formal Square - Single Tone(Black)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 1699,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0226.jpg?alt=media&token=efbf52c0-1029-4120-84ce-81f9a2ea2d98",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0227.jpg?alt=media&token=711ad65a-664b-416a-b115-02570caa6584"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-116",
+          "name": "Transparent Sage - Dual Tone(Sage & Light Green)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Sage&LightGreen",
+              "colorCode": "#ACD3A8",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0228.jpg?alt=media&token=34c13472-35b7-473a-a403-424ceaeb8a78",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0229.jpg?alt=media&token=a0d039ae-2c96-4929-bb62-9ba02f198355"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-117",
+          "name": "Transparent Brown - Mix Tone(Light Brown & Blue & Silver)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Mix",
+              "colorCode": "#A55B4B",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0228.jpg?alt=media&token=34c13472-35b7-473a-a403-424ceaeb8a78",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0229.jpg?alt=media&token=a0d039ae-2c96-4929-bb62-9ba02f198355"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-118",
+          "name": "Transparent Black Gold - Dual Tone(Black & Gold)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Gold&Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0232.jpg?alt=media&token=54f317a3-a1be-42a1-adba-e7b4544c6039",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0233.jpg?alt=media&token=c74cd392-6e73-4eac-9928-67df9d1969f4"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-120",
+          "name": "Square Blue Silver - Dual Tone(Blue & Silver)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Silver&Blue",
+              "colorCode": "#090979",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0234.jpg?alt=media&token=31fee4b0-5ae2-499f-9052-63cec4b14b1c",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0235.jpg?alt=media&token=c7542af6-2a98-4af8-b371-be9f1f038c13"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-121",
+          "name": "Square Black Gold - Dual Tone(Black & Gold)",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Gold&Black",
+              "colorCode": "#FEBA17",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0236.jpg?alt=media&token=0563fd10-ed2c-4f14-b55e-dfed586501de",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0237.jpg?alt=media&token=b5614222-5649-4379-9b42-74ad60680eca"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-122",
+          "name": "Single Tone Transparent",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Transparent",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0238.jpg?alt=media&token=a2236656-fd3b-4d38-bfa5-40ea86912dbd",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0239.jpg?alt=media&token=37035750-da04-41d1-9b96-cd45b8ae22e0",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0240.jpg?alt=media&token=f5847e59-f2d4-4c6a-bb76-114b5f0f2902",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0241.jpg?alt=media&token=902b076a-accb-4481-b8da-4f569fad0f20",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0260.jpg?alt=media&token=23e9f595-6244-407e-aa38-781ffeedf829"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-123",
+          "name": "Square Premium - Single Tone",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0262.jpg?alt=media&token=c983b452-a830-438b-85dd-a7b53ab74037",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0263.jpg?alt=media&token=604550ab-f95f-4ecc-9700-035833c59358"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            },
+            {
+              "color": "Blue",
+              "colorCode": "#090979",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0264.jpg?alt=media&token=40d71cb1-7ebe-4c40-a5ae-12f17ff26684",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0265.jpg?alt=media&token=609e917f-b3cd-4fad-864c-93daf89951a5"
+              ],
+              "inStock": true,
+              "priceModifier": 0
+            }
+          ],
+          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+        },
+        {
+          "id": "rd-124",
+          "name": "Square Plain Premium - Single Tone",
+          "description": "Contemporary take on Square frames",
+          "basePrice": 2499,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0278.jpg?alt=media&token=755c74e9-5bac-416c-846e-48a5222046fd",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Square%2FDSC_0280.jpg?alt=media&token=93f30ef7-f5c5-4f13-a68c-3de499dcc884"
+              ],
+              "inStock": true,
+              "priceModifier": 200
+            }
+          ],
+          "features": ["Fiber frame", "Adjustable nose pads", "Lightweight"]
         }
       ]
     },

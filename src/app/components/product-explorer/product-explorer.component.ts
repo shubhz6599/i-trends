@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import productsData from '../../../assets/Json/products.json';
 
 interface Variant {
@@ -41,7 +41,7 @@ export class ProductExplorerComponent implements OnInit {
   filteredProducts: Product[] = [];
   currentMainImage: string = ''; // Track currently displayed main image
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -60,6 +60,10 @@ export class ProductExplorerComponent implements OnInit {
       if (variant) return variant.colorCode;
     }
     return '#ffffff';
+  }
+
+  navigateToHome() {
+    this.router.navigateByUrl('/home')
   }
 
   setMainImage(imgUrl: string): void {

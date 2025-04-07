@@ -864,17 +864,20 @@
 
 /* Card styling */
 .cart .card {
+  flex: 0 0 auto;
   width: 220px;
+  border: 1px solid #ccc;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-  margin: 15px;
-  background: white;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  height: auto;
-  /* Remove fixed height */
+  justify-content: space-between;
+  padding: 15px 10px;
+  /* Add padding for better spacing */
+  background-color: white;
+  /* Ensure consistent background color */
 }
 
 
@@ -952,34 +955,56 @@
 /* Card content */
 .cart .card p {
   font-size: 14px;
+  /* Adjust font size for better readability */
   font-weight: 600;
+  /* Make text bold */
   color: #333;
   margin: 12px 0 8px;
-  padding: 0 10px;
-  text-align: center;
+  /* Add spacing above and below the text */
 }
 
-/* Explore button */
 .cart .card .exploreBtn {
-  display: block;
-  width: 80%;
-  margin: 0 auto 15px;
-  padding: 8px 0;
-  background: #1abc9c;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  font-size: 12px;
+  width: 35%;
+  /* Adjust button width to fit nicely */
+  padding: 8px;
+  /* Add padding for better button size */
+  font-size: 14px;
+  /* Adjust font size */
   font-weight: 600;
+  /* Make text bold */
+  color: white;
+  background-color: #1abc9c;
+  /* Use teal color for the button */
+  border: none;
+  border-radius: 25px;
+  /* Add rounded corners */
+  margin: 10px auto;
+  /* Center the button */
   cursor: pointer;
   transition: all 0.3s ease;
+  /* Smooth transition for hover effects */
 }
 
 .cart .card .exploreBtn:hover {
-  background: #16a085;
+  background-color: #16a085;
+  /* Darker teal color on hover */
   transform: translateY(-2px);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* Slight lift effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  /* Add shadow on hover */
 }
+
+.cart .card img {
+  width: 100%;
+  /* Ensure the image fits the card width */
+  height: auto;
+  /* Maintain aspect ratio */
+  margin-bottom: 10px;
+  /* Add spacing below the image */
+}
+
+/* Explore button */
+
 
 .banner h2 {
   text-align: center;
@@ -1090,7 +1115,15 @@
     /* Reduce gap for mobile */
   }
 
+  .cart .card {
+    width: 180px;
+    /* Adjust card width for smaller screens */
+  }
 
+  .cart .card button {
+    width: 90%;
+    /* Make button slightly wider on smaller screens */
+  }
 
   /* Adjust search bar and menu items for mobile */
   .search-container {
@@ -1176,7 +1209,24 @@
 
   .cart .card {
     width: 100%;
-    margin: 10px 0;
+    /* Use full width for very small screens */
+  }
+
+  .cart .card img {
+    margin-bottom: 5px;
+    /* Reduce spacing below the image */
+  }
+
+  .cart .card p {
+    font-size: 12px;
+    /* Smaller font size for smaller screens */
+  }
+
+  .cart .card button {
+    padding: 6px;
+    /* Smaller padding for buttons */
+    font-size: 12px;
+    /* Adjust font size */
   }
 
   .banner h2 {
