@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import productsData from '../../../assets/Json/products.json';
 
@@ -31,7 +31,7 @@ interface Category {
   templateUrl: './product-explorer.component.html',
   styleUrls: ['./product-explorer.component.css']
 })
-export class ProductExplorerComponent implements OnInit {
+export class ProductExplorerComponent implements OnInit, OnDestroy {
   categories: Category[] = productsData.categories;
   currentCategory: Category | null = null;
   selectedProduct: Product | null = null;
@@ -39,8 +39,24 @@ export class ProductExplorerComponent implements OnInit {
   selectedColor: string | null = null;
   availableColors: string[] = [];
   filteredProducts: Product[] = [];
-  currentMainImage: string = ''; // Track currently displayed main image
+  currentMainImage: string = '';
+  selectedQuantity: any = "Select Quantity";
+  quantityOptions: any[] = ["Select Quantity", 1, 2, 3, 4, 5];
+  imageLoaded: boolean = false;
+  loadingMessages = [
+    "Carrots are healthy for eyes!",
+    "Did you know: Blinking helps keep eyes moist",
+    "20-20-20 rule: Every 20 minutes, look 20 feet away for 20 seconds",
+    "The human eye can distinguish about 10 million different colors",
+    "Your eyes contain about 107 million light-sensitive cells",
+    "Eyes are the second most complex organ after the brain",
+    "The average person blinks 15-20 times per minute",
+    "Wearing sunglasses protects your eyes from UV damage",
+    "The cornea is the only tissue in the body without blood vessels",
+    "Eye exercises can help reduce digital eye strain"
+  ];
 
+  currentLoadingMessage = this.loadingMessages[0];
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -51,6 +67,11 @@ export class ProductExplorerComponent implements OnInit {
       this.resetSelections();
       this.updateAvailableColors();
     });
+  }
+  onImageLoad(): void {
+    this.imageLoaded = true;
+    const randomIndex = Math.floor(Math.random() * this.loadingMessages.length);
+    this.currentLoadingMessage = this.loadingMessages[randomIndex];
   }
 
   getColorCode(colorName: string): string {
@@ -63,11 +84,36 @@ export class ProductExplorerComponent implements OnInit {
   }
 
   navigateToHome() {
-    this.router.navigateByUrl('/home')
+    this.router.navigateByUrl('/home');
   }
 
+  // Add to your component
+  private imageLoadTimeout: any;
+
   setMainImage(imgUrl: string): void {
-    this.currentMainImage = imgUrl; // Update the current main image
+    this.imageLoaded = false;
+    this.currentMainImage = imgUrl;
+
+    // Clear any existing timeout
+    if (this.imageLoadTimeout) {
+      clearTimeout(this.imageLoadTimeout);
+    }
+
+    // Set a timeout (e.g., 10 seconds)
+    this.imageLoadTimeout = setTimeout(() => {
+      if (!this.imageLoaded) {
+        console.warn('Image load timed out:', imgUrl);
+        this.imageLoaded = true; // Give up trying to show loading indicator
+        // Optionally set a fallback image here
+      }
+    }, 10000);
+  }
+
+  // Don't forget to clear timeout in ngOnDestroy
+  ngOnDestroy(): void {
+    if (this.imageLoadTimeout) {
+      clearTimeout(this.imageLoadTimeout);
+    }
   }
 
   resetSelections(): void {
@@ -75,6 +121,7 @@ export class ProductExplorerComponent implements OnInit {
     this.selectedVariant = null;
     this.selectedColor = null;
     this.currentMainImage = '';
+    this.selectedQuantity = "Select Quantity";
   }
 
   updateAvailableColors(): void {
@@ -104,9 +151,14 @@ export class ProductExplorerComponent implements OnInit {
   selectProduct(product: Product): void {
     this.selectedProduct = product;
     this.selectedVariant = product.variants[0];
-    this.currentMainImage = this.selectedVariant.images[0]; // Set initial main image
+    this.currentMainImage = this.selectedVariant.images[0];
+    this.imageLoaded = false;
+    this.selectedColor = this.selectedVariant.color;
     this.updateAvailableColorsForProduct();
+    console.log(this.selectedVariant);
+
   }
+
 
 
   updateAvailableColorsForProduct(): void {
@@ -118,13 +170,16 @@ export class ProductExplorerComponent implements OnInit {
 
   selectVariant(variant: Variant): void {
     this.selectedVariant = variant;
-    this.currentMainImage = variant.images[0]; // Reset to first image when variant changes
+    this.currentMainImage = variant.images[0];
+    this.imageLoaded = false;
+    this.selectedColor = variant.color;
   }
 
   getFinalPrice(): number {
     if (!this.selectedProduct || !this.selectedVariant) return 0;
     return this.selectedProduct.basePrice + this.selectedVariant.priceModifier;
   }
+
   selectColor(color: string): void {
     this.selectedColor = color;
     if (!this.selectedProduct) return;
@@ -134,8 +189,37 @@ export class ProductExplorerComponent implements OnInit {
     );
 
     if (variant) {
-      this.selectedVariant = variant;
-      this.currentMainImage = variant.images[0];
+      this.selectVariant(variant);
     }
+  }
+
+  addToCart(): void {
+    if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
+
+    // Implement your add to cart logic here
+    console.log('Added to cart:', {
+      product: this.selectedProduct.name,
+      variant: this.selectedVariant.color,
+      quantity: this.selectedQuantity,
+      price: this.getFinalPrice()
+    });
+
+    // Optional: Show confirmation or navigate to cart
+    // this.router.navigate(['/cart']);
+  }
+
+  buyNow(): void {
+    if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
+
+    // Implement your buy now logic here
+    console.log('Buy now:', {
+      product: this.selectedProduct.name,
+      variant: this.selectedVariant.color,
+      quantity: this.selectedQuantity,
+      price: this.getFinalPrice()
+    });
+
+    // Optional: Navigate to checkout
+    // this.router.navigate(['/checkout']);
   }
 }
