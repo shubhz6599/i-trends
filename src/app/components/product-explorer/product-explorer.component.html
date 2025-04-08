@@ -1,17 +1,18 @@
 <div class="explorer-container">
   <!-- Category Header -->
   <div class="category-header" *ngIf="currentCategory && !selectedProduct">
-    <h1>{{currentCategory.name}}</h1>
-    <p class="category-description">{{currentCategory.description}}</p>
+    <h1 class="cursiveFont">{{currentCategory.name}}</h1>
+    <p class="category-description cursiveFont">{{currentCategory.description}}</p>
   </div>
+
 
   <!-- Products Grid View -->
   <div class="products-grid" *ngIf="!selectedProduct">
     <div class="product-card" *ngFor="let product of filteredProducts" (click)="selectProduct(product)">
       <div class="image-container">
-        <img [src]="product.variants[0].images[0]" [alt]="product.name">
+        <img [src]="product.variants[0].images[0]" [alt]="product.name" loading="lazy">
       </div>
-      <div class="product-info">
+      <div class="product-info cursiveFont">
         <h3>{{product.name}}</h3>
         <p class="price">From ₹{{product.basePrice}}</p>
         <div class="color-options">

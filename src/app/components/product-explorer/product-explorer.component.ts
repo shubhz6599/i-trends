@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import productsData from '../../../assets/Json/products.json';
+import { ImagePreloaderService } from 'src/app/services/image-preloader.service';
 
 interface Variant {
   color: string;
@@ -57,16 +58,41 @@ export class ProductExplorerComponent implements OnInit, OnDestroy {
   ];
 
   currentLoadingMessage = this.loadingMessages[0];
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  isLoading: boolean = true;
+  categoryId: string | any = '';
+  products: any[] = [];
+  cachedImages: string[] = [];
+  constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const categoryId = params.get('category');
-      this.currentCategory = this.categories.find(c => c.id === categoryId) || null;
+      this.categoryId = params.get('category');
+      this.currentCategory = this.categories.find(c => c.id === this.categoryId) || null;
       this.filteredProducts = this.currentCategory?.products || [];
+      this.fetchCategoryImages();
       this.resetSelections();
       this.updateAvailableColors();
     });
+  }
+  fetchCategoryImages(): void {
+    this.isLoading = true; // Show loader
+    this.cachedImages = this.imagePreloader.getCategoryImages(this.categoryId); // Get cached images
+    this.products = this.getCategoryProducts(); // Load products dynamically
+
+    // If there are uncached images, preload them sequentially
+    if (this.cachedImages.length < this.products.length) {
+      this.imagePreloader.preloadCategoryImages(this.categoryId);
+    }
+
+    setTimeout(() => {
+      this.isLoading = false; // Hide loader after images are fetched
+    }, 2000); // Simulate loading delay (adjust based on real data fetching time)
+  }
+
+
+  getCategoryProducts(): any[] {
+    const category = productsData.categories.find((cat) => cat.id === this.categoryId);
+    return category?.products || [];
   }
   onImageLoad(): void {
     this.imageLoaded = true;

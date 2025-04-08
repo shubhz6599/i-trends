@@ -7,13 +7,17 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ProductExplorerComponent } from './components/product-explorer/product-explorer.component';
 
 const routes: Routes = [
-  { path: '', component: LayoutComponent },
-  { path: 'home', component: LayoutComponent },
-  { path: 'buyProduct', component: ProductDetailsComponent },
   {
-    path: 'category/:category',
-    component: ProductExplorerComponent
-  }
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomepageComponent },
+      { path: 'category/:category', component: ProductExplorerComponent },
+      { path: 'buyProduct', component: ProductDetailsComponent },
+    ],
+  },
+
 ];
 
 @NgModule({

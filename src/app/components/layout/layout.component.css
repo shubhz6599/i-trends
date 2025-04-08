@@ -1,0 +1,20 @@
+/* layout.component.css */
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* Full viewport height */
+}
+
+router-outlet {
+  flex: 1;
+  /* Allow content to take up the remaining space */
+}
+
+app-bottom-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  /* Ensure it stays above other elements */
+}

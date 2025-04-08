@@ -1,18 +1,133 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ImagePreloaderService } from 'src/app/services/image-preloader.service';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  styleUrls: ['./homepage.component.css'],
 })
-export class HomepageComponent implements AfterViewInit {
+export class HomepageComponent implements OnInit, AfterViewInit {
   isMenuOpen = false; // State to track menu visibility
-  constructor(private router: Router) { }
+  isLoading = true; // State to track image loading for placeholders
+  imagesLoaded = 0;
+  totalImages = 2;
+
+  images = [
+    {
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FSquareMain.jpg?alt=media&token=4c5f425b-103f-4669-8864-c2b4a86ff870',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FSquareMain2.jpg?alt=media&token=ebe68f96-cc01-48df-ac16-b4c266a242d7',
+      title: 'Square Frames',
+      category: 'Square',
+      loaded: false, // Placeholder visibility
+      frontLoaded: false,
+      backLoaded: false,
+    },
+    {
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FSquareMain12X.jpg?alt=media&token=9fd9c3ea-b95b-459a-a254-5525b6718a0e',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FSquareMain12X2.jpg?alt=media&token=39fe9500-1dd5-40d6-9bd0-e8d8ce05156b',
+      title: '12X Square Frames',
+      category: 'Square',
+      loaded: false, // Placeholder visibility
+      frontLoaded: false,
+      backLoaded: false,
+    },
+    {
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRimless.jpg?alt=media&token=fa26679b-febc-4c46-affe-b98fc22296a3',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRimless2.jpg?alt=media&token=2569f6bc-03d1-4ea8-b01c-b034be9e95b1',
+      title: 'Rim Less Frames',
+      category: 'RimLess',
+      loaded: false, // Placeholder visibility
+      frontLoaded: false,
+      backLoaded: false,
+    },
+    {
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRounded.jpg?alt=media&token=b6dc8604-4da4-4ad5-86d5-b58a45628d52',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRounded2.jpg?alt=media&token=e68216e4-2286-48d6-9672-ca30f1b0db89',
+      title: 'Rounded Frames',
+      category: 'Rounded',
+      loaded: false, // Placeholder visibility
+      frontLoaded: false,
+      backLoaded: false,
+    },
+    {
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FHuslr.jpg?alt=media&token=fffacfee-42a4-4b5a-992a-3e9063706d67',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FHuslr2.jpg?alt=media&token=6bb29f8c-57bd-42d2-9f1c-57fc677f265c',
+      title: 'Huslr Frames',
+      category: 'Huslr',
+      loaded: false, // Placeholder visibility
+      frontLoaded: false,
+      backLoaded: false,
+    },
+    {
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FUnisex.jpg?alt=media&token=ec671f5d-765b-49c8-a8c1-e42ef882aa1f',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FUnisex2.jpg?alt=media&token=adcaa9ae-7427-4130-9ba6-7e4cd110ea1f',
+      title: 'Unisex Sunglasses',
+      category: 'Unisex',
+      loaded: false, // Placeholder visibility
+      frontLoaded: false,
+      backLoaded: false,
+    },
+  ];
+  constructor(private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef) { }
+
+  ngOnInit(): void {
+    this.imagePreloader.lazyLoadHomePageImages();
+
+    this.imagePreloader.preloadCategoryImages('Square');
+
+
+    // this.checkImageCache();
+  }
+
   ngAfterViewInit(): void {
     this.observeCards();
     this.initImageFlipper();
   }
+
+  navigate(categoryId: string): void {
+    console.log(categoryId);
+
+    this.imagePreloader.preloadCategoryImages(categoryId); // Preload selected category images
+    this.router.navigateByUrl(`category/${categoryId}`); // Redirect to specific category
+  }
+
+  checkImageCache(): void {
+    this.images.forEach((image, index) => {
+      const frontInCache = this.imagePreloader.imageCache.has(image.front);
+      const backInCache = this.imagePreloader.imageCache.has(image.back);
+
+      if (frontInCache && backInCache) {
+        console.log("found");
+
+        // If both images are cached, mark as loaded immediately
+        this.images[index].frontLoaded = true;
+        this.images[index].backLoaded = true;
+        this.images[index].loaded = true;
+      }
+    });
+  }
+
+  onImageLoaded(index: number, side: 'front' | 'back'): void {
+
+    this.ngZone.run(() => {
+      const image = this.images[index];
+
+      if (side === 'front') {
+        image.frontLoaded = true;
+      } else {
+        image.backLoaded = true;
+      }
+
+      // Check if both images are loaded
+      if (image.frontLoaded && image.backLoaded) {
+        image.loaded = true;
+        console.log(`Both images loaded for ${image.title}`); // Debug log
+      }
+    });
+    this.cdr.detectChanges()
+  }
+
   initImageFlipper() {
     const flippers = document.querySelectorAll('.image-flipper');
 
@@ -40,55 +155,27 @@ export class HomepageComponent implements AfterViewInit {
   observeCards(): void {
     const cards = document.querySelectorAll('.hover-trigger');
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('hover-trigger-active');
-        } else {
-          entry.target.classList.remove('hover-trigger-active');
-        }
-      });
-    }, {
-      threshold: 0.5 // Adjust this value to control when the effect triggers
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('hover-trigger-active');
+          } else {
+            entry.target.classList.remove('hover-trigger-active');
+          }
+        });
+      },
+      {
+        threshold: 0.5, // Adjust this value to control when the effect triggers
+      }
+    );
 
-    cards.forEach(card => {
+    cards.forEach((card) => {
       observer.observe(card);
     });
   }
 
-  // Function to toggle menu
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  quantity = 1; // Default quantity
-  cartCount = 0; // Cart count
-
-  // Function to add item to cart
-  addToCart() {
-    this.cartCount += this.quantity;
-    alert(`${this.quantity} item(s) added to cart!`);
-  }
-
-  // Function to buy now
-  buyNow() {
-    alert(`Buying ${this.quantity} item(s) now!`);
-  }
-
-  // Function to increase quantity
-  increaseQuantity() {
-    this.quantity++;
-  }
-
-  // Function to decrease quantity
-  decreaseQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
-    }
-  }
-
-  navigate(name: any) {
-    this.router.navigateByUrl(`category/${name}`)
   }
 }

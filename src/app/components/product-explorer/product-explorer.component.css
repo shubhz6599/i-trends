@@ -1,7 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
 /* Base Styles */
 .explorer-container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 5px;
+  background-color: linen;
+  border-radius: 10px;
+}
+
+/* Back Button Styling */
+
+
+
+
+.back-button:active {
+  transform: translateY(0);
+  /* Reset lift effect on click */
 }
 
 /* Category Header */
@@ -45,11 +64,11 @@
 
 .image-container {
   aspect-ratio: 1/1;
-  background: #f5f6fa;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 5px;
 }
 
 .image-container img {
@@ -290,7 +309,7 @@
 
 /* Loading animation styles */
 .image-loading {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -444,4 +463,8 @@
   .product-info h3 {
     font-size: 1rem;
   }
+}
+
+.cursiveFont {
+  font-family: cursive;
 }
