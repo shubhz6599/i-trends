@@ -205,7 +205,7 @@
       <img [src]="image.back" class="flipper-image back" (load)="onImageLoaded(i, 'back')" alt="Square Frame Back">
     </div>
     <div class="placeholder" *ngIf="!image.loaded">
-      <p>Loading...</p>
+      <!-- <p class="grey">Loading...</p> -->
     </div>
     <p>{{ image.title }}</p>
     <button class="exploreBtn" (click)="navigate(image.category)">EXPLORE</button>
