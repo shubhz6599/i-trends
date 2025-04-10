@@ -288,8 +288,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         this.showDiscountPercent = false;
         this.showFinalPrice = true;
         this.cdr.detectChanges();
-      }, 1000);
-    }, 1000);
+      }, 2000);
+    }, 2000);
   }
 
   showPriceWithDiscount() {
