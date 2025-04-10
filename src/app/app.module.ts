@@ -10,6 +10,8 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductExplorerComponent } from './components/product-explorer/product-explorer.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { PaymentProcessComponent } from './components/payment-process/payment-process.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ProductExplorerComponent } from './components/product-explorer/product-
     LayoutComponent,
     ProductDetailsComponent,
     ProductExplorerComponent,
+    ErrorPageComponent,
+    PaymentProcessComponent,
   ],
   imports: [
     BrowserModule,

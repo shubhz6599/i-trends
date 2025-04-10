@@ -1,0 +1,81 @@
+<div class="payment-container">
+  <h2 class="page-title">Checkout</h2>
+  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <!-- Customer Name -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" class="form-control" formControlName="name" placeholder="Enter your name" />
+      <div *ngIf="paymentForm.get('name')?.invalid && paymentForm.get('name')?.touched" class="error">
+        Name is required.
+      </div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-group">
+      <label for="address">Address</label>
+      <textarea id="address" class="form-control" formControlName="address" rows="4"
+        placeholder="Enter your address"></textarea>
+      <div *ngIf="paymentForm.get('address')?.invalid && paymentForm.get('address')?.touched" class="error">
+        Address is required.
+      </div>
+    </div>
+
+    <!-- Contact Number -->
+    <div class="form-group">
+      <label for="contact">Contact Number</label>
+      <input type="text" id="contact" class="form-control" formControlName="contact"
+        placeholder="Enter your contact number" />
+      <div *ngIf="paymentForm.get('contact')?.invalid && paymentForm.get('contact')?.touched" class="error">
+        Contact number is required and must be valid.
+      </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="form-group">
+      <label for="paymentMethod">Payment Method</label>
+      <select id="paymentMethod" class="form-control" formControlName="paymentMethod">
+        <option value="">Select Payment Method</option>
+        <option value="creditCard">Credit Card</option>
+        <option value="debitCard">Debit Card</option>
+        <option value="paypal">PayPal</option>
+        <option value="cashOnDelivery">Cash on Delivery</option>
+      </select>
+      <div *ngIf="paymentForm.get('paymentMethod')?.invalid && paymentForm.get('paymentMethod')?.touched" class="error">
+        Please select a payment method.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="paymentForm.invalid">
+      Proceed to Payment
+    </button>
+  </form>
+
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background-color: #2c3e50; color: white;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmationModalLabel">Order Confirmation</h5>
+          <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            We currently do not support automated payments. To confirm your order, please click "OK" to send the order
+            details directly to the owner via WhatsApp.
+
+            Important: For accurate processing, kindly refrain from modifying the system-generated WhatsApp message.
+            Simply click "Send."
+
+            Thank you for your cooperation!
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click)="redirectToWhatsApp()">OK</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

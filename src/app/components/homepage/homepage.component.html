@@ -40,33 +40,29 @@
     <div class="imgBx">
       <img
         src="https://static.vecteezy.com/system/resources/thumbnails/045/948/372/small_2x/modern-eyeglasses-isolated-on-background-png.png"
-        alt="nike-air-shoe">
+        alt="Trending_Eye_Frame">
     </div>
 
     <div class="contentBx">
 
       <h2>Trendy Specs</h2>
+      <p>Stylish, durable eyewear designed to match your personality and make a statement.</p>
 
-
-
-      <div class="color">
-
-        <h3>Color :</h3>
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="offer">
+        <marquee><strong>*Exclusive Offer:</strong> Get a free lens upgrade with your first purchase!</marquee>
       </div>
-      <a routerLink="/buyProduct">Buy Now</a>
+
+
+
     </div>
 
   </div>
 </div>
-
 <div class="trans2 hover-trigger">
   <article>
     <figure class="">
       <img
-        src="https://static.vecteezy.com/system/resources/thumbnails/049/589/946/small_2x/man-adjusting-his-glasses-focusing-intently-on-his-task-png.png"
+        src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2F0a83f3d6-5867-46ae-826e-e81163baa977_removalai_preview.png?alt=media&token=351ee7a3-ef6e-45ff-a614-fd19ebaf8a1c"
         alt="">
       <div class="cardDetails">
         <h4>Cool Eyewears <br> Starting<span> <br> @149</span></h4>
@@ -76,96 +72,22 @@
   </article>
 </div>
 
-
-<!-- <div class="lens">
-
-  <div class="card">
-    <img
-      src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
-    <h4 class="customFont12">Test Sunglass Name</h4>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
-    <div class="actions">
-      <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
-      <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow" routerLink="/buyProduct">Buy
-        Now</button>
-
+<div class="cart">
+  <h2 class="section-heading">
+    <span>Shop by</span> <strong>Category</strong>
+  </h2>
+  <div class="card" *ngFor="let image of images; let i = index">
+    <!-- Placeholder that shows until both images are loaded -->
+    <div class="image-flipper" [ngClass]="{ 'visible': image.loaded, 'hidden': !image.loaded }">
+      <img [src]="image.front" class="flipper-image front" (load)="onImageLoaded(i, 'front')" alt="Square Frame Front">
+      <img [src]="image.back" class="flipper-image back" (load)="onImageLoaded(i, 'back')" alt="Square Frame Back">
     </div>
+    <div class="placeholder" *ngIf="!image.loaded"></div>
+    <p>{{ image.title }}</p>
+    <button class="exploreBtn" (click)="navigate(image.category)">EXPLORE</button>
   </div>
-  <div class="card">
-    <img
-      src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e10235-c7-eyeglasses_g_2374.jpg">
-    <h4 class="customFont12">Test Sunglass Name</h4>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
-    <div class="actions">
-      <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
-      <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-    </div>
-  </div>
+</div>
 
-  <div class="card">
-    <img src="https://static1.lenskart.com/media/desktop/img/Sep21/image179.png">
-    <h4 class="customFont12">Test Sunglass Name</h4>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
-    <div class="actions">
-      <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
-      <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://static1.lenskart.com/media/desktop/img/Apr22/a2.png">
-    <h4 class="customFont12">Test Sunglass Name</h4>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
-    <div class="actions">
-      <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
-      <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <img
-      src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
-    <h4 class="customFont12">Test Sunglass Name</h4>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
-    <div class="actions">
-      <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
-      <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <img
-      src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
-    <h4 class="customFont12">Test Sunglass Name</h4>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
-    <div class="actions">
-      <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
-      <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <img
-      src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
-    <h4 class="customFont12">Test Sunglass Name</h4>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
-    <div class="actions">
-      <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
-      <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <img
-      src="https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/371x178/9df78eab33525d08d6e5fb8d27136e95//j/o/john-jacobs-jj-e11675-c1-eyeglasses_g_1122_2.jpg">
-    <h4 class="customFont12">Test Sunglass Name</h4>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequatur?</p>
-    <div class="actions">
-      <button (click)="addToCart()" routerLink="/buyProduct" class="customBtn addTocart">Add to Cart</button>
-      <button (click)="buyNow()" routerLink="/buyProduct" class="customBtn buyNow">Buy Now</button>
-    </div>
-  </div>
-</div> -->
 
 <div class="maincardDoctor hover-trigger">
 
@@ -197,20 +119,7 @@
     loading="lazy">
 </div>
 
-<div class="cart">
-  <div class="card" *ngFor="let image of images; let i = index">
-    <!-- Placeholder that shows until both images are loaded -->
-    <div class="image-flipper" [ngClass]="{ 'visible': image.loaded, 'hidden': !image.loaded }">
-      <img [src]="image.front" class="flipper-image front" (load)="onImageLoaded(i, 'front')" alt="Square Frame Front">
-      <img [src]="image.back" class="flipper-image back" (load)="onImageLoaded(i, 'back')" alt="Square Frame Back">
-    </div>
-    <div class="placeholder" *ngIf="!image.loaded">
-      <!-- <p class="grey">Loading...</p> -->
-    </div>
-    <p>{{ image.title }}</p>
-    <button class="exploreBtn" (click)="navigate(image.category)">EXPLORE</button>
-  </div>
-</div>
+
 
 
 <div class="banner">

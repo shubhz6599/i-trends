@@ -15,8 +15,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
   images = [
     {
-      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FSquareMain.jpg?alt=media&token=4c5f425b-103f-4669-8864-c2b4a86ff870',
-      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FSquareMain2.jpg?alt=media&token=ebe68f96-cc01-48df-ac16-b4c266a242d7',
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0220.jpg?alt=media&token=89e9d23f-bc48-4121-8f07-1d7597f35fbd',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0221.jpg?alt=media&token=340515a4-4bf3-46ef-95db-6da4312afd46',
       title: 'Square Frames',
       category: 'Square',
       loaded: false, // Placeholder visibility
@@ -27,7 +27,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FSquareMain12X.jpg?alt=media&token=9fd9c3ea-b95b-459a-a254-5525b6718a0e',
       back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FSquareMain12X2.jpg?alt=media&token=39fe9500-1dd5-40d6-9bd0-e8d8ce05156b',
       title: '12X Square Frames',
-      category: 'Square',
+      category: '12X Square Frames',
       loaded: false, // Placeholder visibility
       frontLoaded: false,
       backLoaded: false,
@@ -36,7 +36,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRimless.jpg?alt=media&token=fa26679b-febc-4c46-affe-b98fc22296a3',
       back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRimless2.jpg?alt=media&token=2569f6bc-03d1-4ea8-b01c-b034be9e95b1',
       title: 'Rim Less Frames',
-      category: 'RimLess',
+      category: 'Rim Less Frames',
       loaded: false, // Placeholder visibility
       frontLoaded: false,
       backLoaded: false,
@@ -45,7 +45,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRounded.jpg?alt=media&token=b6dc8604-4da4-4ad5-86d5-b58a45628d52',
       back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRounded2.jpg?alt=media&token=e68216e4-2286-48d6-9672-ca30f1b0db89',
       title: 'Rounded Frames',
-      category: 'Rounded',
+      category: 'Rounded Frames',
       loaded: false, // Placeholder visibility
       frontLoaded: false,
       backLoaded: false,
@@ -53,8 +53,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     {
       front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FHuslr.jpg?alt=media&token=fffacfee-42a4-4b5a-992a-3e9063706d67',
       back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FHuslr2.jpg?alt=media&token=6bb29f8c-57bd-42d2-9f1c-57fc677f265c',
-      title: 'Huslr Frames',
-      category: 'Huslr',
+      title: 'Husler Frames ',
+      category: 'Husler Frames',
       loaded: false, // Placeholder visibility
       frontLoaded: false,
       backLoaded: false,
@@ -63,7 +63,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FUnisex.jpg?alt=media&token=ec671f5d-765b-49c8-a8c1-e42ef882aa1f',
       back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FUnisex2.jpg?alt=media&token=adcaa9ae-7427-4130-9ba6-7e4cd110ea1f',
       title: 'Unisex Sunglasses',
-      category: 'Unisex',
+      category: 'Unisex Sunglasses',
       loaded: false, // Placeholder visibility
       frontLoaded: false,
       backLoaded: false,
@@ -74,7 +74,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.imagePreloader.lazyLoadHomePageImages();
 
-    this.imagePreloader.preloadCategoryImages('Square');
+    // this.imagePreloader.preloadCategoryImages('Square');
 
 
     // this.checkImageCache();
@@ -92,21 +92,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     this.router.navigateByUrl(`category/${categoryId}`); // Redirect to specific category
   }
 
-  checkImageCache(): void {
-    this.images.forEach((image, index) => {
-      const frontInCache = this.imagePreloader.imageCache.has(image.front);
-      const backInCache = this.imagePreloader.imageCache.has(image.back);
-
-      if (frontInCache && backInCache) {
-        console.log("found");
-
-        // If both images are cached, mark as loaded immediately
-        this.images[index].frontLoaded = true;
-        this.images[index].backLoaded = true;
-        this.images[index].loaded = true;
-      }
-    });
-  }
 
   onImageLoaded(index: number, side: 'front' | 'back'): void {
 
@@ -122,7 +107,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       // Check if both images are loaded
       if (image.frontLoaded && image.backLoaded) {
         image.loaded = true;
-        console.log(`Both images loaded for ${image.title}`); // Debug log
       }
     });
     this.cdr.detectChanges()

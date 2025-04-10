@@ -9,30 +9,53 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 5px;
-  background-color: linen;
+  background-color: mintcream;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  height: 108%;
 }
 
 /* Back Button Styling */
 
-
-
-
-.back-button:active {
-  transform: translateY(0);
-  /* Reset lift effect on click */
+.backBtn {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
+
+.backBtn:active,
+.backBtn:hover {
+  color: #007bff;
+  /* Change color on hover */
+}
+
+.backBtn i,
+nav i {
+  margin-right: 5px;
+  /* Add spacing between icon and text */
+}
+
+
 
 /* Category Header */
 .category-header {
-  margin-bottom: 30px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f8f9fa;
 }
 
 .category-header h1 {
-  font-size: 2.2rem;
-  color: #2d3436;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
 }
 
 .category-description {
@@ -52,9 +75,10 @@ body {
   background: white;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
+
 }
 
 .product-card:hover {
@@ -75,6 +99,31 @@ body {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+}
+
+.placeholder {
+  aspect-ratio: 1/1;
+  width: 100%;
+  height: 100%;
+  /* Match your image container height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #F5FFFA 25%, #e0e0e0 50%, #F5FFFA 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .product-info {
@@ -125,14 +174,14 @@ body {
 }
 
 .mDiv .card nav {
-  color: #727272;
-  text-transform: uppercase;
+  color: black;
   padding: 20px;
   border-bottom: 2px solid #efefef;
-  font-size: 12px;
+  /* font-size: 12px; */
   display: flex;
   align-items: center;
   cursor: pointer;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .mDiv .card nav svg.arrow {
@@ -144,7 +193,7 @@ body {
 
 .mDiv .card .photo {
   padding: 20px 25px;
-  width: 84%;
+  width: 100%;
   text-align: center;
 }
 
@@ -157,7 +206,7 @@ body {
 
 .mDiv .card .description {
   padding: 5px 25px;
-  width: 80%;
+  width: 100%;
 }
 
 .mDiv .card .description h1 {
@@ -170,16 +219,16 @@ body {
 }
 
 .mDiv .card .description h2 {
-  color: #515151;
+  color: black;
   margin: 0;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 900;
 }
 
 .mDiv .card .description h4 {
   margin: 5px;
   color: #727272;
-  text-transform: uppercase;
+  font-family: "Roboto Condensed", sans-serif;
   font-weight: 500;
   font-size: 12px;
 }
@@ -187,9 +236,11 @@ body {
 .mDiv .card .description p {
   font-size: 12px;
   line-height: 20px;
-  color: #727272;
+  color: black;
   padding: 20px 0;
   margin: 0;
+  font-family: "Roboto Condensed", sans-serif;
+
 }
 
 .mDiv .card .description button {
@@ -202,10 +253,10 @@ body {
   color: #515151;
   text-transform: uppercase;
   width: 100%;
-  font-family: inherit;
   margin-right: 5px;
   transition: all 0.3s ease;
-  font-weight: 500;
+  font-family: "Roboto Condensed", sans-serif;
+
 }
 
 .mDiv .card .description button:hover:not(:disabled) {
@@ -225,10 +276,11 @@ body {
 }
 
 .customBtn {
-  background-color: darkgray !important;
+  background-color: #2c3e50 !important;
   color: white !important;
   margin-bottom: 10px !important;
   border: none !important;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 .customBtn:hover:not(:disabled) {
@@ -465,6 +517,25 @@ body {
   }
 }
 
-/* .cursiveFont {
-  font-family: cursive;
-} */
+.cursiveFont {
+  font-family: "Roboto Condensed", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.visible {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+.customC {
+  color: darkgrey;
+}

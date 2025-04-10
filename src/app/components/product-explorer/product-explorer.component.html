@@ -1,20 +1,31 @@
 <div class="explorer-container">
+  <!-- <button class="backBtn"> Back To Home</button> -->
   <!-- Category Header -->
-  <div class="category-header" *ngIf="currentCategory && !selectedProduct">
-    <h1 class="cursiveFont">{{currentCategory.name}}</h1>
-    <p class="category-description cursiveFont">{{currentCategory.description}}</p>
+
+  <div class="category-header d-flex align-items-center" *ngIf="currentCategory && !selectedProduct">
+    <button class="backBtn me-3" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i> <!-- Bootstrap back icon -->
+    </button>
+    <h1 class="cursiveFont mb-0">{{currentCategory.name}}</h1>
   </div>
+
 
 
   <!-- Products Grid View -->
   <div class="products-grid" *ngIf="!selectedProduct">
-    <div class="product-card" *ngFor="let product of filteredProducts" (click)="selectProduct(product)">
-      <div class="image-container">
-        <img [src]="product.variants[0].images[0]" [alt]="product.name" loading="lazy">
+
+    <div class="product-card" *ngFor="let product of filteredProducts;let i = index" (click)="selectProduct(product)">
+      <div class="image-container"
+        [ngClass]="{ 'visible': product.variants[0].imagesLoaded, 'hidden': !product.variants[0].imagesLoaded }">
+        <img [src]="product.variants[0].images[0]" [alt]="product.name" loading="lazy" (load)="onImageLoaded(i)">
       </div>
+      <div class="placeholder" *ngIf="!product.variants[0].imagesLoaded">
+        <p class="customC">Loading...</p>
+      </div>
+
       <div class="product-info cursiveFont">
-        <h3>{{product.name}}</h3>
-        <p class="price">From ₹{{product.basePrice}}</p>
+        <h3 class="fw-600">{{product.name}}</h3>
+        <p class="price fw-600">From ₹{{product.basePrice}}</p>
         <div class="color-options">
           <span *ngFor="let variant of product.variants" class="color-dot" [style.background]="variant.colorCode"
             [title]="variant.color"></span>
@@ -27,10 +38,7 @@
   <div class="mDiv" *ngIf="selectedProduct && selectedVariant">
     <div class="card">
       <nav (click)="resetSelections()">
-        <svg class="arrow" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve"
-          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <polygon points="352,115.4 331.3,96 160,256 331.3,416 352,396.7 201.5,256 " stroke="#727272" />
-        </svg>
+        <i class="bi bi-arrow-left"></i> <!-- Bootstrap back icon -->
         Back to Collection
       </nav>
       <!-- In your product-detail section (replace the photo div) -->
@@ -77,9 +85,9 @@
           </label>
         </div>
         <button class="customBtn" [disabled]="!selectedVariant.inStock" (click)="addToCart()">
-          {{selectedVariant.inStock ? 'Add To Cart' : 'Out of Stock'}}
+          {{selectedVariant.inStock ? 'Buy Now' : 'Out of Stock'}}
         </button>
-        <button [disabled]="!selectedVariant.inStock" (click)="buyNow()">Buy Now</button>
+        <!-- <button [disabled]="!selectedVariant.inStock" (click)="buyNow()">Buy Now</button> -->
       </div>
     </div>
   </div>

@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import productsData from '../../../assets/Json/products.json';
 import { ImagePreloaderService } from 'src/app/services/image-preloader.service';
+import { SharedStateService } from 'src/app/services/shared-state.service';
 
 interface Variant {
   color: string;
@@ -9,6 +10,7 @@ interface Variant {
   images: string[];
   inStock: boolean;
   priceModifier: number;
+  imagesLoaded: boolean;
 }
 
 interface Product {
@@ -62,7 +64,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy {
   categoryId: string | any = '';
   products: any[] = [];
   cachedImages: string[] = [];
-  constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService) { }
+  showImgPlaceholder: boolean = true;
+  constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private sharedStateService: SharedStateService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -72,6 +75,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy {
       this.fetchCategoryImages();
       this.resetSelections();
       this.updateAvailableColors();
+
     });
   }
   fetchCategoryImages(): void {
@@ -82,6 +86,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy {
     // If there are uncached images, preload them sequentially
     if (this.cachedImages.length < this.products.length) {
       this.imagePreloader.preloadCategoryImages(this.categoryId);
+      this.showImgPlaceholder = false;
     }
 
     setTimeout(() => {
@@ -148,6 +153,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy {
     this.selectedColor = null;
     this.currentMainImage = '';
     this.selectedQuantity = "Select Quantity";
+    this.sharedStateService.setDetailViewVisible(false);
   }
 
   updateAvailableColors(): void {
@@ -175,14 +181,15 @@ export class ProductExplorerComponent implements OnInit, OnDestroy {
   }
 
   selectProduct(product: Product): void {
+    console.log(product);
+
     this.selectedProduct = product;
     this.selectedVariant = product.variants[0];
     this.currentMainImage = this.selectedVariant.images[0];
     this.imageLoaded = false;
     this.selectedColor = this.selectedVariant.color;
     this.updateAvailableColorsForProduct();
-    console.log(this.selectedVariant);
-
+    this.sharedStateService.setDetailViewVisible(true);
   }
 
 
@@ -229,6 +236,14 @@ export class ProductExplorerComponent implements OnInit, OnDestroy {
       quantity: this.selectedQuantity,
       price: this.getFinalPrice()
     });
+    const productData = {
+      name: this.selectedProduct.name,
+      variant: this.selectedVariant.color,
+      quantity: this.selectedQuantity,
+      price: this.getFinalPrice(),
+      imageUrl: this.selectedVariant.images[0], // Assuming the first image is the main image
+    };
+    this.router.navigate(['/payment'], { state: { product: productData } });
 
     // Optional: Show confirmation or navigate to cart
     // this.router.navigate(['/cart']);
@@ -247,5 +262,19 @@ export class ProductExplorerComponent implements OnInit, OnDestroy {
 
     // Optional: Navigate to checkout
     // this.router.navigate(['/checkout']);
+  }
+
+  onImageLoaded(index: number): void {
+    this.ngZone.run(() => {
+      const image: any = this.filteredProducts[index].variants[0].images[0];
+      // image.loaded = true;
+      this.filteredProducts[index].variants[0].imagesLoaded = true;
+      console.log(`images loaded for ${image}`);
+    });
+    this.cdr.detectChanges()
+  }
+
+  goBack() {
+    this.router.navigateByUrl('/home')
   }
 }
