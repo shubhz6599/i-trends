@@ -220,6 +220,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.showFinalPrice = false;
     this.updateAvailableColorsForProduct();
     this.sharedStateService.setDetailViewVisible(true);
+    setTimeout(() => {
+      this.startPriceAnimation();
+    }, 50);
   }
 
 
@@ -236,6 +239,13 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.currentMainImage = variant.images[0];
     this.imageLoaded = false;
     this.selectedColor = variant.color;
+    this.priceAnimationTriggered = false;
+    this.showOriginalPrice = false;
+    this.showDiscountPercent = false;
+    this.showFinalPrice = false;
+    setTimeout(() => {
+      this.startPriceAnimation();
+    }, 50);
   }
 
   checkPriceInView(): void {
@@ -317,6 +327,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   addToCart(): void {
     if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
+    if (this.selectedQuantity == "Select Quantity") {
+      window.alert('Please select quantity to proceed')
+    }
 
     // Implement your add to cart logic here
     console.log('Added to cart:', {
