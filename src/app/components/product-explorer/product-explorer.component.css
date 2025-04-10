@@ -137,8 +137,8 @@ nav i {
 }
 
 .price {
-  font-weight: bold;
-  color: #00b894;
+  font-weight: 400 !important;
+  color: #2c3e50;
   margin: 0 0 10px 0;
 }
 
@@ -209,13 +209,111 @@ nav i {
   width: 100%;
 }
 
-.mDiv .card .description h1 {
-  color: #515151;
-  font-weight: 300;
-  padding-top: 15px;
-  margin: 0;
-  font-size: 30px;
-  font-weight: 300;
+/* Add these new styles to your existing CSS */
+
+.price-display {
+  min-height: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.price-step {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.original-price {
+  position: relative;
+  color: #999;
+  font-size: 1.2em;
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.strike-through {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 2px;
+  background-color: #ff6b6b;
+  transform: translateY(-50%);
+  animation: strikeThrough 0.5s ease-out forwards;
+}
+
+@keyframes strikeThrough {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.discount-percent {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: bold;
+  display: inline-block;
+  animation: blink 0.3s 3;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.final-price {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.digit {
+  display: inline-block;
+  min-width: 0.5em;
+  text-align: center;
+  animation: digitDrop 0.3s ease-out backwards;
+}
+
+@keyframes digitDrop {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animation states */
+.price-step {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.price-step.animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.5s ease-out;
 }
 
 .mDiv .card .description h2 {

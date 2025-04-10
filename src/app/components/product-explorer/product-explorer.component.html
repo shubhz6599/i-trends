@@ -1,19 +1,12 @@
 <div class="explorer-container">
-  <!-- <button class="backBtn"> Back To Home</button> -->
-  <!-- Category Header -->
-
   <div class="category-header d-flex align-items-center" *ngIf="currentCategory && !selectedProduct">
     <button class="backBtn me-3" (click)="goBack()">
-      <i class="bi bi-arrow-left"></i> <!-- Bootstrap back icon -->
+      <i class="bi bi-arrow-left"></i>
     </button>
     <h1 class="cursiveFont mb-0">{{currentCategory.name}}</h1>
   </div>
 
-
-
-  <!-- Products Grid View -->
   <div class="products-grid" *ngIf="!selectedProduct">
-
     <div class="product-card" *ngFor="let product of filteredProducts;let i = index" (click)="selectProduct(product)">
       <div class="image-container"
         [ngClass]="{ 'visible': product.variants[0].imagesLoaded, 'hidden': !product.variants[0].imagesLoaded }">
@@ -25,7 +18,7 @@
 
       <div class="product-info cursiveFont">
         <h3 class="fw-600">{{product.name}}</h3>
-        <p class="price fw-600">From ₹{{product.basePrice}}</p>
+        <p class="price">From ₹{{product.basePrice}}</p>
         <div class="color-options">
           <span *ngFor="let variant of product.variants" class="color-dot" [style.background]="variant.colorCode"
             [title]="variant.color"></span>
@@ -34,14 +27,13 @@
     </div>
   </div>
 
-  <!-- Product Detail View -->
   <div class="mDiv" *ngIf="selectedProduct && selectedVariant">
     <div class="card">
       <nav (click)="resetSelections()">
-        <i class="bi bi-arrow-left"></i> <!-- Bootstrap back icon -->
+        <i class="bi bi-arrow-left"></i>
         Back to Collection
       </nav>
-      <!-- In your product-detail section (replace the photo div) -->
+
       <div class="photo">
         <div class="image-loading" *ngIf="!imageLoaded">
           <div class="loading-spinner"></div>
@@ -50,7 +42,6 @@
         <img [src]="currentMainImage || selectedVariant.images[0]" [alt]="selectedProduct.name" (load)="onImageLoad()"
           [class.loaded]="imageLoaded" loading="lazy">
 
-        <!-- Image thumbnails if multiple images exist -->
         <div class="image-thumbnails" *ngIf="selectedVariant.images.length > 1">
           <div *ngFor="let img of selectedVariant.images; let i = index" class="thumbnail"
             [class.active]="currentMainImage === img" [class.loaded]="imageLoaded" (click)="setMainImage(img)">
@@ -58,12 +49,12 @@
           </div>
         </div>
 
-        <!-- Image navigation dots -->
         <div class="image-dots" *ngIf="selectedVariant.images.length > 1">
           <span *ngFor="let img of selectedVariant.images; let i = index" [class.active]="currentMainImage === img"
             (click)="setMainImage(img)"></span>
         </div>
       </div>
+
       <div class="description">
         <h2>{{selectedProduct.name}}</h2>
         <h4>{{currentCategory?.name}}</h4>
@@ -71,7 +62,33 @@
           <span *ngFor="let variant of selectedProduct.variants" class="color-option"
             [style.backgroundColor]="variant.colorCode" (click)="selectVariant(variant)"></span>
         </div>
-        <h1>₹{{getFinalPrice()}}</h1>
+
+        <!-- Updated Price Display Section -->
+        <div class="price-display" #priceDisplay>
+          <div *ngIf="showOriginalPrice" class="price-step" @priceStep>
+            <span class="original-price">
+              ₹{{getOriginalPrice()}}
+              <span class="strike-through"></span>
+            </span>
+          </div>
+
+          <div *ngIf="showDiscountPercent" class="price-step" @priceStep>
+            <span class="discount-percent">
+              {{discountPercent}}% OFF
+            </span>
+          </div>
+
+          <div *ngIf="showFinalPrice" class="price-step" @priceStep>
+            <span class="final-price">
+              ₹
+              <span *ngFor="let digit of getFinalPriceDigits(); let i = index" class="digit"
+                [style.animation-delay]="i * 100 + 'ms'">
+                {{digit}}
+              </span>
+            </span>
+          </div>
+        </div>
+
         <p>{{selectedProduct.description}}</p>
         <div class="quantity-selector">
           <label class="select" for="slct">
@@ -87,7 +104,6 @@
         <button class="customBtn" [disabled]="!selectedVariant.inStock" (click)="addToCart()">
           {{selectedVariant.inStock ? 'Buy Now' : 'Out of Stock'}}
         </button>
-        <!-- <button [disabled]="!selectedVariant.inStock" (click)="buyNow()">Buy Now</button> -->
       </div>
     </div>
   </div>
