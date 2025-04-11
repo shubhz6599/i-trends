@@ -1,0 +1,136 @@
+<div class="hero-section">
+  <div class="hero-overlay">
+    <h1>Book Expert Eye Consultation</h1>
+    <p>Your vision, our mission. Let us help you see the world better.</p>
+    <button class="hero-btn" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now for ₹650</button>
+  </div>
+</div>
+
+<!-- Main Container -->
+<div class="consultation-container">
+  <!-- Steps Section -->
+  <div class="steps-container">
+    <h2>How It Works</h2>
+    <div class="step">
+      <div class="step-icon">1</div>
+      <div class="step-content">
+        <h3>Book Online</h3>
+        <p>Choose a consultation package and book online.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon">2</div>
+      <div class="step-content">
+        <h3>Expert Will Call You</h3>
+        <p>Our expert will reach out to you for details.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon">3</div>
+      <div class="step-content">
+        <h3>Appointment Confirmed</h3>
+        <p>Your appointment will be booked at your desired time.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon">4</div>
+      <div class="step-content">
+        <h3>Expert Visits Your Home</h3>
+        <p>The expert will visit you at your home for the consultation.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-icon">5</div>
+      <div class="step-content">
+        <h3>Receive Your Specs</h3>
+        <p>Your specs will be delivered in the next 3-4 days.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials Section -->
+  <div class="testimonials-container">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial">
+      <p>"The consultation process was seamless, and the expert was very professional. Highly recommend!"</p>
+      <span>- John Doe</span>
+    </div>
+    <div class="testimonial">
+      <p>"I loved how convenient and smooth the entire experience was. Got my specs delivered in no time!"</p>
+      <span>- Jane Smith</span>
+    </div>
+  </div>
+</div>
+
+<!-- Footer Callout -->
+<div class="footer-callout">
+  <h2>Ready to Improve Your Vision?</h2>
+  <button class="footer-btn" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Your Consultation Now</button>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">Book Your Consultation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Reactive Form -->
+        <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control" formControlName="name" placeholder="Enter your name">
+            <div class="text-danger" *ngIf="bookingForm.get('name')?.invalid && bookingForm.get('name')?.touched">
+              Name is required.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea id="address" class="form-control" rows="2" formControlName="address"
+              placeholder="Enter your address"></textarea>
+            <div class="text-danger" *ngIf="bookingForm.get('address')?.invalid && bookingForm.get('address')?.touched">
+              Address is required.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="tel" id="phone" class="form-control" formControlName="phone"
+              placeholder="Enter your phone number">
+            <div class="text-danger" *ngIf="bookingForm.get('phone')?.invalid && bookingForm.get('phone')?.touched">
+              Phone number is required and must be 10 digits.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="concern" class="form-label">Concern</label>
+            <select class="form-select" id="concern" formControlName="concern" (change)="onConcernChange($event)">
+              <option value="" disabled selected>Select your concern</option>
+              <option value="Upgrade existing spec">Upgrade existing spec</option>
+              <option value="Eye checkup">Eye checkup</option>
+              <option value="Eye checkup + spec">Eye checkup + spec</option>
+              <option value="Other">Other</option>
+            </select>
+            <div class="text-danger" *ngIf="bookingForm.get('concern')?.invalid && bookingForm.get('concern')?.touched">
+              Concern is required.
+            </div>
+          </div>
+          <div class="mb-3" *ngIf="showOtherConcern">
+            <label for="otherConcern" class="form-label">Specify Other Concern</label>
+            <input type="text" id="otherConcern" class="form-control" formControlName="otherConcern"
+              placeholder="Specify your concern">
+            <div class="text-danger"
+              *ngIf="bookingForm.get('otherConcern')?.invalid && bookingForm.get('otherConcern')?.touched">
+              Please specify your concern.
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success customBtn w-100" [disabled]="bookingForm.invalid">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

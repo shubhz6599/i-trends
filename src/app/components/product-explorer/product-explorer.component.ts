@@ -53,8 +53,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   currentCategory: Category | null = null;
   selectedProduct: Product | null = null;
   selectedVariant: Variant | null = null;
-  selectedColor: string | null = null;
-  availableColors: string[] = [];
+  selectedColor: any | null = null;
+  availableColors: any[] = [];
   filteredProducts: Product[] = [];
   currentMainImage: string = '';
   selectedQuantity: any = "Select Quantity";
@@ -85,6 +85,22 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   showOriginalPrice = false;
   showDiscountPercent = false;
   showFinalPrice = false;
+  selectedSort: string = ''; // Tracks selected sorting option
+  selectedPriceRange: any = null; // Tracks selected price range
+  selectedRating: number | null = null; // Tracks selected rating
+  selectedDiscount: number | null = null; // Tracks selected discount
+  isFilterPanelVisible: boolean = false;
+  priceRanges = [
+    { label: '₹500 - ₹1000', min: 500, max: 1000 },
+    { label: '₹1000 - ₹1500', min: 1000, max: 1500 },
+    { label: '₹1500 - ₹2000', min: 1500, max: 2000 },
+    { label: '₹2000 - ₹2500', min: 2000, max: 2500 },
+    { label: '₹2500 - ₹3000', min: 2500, max: 3000 },
+  ];
+  ratingsOptions = [4, 3, 2, 1]; // Ratings options: 4 stars & up, 3 stars & up, etc.
+  discountOptions = [10, 20, 30, 40, 50];
+  selectedFilters: { label: string, value: any }[] = [];
+  searchResultMessage: string = '';
   constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private sharedStateService: SharedStateService, private viewportScroller: ViewportScroller) { }
 
   ngOnInit(): void {
@@ -180,35 +196,24 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.showOriginalPrice = false;
     this.showDiscountPercent = false;
     this.showFinalPrice = false;
+    this.updateAvailableColors();
   }
 
   updateAvailableColors(): void {
-    const colors = new Set<string>();
+    const colorsWithCodes: { name: string; colorCode: string }[] = [];
     this.currentCategory?.products.forEach(product => {
       product.variants.forEach(variant => {
-        if (variant.inStock) colors.add(variant.color);
+        if (!colorsWithCodes.some(color => color.name === variant.color)) {
+          colorsWithCodes.push({ name: variant.color, colorCode: variant.colorCode });
+        }
       });
     });
-    this.availableColors = Array.from(colors);
+    this.availableColors = colorsWithCodes;
   }
 
-  filterByColor(color: string): void {
-    this.selectedColor = color;
-    if (!this.currentCategory) return;
 
-    if (!color) {
-      this.filteredProducts = [...this.currentCategory.products];
-      return;
-    }
-
-    this.filteredProducts = this.currentCategory.products.filter(product =>
-      product.variants.some(v => v.color === color && v.inStock)
-    );
-  }
 
   selectProduct(product: Product): void {
-    console.log(product);
-
     this.selectedProduct = product;
     this.selectedVariant = product.variants[0];
     this.currentMainImage = this.selectedVariant.images[0];
@@ -222,7 +227,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.sharedStateService.setDetailViewVisible(true);
     setTimeout(() => {
       this.startPriceAnimation();
-    }, 50);
+    }, 1000);
   }
 
 
@@ -289,7 +294,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         this.showFinalPrice = true;
         this.cdr.detectChanges();
       }, 2000);
-    }, 2000);
+    }, 1000);
   }
 
   showPriceWithDiscount() {
@@ -303,6 +308,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   getFinalPriceDigits(): string[] {
     if (!this.selectedProduct || !this.selectedVariant) return [];
     const price = (this.selectedProduct.basePrice + this.selectedVariant.priceModifier).toString();
+
     return price.split('');
   }
 
@@ -319,7 +325,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     const variant = this.selectedProduct.variants.find(v =>
       v.color === color && v.inStock
     );
-
     if (variant) {
       this.selectVariant(variant);
     }
@@ -328,21 +333,16 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   addToCart(): void {
     if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
     if (this.selectedQuantity == "Select Quantity") {
-      window.alert('Please select quantity to proceed')
+      window.alert('Please select quantity to proceed');
+      return
     }
+    let price: any = this.getFinalPriceDigits();
 
-    // Implement your add to cart logic here
-    console.log('Added to cart:', {
-      product: this.selectedProduct.name,
-      variant: this.selectedVariant.color,
-      quantity: this.selectedQuantity,
-      // price: this.getFinalPrice()
-    });
     const productData = {
       name: this.selectedProduct.name,
       variant: this.selectedVariant.color,
       quantity: this.selectedQuantity,
-      // price: this.getFinalPrice(),
+      price: price.join(""),
       imageUrl: this.selectedVariant.images[0], // Assuming the first image is the main image
     };
     this.router.navigate(['/payment'], { state: { product: productData } });
@@ -354,13 +354,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   buyNow(): void {
     if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
 
-    // Implement your buy now logic here
-    console.log('Buy now:', {
-      product: this.selectedProduct.name,
-      variant: this.selectedVariant.color,
-      quantity: this.selectedQuantity,
-      // price: this.getFinalPrice()
-    });
+
 
     // Optional: Navigate to checkout
     // this.router.navigate(['/checkout']);
@@ -371,7 +365,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       const image: any = this.filteredProducts[index].variants[0].images[0];
       // image.loaded = true;
       this.filteredProducts[index].variants[0].imagesLoaded = true;
-      console.log(`images loaded for ${image}`);
     });
     this.cdr.detectChanges()
   }
@@ -379,4 +372,143 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   goBack() {
     this.router.navigateByUrl('/home')
   }
+
+  sortProducts(sortOption: string): void {
+    if (sortOption === 'lowToHigh') {
+      this.filteredProducts = [...this.filteredProducts].sort((a, b) => a.basePrice - b.basePrice);
+    } else if (sortOption === 'highToLow') {
+      this.filteredProducts = [...this.filteredProducts].sort((a, b) => b.basePrice - a.basePrice);
+    }
+  }
+
+  // Filter products by color
+  filterByColor(colorName: string) {
+
+    // Check if filter is already selected
+    if (!this.selectedFilters.find(filter => filter.label === colorName)) {
+      this.selectedFilters.push({ label: colorName, value: colorName });
+    }
+
+  }
+
+  filterByPrice(priceRange: any) {
+
+    if (!this.selectedFilters.find(filter => filter.label === priceRange.label)) {
+      this.selectedFilters.push({ label: priceRange.label, value: priceRange });
+    }
+
+  }
+
+  filterByRating(rating: number) {
+
+    if (!this.selectedFilters.find((filter: any) => filter.label === `${rating} ★ & Up`)) {
+      this.selectedFilters.push({ label: `${rating} ★ & Up`, value: rating });
+    }
+  }
+
+  filterByDiscount(discount: number) {
+    if (!this.selectedFilters.find((filter: any) => filter.label === `${discount}% or more`)) {
+      this.selectedFilters.push({ label: `${discount}% or more`, value: discount });
+    }
+  }
+
+  // Remove filter from selectedFilters array
+  removeFilter(filter: { label: string, value: any }) {
+    this.selectedFilters = this.selectedFilters.filter(f => f.label !== filter.label);
+
+  }
+
+  resetFilters() {
+    if (this.currentCategory?.products) this.filteredProducts = this.currentCategory?.products;
+    this.searchResultMessage = ''
+    this.toggleFilterPanel();
+
+  }
+  // Apply filters on search button click
+  applyFilters() {
+    console.log('Applying filters:', this.selectedFilters);
+
+    // Start with all products in the current category
+    let filtered = [...this.currentCategory?.products || []];
+
+    // Apply color filters
+    const colorFilters = this.selectedFilters
+      .filter(filter => this.availableColors.some(color => color.name === filter.value))
+      .map(filter => filter.value);
+
+    if (colorFilters.length > 0) {
+      filtered = filtered.filter(product =>
+        product.variants.some(variant => colorFilters.includes(variant.color))
+      );
+    }
+
+    // Apply price filters
+    const priceFilters = this.selectedFilters
+      .filter(filter => this.priceRanges.some(range => range.label === filter.label))
+      .map(filter => filter.value);
+
+    if (priceFilters.length > 0) {
+      filtered = filtered.filter(product =>
+        priceFilters.some(range =>
+          product.basePrice >= range.min && product.basePrice <= range.max
+        )
+      );
+    }
+
+    // Apply rating filters (if applicable)
+    const ratingFilters = this.selectedFilters
+      .filter(filter => filter.label.endsWith('★ & Up'))
+      .map(filter => filter.value);
+
+    if (ratingFilters.length > 0) {
+      filtered = filtered.filter((product: any) =>
+        product.rating && ratingFilters.some(rating => product.rating >= rating)
+      );
+    }
+
+    // Apply discount filters
+    const discountFilters = this.selectedFilters
+      .filter(filter => filter.label.endsWith('% or more'))
+      .map(filter => filter.value);
+
+    if (discountFilters.length > 0) {
+      filtered = filtered.filter((product: any) =>
+        discountFilters.some(discount =>
+          Math.round(100 - (product.basePrice / product.basePriceWithDiscount) * 100) >= discount
+        )
+      );
+    }
+
+    // If no products match, prepare related products
+    if (filtered.length === 0) {
+      this.filteredProducts = this.getRelatedProducts();
+      this.searchResultMessage =
+        'Your search query did not match any products. Showing related products instead.';
+    } else {
+      this.filteredProducts = filtered;
+      this.searchResultMessage = 'Showing search results for your query.';
+    }
+
+    // Close filter panel
+    this.toggleFilterPanel();
+  }
+
+  getRelatedProducts(): Product[] {
+    return this.currentCategory?.products || [];
+  }
+  // Filter products by today's deals
+  filterTodaysDeals(): void {
+    this.filteredProducts = this.currentCategory?.products.filter((product: any) =>
+      product.isTodaysDeal // Assuming isTodaysDeal exists in product data
+    ) || [];
+
+  }
+
+  toggleFilterPanel(): void {
+
+    this.isFilterPanelVisible = !this.isFilterPanelVisible;
+  }
+
+  // Apply filters and close the filter panel
+
 }

@@ -51,12 +51,12 @@ export class PaymentProcessComponent implements OnInit {
       : '';
 
     const message = `Hello, I would like to place an order. Here are my details:
-  *Customer Details:*
+  Customer Details:
   - Name: ${customerDetails.name}
   - Address: ${customerDetails.address}
   - Contact Number: ${customerDetails.contact}
   - Payment Method: ${customerDetails.paymentMethod}
-  *Product Details:*
+  Product Details:
   - Product Name: ${this.productData.name}
   - Variant: ${this.productData.variant}
   - Quantity: ${this.productData.quantity}

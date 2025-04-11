@@ -86,8 +86,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   }
 
   navigate(categoryId: string): void {
-    console.log(categoryId);
-
     this.imagePreloader.preloadCategoryImages(categoryId); // Preload selected category images
     this.router.navigateByUrl(`category/${categoryId}`); // Redirect to specific category
   }
@@ -161,5 +159,9 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+  navigateToStoreLocation(): void {
+    const googleMapsLink = 'https://www.google.com/maps/dir//Shop+No+3,+Ground+floor,+i-trends,+Sr.+No+296,+Porwal+Rd,+near+DY+Patil+University+Road,+Lohegaon,+Pune,+Maharashtra+411047/@18.6141551,73.9071623,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x3bc2c700594eff49:0x4978255b63aab10e!2m2!1d73.9120332!2d18.6141552!3e0?entry=ttu&g_ep=EgoyMDI1MDQwOC4wIKXMDSoASAFQAw%3D%3D';
+    window.open(googleMapsLink, '_blank'); // Opens the link in a new tab
   }
 }

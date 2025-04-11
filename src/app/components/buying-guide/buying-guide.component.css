@@ -1,0 +1,18 @@
+.card {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.card-header {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+}
+
+.customBtn {
+  background-color: #2c3e50;
+  border: none;
+}

@@ -1,0 +1,64 @@
+<div class="card shadow">
+  <div class="card-header">
+    <h4>Step {{ currentStep }} of 5</h4>
+  </div>
+  <div class="card-body">
+    <!-- Step 1: Lens Types -->
+    <div *ngIf="currentStep === 1">
+      <h5>Types of Lenses</h5>
+      <ul class="list-group">
+        <li *ngFor="let lens of lensTypes" class="list-group-item">
+          <strong>{{ lens.name }}</strong>: {{ lens.description }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Step 2: Frame Materials -->
+    <div *ngIf="currentStep === 2">
+      <h5>Frame Materials</h5>
+      <ul class="list-group">
+        <li *ngFor="let material of frameMaterials" class="list-group-item">
+          <strong>{{ material.name }}</strong>: {{ material.description }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Step 3: Face Shape and Frame Matching -->
+    <div *ngIf="currentStep === 3">
+      <h5>Frame Recommendations by Face Shape</h5>
+      <ul class="list-group">
+        <li *ngFor="let face of faceShapes" class="list-group-item">
+          <strong>{{ face.shape }}</strong>: {{ face.recommendation }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Step 4: Age Group Recommendations -->
+    <div *ngIf="currentStep === 4">
+      <h5>Recommendations by Age Group</h5>
+      <ul class="list-group">
+        <li *ngFor="let group of ageGroups" class="list-group-item">
+          <strong>{{ group.group }}</strong>: {{ group.advice }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Step 5: Care Tips -->
+    <div *ngIf="currentStep === 5">
+      <h5>Care Tips for Your Specs</h5>
+      <ul class="list-group">
+        <li *ngFor="let tip of careTips" class="list-group-item">
+          {{ tip }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-footer text-center">
+    <!-- Previous Button -->
+    <button class="btn btn-secondary me-2" (click)="previousStep()" [disabled]="currentStep === 1">Previous</button>
+
+    <!-- Conditional Buttons -->
+    <button *ngIf="currentStep < 5" class="btn btn-primary" (click)="nextStep()">Next</button>
+    <button *ngIf="currentStep === 5" class="btn btn-success" routerLink="/home">Back to Home</button>
+  </div>
+</div>

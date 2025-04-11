@@ -10,6 +10,8 @@
           "name": "Vintage Square",
           "description": "Retro-inspired Square frames with modern comfort",
           "basePrice": 1799,
+          "rating": 1,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Blue",
@@ -21,7 +23,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Light Cyan",
@@ -31,7 +33,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Brown",
@@ -42,7 +44,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": ["Acetate frame", "Spring hinges", "UV400 protection"]
@@ -52,6 +54,8 @@
           "name": "Transparent Square - Dual Tone(Silver & Black )",
           "description": "Contemporary take on Square frames",
           "basePrice": 2199,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Silver&Black",
@@ -72,6 +76,8 @@
           "name": "Transparent Square - Dual Tone(Gold & Black)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2199,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Gold&Black",
@@ -92,6 +98,8 @@
           "name": "Transparent Square - Mix Tone",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Mix",
@@ -112,6 +120,8 @@
           "name": "Transparent Square - Single Tone(Pistachio green)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "PistachioGreen",
@@ -132,6 +142,8 @@
           "name": "Transparent Square - Double Tone",
           "description": "Contemporary take on Square frames",
           "basePrice": 2099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Blue&Gold",
@@ -196,6 +208,8 @@
           "name": "Transparent Square - Tripple Tone(Black Brown Blue)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "BlackBrownBlue",
@@ -216,6 +230,8 @@
           "name": "Transparent Square - Double Tone(Light-Purple Gold)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Light&Purple",
@@ -236,6 +252,8 @@
           "name": "Vintage Square - Double Tone(Black Silver)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -267,6 +285,8 @@
           "name": "Transparent Square - Double Tone(Transparent Black)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "TransparentBlack",
@@ -287,6 +307,8 @@
           "name": "Formal Square - Single Tone(Black)",
           "description": "Contemporary take on Square frames",
           "basePrice": 1699,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -307,6 +329,8 @@
           "name": "Transparent Sage - Dual Tone(Sage & Light Green)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Sage&LightGreen",
@@ -327,6 +351,8 @@
           "name": "Transparent Brown - Mix Tone(Light Brown & Blue & Silver)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Mix",
@@ -347,6 +373,8 @@
           "name": "Transparent Black Gold - Dual Tone(Black & Gold)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Gold&Black",
@@ -367,6 +395,8 @@
           "name": "Square Blue Silver - Dual Tone(Blue & Silver)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Silver&Blue",
@@ -387,6 +417,8 @@
           "name": "Square Black Gold - Dual Tone(Black & Gold)",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Gold&Black",
@@ -407,6 +439,8 @@
           "name": "Single Tone Transparent",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Transparent",
@@ -430,6 +464,8 @@
           "name": "Square Premium - Single Tone",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -451,7 +487,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
@@ -461,6 +497,8 @@
           "name": "Square Plain Premium - Single Tone",
           "description": "Contemporary take on Square frames",
           "basePrice": 2499,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -488,6 +526,8 @@
           "name": "12X Classic Square - Single Tone",
           "description": "Timeless square frames with thick profile",
           "basePrice": 1599,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -498,7 +538,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "LightMatBlack",
@@ -509,7 +549,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "DarkMatBlack",
@@ -520,7 +560,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -534,6 +574,8 @@
           "name": "12X Classic Square - Dual Tone",
           "description": "Timeless square frames with thick profile",
           "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "TransparentBlack",
@@ -544,7 +586,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -558,6 +600,8 @@
           "name": "12X Classic Square - Dual Tone Transparent",
           "description": "Timeless square frames with thick profile",
           "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "TransparentBlack&Greenyellow",
@@ -568,7 +612,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "TransparentBrown",
@@ -579,7 +623,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -593,6 +637,8 @@
           "name": "12X Classic Square - Single Tone Transparent",
           "description": "Timeless square frames with thick profile",
           "basePrice": 1399,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "MatWhite",
@@ -603,7 +649,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "TransparentGreen",
@@ -614,7 +660,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -635,6 +681,8 @@
           "name": "Hexagonal RimLess - Dual Tone",
           "description": "Hexa Rimless round frames with thick profile",
           "basePrice": 1599,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -645,7 +693,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Gold&Black",
@@ -656,7 +704,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -670,6 +718,8 @@
           "name": "Rounded RimLess - Single Tone",
           "description": "Round RimLess Round frames with thick profile",
           "basePrice": 1599,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -681,7 +731,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Gold",
@@ -691,7 +741,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -705,6 +755,8 @@
           "name": "Sharp Square RimLess - Single Tone",
           "description": "Square RimLess Round frames with thick profile",
           "basePrice": 1599,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -715,7 +767,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -729,6 +781,8 @@
           "name": "Curved Square RimLess - Single/Dual Tone",
           "description": "Square RimLess Round frames with thick profile",
           "basePrice": 1599,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Brown",
@@ -739,7 +793,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Black",
@@ -750,7 +804,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -764,6 +818,8 @@
           "name": "Curved Square RimLess - Dual Tone",
           "description": "Square RimLess Round frames with thick profile",
           "basePrice": 1599,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Gold&Brown",
@@ -774,7 +830,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -788,6 +844,8 @@
           "name": "Curved Square RimLess - Dual Tone",
           "description": "Square RimLess Round frames with thin profile",
           "basePrice": 1599,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Gold&Brown",
@@ -798,7 +856,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Black",
@@ -808,7 +866,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -822,6 +880,8 @@
           "name": "Unique RimLess - Dual Tone",
           "description": "Unique RimLess Round frames with thin profile",
           "basePrice": 1599,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Gold",
@@ -832,7 +892,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Black",
@@ -843,7 +903,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -857,6 +917,8 @@
           "name": "Unique RimLess 2- Dual Tone",
           "description": "Unique RimLess Round frames with thin profile",
           "basePrice": 1599,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Gold",
@@ -867,7 +929,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -888,6 +950,8 @@
           "name": "Rounded - Dual Tone",
           "description": "Rounded frames with thick Fiber profile",
           "basePrice": 1899,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "TransparentBlack&Greenyellow",
@@ -899,7 +963,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -913,6 +977,8 @@
           "name": "Rounded - Matte Single Tone",
           "description": "Rounded frames with thick Fiber profile",
           "basePrice": 1899,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "MatteBrown",
@@ -923,7 +989,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Black",
@@ -934,7 +1000,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -948,6 +1014,8 @@
           "name": "Rounded - Transparent Single Tone",
           "description": "Rounded frames with thick Fiber profile",
           "basePrice": 1899,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "TransparentYellow",
@@ -958,7 +1026,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "TransparentGreen",
@@ -969,7 +1037,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -983,6 +1051,8 @@
           "name": "Rounded - Transparent Dual Tone",
           "description": "Rounded frames with thick Fiber profile",
           "basePrice": 1899,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Transparent",
@@ -992,7 +1062,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1006,6 +1076,8 @@
           "name": "Rounded - Single Tone Glossy",
           "description": "Rounded frames with thin Fiber profile",
           "basePrice": 1699,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1016,7 +1088,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1030,6 +1102,8 @@
           "name": "Rounded - Transparent Dual Tone",
           "description": "Rounded frames with thin glossy profile",
           "basePrice": 1699,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1040,7 +1114,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Brown",
@@ -1051,7 +1125,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1072,6 +1146,8 @@
           "name": "Husler - Transparent Purple",
           "description": "Husler frames with thick Fiber profile",
           "basePrice": 1899,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "TransparentPurple",
@@ -1081,7 +1157,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1095,6 +1171,8 @@
           "name": "Husler - Transparent Yellow",
           "description": "Husler frames with thick Fiber profile",
           "basePrice": 1899,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "TransparentYellow",
@@ -1104,7 +1182,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1118,6 +1196,8 @@
           "name": "Husler - Matte Black",
           "description": "Husler frames with thick Fiber profile",
           "basePrice": 1899,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1128,7 +1208,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1142,6 +1222,8 @@
           "name": "Husler - Transparent Cream White",
           "description": "Husler frames with thick Fiber profile",
           "basePrice": 1899,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "TransparentCreamWhite",
@@ -1152,7 +1234,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1166,6 +1248,8 @@
           "name": "Husler - Transparent Yellow White",
           "description": "Husler frames with thick Fiber profile",
           "basePrice": 1899,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "TransparentYellow",
@@ -1176,7 +1260,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1190,6 +1274,8 @@
           "name": "Husler - Rich Matte Blue",
           "description": "Husler frames with thick Fiber profile",
           "basePrice": 2099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "MatteBlue",
@@ -1200,7 +1286,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1214,6 +1300,8 @@
           "name": "Husler - Rich Matte Cyan",
           "description": "Husler frames with thick Fiber profile",
           "basePrice": 2099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "MatteCyan",
@@ -1225,7 +1313,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1239,6 +1327,8 @@
           "name": "Husler - Rich Matte Brown",
           "description": "Husler frames with thick Fiber profile",
           "basePrice": 2099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "MatteBrown",
@@ -1249,7 +1339,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1270,6 +1360,8 @@
           "name": "Womens - Trending Daily wear",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "BlackZigZag",
@@ -1281,7 +1373,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1295,6 +1387,8 @@
           "name": "Mens - Trending Daily wear",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "BlackZigZag",
@@ -1305,7 +1399,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1319,6 +1413,8 @@
           "name": "Mens - Trending Daily wear",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Gold&Black",
@@ -1329,7 +1425,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1343,6 +1439,8 @@
           "name": "Mens - Trending Daily wear",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "MatWhite",
@@ -1353,7 +1451,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Blue",
@@ -1364,7 +1462,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1378,6 +1476,8 @@
           "name": "Mens - Sun Eye Protector",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1388,7 +1488,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             },
             {
               "color": "Blue",
@@ -1399,7 +1499,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1413,6 +1513,8 @@
           "name": "Mens - Sun Eye Protector",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1423,7 +1525,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1437,6 +1539,8 @@
           "name": "Mens - Sun Eye Protector",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1447,7 +1551,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1461,6 +1565,8 @@
           "name": "Unisex - Sun Eye Protector",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "BlackZigZag",
@@ -1472,7 +1578,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1486,6 +1592,8 @@
           "name": "Unisex - Sportswear",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "BlackZigZag",
@@ -1496,7 +1604,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1510,6 +1618,8 @@
           "name": "Unisex - Unique Daily Wear",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1520,7 +1630,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1534,6 +1644,8 @@
           "name": "Unisex - Trendy",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Gold&Black",
@@ -1544,7 +1656,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1558,6 +1670,8 @@
           "name": "Unisex - Trendy2",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1568,7 +1682,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1582,6 +1696,8 @@
           "name": "Unisex - Trendy3",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1592,7 +1708,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1606,6 +1722,8 @@
           "name": "Womes - Trendy",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "BlackZigZag",
@@ -1616,7 +1734,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1630,6 +1748,8 @@
           "name": "Unisex - Matte Finish Trendy4",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "BlackZigZag",
@@ -1640,7 +1760,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1654,6 +1774,8 @@
           "name": "Unisex - Sun Eye Protector",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1664,7 +1786,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [
@@ -1678,6 +1800,8 @@
           "name": "Unisex - Trendy5",
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
           "variants": [
             {
               "color": "Black",
@@ -1688,7 +1812,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 0
+              "priceModifier": 200
             }
           ],
           "features": [

@@ -1,27 +1,105 @@
 <div class="explorer-container">
+  <!-- Category Header -->
   <div class="category-header d-flex align-items-center" *ngIf="currentCategory && !selectedProduct">
     <button class="backBtn me-3" (click)="goBack()">
       <i class="bi bi-arrow-left"></i>
     </button>
-    <h1 class="cursiveFont mb-0">{{currentCategory.name}}</h1>
+    <h1 class="cursiveFont mb-0 fg2">{{currentCategory.name}}</h1>
+    <button class="filter-btn ms-auto btn" (click)="toggleFilterPanel()">Filters</button>
   </div>
 
-  <div class="products-grid" *ngIf="!selectedProduct">
-    <div class="product-card" *ngFor="let product of filteredProducts;let i = index" (click)="selectProduct(product)">
-      <div class="image-container"
-        [ngClass]="{ 'visible': product.variants[0].imagesLoaded, 'hidden': !product.variants[0].imagesLoaded }">
-        <img [src]="product.variants[0].images[0]" [alt]="product.name" loading="lazy" (load)="onImageLoaded(i)">
-      </div>
-      <div class="placeholder" *ngIf="!product.variants[0].imagesLoaded">
-        <p class="customC">Loading...</p>
-      </div>
+  <!-- Button to Open Filter -->
 
-      <div class="product-info cursiveFont">
-        <h3 class="fw-600">{{product.name}}</h3>
-        <p class="price">From ₹{{product.basePrice}}</p>
-        <div class="color-options">
-          <span *ngFor="let variant of product.variants" class="color-dot" [style.background]="variant.colorCode"
-            [title]="variant.color"></span>
+  <!-- Filter Panel -->
+  <!-- Filter Panel -->
+  <div class="filter-panel" [class.active]="isFilterPanelVisible">
+    <div class="filter-header">
+      <h3>Filters</h3>
+      <button type="button" class="btn-close" aria-label="Close" (click)="toggleFilterPanel()"></button>
+    </div>
+
+    <!-- Selected Filters Section -->
+    <div class="selected-filters" *ngIf="selectedFilters.length > 0">
+      <h4>Selected Filters</h4>
+      <div class="selected-filter" *ngFor="let filter of selectedFilters; let i = index">
+        <span>{{ filter.label }}</span>
+        <button class="remove-filter-btn" (click)="removeFilter(filter)">✖</button>
+      </div>
+    </div>
+
+    <!-- Sort Section -->
+    <div class="filter-section">
+      <h4>Sort</h4>
+      <select id="sortSelect" [(ngModel)]="selectedSort" (change)="sortProducts(selectedSort)">
+        <option value="lowToHigh">Price: Low to High</option>
+        <option value="highToLow">Price: High to Low</option>
+      </select>
+    </div>
+
+    <!-- Other Filter Sections -->
+    <!-- Color Section -->
+    <div class="filter-section">
+      <h4>Color Options</h4>
+      <div class="color-options">
+        <div *ngFor="let color of availableColors" class="color-option" (click)="filterByColor(color.name)">
+          <div class="color-shade" [style.backgroundColor]="color.colorCode"></div>
+          <span>{{color.name}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price Range Section -->
+    <div class="filter-section">
+      <h4>Price Range</h4>
+      <div *ngFor="let range of priceRanges" class="price-option" (click)="filterByPrice(range)">
+        <span>{{range.label}}</span>
+      </div>
+    </div>
+
+    <!-- Ratings Section -->
+    <div class="filter-section">
+      <h4>Ratings</h4>
+      <div *ngFor="let rating of ratingsOptions" class="rating-option" (click)="filterByRating(rating)">
+        <span>{{rating}} ★ & Up</span>
+      </div>
+    </div>
+
+    <!-- Discounts Section -->
+    <div class="filter-section">
+      <h4>Discounts</h4>
+      <div *ngFor="let discount of discountOptions" class="discount-option" (click)="filterByDiscount(discount)">
+        <span>{{discount}}% or more</span>
+      </div>
+    </div>
+
+    <!-- Search Button -->
+    <button class="btn btn-outline-secondary w-100" (click)="resetFilters()">Clear all filters</button>
+    <button class="search-btn" (click)="applyFilters()">Search</button>
+  </div>
+
+  <div class="search-result-message" *ngIf="searchResultMessage">
+    <p class="professional-message">{{ searchResultMessage }}</p>
+  </div>
+  <!-- Main Content -->
+  <div class="main-content" [class.hidden]="isFilterPanelVisible">
+    <!-- Product Grid Section -->
+    <div class="products-grid" *ngIf="!selectedProduct">
+      <div class="product-card" *ngFor="let product of filteredProducts; let i = index"
+        (click)="selectProduct(product)">
+        <div class="image-container"
+          [ngClass]="{ 'visible': product.variants[0].imagesLoaded, 'hidden': !product.variants[0].imagesLoaded }">
+          <img [src]="product.variants[0].images[0]" [alt]="product.name" loading="lazy" (load)="onImageLoaded(i)">
+        </div>
+        <div class="placeholder" *ngIf="!product.variants[0].imagesLoaded">
+          <p class="customC">Loading...</p>
+        </div>
+        <div class="product-info cursiveFont">
+          <h3 class="fw-600">{{product.name}}</h3>
+          <p class="price">From ₹{{product.basePrice}}</p>
+          <div class="color-options">
+            <span *ngFor="let variant of product.variants" class="color-dot" [style.background]="variant.colorCode"
+              [title]="variant.color"></span>
+          </div>
         </div>
       </div>
     </div>

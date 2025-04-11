@@ -16,7 +16,7 @@ export class AppComponent {
 
   checkViewportSize(): void {
     const screenWidth = window.innerWidth;
-    if (screenWidth > 700) {
+    if (screenWidth > 600) {
       // Redirect to the error page if screen width exceeds 600px
       this.router.navigate(['/error']);
     }
