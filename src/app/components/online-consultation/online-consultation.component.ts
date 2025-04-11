@@ -54,7 +54,7 @@ export class OnlineConsultationComponent {
       `;
 
       // Navigate to WhatsApp
-      const whatsappURL = `https://wa.me/8888052579?text=${encodeURIComponent(message)}`;
+      const whatsappURL = `https://wa.me/+918888052579?text=${encodeURIComponent(message)}`;
       window.open(whatsappURL, '_blank');
     }
   }
