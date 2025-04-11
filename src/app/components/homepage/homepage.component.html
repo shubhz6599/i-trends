@@ -21,18 +21,21 @@
 </nav>
 
 <nav class="snav">
-  <div class="nav-links">
-    <p routerLink="/category/Unisex Sunglasses">EYEGLASSES</p>
-    <p>KIDS GLASSES</p>
-    <p>COMPUTER GLASSES</p>
-    <p routerLink="/category/Unisex Sunglasses">SUNGLASSES</p>
-    <p>CONTACT LENSES</p>
-    <p routerLink="/book-online-consultation">HOME EYE-TEST</p>
-    <p (click)="navigateToStoreLocation()">STORE LOCATION</p>
+  <div class="nav-links-container">
+    <button class="scroll-btn scroll-left" aria-label="Scroll left">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <div class="nav-links">
+      <p (click)="scrollToCategory()">EYEGLASSES</p>
+      <p>CONTACT LENSES</p>
+      <p>ACCESSORIES</p>
+      <p routerLink="/book-online-consultation">HOME EYE-TEST</p>
+      <p (click)="navigateToStoreLocation()">STORE LOCATION</p>
+    </div>
+    <button class="scroll-btn scroll-right" aria-label="Scroll right">
+      <i class="bi bi-chevron-right"></i>
+    </button>
   </div>
-  <!-- <div class="nav-image">
-        <img src="https://static1.lenskart.com/media/desktop/img/May22/3dtryon1.png" alt="3D Try On">
-    </div> -->
 </nav>
 
 <div class="container1Main">
@@ -168,8 +171,6 @@
         <h2>SERVICES</h2><br><br>
         <a (click)="navigateToStoreLocation()">Visit Store</a><br><br>
         <a routerLink="/buying-guide">Buying Guide</a><br><br>
-        <a>Frame Size</a><br><br>
-        <a>Check Power</a><br><br>
       </li>
     </ul>
   </div>
@@ -178,10 +179,8 @@
     <ul>
       <li>
         <h2>ABOUT US</h2><br><br>
-        <a>We Are Hiring</a><br><br>
-        <a>Refer & Earn</a><br><br>
+        <a>Know More About Us</a><br><br>
         <a>Follow Us</a><br><br>
-        <a>i-trends Coupons</a><br><br>
       </li>
     </ul>
   </div>
@@ -189,19 +188,11 @@
   <div class="list">
     <ul>
       <li>
-        <h2>HELP</h2><br><br>
         <a>Contact</a><br><br>
         <a>Feedback</a><br><br>
-        <a>Details</a><br><br>
       </li>
     </ul>
   </div>
 
-  <div class="list">
-    <ul>
-      <li>
-        <img src="https://static.lenskart.com/media/desktop/img/play-store.svg"><br><br>
-      </li>
-    </ul>
-  </div>
+
 </div>

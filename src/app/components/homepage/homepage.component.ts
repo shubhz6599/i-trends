@@ -12,7 +12,9 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   isLoading = true; // State to track image loading for placeholders
   imagesLoaded = 0;
   totalImages = 2;
-
+  private navLinks!: HTMLElement;
+  private scrollLeftBtn!: HTMLElement;
+  private scrollRightBtn!: HTMLElement;
   images = [
     {
       front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0220.jpg?alt=media&token=89e9d23f-bc48-4121-8f07-1d7597f35fbd',
@@ -83,7 +85,51 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.observeCards();
     this.initImageFlipper();
+    this.navLinks = document.querySelector('.nav-links') as HTMLElement;
+    this.scrollLeftBtn = document.querySelector('.scroll-left') as HTMLElement;
+    this.scrollRightBtn = document.querySelector('.scroll-right') as HTMLElement;
+
+    if (this.navLinks) {
+      this.setupScrollButtons();
+      // Initial check
+      setTimeout(() => this.checkScrollPosition(), 100);
+    }
   }
+  private setupScrollButtons() {
+    // Check on scroll
+    this.navLinks.addEventListener('scroll', () => this.checkScrollPosition());
+
+    // Button click handlers
+    if (this.scrollLeftBtn) {
+      this.scrollLeftBtn.addEventListener('click', () => {
+        this.navLinks.scrollBy({ left: -200, behavior: 'smooth' });
+      });
+    }
+
+    if (this.scrollRightBtn) {
+      this.scrollRightBtn.addEventListener('click', () => {
+        this.navLinks.scrollBy({ left: 200, behavior: 'smooth' });
+      });
+    }
+  }
+
+  private checkScrollPosition() {
+    const { scrollLeft, scrollWidth, clientWidth } = this.navLinks;
+    const atStart = scrollLeft <= 0;
+    const atEnd = scrollLeft >= scrollWidth - clientWidth - 1;
+
+    if (this.scrollLeftBtn) {
+      atStart ? this.scrollLeftBtn.classList.remove('active')
+        : this.scrollLeftBtn.classList.add('active');
+    }
+
+    if (this.scrollRightBtn) {
+      atEnd ? this.scrollRightBtn.classList.remove('active')
+        : this.scrollRightBtn.classList.add('active');
+    }
+  }
+
+
 
   navigate(categoryId: string): void {
     this.imagePreloader.preloadCategoryImages(categoryId); // Preload selected category images
@@ -163,5 +209,14 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   navigateToStoreLocation(): void {
     const googleMapsLink = 'https://www.google.com/maps/dir//Shop+No+3,+Ground+floor,+i-trends,+Sr.+No+296,+Porwal+Rd,+near+DY+Patil+University+Road,+Lohegaon,+Pune,+Maharashtra+411047/@18.6141551,73.9071623,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x3bc2c700594eff49:0x4978255b63aab10e!2m2!1d73.9120332!2d18.6141552!3e0?entry=ttu&g_ep=EgoyMDI1MDQwOC4wIKXMDSoASAFQAw%3D%3D';
     window.open(googleMapsLink, '_blank'); // Opens the link in a new tab
+  }
+  scrollToCategory() {
+    const categorySection = document.querySelector('.cart');
+    if (categorySection) {
+      categorySection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   }
 }
