@@ -3,6 +3,8 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Mulish', sans-serif;
+  text-decoration: none;
+  list-style: none;
 }
 
 .fnav {
@@ -131,7 +133,7 @@
   display: flex;
   gap: 20px;
   padding: 0 5px;
-  color: slategrey;
+  color: teal;
 
 }
 
@@ -1333,6 +1335,7 @@
   .footer .list {
     margin: 20px 0;
     text-align: center;
+    margin-bottom: 10%;
   }
 
   .snav {
@@ -1443,4 +1446,8 @@
 
 .hidden {
   display: none;
+}
+
+.textAnchor {
+  color: white;
 }

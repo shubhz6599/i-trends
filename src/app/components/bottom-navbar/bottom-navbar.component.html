@@ -9,10 +9,25 @@
 
     <!-- Contact -->
     <input type="radio" name="radio" value="2" id="tab-2" />
-    <label class="icon contact-icon" for="tab-2" routerLink="/contact" routerLinkActive="active">
+    <label class="icon contact-icon" for="tab-2" routerLinkActive="active" (click)="toggleOptions()">
       <i class="bi bi-whatsapp"></i>
       <span class="nav-text">Contact</span>
+      <div *ngIf="showContactOptions" class="half-circle-options">
+        <button class="option-btn" (click)="call()">
+          <i class="bi bi-telephone-fill"></i>
+          <span>Call</span>
+        </button>
+        <button class="option-btn" (click)="mail()">
+          <i class="bi bi-envelope-fill"></i>
+          <span>Mail</span>
+        </button>
+        <button class="option-btn" (click)="whatsapp()">
+          <i class="bi bi-whatsapp"></i>
+          <span>WhatsApp</span>
+        </button>
+      </div>
     </label>
+
 
     <!-- EyeWears -->
     <input type="radio" name="radio" value="3" id="tab-3" />
@@ -22,7 +37,7 @@
     </label>
 
     <!-- Cart -->
-    <input type="radio" name="radio" value="4" id="tab-4" />
+    <input disabled type="radio" name="radio" value="4" id="tab-4" />
     <label class="icon cart-icon" for="tab-4" routerLink="/cart" routerLinkActive="active">
       <i class="bi bi-bag"></i>
       <span class="nav-text">Cart</span>

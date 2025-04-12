@@ -15,6 +15,13 @@ export class OnlineConsultationComponent {
     this.bookingForm = this.fb.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+      pincode: [
+        '',
+        [Validators.required, Validators.pattern(/^\d{6}$/)] // 6-digit pincode validation
+      ],
+      landmark: ['', Validators.required],
       phone: [
         '',
         [Validators.required, Validators.pattern(/^\d{10}$/)] // 10-digit phone number validation
@@ -48,9 +55,12 @@ export class OnlineConsultationComponent {
         New Eye Consultation Booking:%0A
         Name: ${formData.name}%0A
         Address: ${formData.address}%0A
+        State: ${formData.state}%0A
+        City: ${formData.city}%0A
+        Pincode: ${formData.pincode}%0A
+        Nearby Landmark: ${formData.landmark}%0A
         Phone: ${formData.phone}%0A
-        Concern: ${formData.concern === 'Other' ? formData.otherConcern : formData.concern
-        }%0A
+        Concern: ${formData.concern === 'Other' ? formData.otherConcern : formData.concern}%0A
       `;
 
       // Navigate to WhatsApp
@@ -58,5 +68,4 @@ export class OnlineConsultationComponent {
       window.open(whatsappURL, '_blank');
     }
   }
-
 }

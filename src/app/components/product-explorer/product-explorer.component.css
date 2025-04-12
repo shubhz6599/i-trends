@@ -616,77 +616,6 @@ nav i {
   cursor: not-allowed;
 }
 
-.quantity-selector {
-  margin-bottom: 10px;
-  width: 100%;
-}
-
-.customBtn {
-  background-color: #2c3e50 !important;
-  color: white !important;
-  margin-bottom: 10px !important;
-  border: none !important;
-  font-family: "Roboto Condensed", sans-serif;
-}
-
-.customBtn:hover:not(:disabled),
-.customBtn:active:not(:disabled) {
-  background-color: #aedaa6 !important;
-  color: white !important;
-}
-
-.select {
-  position: relative;
-  min-width: 200px;
-  margin-bottom: 20px;
-}
-
-.select svg {
-  position: absolute;
-  right: 12px;
-  top: calc(50% - 3px);
-  width: 10px;
-  height: 6px;
-  stroke-width: 2px;
-  stroke: #9098a9;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  pointer-events: none;
-}
-
-.select select {
-  -webkit-appearance: none;
-  padding: 7px 40px 7px 12px;
-  width: 100%;
-  border: 1px solid #e8eaed;
-  border-radius: 5px;
-  background: #fff;
-  box-shadow: 0 1px 3px -2px #9098a9;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 16px;
-  transition: all 150ms ease;
-}
-
-.select select:required:invalid {
-  color: #5a667f;
-}
-
-.select select option {
-  color: #223254;
-}
-
-.select select option[value=""][disabled] {
-  display: none;
-}
-
-.select select:focus {
-  outline: none;
-  border-color: #07f;
-  box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.2);
-}
-
 .mDiv .card .description .color-options {
   margin: 20px 0;
 }
@@ -887,4 +816,274 @@ nav i {
 
 .customC {
   color: darkgrey;
+}
+
+.hidden {
+  display: none;
+}
+
+.toggle {
+  margin: 20px;
+}
+
+.option-btn,
+#back-to-toggle-1,
+#proceed-btn {
+  margin: 5px;
+}
+
+.customBtn {
+  background-color: #2c3e50 !important;
+  color: white !important;
+  margin-bottom: 10px !important;
+  border: none !important;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.customBtn:hover:not(:disabled),
+.customBtn:active:not(:disabled) {
+  background-color: #aedaa6 !important;
+  color: white !important;
+}
+
+.custommargin {
+  margin-bottom: 10px !important;
+}
+
+/* Modal header styling */
+.modal {
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  /* Smooth transition for opening */
+}
+
+.modal.fade {
+  transform: translateY(-50px);
+  /* Start position (for fade-in effect) */
+  opacity: 0;
+  /* Start opacity */
+}
+
+.modal.show {
+  transform: translateY(0);
+  /* End position */
+  opacity: 1;
+  /* End opacity */
+}
+
+/* Backdrop Transition Effects */
+.modal-backdrop {
+  transition: opacity 0.3s ease-out;
+  /* Smooth transition for backdrop */
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+  /* Start opacity for fade-out */
+}
+
+.modal-backdrop.show {
+  opacity: 0.5;
+  /* End opacity for fade-in */
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+}
+
+.modal-header .btn-link {
+  padding: 0;
+  text-decoration: none;
+}
+
+.modal-header i {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  /* Matches the theme */
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+  font-weight: bold;
+  border: 2px solid transparent;
+}
+
+.step.active {
+  background-color: #2c3e50;
+  /* Updated background color */
+  color: white;
+  /* Text color remains white */
+  border-color: #34495e;
+  /* Slightly darker border for better visibility */
+}
+
+.list-group-item {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  /* Adds spacing */
+}
+
+.list-group-item .text-center {
+  text-align: left;
+}
+
+.list-group-item:hover {
+  background: linear-gradient(to right, #2c3e50, #34495e);
+  /* Gradient theme */
+  color: white;
+  cursor: pointer;
+}
+
+.list-group-item i {
+  font-size: 1.5rem;
+}
+
+.gradient-card {
+  background: linear-gradient(120deg, #2c3e50, #34495e);
+  color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gradient-card .card-title {
+  font-weight: bold;
+  color: white;
+}
+
+.gradient-card ul {
+  padding-left: 0;
+}
+
+.gradient-card ul li {
+  font-size: 0.9rem;
+  color: #dcdcdc;
+}
+
+.gradient-card .price-container {
+  background: linear-gradient(120deg, #f7b42c, #fc575e);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.gradient-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Product Details Card Styling */
+.modal .card {
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Product Image Styling */
+.modal .img-fluid {
+  border-radius: 10px 0 0 10px;
+}
+
+/* Price Container Styling */
+.modal .price-container {
+  background: linear-gradient(to right, #ff7e5f, #feb47b);
+  /* Vibrant gradient */
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 10px;
+}
+
+/* Button Styling */
+.modal .btn-success {
+  background-color: #2c3e50;
+  border: none;
+  font-size: 1rem;
+}
+
+.modal .btn-success:hover {
+  background-color: #34495e;
+  color: white;
+}
+
+/* General Styling for the Modal */
+.modal .fade-in-animation {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.modal .modern-card {
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.modal .modern-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Product Image Styling */
+.modal .product-image {
+  border-radius: 15px 0 0 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal .product-image:hover {
+  transform: scale(1.05);
+}
+
+/* Price Container Styling */
+.modal .price-container {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  /* Vibrant gradient */
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styling */
+.modal .proceed-button {
+  background-color: #2c3e50;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.modal .proceed-button:hover {
+  background-color: #34495e;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

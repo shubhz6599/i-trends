@@ -1,10 +1,11 @@
 <div class="payment-container">
-  <h2 class="page-title">Checkout</h2>
+  <h2 class="page-title fade-in-animation">Checkout</h2>
   <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
     <!-- Customer Name -->
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" id="name" class="form-control" formControlName="name" placeholder="Enter your name" />
+      <input type="text" id="name" class="form-control input-field" formControlName="name"
+        placeholder="Enter your name" />
       <div *ngIf="paymentForm.get('name')?.invalid && paymentForm.get('name')?.touched" class="error">
         Name is required.
       </div>
@@ -13,40 +14,65 @@
     <!-- Address -->
     <div class="form-group">
       <label for="address">Address</label>
-      <textarea id="address" class="form-control" formControlName="address" rows="4"
-        placeholder="Enter your address"></textarea>
+      <input id="address" class="form-control input-field" formControlName="address" rows="4"
+        placeholder="Enter your address">
       <div *ngIf="paymentForm.get('address')?.invalid && paymentForm.get('address')?.touched" class="error">
         Address is required.
+      </div>
+    </div>
+
+    <!-- State -->
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" id="state" class="form-control input-field" formControlName="state"
+        placeholder="Enter your state" />
+      <div *ngIf="paymentForm.get('state')?.invalid && paymentForm.get('state')?.touched" class="error">
+        State is required.
+      </div>
+    </div>
+
+    <!-- City -->
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" id="city" class="form-control input-field" formControlName="city"
+        placeholder="Enter your city" />
+      <div *ngIf="paymentForm.get('city')?.invalid && paymentForm.get('city')?.touched" class="error">
+        City is required.
+      </div>
+    </div>
+
+    <!-- Pincode -->
+    <div class="form-group">
+      <label for="pincode">Pincode</label>
+      <input type="text" id="pincode" class="form-control input-field" formControlName="pincode"
+        placeholder="Enter your pincode" />
+      <div *ngIf="paymentForm.get('pincode')?.invalid && paymentForm.get('pincode')?.touched" class="error">
+        Pincode is required and must be valid.
+      </div>
+    </div>
+
+    <!-- Landmark -->
+    <div class="form-group">
+      <label for="landmark">Nearby Landmark</label>
+      <input type="text" id="landmark" class="form-control input-field" formControlName="landmark"
+        placeholder="Enter nearby landmark" />
+      <div *ngIf="paymentForm.get('landmark')?.invalid && paymentForm.get('landmark')?.touched" class="error">
+        Landmark is required.
       </div>
     </div>
 
     <!-- Contact Number -->
     <div class="form-group">
       <label for="contact">Contact Number</label>
-      <input type="text" id="contact" class="form-control" formControlName="contact"
+      <input type="text" id="contact" class="form-control input-field" formControlName="contact"
         placeholder="Enter your contact number" />
       <div *ngIf="paymentForm.get('contact')?.invalid && paymentForm.get('contact')?.touched" class="error">
         Contact number is required and must be valid.
       </div>
     </div>
 
-    <!-- Payment Method -->
-    <div class="form-group">
-      <label for="paymentMethod">Payment Method</label>
-      <select id="paymentMethod" class="form-control" formControlName="paymentMethod">
-        <option value="">Select Payment Method</option>
-        <option value="creditCard">Credit Card</option>
-        <option value="debitCard">Debit Card</option>
-        <option value="paypal">PayPal</option>
-        <option value="cashOnDelivery">Cash on Delivery</option>
-      </select>
-      <div *ngIf="paymentForm.get('paymentMethod')?.invalid && paymentForm.get('paymentMethod')?.touched" class="error">
-        Please select a payment method.
-      </div>
-    </div>
-
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary btn-block" [disabled]="paymentForm.invalid">
+    <button type="submit" class="btn btn-primary btn-block fade-in-animation" [disabled]="paymentForm.invalid">
       Proceed to Payment
     </button>
   </form>
@@ -55,13 +81,14 @@
   <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content" style="background-color: #2c3e50; color: white;">
+      <div class="modal-content modal-custom-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="confirmationModalLabel">Order Confirmation</h5>
-          <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title fade-in-animation" id="confirmationModalLabel">Order Confirmation</h5>
+          <button type="button" class="btn-close text-white fade-in-animation" data-bs-dismiss="modal"
+            aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>
+          <p class="fade-in-animation">
             We currently do not support automated payments. To confirm your order, please click "OK" to send the order
             details directly to the owner via WhatsApp.
 
@@ -72,8 +99,8 @@
           </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" (click)="redirectToWhatsApp()">OK</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-success fade-in-animation" (click)="redirectToWhatsApp()">OK</button>
+          <button type="button" class="btn btn-secondary fade-in-animation" data-bs-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>

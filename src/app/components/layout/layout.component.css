@@ -16,6 +16,7 @@ app-bottom-navbar {
   height: 60px;
   /* Define the height of the navbar */
   z-index: 2000;
+  margin-top: 60px;
   /* Ensure it stays above other elements */
 }
 

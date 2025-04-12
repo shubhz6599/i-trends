@@ -5,7 +5,7 @@
     alt="i-trends Logo" class="logo" loading="lazy">
 
   <!-- Hamburger Menu Button (for mobile) -->
-  <button class="hamburger" (click)="toggleMenu()">☰</button>
+  <!-- <button class="hamburger" (click)="toggleMenu()">☰</button> -->
 
   <!-- Search Bar and Menu Items -->
   <div class="nav-content customFlex" [ngClass]="{ 'active': isMenuOpen }">
@@ -170,7 +170,7 @@
       <li>
         <h2>SERVICES</h2><br><br>
         <a (click)="navigateToStoreLocation()">Visit Store</a><br><br>
-        <a routerLink="/buying-guide">Buying Guide</a><br><br>
+        <a routerLink="/buying-guide" class="textAnchor">Buying Guide</a><br><br>
       </li>
     </ul>
   </div>
@@ -179,20 +179,15 @@
     <ul>
       <li>
         <h2>ABOUT US</h2><br><br>
-        <a>Know More About Us</a><br><br>
-        <a>Follow Us</a><br><br>
+        <a routerLink="/know-more-about-us">Know More About Us</a><br><br>
+        <a class="textAnchor" href="https://www.instagram.com/i_trends_official?igsh=MTl2MDltZno1NzAzYg==">Follow
+          Us</a><br><br>
+        <a routerLink="/feedback">Feedback</a><br><br>
       </li>
     </ul>
   </div>
 
-  <div class="list">
-    <ul>
-      <li>
-        <a>Contact</a><br><br>
-        <a>Feedback</a><br><br>
-      </li>
-    </ul>
-  </div>
+
 
 
 </div>

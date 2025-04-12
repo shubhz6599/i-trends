@@ -18,7 +18,7 @@ interface Product {
   id: string;
   name: string;
   description: string;
-  basePrice: number;
+  basePrice: any;
   variants: Variant[];
   features: string[];
 }
@@ -52,7 +52,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   categories: Category[] = productsData.categories;
   currentCategory: Category | null = null;
   selectedProduct: Product | null = null;
-  selectedVariant: Variant | null = null;
+  selectedVariant: Variant | any = null;
   selectedColor: any | null = null;
   availableColors: any[] = [];
   filteredProducts: Product[] = [];
@@ -101,6 +101,66 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   discountOptions = [10, 20, 30, 40, 50];
   selectedFilters: { label: string, value: any }[] = [];
   searchResultMessage: string = '';
+  currentStep: number = 1; // Tracks the current step (1, 2, or 3)
+  steps = [1, 2, 3]; // Step numbers
+
+  selection = {
+    mainOption: '',
+    subOption: ''
+  };
+
+  subOptions: string[] = []; // Sub-options for the selected main option
+
+  subOptionsMap: Record<string, string[]> = {
+    'single-vision': [
+      'Anti-Glare Premium',
+      'BLU Screen Lenses',
+      'Thin BLU Screen Lenses',
+      'Owndays Japan Clear Vision Lenses',
+      'Owndays Japan Shatterproof'
+    ],
+    'bifocal': ['Circular Bi-focal KT', 'Anti-Glare Normal Corridor Progressive', 'Anti-Glare Normal Corridor Progressive', 'BLU Screen Normal Corridor Progressive', 'BLU Screen Wide Corridor Progressive'],
+    'zero-power': ['BLU Screen Lenses Zero Power', 'Brown Tinted Color Lenses', 'Pink Tinted Color Lenses', 'Yellow Tinted Color Lenses', 'Blue Tinted Color Lenses', 'Green Tinted Color Lenses', 'Grey Tinted Color Lenses', 'Owndays Japan Clear Vision Lenses Zero Power'],
+    'frame-only': ['Stylish Frames', 'Lightweight', 'Durable']
+  };
+  optionDetails: Record<string, string[]> = {
+    'Anti-Glare Premium': ['6 Months Warranty', 'Double Side Anti-Glare'],
+    'BLU Screen Lenses': ['1 Year Warranty', 'Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant'],
+    'Thin BLU Screen Lenses': ['Lightweight', 'Slim Design', 'High Optical Clarity'],
+    'Owndays Japan Clear Vision Lenses': ['Premium Quality', 'Clear Vision', 'Anti-Reflection Coating'],
+    'Owndays Japan Shatterproof': ['Shatterproof Design', 'Durable', 'Impact Resistant'],
+    'Circular Bi-focal KT': ['1 Year Warranty', 'UV-400 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Circular Reading Area in Lower Part'],
+    'Anti-Glare Normal Corridor Progressive': ['1 Year Warranty', 'UV-400 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'For Distance Intermediate & Near Vision', 'Smooth Lens with No Visible Line'],
+    'BLU Screen Normal Corridor Progressive': ['1 Year Warranty', 'UV-400 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'For Distance, Intermediate & Near Vision'],
+    'BLU Screen Wide Corridor Progressive': ['1 Year Warranty', 'UV-400 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'For Distance, Intermediate & Near Vision'],
+    'BLU Screen Lenses Zero Power': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'Double Side Anti-Glare'],
+    'Brown Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Pink Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Yellow Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Blue Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Green Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Grey Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Owndays Japan Clear Vision Lenses Zero Power': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power']
+  };
+  prices: Record<string, number> = {
+    'Anti-Glare Premium': 400,
+    'BLU Screen Lenses': 500,
+    'Thin BLU Screen Lenses': 1000,
+    'Owndays Japan Clear Vision Lenses': 1200,
+    'Owndays Japan Shatterproof': 2000,
+    'Circular Bi-focal KT': 1000,
+    'Anti-Glare Normal Corridor Progressive': 1000,
+    'BLU Screen Normal Corridor Progressive': 1800,
+    'BLU Screen Wide Corridor Progressive': 2500,
+    'BLU Screen Lenses Zero Power': 1500,
+    'Brown Tinted Color Lenses': 1200,
+    'Pink Tinted Color Lenses': 120,
+    'Yellow Tinted Color Lenses': 1200,
+    'Blue Tinted Color Lenses': 1200,
+    'Green Tinted Color Lenses': 1200,
+    'Grey Tinted Color Lenses': 1200,
+    'Owndays Japan Clear Vision Lenses Zero Power': 1600
+  };
   constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private sharedStateService: SharedStateService, private viewportScroller: ViewportScroller) { }
 
   ngOnInit(): void {
@@ -155,6 +215,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   navigateToHome() {
+    const lensModal = document.getElementById('lensModal');
+    this.hideModal()
     this.router.navigateByUrl('/home');
   }
 
@@ -330,26 +392,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
-  addToCart(): void {
-    if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
-    if (this.selectedQuantity == "Select Quantity") {
-      window.alert('Please select quantity to proceed');
-      return
-    }
-    let price: any = this.getFinalPriceDigits();
-
-    const productData = {
-      name: this.selectedProduct.name,
-      variant: this.selectedVariant.color,
-      quantity: this.selectedQuantity,
-      price: price.join(""),
-      imageUrl: this.selectedVariant.images[0], // Assuming the first image is the main image
-    };
-    this.router.navigate(['/payment'], { state: { product: productData } });
-
-    // Optional: Show confirmation or navigate to cart
-    // this.router.navigate(['/cart']);
-  }
 
   buyNow(): void {
     if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
@@ -370,6 +412,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   goBack() {
+    this.hideModal()
     this.router.navigateByUrl('/home')
   }
 
@@ -408,7 +451,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   filterByDiscount(discount: number) {
     if (!this.selectedFilters.find((filter: any) => filter.label === `${discount}% or more`)) {
-      this.selectedFilters.push({ label: `${discount}% or more`, value: discount });
+      this.selectedFilters.push({ label: ` ${discount}% or more`, value: discount });
     }
   }
 
@@ -510,5 +553,115 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   // Apply filters and close the filter panel
+  openModal(): void {
+    const lensModal = document.getElementById('lensModal');
+    if (lensModal) {
+      const modalInstance = new (window as any).bootstrap.Modal(lensModal);
+      modalInstance.show(); // Show the modal
 
+      // Apply fade-in effect to backdrop (optional, handled via CSS)
+      const backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) {
+        backdrop.classList.add('fade');
+      }
+    }
+  }
+
+
+
+  // Handle main option selection
+  selectMainOption(option: string): void {
+    if (option === 'frame-only') {
+      this.selectFrameOnly()
+    } else {
+      this.selection.mainOption = option;
+      this.subOptions = this.subOptionsMap[option];
+      this.currentStep = 2; // Navigate to Step 2
+    }
+  }
+
+  // Handle sub-option selection
+  selectSubOption(option: string): void {
+    this.selection.subOption = option;
+    this.currentStep = 3; // Navigate to Step 3
+  }
+
+  // Go back to the previous step
+  goBackForToggle(): void {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+      if (this.currentStep === 1) {
+        this.selection.mainOption = '';
+      } else if (this.currentStep === 2) {
+        this.selection.subOption = '';
+      }
+    }
+  }
+
+  // Proceed to buy
+  proceedToBuy(): void {
+    console.log(this.selectedProduct?.basePrice);
+
+    if (this.selection.mainOption && this.selection.subOption && this.selectedProduct) {
+      let price = this.prices[this.selection.subOption] + this.selectedProduct?.basePrice
+      // Prepare product data for Step 3 display
+      const productData = {
+        name: this.selectedProduct?.name,
+        variant: this.selectedVariant?.color,
+        quantity: this.selectedQuantity || 1,
+        price: price,
+        imageUrl: this.selectedVariant?.images[0],
+        ...this.selection
+      };
+
+      const totalPrice = price; // Add frame price
+
+      // Log product data for debugging
+      console.log('Proceeding to buy:', productData, `Total Price: ₹${totalPrice}`);
+
+      // Navigate to checkout or payment page
+      this.hideModal()
+      this.router.navigate(['/payment'], { state: { product: productData, totalPrice } });
+
+      // Reset selection
+      this.resetSelection();
+    } else {
+      alert('Please make all selections!');
+    }
+  }
+
+  // Reset the selection after proceeding
+  resetSelection(): void {
+    this.selection = { mainOption: '', subOption: '' };
+    this.currentStep = 1;
+  }
+  selectFrameOnly(): void {
+    let price: any = this.getFinalPriceDigits();
+    if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
+    const productData = {
+      name: this.selectedProduct.name,
+      variant: this.selectedVariant.color,
+      quantity: this.selectedQuantity,
+      price: price.join(""),
+      imageUrl: this.selectedVariant.images[0],
+    };
+    this.hideModal()
+    this.router.navigate(['/payment'], { state: { product: productData } });
+
+  }
+  hideModal(): void {
+    const lensModal = document.getElementById('lensModal');
+    if (lensModal) {
+      const modalInstance = new (window as any).bootstrap.Modal(lensModal);
+      modalInstance.hide(); // Trigger Bootstrap's hide functionality
+
+      // Delay removal for transition effect
+      setTimeout(() => {
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+          backdrop.remove(); // Remove the backdrop after animation completes
+        }
+      }, 300); // Match the transition duration in your CSS (0.3s)
+    }
+  }
 }

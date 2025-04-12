@@ -17,16 +17,24 @@ export class PaymentProcessComponent implements OnInit {
 
   ngOnInit(): void {
     this.productData = history.state.product;
+    console.log(this.productData);
 
     // Initialize the form
     this.paymentForm = this.fb.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+      pincode: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]{6}$')],
+      ],
+      landmark: ['', Validators.required],
       contact: [
         '',
         [Validators.required, Validators.pattern('^[0-9]{10}$')],
       ],
-      paymentMethod: ['', Validators.required],
+      // paymentMethod: ['', Validators.required],
     });
   }
 
@@ -34,15 +42,14 @@ export class PaymentProcessComponent implements OnInit {
     if (this.paymentForm.valid) {
       const confirmationModal = document.getElementById('confirmationModal');
       if (confirmationModal) {
-        // Use Renderer2 to show the modal
         const modalInstance = new (window as any).bootstrap.Modal(confirmationModal);
         modalInstance.show();
       }
     } else {
-      // Mark all fields as touched to show validation errors
       this.paymentForm.markAllAsTouched();
     }
   }
+
   redirectToWhatsApp(): void {
     const customerDetails = this.paymentForm.value;
 
@@ -50,12 +57,16 @@ export class PaymentProcessComponent implements OnInit {
       ? `- Image: ${this.productData.imageUrl}`
       : '';
 
+
     const message = `Hello, I would like to place an order. Here are my details:
   Customer Details:
   - Name: ${customerDetails.name}
   - Address: ${customerDetails.address}
+  - State: ${customerDetails.state}
+  - City: ${customerDetails.city}
+  - Pincode: ${customerDetails.pincode}
+  - Nearby Landmark: ${customerDetails.landmark}
   - Contact Number: ${customerDetails.contact}
-  - Payment Method: ${customerDetails.paymentMethod}
   Product Details:
   - Product Name: ${this.productData.name}
   - Variant: ${this.productData.variant}
@@ -69,5 +80,4 @@ export class PaymentProcessComponent implements OnInit {
     const whatsappUrl = `https://wa.me/${this.ownerWhatsAppNumber}?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
   }
-
 }

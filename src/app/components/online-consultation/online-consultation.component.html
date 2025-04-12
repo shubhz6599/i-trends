@@ -97,6 +97,37 @@
             </div>
           </div>
           <div class="mb-3">
+            <label for="state" class="form-label">State</label>
+            <input type="text" id="state" class="form-control" formControlName="state" placeholder="Enter your state">
+            <div class="text-danger" *ngIf="bookingForm.get('state')?.invalid && bookingForm.get('state')?.touched">
+              State is required.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" id="city" class="form-control" formControlName="city" placeholder="Enter your city">
+            <div class="text-danger" *ngIf="bookingForm.get('city')?.invalid && bookingForm.get('city')?.touched">
+              City is required.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="pincode" class="form-label">Pincode</label>
+            <input type="text" id="pincode" class="form-control" formControlName="pincode"
+              placeholder="Enter your pincode">
+            <div class="text-danger" *ngIf="bookingForm.get('pincode')?.invalid && bookingForm.get('pincode')?.touched">
+              Pincode is required and must be valid (6 digits).
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="landmark" class="form-label">Nearby Landmark</label>
+            <input type="text" id="landmark" class="form-control" formControlName="landmark"
+              placeholder="Enter nearby landmark">
+            <div class="text-danger"
+              *ngIf="bookingForm.get('landmark')?.invalid && bookingForm.get('landmark')?.touched">
+              Landmark is required.
+            </div>
+          </div>
+          <div class="mb-3">
             <label for="phone" class="form-label">Phone Number</label>
             <input type="tel" id="phone" class="form-control" formControlName="phone"
               placeholder="Enter your phone number">

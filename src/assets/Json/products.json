@@ -1455,7 +1455,7 @@
             },
             {
               "color": "Blue",
-              "colorCode": "#0000FF",
+              "colorCode": "#090979",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0438.jpg?alt=media&token=c30c7d26-52e7-4b7a-a07a-870d288835f0",
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0439.jpg?alt=media&token=6f442deb-faf2-4ae5-b43c-baa59949042f"
@@ -1492,7 +1492,7 @@
             },
             {
               "color": "Blue",
-              "colorCode": "#000000",
+              "colorCode": "#090979",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0399.jpg?alt=media&token=7ce2c3e3-6948-456d-9cb8-969d65037c18",
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0400.jpg?alt=media&token=40101775-8ae3-4feb-abae-d910af0c760c"
@@ -1817,6 +1817,257 @@
           ],
           "features": [
             "Trendy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Kids Sunglasses",
+      "name": "Kids Sunglasses",
+      "description": "Bold square frames for a statement look",
+      "products": [
+        {
+          "id": "kd-701",
+          "name": "Kids Sunglasses",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0447.jpg?alt=media&token=45511090-53a6-4f16-bd89-eb7c0483dec6",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0448.jpg?alt=media&token=c9d18203-ba13-40aa-91b7-2dafd7bf2628"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "LightMatBlack",
+              "colorCode": "#36454F",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/SQUARE%20FRAMES%2012X%2FDSC_0283.jpg?alt=media&token=ef6db5e1-55ee-43e9-9636-2159aa8e1ff2",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/SQUARE%20FRAMES%2012X%2FDSC_0284.jpg?alt=media&token=fc240fe9-c38d-47fc-8d53-9dfc01383795"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "DarkMatBlack",
+              "colorCode": "#343434",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/SQUARE%20FRAMES%2012X%2FDSC_0285.jpg?alt=media&token=515d641c-3ca7-4b28-bc31-8b70ff6ae752",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/SQUARE%20FRAMES%2012X%2FDSC_0286.jpg?alt=media&token=42a18ff2-2dd8-4aee-9d50-e1b7d92d05d8"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "kd-702",
+          "name": "Kids Sunglasses - Dual Tone",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Blue",
+              "colorCode": "#090979",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0449.jpg?alt=media&token=47a5a129-f992-4de9-afb4-f950a4bb9480",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0450.jpg?alt=media&token=00672768-02b3-41c5-9dcd-66beb89904c4"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "kd-703",
+          "name": "Kids Sunglasses",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0451.jpg?alt=media&token=d4ea24eb-3db3-4f9a-9704-ffafca2f674c",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0452.jpg?alt=media&token=989cbcfe-ade4-4b6f-9c7b-56a2928d59ea"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "kd-704",
+          "name": "Kids Sunglasses",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Baby Pink",
+              "colorCode": "#F4C2C2",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0453.jpg?alt=media&token=ae7576a8-42bf-485f-9d5d-f59d783fac7a",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0454.jpg?alt=media&token=eb0e0c38-83b9-46d1-aeec-f3a38fa411e3"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "kd-705",
+          "name": "Kids Sunglasses",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Blue",
+              "colorCode": "#0e3ad6",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0455.jpg?alt=media&token=5d3bb45a-fb67-4d6f-aa80-b8adf1d1235d",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0456.jpg?alt=media&token=4f87f67d-3e85-4d0f-9f4d-bf2844253404"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Orange",
+              "colorCode": "#FF4D00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0457.jpg?alt=media&token=1db700db-c21f-4682-9e67-64a8b76301f5",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0458.jpg?alt=media&token=ce288b72-b9d0-4774-87b2-6d9d628f1aeb"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "kd-706",
+          "name": "Kids Sunglasses",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Orange",
+              "colorCode": "#FF4D00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0459.jpg?alt=media&token=0071ec74-dcdb-4008-a1e9-22bcd519ac7a",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0460.jpg?alt=media&token=92431406-c01c-4809-92c0-c1055851bd30"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "computer glasses",
+      "name": "computer glasses",
+      "description": "Bold square frames for a statement look",
+      "products": [
+        {
+          "id": "kd-701",
+          "name": "computer glasses",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0232.jpg?alt=media&token=64925148-c94f-4668-83e3-9cf61a9bb40d",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0233.jpg?alt=media&token=bdbd701c-a618-4273-b467-9c8f1209c870"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "LightMatBlack",
+              "colorCode": "#36454F",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/SQUARE%20FRAMES%2012X%2FDSC_0283.jpg?alt=media&token=ef6db5e1-55ee-43e9-9636-2159aa8e1ff2",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/SQUARE%20FRAMES%2012X%2FDSC_0284.jpg?alt=media&token=fc240fe9-c38d-47fc-8d53-9dfc01383795"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "DarkMatBlack",
+              "colorCode": "#343434",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/SQUARE%20FRAMES%2012X%2FDSC_0285.jpg?alt=media&token=515d641c-3ca7-4b28-bc31-8b70ff6ae752",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/SQUARE%20FRAMES%2012X%2FDSC_0286.jpg?alt=media&token=42a18ff2-2dd8-4aee-9d50-e1b7d92d05d8"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
             "Magnetic sunglasses clip-on",
             "Anti-reflective coating"
           ]

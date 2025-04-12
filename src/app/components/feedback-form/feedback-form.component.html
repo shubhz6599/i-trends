@@ -1,0 +1,71 @@
+<div class="feedback-form-container">
+  <h1>We Value Your Feedback</h1>
+  <p>Please take a moment to share your thoughts about our website and services.</p>
+
+  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <!-- Question 1: Website Design -->
+    <div class="form-group">
+      <label for="websiteDesign">How would you rate the website design?</label>
+      <select id="websiteDesign" formControlName="websiteDesign">
+        <option value="" disabled selected>Select an option</option>
+        <option value="Excellent">Excellent</option>
+        <option value="Good">Good</option>
+        <option value="Average">Average</option>
+        <option value="Poor">Poor</option>
+      </select>
+      <div class="error"
+        *ngIf="feedbackForm.get('websiteDesign')?.invalid && feedbackForm.get('websiteDesign')?.touched">
+        Please select a rating for the website design.
+      </div>
+    </div>
+
+    <!-- Question 2: Navigation -->
+    <div class="form-group">
+      <label for="navigationEase">Was the website easy to navigate?</label>
+      <select id="navigationEase" formControlName="navigationEase">
+        <option value="" disabled selected>Select an option</option>
+        <option value="Very Easy">Very Easy</option>
+        <option value="Somewhat Easy">Somewhat Easy</option>
+        <option value="Neutral">Neutral</option>
+        <option value="Difficult">Difficult</option>
+        <option value="Very Difficult">Very Difficult</option>
+      </select>
+      <div class="error"
+        *ngIf="feedbackForm.get('navigationEase')?.invalid && feedbackForm.get('navigationEase')?.touched">
+        Please select an option for navigation ease.
+      </div>
+    </div>
+
+    <!-- Question 3: Service Quality -->
+    <div class="form-group">
+      <label for="serviceSatisfaction">How satisfied are you with our services?</label>
+      <select id="serviceSatisfaction" formControlName="serviceSatisfaction">
+        <option value="" disabled selected>Select an option</option>
+        <option value="Very Satisfied">Very Satisfied</option>
+        <option value="Satisfied">Satisfied</option>
+        <option value="Neutral">Neutral</option>
+        <option value="Dissatisfied">Dissatisfied</option>
+        <option value="Very Dissatisfied">Very Dissatisfied</option>
+      </select>
+      <div class="error"
+        *ngIf="feedbackForm.get('serviceSatisfaction')?.invalid && feedbackForm.get('serviceSatisfaction')?.touched">
+        Please select a satisfaction level for our services.
+      </div>
+    </div>
+
+    <!-- Additional Comments -->
+    <div class="form-group">
+      <label for="additionalComments">Do you have any additional comments or suggestions?</label>
+      <textarea id="additionalComments" formControlName="additionalComments" placeholder="Enter your comments"
+        rows="4"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="feedbackForm.invalid">Submit Feedback</button>
+  </form>
+
+  <!-- Confirmation Message -->
+  <div *ngIf="confirmationMessage" class="confirmation">
+    <p>{{ confirmationMessage }}</p>
+  </div>
+</div>

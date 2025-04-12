@@ -168,20 +168,167 @@
         </div>
 
         <p>{{selectedProduct.description}}</p>
-        <div class="quantity-selector">
-          <label class="select" for="slct">
-            <select id="slct" [(ngModel)]="selectedQuantity" required>
-              <option *ngFor="let qty of quantityOptions" [value]="qty">{{ qty }}</option>
-            </select>
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
-              stroke="#9098A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </label>
-        </div>
-        <button class="customBtn" [disabled]="!selectedVariant.inStock" (click)="addToCart()">
+        <button class="btn btn-primary customBtn" (click)="openModal()">Select Lenses</button>
+
+        <!-- <button class="customBtn" [disabled]="!selectedVariant.inStock" (click)="openModal()">
           {{selectedVariant.inStock ? 'Buy Now' : 'Out of Stock'}}
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="lensModal" tabindex="-1" aria-labelledby="lensModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header d-flex align-items-center">
+        <!-- Back Button (for Step 2 and Step 3) -->
+        <button *ngIf="currentStep > 1" class="btn btn-link p-0 me-3" (click)="goBackForToggle()">
+          <i class="bi bi-arrow-left-circle" style="font-size: 1.5rem; color: #2c3e50;"></i>
         </button>
+
+        <!-- Dynamic Heading -->
+        <h5 class="modal-title flex-grow-1 text-center">
+          {{ currentStep === 1 ? 'Select Lens Type' : currentStep === 2 ? 'Choose Lens Package' : 'View Complete
+          Details' }}
+        </h5>
+
+        <!-- Close Icon -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- Step Navigation -->
+        <div class="steps">
+          <div *ngFor="let step of steps; let index = index" class="step" [class.active]="currentStep === index + 1">
+            {{ index + 1 }}
+          </div>
+        </div>
+
+        <!-- Step 1: Select Lenses -->
+        <div *ngIf="currentStep === 1">
+          <ul class="list-group">
+            <!-- Single Vision -->
+            <li class="list-group-item lens-option d-flex align-items-center justify-content-between"
+              (click)="selectMainOption('single-vision')">
+              <i class="bi bi-eye-fill left-icon"></i> <!-- Left Icon -->
+              <div class="text-center flex-grow-1">
+                <h5 class="mb-1">Single Vision</h5>
+                <p class="text-muted">For distance or near vision (Thin, anti-glare, blue-cut options)</p>
+              </div>
+              <i class="bi bi-arrow-right-circle-fill right-icon"></i> <!-- Right Icon -->
+            </li>
+
+            <!-- Bifocal/Progressive -->
+            <li class="list-group-item lens-option d-flex align-items-center justify-content-between"
+              (click)="selectMainOption('bifocal')">
+              <i class="bi bi-glasses left-icon"></i> <!-- Left Icon -->
+              <div class="text-center flex-grow-1">
+                <h5 class="mb-1">Bifocal/Progressive</h5>
+                <p class="text-muted">Bifocal and Progressives (For two powers in same lenses)</p>
+              </div>
+              <i class="bi bi-arrow-right-circle-fill right-icon"></i> <!-- Right Icon -->
+            </li>
+
+            <!-- Zero Power -->
+            <li class="list-group-item lens-option d-flex align-items-center justify-content-between"
+              (click)="selectMainOption('zero-power')">
+              <i class="bi bi-shield-check left-icon"></i> <!-- Left Icon -->
+              <div class="text-center flex-grow-1">
+                <h5 class="mb-1">Zero Power</h5>
+                <p class="text-muted">Block 98% of harmful rays (Anti-glare and blue-cut options)</p>
+              </div>
+              <i class="bi bi-arrow-right-circle-fill right-icon"></i> <!-- Right Icon -->
+            </li>
+
+            <!-- Frame Only -->
+            <li class="list-group-item lens-option d-flex align-items-center justify-content-between"
+              (click)="selectFrameOnly()">
+              <i class="bi bi-box left-icon"></i> <!-- Left Icon -->
+              <div class="text-center flex-grow-1">
+                <h5 class="mb-1">Frame Only</h5>
+                <p class="text-muted">Buy Only Frame</p>
+              </div>
+              <i class="bi bi-arrow-right-circle-fill right-icon"></i> <!-- Right Icon -->
+            </li>
+          </ul>
+        </div>
+
+        <!-- Step 2: Sub-options -->
+        <div *ngIf="currentStep === 2">
+          <div class="row">
+            <div class="col-md-6 mb-4" *ngFor="let option of subOptions" (click)="selectSubOption(option)">
+              <div class="card shadow-sm gradient-card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">{{ option }}</h5>
+                    <i class="bi bi-arrow-right-circle-fill"></i>
+                  </div>
+                  <ul class="list-unstyled">
+                    <li *ngFor="let detail of optionDetails[option]">
+                      {{ detail }}
+                    </li>
+                  </ul>
+                  <div class="price-container mt-3 text-center">
+                    Frame+Lens: Get it for ₹{{ prices[option] }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="currentStep === 3">
+          <h5 class="text-primary text-center mb-4 fade-in-animation">Order Details:</h5>
+
+          <!-- Product Details Card -->
+          <div class="card shadow-sm border-0 modern-card">
+            <div class="row g-0">
+              <!-- Product Image -->
+              <div class="col-md-4">
+                <img [src]="selectedVariant.images[0]" class="img-fluid rounded-start product-image"
+                  alt="{{ selectedProduct?.name || 'Product Image' }}" />
+              </div>
+
+              <!-- Product Details -->
+              <div class="col-md-8">
+                <div class="card-body">
+                  <!-- Product Name -->
+                  <h5 class="card-title mb-3 fade-in-animation">{{ selectedProduct?.name }}</h5>
+
+                  <!-- Variant -->
+                  <p class="card-text text-muted fade-in-animation">
+                    <strong>Variant:</strong> {{ selectedVariant?.color || 'Default Variant' }}
+                  </p>
+
+                  <!-- Quantity -->
+                  <p class="card-text text-muted fade-in-animation">
+                    <strong>Quantity:</strong> {{ selectedQuantity || 1 }}
+                  </p>
+
+                  <!-- Price -->
+                  <p class="card-text text-muted fade-in-animation">
+                    <strong>Price:</strong> ₹{{ selectedProduct?.basePrice }}
+                  </p>
+
+                  <!-- Frame + Popup Selection Price -->
+                  <div class="price-container mt-3 p-2 text-center rounded fade-in-animation">
+                    Frame + Lens Price: ₹{{ prices[selection.subOption] + selectedProduct?.basePrice }}
+                  </div>
+
+                  <!-- Proceed Button -->
+                  <button class="btn btn-primary mt-4 w-100 proceed-button fade-in-animation"
+                    (click)="proceedToBuy()">Proceed to Buy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
