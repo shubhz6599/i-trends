@@ -12,6 +12,7 @@
           "basePrice": 1799,
           "rating": 1,
           "basePriceWithDiscount": 200,
+          "bumperdiscount":true,
           "variants": [
             {
               "color": "Blue",
@@ -39,8 +40,8 @@
               "color": "Brown",
               "colorCode": "#964B00",
               "images": [
-                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0192.jpg?alt=media&token=9387ab00-b881-43b2-b4b8-87bdf1b809ab",
-                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0193.jpg?alt=media&token=6d725022-9f42-4c0c-85e3-b42974bdaca6"
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0328.jpg?alt=media&token=a1d06655-32cf-4327-af2f-565053e13b77",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0329%20-%20Copy.jpg?alt=media&token=79498585-66d5-42ee-9b90-9e4d14b4076a"
               ],
               "inStock": true,
               "imagesLoaded": false,
@@ -78,6 +79,7 @@
           "basePrice": 2199,
           "rating": 4,
           "basePriceWithDiscount": 100,
+          "bumperdiscount":true,
           "variants": [
             {
               "color": "Gold&Black",
@@ -210,6 +212,7 @@
           "basePrice": 2499,
           "rating": 4,
           "basePriceWithDiscount": 100,
+          "bumperdiscount":true,
           "variants": [
             {
               "color": "BlackBrownBlue",
@@ -397,6 +400,7 @@
           "basePrice": 2499,
           "rating": 4,
           "basePriceWithDiscount": 100,
+          "bumperdiscount":true,
           "variants": [
             {
               "color": "Silver&Blue",
@@ -576,6 +580,7 @@
           "basePrice": 1299,
           "rating": 4,
           "basePriceWithDiscount": 100,
+          "bumperdiscount":true,
           "variants": [
             {
               "color": "TransparentBlack",
@@ -639,6 +644,7 @@
           "basePrice": 1399,
           "rating": 4,
           "basePriceWithDiscount": 100,
+          "bumperdiscount":true,
           "variants": [
             {
               "color": "MatWhite",
@@ -1824,8 +1830,8 @@
       ]
     },
     {
-      "id": "Kids Sunglasses",
-      "name": "Kids Sunglasses",
+      "id": "Kids Sunglasses & Frames",
+      "name": "Kids Sunglasses & Frames",
       "description": "Bold square frames for a statement look",
       "products": [
         {
@@ -1993,7 +1999,7 @@
         },
         {
           "id": "kd-706",
-          "name": "Kids Sunglasses",
+          "name": "Kids Sunglasses ",
           "description": "Timeless square frames with thick profile",
           "basePrice": 1299,
           "rating": 4,
@@ -2005,6 +2011,543 @@
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0459.jpg?alt=media&token=0071ec74-dcdb-4008-a1e9-22bcd519ac7a",
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0460.jpg?alt=media&token=92431406-c01c-4809-92c0-c1055851bd30"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "kd-707",
+          "name": "Kids Frames",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "White",
+              "colorCode": "#f0f2d7",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0326.jpg?alt=media&token=a12729a1-77ff-4149-98d7-ee8a0cedea01",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0327.jpg?alt=media&token=e0607b86-46cf-4df5-bcfc-94e2bb52950b"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Brown",
+              "colorCode": "#f0f2d7",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0326.jpg?alt=media&token=a12729a1-77ff-4149-98d7-ee8a0cedea01",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0327.jpg?alt=media&token=e0607b86-46cf-4df5-bcfc-94e2bb52950b"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Purple",
+              "colorCode": "#CBC3E3",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0330.jpg?alt=media&token=d75448ef-81e7-4896-99c5-43861cb5dc35",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0331.jpg?alt=media&token=df4b3062-7873-411f-abf7-1494f6a1e2b3"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Blue",
+              "colorCode": "#090979",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0332.jpg?alt=media&token=08aae522-6f74-4365-8327-c6dd2147bb2b",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0333.jpg?alt=media&token=c6057364-d231-4331-a2a9-820c19f3b75e"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "kd-708",
+          "name": "Kids Frames - Dual Tone",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Brown",
+              "colorCode": "#f0f2d7",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0334.jpg?alt=media&token=3f7a8dad-7e85-4410-a701-b612a321564a",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0335.jpg?alt=media&token=f5c2cbb6-f247-41e3-85c4-93662f81dc36"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Transparent & Black",
+              "colorCode": "#00RRGGBB",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0336.jpg?alt=media&token=e0f0d397-c24a-46b4-9332-2c16009f3079",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0337.jpg?alt=media&token=7fdd0f1d-4edf-4bbf-9197-6a57cf8d8664"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Blue",
+              "colorCode": "#090979",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0338.jpg?alt=media&token=7e0f1f2b-a543-42ef-a02e-d76db8abb9e1",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0339.jpg?alt=media&token=ea39ddfd-e363-469d-a576-e814e573dea7"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0340.jpg?alt=media&token=97cb0d5c-919b-4fea-b8e0-67f7a1d34822",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0341.jpg?alt=media&token=7c7df11c-938e-4112-a210-65ef279ab4f8"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "kd-709",
+          "name": "Kids Frames - Dual Tone",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0342.jpg?alt=media&token=b9efe4e7-aa6d-4ceb-894b-432d416048f5",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0343.jpg?alt=media&token=b16109df-e675-4f88-b2fc-172af2b68120"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Baby Pink",
+              "colorCode": "#F4C2C2",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0344.jpg?alt=media&token=76380067-c690-4fea-b2b8-3c871306dab7",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0345.jpg?alt=media&token=243d96b2-b3bc-48be-833d-2a0a34b3926e"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "kd-710",
+          "name": "Kids Frames - Dual Tone",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Indigo",
+              "colorCode": "#4B0082",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0346.jpg?alt=media&token=2859a533-642f-4b8a-8b02-ada7945c82d6",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0349.jpg?alt=media&token=dabca075-42a9-4d88-be68-f18fda628449"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0350.jpg?alt=media&token=3e3a7c43-668e-4b01-a300-157b5f6b9169",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0351.jpg?alt=media&token=160d4d8f-619f-4eef-b620-b3851b399e07"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "SkyBlue",
+              "colorCode": "#87CEEB",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0352.jpg?alt=media&token=91135d96-c469-45a8-b6ff-5a9efe60ac31",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0353.jpg?alt=media&token=79c771c9-511d-4d39-932e-c3da4587c064"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0354.jpg?alt=media&token=06691f84-24fe-42e4-8a1e-c88f8e01818e",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0355.jpg?alt=media&token=aea76931-ec00-4968-9e9f-19717e1d04fd"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Orange",
+              "colorCode": "#FF7336",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0356.jpg?alt=media&token=223f3ec1-c058-496c-83ff-0d7d278cb84b",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0357.jpg?alt=media&token=3a8a0275-57f4-40a1-b835-6ec6c16baf33"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "kd-711",
+          "name": "Kids Frames - Single Tone",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1299,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0358.jpg?alt=media&token=1bc34b34-7414-41d0-8a4b-caae4b38864a",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0359.jpg?alt=media&token=47753fa0-ef50-4a73-a77f-b171a0b9a498"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Transparent",
+              "colorCode": "#00RRGGBB",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0360.jpg?alt=media&token=5790c979-eb01-4616-91bd-eff323516470",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0361.jpg?alt=media&token=36bf7a85-b9b3-46b3-a3f1-05127ad3068c"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Transparent",
+              "colorCode": "#87CEEB",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0363.jpg?alt=media&token=e891e0b4-1131-4353-a3d3-17ac3191e5a6",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0364.jpg?alt=media&token=bbb1afc3-728d-4d16-b8f5-2442723301ac"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Cat Eye Frames",
+      "name": "Cat Eye Frames",
+      "description": "Bold square frames for a statement look",
+      "products": [
+        {
+          "id": "CE-801",
+          "name": "Cat Eye Frames",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Gold",
+              "colorCode": "#FEBA17",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0163.jpg?alt=media&token=8d92d382-46b7-4071-a8ff-740c0a21f548",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0164.jpg?alt=media&token=9916350c-4a5e-47e2-9177-de6cc0074b1a"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Silver",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0166.jpg?alt=media&token=e2685ede-cf00-4a26-8bd7-8bf977818398",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0165.jpg?alt=media&token=343c5f3e-0e6e-4f45-a102-99d40e756de7"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "CE-802",
+          "name": "Cat Eye Frames",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Silver",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0170.jpg?alt=media&token=9480637a-6081-49d1-806c-b0a568549e86",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0171.jpg?alt=media&token=3aa2be40-e892-44ea-9b68-b088912ad28b"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            },
+            {
+              "color": "Silver",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0172.jpg?alt=media&token=a7843856-c693-4264-a6f9-50fdb188cb49",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0173.jpg?alt=media&token=0ca4dd6f-a2cb-4bdb-9578-de3a4e533c8b"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "CE-803",
+          "name": "Cat Eye Frames - Side ZigZag",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0174.jpg?alt=media&token=85cc64b8-b1ca-4ab6-b2c8-796c526e61fb",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0175.jpg?alt=media&token=aec67d31-ef67-4410-99ba-0539173a6b21"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "CE-804",
+          "name": "Cat Eye Frames",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Silver",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0176.jpg?alt=media&token=31276774-6b97-4da9-a17a-9739e45fac30",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0177.jpg?alt=media&token=a0e8dbd7-0405-423d-8f6b-412a8bcadc2f"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "CE-805",
+          "name": "Cat Eye Frames",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Transparent",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0178.jpg?alt=media&token=9757c047-512e-4bb3-aa5c-1bba857a6829",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0179.jpg?alt=media&token=ce0faa26-273d-4d89-a266-10ae855c2cd4"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "CE-806",
+          "name": "Cat Eye Frames",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0180.jpg?alt=media&token=1e55efdb-4696-436c-be65-7fcbb8011465",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0181.jpg?alt=media&token=c932c7a9-560d-4323-8b99-2ef7f204ad21"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "CE-807",
+          "name": "Cat Eye Frames - Dual Tone",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "TransparentBlack",
+              "colorCode": "#FFFFFF00",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0182.jpg?alt=media&token=bd23a174-7c53-45bd-bcde-6094079af816",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0183.jpg?alt=media&token=2e3673c6-3ba3-4fd5-abdc-db1dce481a29"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "CE-808",
+          "name": "Cat Eye Frames - Dual Tone MilkWhite",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "TransparentCreamWhite",
+              "colorCode": "#f0f2d7",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0184.jpg?alt=media&token=80c70b56-a63e-49cf-9250-8fe8b2f9bff6",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0185.jpg?alt=media&token=909e6c4f-6356-42cb-a138-d129001a8d54"
+              ],
+              "inStock": true,
+              "imagesLoaded": false,
+              "priceModifier": 200
+            }
+          ],
+          "features": [
+            "Glossy Look",
+            "Magnetic sunglasses clip-on",
+            "Anti-reflective coating"
+          ]
+        },
+        {
+          "id": "CE-808",
+          "name": "Cat Eye Frames - Single Tone",
+          "description": "Timeless square frames with thick profile",
+          "basePrice": 1099,
+          "rating": 4,
+          "basePriceWithDiscount": 100,
+          "variants": [
+            {
+              "color": "Gold&Black",
+              "colorCode": "#000000",
+              "images": [
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0186.jpg?alt=media&token=90e52b1a-f4b0-4f74-b31a-b77f15118bcd",
+                "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0187.jpg?alt=media&token=1570e55d-3cad-4293-92c9-a9843bcbb2b3"
               ],
               "inStock": true,
               "imagesLoaded": false,

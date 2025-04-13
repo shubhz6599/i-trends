@@ -1,10 +1,14 @@
 <div class="explorer-container">
   <!-- Category Header -->
-  <div class="category-header d-flex align-items-center" *ngIf="currentCategory && !selectedProduct">
+  <div class="category-header d-flex align-items-center" *ngIf="!selectedProduct">
     <button class="backBtn me-3" (click)="goBack()">
       <i class="bi bi-arrow-left"></i>
     </button>
-    <h1 class="cursiveFont mb-0 fg2">{{currentCategory.name}}</h1>
+    <h1 class="cursiveFont mb-0 fg2">
+      <span *ngIf="isBumperDiscountView">Bumper Discount Products</span>
+      <span *ngIf="isAllProductsView">All Products</span>
+      <span *ngIf="currentCategory && !isBumperDiscountView && !isAllProductsView">{{currentCategory.name}}</span>
+    </h1>
     <button class="filter-btn ms-auto btn" (click)="toggleFilterPanel()">Filters</button>
   </div>
 
@@ -86,6 +90,15 @@
     <div class="products-grid" *ngIf="!selectedProduct">
       <div class="product-card" *ngFor="let product of filteredProducts; let i = index"
         (click)="selectProduct(product)">
+        <div *ngIf="product.bumperdiscount && isBumperDiscountView" class="bumper-discount-badge">
+          <div class="discount-pulse"></div>
+          <div class="discount-content">
+            <i class="bi bi-lightning-charge-fill discount-icon"></i>
+            <span class="discount-text">BUMPER DISCOUNT!</span>
+            <i class="bi bi-arrow-right-circle-fill discount-arrow"></i>
+          </div>
+        </div>
+
         <div class="image-container"
           [ngClass]="{ 'visible': product.variants[0].imagesLoaded, 'hidden': !product.variants[0].imagesLoaded }">
           <img [src]="product.variants[0].images[0]" [alt]="product.name" loading="lazy" (load)="onImageLoaded(i)">
@@ -181,101 +194,138 @@
 
 
 <!-- Bootstrap Modal -->
-<div class="modal fade" id="lensModal" tabindex="-1" aria-labelledby="lensModalLabel" aria-hidden="true">
+<div class="modal fade" id="lensModal" tabindex="-1" aria-labelledby="lensModalLabel" style="overflow-y: auto;" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content">
       <!-- Modal Header -->
-      <div class="modal-header d-flex align-items-center">
-        <!-- Back Button (for Step 2 and Step 3) -->
-        <button *ngIf="currentStep > 1" class="btn btn-link p-0 me-3" (click)="goBackForToggle()">
-          <i class="bi bi-arrow-left-circle" style="font-size: 1.5rem; color: #2c3e50;"></i>
+      <div class="modal-header">
+        <!-- Back Button -->
+        <button *ngIf="currentStep > 1" class="btn btn-back" (click)="goBackForToggle()">
+          <i class="bi bi-chevron-left"></i>
+          <span class="visually-hidden">Back</span>
         </button>
 
-        <!-- Dynamic Heading -->
-        <h5 class="modal-title flex-grow-1 text-center">
-          {{ currentStep === 1 ? 'Select Lens Type' : currentStep === 2 ? 'Choose Lens Package' : 'View Complete
-          Details' }}
+        <!-- Title -->
+        <h5 class="modal-title">
+          {{ currentStep === 1 ? 'Select Lens Type' : currentStep === 2 ? 'Choose Package' : 'Order Summary' }}
         </h5>
 
-        <!-- Close Icon -->
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Close Button -->
+        <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
 
       <!-- Modal Body -->
       <div class="modal-body">
         <!-- Step Navigation -->
         <div class="steps">
-          <div *ngFor="let step of steps; let index = index" class="step" [class.active]="currentStep === index + 1">
-            {{ index + 1 }}
+          <div *ngFor="let step of steps; let index = index" class="step"
+               [class.active]="currentStep === index + 1"
+               [class.completed]="currentStep > index + 1">
+            <span *ngIf="currentStep <= index + 1">{{ index + 1 }}</span>
+            <i *ngIf="currentStep > index + 1" class="bi bi-check"></i>
           </div>
+          <div class="step-connector"></div>
         </div>
 
         <!-- Step 1: Select Lenses -->
-        <div *ngIf="currentStep === 1">
-          <ul class="list-group">
+        <div *ngIf="currentStep === 1" class="step-content slide-in">
+          <ul class="list-group lens-options">
             <!-- Single Vision -->
-            <li class="list-group-item lens-option d-flex align-items-center justify-content-between"
-              (click)="selectMainOption('single-vision')">
-              <i class="bi bi-eye-fill left-icon"></i> <!-- Left Icon -->
-              <div class="text-center flex-grow-1">
-                <h5 class="mb-1">Single Vision</h5>
-                <p class="text-muted">For distance or near vision (Thin, anti-glare, blue-cut options)</p>
+            <li class="list-group-item lens-option"
+                (click)="selectMainOption('single-vision')"
+                [class.active]="selection.mainOption === 'single-vision'">
+              <div class="option-content">
+                <div class="option-icon">
+                  <i class="bi bi-eye-fill"></i>
+                </div>
+                <div class="option-text">
+                  <h5>Single Vision</h5>
+                  <p>For distance or near vision (Thin, anti-glare, blue-cut options)</p>
+                </div>
+                <div class="option-arrow">
+                  <i class="bi bi-chevron-right"></i>
+                </div>
               </div>
-              <i class="bi bi-arrow-right-circle-fill right-icon"></i> <!-- Right Icon -->
             </li>
 
             <!-- Bifocal/Progressive -->
-            <li class="list-group-item lens-option d-flex align-items-center justify-content-between"
-              (click)="selectMainOption('bifocal')">
-              <i class="bi bi-glasses left-icon"></i> <!-- Left Icon -->
-              <div class="text-center flex-grow-1">
-                <h5 class="mb-1">Bifocal/Progressive</h5>
-                <p class="text-muted">Bifocal and Progressives (For two powers in same lenses)</p>
+            <li class="list-group-item lens-option"
+                (click)="selectMainOption('bifocal')"
+                [class.active]="selection.mainOption === 'bifocal'">
+              <div class="option-content">
+                <div class="option-icon">
+                  <i class="bi bi-glasses"></i>
+                </div>
+                <div class="option-text">
+                  <h5>Bifocal/Progressive</h5>
+                  <p>Bifocal and Progressives (For two powers in same lenses)</p>
+                </div>
+                <div class="option-arrow">
+                  <i class="bi bi-chevron-right"></i>
+                </div>
               </div>
-              <i class="bi bi-arrow-right-circle-fill right-icon"></i> <!-- Right Icon -->
             </li>
 
             <!-- Zero Power -->
-            <li class="list-group-item lens-option d-flex align-items-center justify-content-between"
-              (click)="selectMainOption('zero-power')">
-              <i class="bi bi-shield-check left-icon"></i> <!-- Left Icon -->
-              <div class="text-center flex-grow-1">
-                <h5 class="mb-1">Zero Power</h5>
-                <p class="text-muted">Block 98% of harmful rays (Anti-glare and blue-cut options)</p>
+            <li class="list-group-item lens-option"
+                (click)="selectMainOption('zero-power')"
+                [class.active]="selection.mainOption === 'zero-power'">
+              <div class="option-content">
+                <div class="option-icon">
+                  <i class="bi bi-shield-check"></i>
+                </div>
+                <div class="option-text">
+                  <h5>Zero Power</h5>
+                  <p>Block 98% of harmful rays (Anti-glare and blue-cut options)</p>
+                </div>
+                <div class="option-arrow">
+                  <i class="bi bi-chevron-right"></i>
+                </div>
               </div>
-              <i class="bi bi-arrow-right-circle-fill right-icon"></i> <!-- Right Icon -->
             </li>
 
             <!-- Frame Only -->
-            <li class="list-group-item lens-option d-flex align-items-center justify-content-between"
-              (click)="selectFrameOnly()">
-              <i class="bi bi-box left-icon"></i> <!-- Left Icon -->
-              <div class="text-center flex-grow-1">
-                <h5 class="mb-1">Frame Only</h5>
-                <p class="text-muted">Buy Only Frame</p>
+            <li class="list-group-item lens-option"
+                (click)="selectFrameOnly()"
+                [class.active]="selection.mainOption === 'frame-only'">
+              <div class="option-content">
+                <div class="option-icon">
+                  <i class="bi bi-box"></i>
+                </div>
+                <div class="option-text">
+                  <h5>Frame Only</h5>
+                  <p>Buy Only Frame</p>
+                </div>
+                <div class="option-arrow">
+                  <i class="bi bi-chevron-right"></i>
+                </div>
               </div>
-              <i class="bi bi-arrow-right-circle-fill right-icon"></i> <!-- Right Icon -->
             </li>
           </ul>
         </div>
 
         <!-- Step 2: Sub-options -->
-        <div *ngIf="currentStep === 2">
+        <div *ngIf="currentStep === 2" class="step-content slide-in">
           <div class="row">
-            <div class="col-md-6 mb-4" *ngFor="let option of subOptions" (click)="selectSubOption(option)">
-              <div class="card shadow-sm gradient-card">
+            <div class="col-md-6 mb-4" *ngFor="let option of subOptions">
+              <div class="card option-card"
+                   (click)="selectSubOption(option)"
+                   [class.active]="selection.subOption === option">
                 <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">{{ option }}</h5>
-                    <i class="bi bi-arrow-right-circle-fill"></i>
+                  <div class="card-header">
+                    <h5>{{ option }}</h5>
+                    <i class="bi bi-check-circle-fill"></i>
                   </div>
-                  <ul class="list-unstyled">
+                  <ul class="features-list">
                     <li *ngFor="let detail of optionDetails[option]">
+                      <i class="bi bi-check-circle"></i>
                       {{ detail }}
                     </li>
                   </ul>
-                  <div class="price-container mt-3 text-center">
-                    Frame+Lens: Get it for ₹{{ prices[option] }}
+                  <div class="price-tag">
+                    Frame + Lens: ₹{{ prices[option] }}
                   </div>
                 </div>
               </div>
@@ -283,47 +333,62 @@
           </div>
         </div>
 
-        <div *ngIf="currentStep === 3">
-          <h5 class="text-primary text-center mb-4 fade-in-animation">Order Details:</h5>
+        <!-- Step 3: Order Review -->
+        <div *ngIf="currentStep === 3" class="step-content slide-in">
+          <h5 class="section-title">Review Your Order</h5>
 
-          <!-- Product Details Card -->
-          <div class="card shadow-sm border-0 modern-card">
+          <div class="order-summary-card">
             <div class="row g-0">
               <!-- Product Image -->
-              <div class="col-md-4">
-                <img [src]="selectedVariant.images[0]" class="img-fluid rounded-start product-image"
+              <div class="col-md-4 position-relative">
+                <img [src]="selectedVariant.images[0]" class="product-image"
                   alt="{{ selectedProduct?.name || 'Product Image' }}" />
+                <div class="badge-overlay">
+                  <span class="badge">Selected</span>
+                </div>
               </div>
 
               <!-- Product Details -->
               <div class="col-md-8">
                 <div class="card-body">
-                  <!-- Product Name -->
-                  <h5 class="card-title mb-3 fade-in-animation">{{ selectedProduct?.name }}</h5>
+                  <h5 class="product-title">{{ selectedProduct?.name }}</h5>
 
-                  <!-- Variant -->
-                  <p class="card-text text-muted fade-in-animation">
-                    <strong>Variant:</strong> {{ selectedVariant?.color || 'Default Variant' }}
-                  </p>
-
-                  <!-- Quantity -->
-                  <p class="card-text text-muted fade-in-animation">
-                    <strong>Quantity:</strong> {{ selectedQuantity || 1 }}
-                  </p>
-
-                  <!-- Price -->
-                  <p class="card-text text-muted fade-in-animation">
-                    <strong>Price:</strong> ₹{{ selectedProduct?.basePrice }}
-                  </p>
-
-                  <!-- Frame + Popup Selection Price -->
-                  <div class="price-container mt-3 p-2 text-center rounded fade-in-animation">
-                    Frame + Lens Price: ₹{{ prices[selection.subOption] + selectedProduct?.basePrice }}
+                  <div class="detail-grid">
+                    <div class="detail-item">
+                      <span>Variant:</span>
+                      <strong>{{ selectedVariant?.color || 'Default Variant' }}</strong>
+                    </div>
+                    <div class="detail-item">
+                      <span>Quantity:</span>
+                      <strong>{{ selectedQuantity || 1 }}</strong>
+                    </div>
+                    <div class="detail-item">
+                      <span>Base Price:</span>
+                      <strong>₹{{ selectedProduct?.basePrice }}</strong>
+                    </div>
                   </div>
 
-                  <!-- Proceed Button -->
-                  <button class="btn btn-primary mt-4 w-100 proceed-button fade-in-animation"
-                    (click)="proceedToBuy()">Proceed to Buy</button>
+                  <div class="price-summary">
+                    <div class="price-row">
+                      <span>Product Price:</span>
+                      <span>₹{{ selectedProduct?.basePrice }}</span>
+                    </div>
+                    <div class="price-row">
+                      <span>Frame + Lens:</span>
+                      <span>₹{{ prices[selection.subOption] }}</span>
+                    </div>
+                    <div class="price-row total">
+                      <span>Total:</span>
+                      <span>₹{{ prices[selection.subOption] + selectedProduct?.basePrice }}</span>
+                    </div>
+                  </div>
+
+                  <div class="proceed-btn-container">
+                    <button class="btn proceed-btn blink-animation" (click)="proceedToBuy()">
+                      <span>Proceed to Buy</span>
+                      <i class="bi bi-arrow-right"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConnectionService } from './services/connection.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,22 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'opticalApp';
-  constructor(private router: Router) { }
+  showOfflinePage = false;
+  constructor(private router: Router,private connectionService: ConnectionService) { }
 
   ngOnInit(): void {
     this.checkViewportSize();
+    this.connectionService.showOfflinePage.subscribe(show => {
+      this.showOfflinePage = show;
+    });
+    document.addEventListener('click', (event) => {
+      if (!this.connectionService.isOnline && (event.target as HTMLElement).tagName === 'BUTTON') {
+        this.showOfflinePage = true;
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }, true);
+
   }
 
   checkViewportSize(): void {

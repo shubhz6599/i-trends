@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SharedStateService } from 'src/app/services/shared-state.service';
 declare var bootstrap: any;
 
 @Component({
@@ -13,11 +14,14 @@ export class PaymentProcessComponent implements OnInit {
   productData: any;
   ownerWhatsAppNumber: string = '+918888052579';
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router,private sharedStateService:SharedStateService) { }
 
   ngOnInit(): void {
+
     this.productData = history.state.product;
     console.log(this.productData);
+    this.sharedStateService.setDetailViewVisible(false);
+
 
     // Initialize the form
     this.paymentForm = this.fb.group({

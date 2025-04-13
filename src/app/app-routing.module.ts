@@ -19,6 +19,14 @@ const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'error', component: ErrorPageComponent },
       { path: 'home', component: HomepageComponent },
+      // {
+      //   path: 'products/bumper-discount',
+      //   component: ProductExplorerComponent
+      // },
+      // {
+      //   path: 'products/all',
+      //   component: ProductExplorerComponent
+      // },
       { path: 'category/:category', component: ProductExplorerComponent },
       { path: 'book-online-consultation', component: OnlineConsultationComponent },
       { path: 'buying-guide', component: BuyingGuideComponent },

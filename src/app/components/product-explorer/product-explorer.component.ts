@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import productsData from '../../../assets/Json/products.json';
 import { ImagePreloaderService } from 'src/app/services/image-preloader.service';
@@ -14,6 +14,7 @@ interface Variant {
   imagesLoaded: boolean;
 }
 
+// In your product.model.ts or where you define interfaces
 interface Product {
   id: string;
   name: string;
@@ -21,6 +22,10 @@ interface Product {
   basePrice: any;
   variants: Variant[];
   features: string[];
+  rating?: number; // Optional property
+  basePriceWithDiscount?: number; // Optional property
+  bumperdiscount?: boolean; // Add this new optional property
+  isTodaysDeal?: boolean; // Existing optional property
 }
 
 interface Category {
@@ -47,7 +52,7 @@ interface Category {
     ])
   ]
 })
-export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewInit,OnDestroy {
   @ViewChild('priceDisplay') priceDisplay!: ElementRef;
   categories: Category[] = productsData.categories;
   currentCategory: Category | null = null;
@@ -161,22 +166,72 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     'Grey Tinted Color Lenses': 1200,
     'Owndays Japan Clear Vision Lenses Zero Power': 1600
   };
+  isBumperDiscountView: boolean = false;
+  isAllProductsView: boolean = false;
   constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private sharedStateService: SharedStateService, private viewportScroller: ViewportScroller) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
+      const viewType = params.get('category');
+
+      if (viewType === 'bumper-discount') {
+        this.showBumperDiscountProducts();
+      } else if (viewType === 'all-products') {
+        this.showAllProducts();
+      } else {
       this.categoryId = params.get('category');
       this.currentCategory = this.categories.find(c => c.id === this.categoryId) || null;
       this.filteredProducts = this.currentCategory?.products || [];
+      }
+
       this.fetchCategoryImages();
       this.resetSelections();
       this.updateAvailableColors();
 
     });
   }
+
+  showBumperDiscountProducts(): void {
+    this.isBumperDiscountView = true;
+    this.isAllProductsView = false;
+
+    // Flatten all products from all categories and filter by bumperDiscount flag
+    this.filteredProducts = this.categories
+      .flatMap((category:any) => category.products)
+      .filter(product => product.bumperdiscount === true);
+
+    this.searchResultMessage = 'Showing all bumper discounted products';
+    console.log(this.filteredProducts);
+
+  }
+
+  showAllProducts(): void {
+    this.imagePreloader.preloadAllProductsImages();
+    this.isAllProductsView = true;
+    this.isBumperDiscountView = false;
+
+    // Flatten all products from all categories
+    this.filteredProducts = this.categories.flatMap(category => category.products);
+
+    this.searchResultMessage = 'Showing all available products';
+  }
   ngAfterViewInit() {
     this.setupScrollListener();
 
+  }
+
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: any) {
+    // Reset body styles when modal closes (including via browser back button)
+    document.body.style.overflow = 'auto';
+    document.body.style.paddingRight = '0';
+  }
+
+  manualFixBodyStyles() {
+    // Call this when you open/close the modal programmatically
+    document.body.style.overflow = 'auto';
+    document.body.style.paddingRight = '0';
   }
   fetchCategoryImages(): void {
     this.isLoading = true; // Show loader
@@ -245,6 +300,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   // Don't forget to clear timeout in ngOnDestroy
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.checkPriceInView.bind(this));
+     // Reset body styles when component is destroyed
+     document.body.style.overflow = 'auto';
+     document.body.style.paddingRight = '0';
   }
 
   resetSelections(): void {
@@ -262,14 +320,35 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   updateAvailableColors(): void {
+    let productsToCheck: Product[] = [];
+
+    if (this.isBumperDiscountView) {
+      // Get all bumper discount products across all categories
+      productsToCheck = this.categories
+        .flatMap(category => category.products)
+        .filter(product => product.bumperdiscount);
+    } else if (this.isAllProductsView) {
+      // Get all products across all categories
+      productsToCheck = this.categories.flatMap(category => category.products);
+    } else if (this.currentCategory) {
+      // Get products from current category
+      productsToCheck = this.currentCategory.products;
+    }
+
+    // Collect unique colors with their codes
     const colorsWithCodes: { name: string; colorCode: string }[] = [];
-    this.currentCategory?.products.forEach(product => {
+
+    productsToCheck.forEach(product => {
       product.variants.forEach(variant => {
         if (!colorsWithCodes.some(color => color.name === variant.color)) {
-          colorsWithCodes.push({ name: variant.color, colorCode: variant.colorCode });
+          colorsWithCodes.push({
+            name: variant.color,
+            colorCode: variant.colorCode
+          });
         }
       });
     });
+
     this.availableColors = colorsWithCodes;
   }
 
@@ -426,12 +505,11 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   // Filter products by color
   filterByColor(colorName: string) {
-
     // Check if filter is already selected
     if (!this.selectedFilters.find(filter => filter.label === colorName)) {
       this.selectedFilters.push({ label: colorName, value: colorName });
+      // this.applyFilters(); // Apply filters immediately
     }
-
   }
 
   filterByPrice(priceRange: any) {
@@ -472,7 +550,17 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     console.log('Applying filters:', this.selectedFilters);
 
     // Start with all products in the current category
-    let filtered = [...this.currentCategory?.products || []];
+    let filtered: Product[] = [];
+
+    if (this.isBumperDiscountView) {
+      filtered = this.categories
+        .flatMap(category => category.products)
+        .filter(product => product.bumperdiscount);
+    } else if (this.isAllProductsView) {
+      filtered = this.categories.flatMap(category => category.products);
+    } else {
+      filtered = [...this.currentCategory?.products || []];
+    }
 
     // Apply color filters
     const colorFilters = this.selectedFilters
@@ -528,8 +616,10 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       this.searchResultMessage =
         'Your search query did not match any products. Showing related products instead.';
     } else {
-      this.filteredProducts = filtered;
-      this.searchResultMessage = 'Showing search results for your query.';
+      this.searchResultMessage = filtered.length > 0
+      ? `Showing Available ${filtered.length} Variants`
+      : 'No products match your filters';
+      this.filteredProducts = filtered
     }
 
     // Close filter panel
@@ -620,7 +710,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       console.log('Proceeding to buy:', productData, `Total Price: ₹${totalPrice}`);
 
       // Navigate to checkout or payment page
-      this.hideModal()
+      this.hideModal();
+      this.manualFixBodyStyles();
       this.router.navigate(['/payment'], { state: { product: productData, totalPrice } });
 
       // Reset selection

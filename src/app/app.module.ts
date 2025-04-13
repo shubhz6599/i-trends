@@ -15,6 +15,7 @@ import { OnlineConsultationComponent } from './components/online-consultation/on
 import { BuyingGuideComponent } from './components/buying-guide/buying-guide.component';
 import { KnowMoreAboutUsComponent } from './components/know-more-about-us/know-more-about-us.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
+import { OfflinePageComponent } from './components/offline-page/offline-page.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     BuyingGuideComponent,
     KnowMoreAboutUsComponent,
     FeedbackFormComponent,
+    OfflinePageComponent,
   ],
   imports: [
     BrowserModule,

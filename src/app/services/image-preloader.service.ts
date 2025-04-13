@@ -58,6 +58,34 @@ export class ImagePreloaderService {
     });
   }
 
+  preloadBumperDiscountImages(): void {
+    this.stopPreloading();
+    const bumperProducts = productsData.categories
+      .flatMap(category => category.products)
+      .filter(product => product.bumperdiscount);
+    const imageUrls = this.collectProductImages(bumperProducts);
+    this.currentBatch = imageUrls;
+    this.preloadImagesSequentially();
+  }
+
+  // NEW: Preload all products regardless of category
+  preloadAllProductsImages(): void {
+    this.stopPreloading();
+    const allProducts = productsData.categories.flatMap(category => category.products);
+    const imageUrls = this.collectProductImages(allProducts);
+    this.currentBatch = imageUrls;
+    this.preloadImagesSequentially();
+  }
+  private collectProductImages(products: any[]): string[] {
+    const imageUrls: string[] = [];
+    products.forEach((product) => {
+      product.variants.forEach((variant:any) => {
+        imageUrls.push(...variant.images);
+      });
+    });
+    return imageUrls;
+  }
+
   // Preload category-specific images dynamically
   preloadCategoryImages(categoryId: string): void {
     const category = productsData.categories.find((cat) => cat.id === categoryId);

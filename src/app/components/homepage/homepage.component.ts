@@ -73,8 +73,17 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     {
       front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0457.jpg?alt=media&token=1db700db-c21f-4682-9e67-64a8b76301f5',
       back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0458.jpg?alt=media&token=ce288b72-b9d0-4774-87b2-6d9d628f1aeb',
-      title: 'Kids Sunglasses',
-      category: 'Kids Sunglasses',
+      title: 'Kids Sunglasses & Frames',
+      category: 'Kids Sunglasses & Frames',
+      loaded: false, // Placeholder visibility
+      frontLoaded: false,
+      backLoaded: false,
+    },
+    {
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0504.jpg?alt=media&token=63d871aa-a376-46e3-a09e-196315db54ad',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0497.jpg?alt=media&token=ac0bedbc-b243-427b-a25f-49cb6ac270fd',
+      title: 'Cat Eye Frames',
+      category: 'Cat Eye Frames',
       loaded: false, // Placeholder visibility
       frontLoaded: false,
       backLoaded: false,
@@ -150,7 +159,13 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
 
   navigate(categoryId: string): void {
-    this.imagePreloader.preloadCategoryImages(categoryId); // Preload selected category images
+    if(categoryId === 'bumper-discount'){
+    this.imagePreloader.preloadBumperDiscountImages(); // Preload selected category images
+    } else if(categoryId === 'all-products'){
+      this.imagePreloader.preloadAllProductsImages(); // Preload all category images
+      }else{
+        this.imagePreloader.preloadCategoryImages(categoryId); // Preload selected category images
+      }
     this.router.navigateByUrl(`category/${categoryId}`); // Redirect to specific category
   }
 
@@ -228,13 +243,5 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     const googleMapsLink = 'https://www.google.com/maps/dir//Shop+No+3,+Ground+floor,+i-trends,+Sr.+No+296,+Porwal+Rd,+near+DY+Patil+University+Road,+Lohegaon,+Pune,+Maharashtra+411047/@18.6141551,73.9071623,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x3bc2c700594eff49:0x4978255b63aab10e!2m2!1d73.9120332!2d18.6141552!3e0?entry=ttu&g_ep=EgoyMDI1MDQwOC4wIKXMDSoASAFQAw%3D%3D';
     window.open(googleMapsLink, '_blank'); // Opens the link in a new tab
   }
-  scrollToCategory() {
-    const categorySection = document.querySelector('.cart');
-    if (categorySection) {
-      categorySection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  }
+
 }
