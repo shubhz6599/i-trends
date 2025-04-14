@@ -197,8 +197,14 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       this.updateAvailableColors();
 
     });
+ this.scrollTop();
   }
-
+scrollTop(){
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  })
+}
   showBumperDiscountProducts(): void {
     this.isBumperDiscountView = true;
     this.isAllProductsView = false;
@@ -384,6 +390,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     setTimeout(() => {
       this.startPriceAnimation();
     }, 1000);
+ this.scrollTop();
   }
 
 
