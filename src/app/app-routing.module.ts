@@ -10,6 +10,8 @@ import { OnlineConsultationComponent } from './components/online-consultation/on
 import { BuyingGuideComponent } from './components/buying-guide/buying-guide.component';
 import { KnowMoreAboutUsComponent } from './components/know-more-about-us/know-more-about-us.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
+import { AccountPageComponent } from './components/account-page/account-page.component';
+import { CartPageComponent } from './components/cart-page/cart-page.component';
 
 const routes: Routes = [
   {
@@ -28,11 +30,14 @@ const routes: Routes = [
       //   component: ProductExplorerComponent
       // },
       { path: 'category/:category', component: ProductExplorerComponent },
+      { path: 'category/:category/:searchQuery', component: ProductExplorerComponent },
       { path: 'book-online-consultation', component: OnlineConsultationComponent },
       { path: 'buying-guide', component: BuyingGuideComponent },
       { path: 'know-more-about-us', component: KnowMoreAboutUsComponent },
       { path: 'feedback', component: FeedbackFormComponent },
       { path: 'payment', component: PaymentProcessComponent },
+      { path: 'account', component: AccountPageComponent },
+      { path: 'cart', component: CartPageComponent },
     ],
   },
 

@@ -16,6 +16,9 @@ import { BuyingGuideComponent } from './components/buying-guide/buying-guide.com
 import { KnowMoreAboutUsComponent } from './components/know-more-about-us/know-more-about-us.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 import { OfflinePageComponent } from './components/offline-page/offline-page.component';
+import { AccountPageComponent } from './components/account-page/account-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CartPageComponent } from './components/cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -31,13 +34,16 @@ import { OfflinePageComponent } from './components/offline-page/offline-page.com
     KnowMoreAboutUsComponent,
     FeedbackFormComponent,
     OfflinePageComponent,
+    AccountPageComponent,
+    CartPageComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

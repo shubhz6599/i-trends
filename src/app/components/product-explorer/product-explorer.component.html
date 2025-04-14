@@ -81,11 +81,20 @@
     <button class="search-btn" (click)="applyFilters()">Search</button>
   </div>
 
-  <div class="search-result-message" *ngIf="searchResultMessage">
+  <div class="search-result-message" *ngIf="searchResultMessage && !selectedProduct">
     <p class="professional-message">{{ searchResultMessage }}</p>
   </div>
   <!-- Main Content -->
   <div class="main-content" [class.hidden]="isFilterPanelVisible">
+    <div class="category-banner" *ngIf="currentCategoryImage">
+      <div class="category-banner-content">
+        <img
+          [src]="currentCategoryImage"
+          alt="N.A."
+          class="category-image animated-banner"
+        />
+      </div>
+    </div>
     <!-- Product Grid Section -->
     <div class="products-grid" *ngIf="!selectedProduct">
       <div class="product-card" *ngFor="let product of filteredProducts; let i = index"

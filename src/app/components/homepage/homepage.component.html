@@ -23,8 +23,8 @@
   <div class="nav-content" [class.active]="isMenuOpen">
     <!-- Search Bar -->
     <div class="search-container">
-      <input type="text" placeholder="Search for products..." class="search-bar">
-      <button class="search-button">
+      <input type="text" placeholder="Search for products..." class="search-bar"  [(ngModel)]="searchQuery">
+      <button class="search-button"  (click)="onSearch()">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -38,7 +38,7 @@
         </a>
       </li>
       <li>
-        <a >
+        <a routerLink="/account">
           <i class="bi bi-person"></i>
           <span>Account</span>
         </a>
@@ -50,7 +50,7 @@
         </a>
       </li>
       <li class="desktop-only">
-        <a >
+        <a routerLink="/cart">
           <i class="bi bi-cart3"></i>
           <span>Cart</span>
         </a>

@@ -17,6 +17,15 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   private scrollRightBtn!: HTMLElement;
   images = [
     {
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Metal%2FRound%2FDSC_0094.jpg?alt=media&token=4dd9f9d0-bcaf-4d46-84b2-495f478b66ee',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Metal%2FRound%2FDSC_0095.jpg?alt=media&token=9ce63975-5692-436b-942b-36ca1f5fa610',
+      title: 'Metal Frames',
+      category: 'Metal Frames',
+      loaded: false, // Placeholder visibility
+      frontLoaded: false,
+      backLoaded: false,
+    },
+    {
       front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0220.jpg?alt=media&token=89e9d23f-bc48-4121-8f07-1d7597f35fbd',
       back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0221.jpg?alt=media&token=340515a4-4bf3-46ef-95db-6da4312afd46',
       title: 'Square Frames',
@@ -98,6 +107,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       backLoaded: false,
     },
   ];
+  searchQuery: string = '';
   constructor(private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -156,7 +166,13 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     }
   }
 
-
+  onSearch(): void {
+    if (this.searchQuery.trim()) {
+      this.router.navigate([`category/all-products/${this.searchQuery}`], {
+        queryParams: { query: this.searchQuery },
+      });
+    }
+  }
 
   navigate(categoryId: string): void {
     if(categoryId === 'bumper-discount'){

@@ -1,4 +1,3 @@
-// connection.service.ts
 import { Injectable, EventEmitter } from '@angular/core';
 import { fromEvent, merge, of, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';

@@ -13,7 +13,6 @@ export class BottomNavbarComponent {
     window.open(url, '_blank'); // Open in a new tab
   }
   toggleOptions(): void {
-    console.log('djsj');
 
     this.showContactOptions = !this.showContactOptions;
   }

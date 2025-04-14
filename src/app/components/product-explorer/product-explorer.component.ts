@@ -52,7 +52,7 @@ interface Category {
     ])
   ]
 })
-export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewInit,OnDestroy {
+export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewInit, OnDestroy {
   @ViewChild('priceDisplay') priceDisplay!: ElementRef;
   categories: Category[] = productsData.categories;
   currentCategory: Category | null = null;
@@ -168,22 +168,30 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   };
   isBumperDiscountView: boolean = false;
   isAllProductsView: boolean = false;
-  constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private sharedStateService: SharedStateService, private viewportScroller: ViewportScroller) { }
+  searchQueryFromHomePageNav: string = '';
+  currentCategoryImage: string = '';
+  constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private sharedStateService: SharedStateService, private viewportScroller: ViewportScroller) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const viewType = params.get('category');
-
+      const searchQuery = params.get('searchQuery')
       if (viewType === 'bumper-discount') {
+        this.currentCategoryImage = 'https://media.istockphoto.com/id/842287212/vector/bright-sale-background-poster-in-orange-color.jpg?s=612x612&w=0&k=20&c=0y7tCbAmRQriR4080d2omzcuTDSamVU34Q1p3Ejqge0='
         this.showBumperDiscountProducts();
-      } else if (viewType === 'all-products') {
+      } if (viewType === 'all-products' && searchQuery == null) {
+        this.currentCategoryImage = 'https://envision-eyecare.com/wp-content/uploads/2024/09/7-Reasons-To-Buy-Glasses-From-Your-Optometrist-Hero.jpg'
         this.showAllProducts();
-      } else {
-      this.categoryId = params.get('category');
-      this.currentCategory = this.categories.find(c => c.id === this.categoryId) || null;
-      this.filteredProducts = this.currentCategory?.products || [];
+      } else if (viewType === 'all-products' && searchQuery != null) {
+        this.searchQueryFromHomePageNav = searchQuery
+        this.showAllProducts()
       }
-
+      if (viewType !== 'all-products' && viewType !== 'bumper-discount') {
+        this.categoryId = params.get('category');
+        this.currentCategory = this.categories.find(c => c.id === this.categoryId) || null;
+        this.filteredProducts = this.currentCategory?.products || [];
+      }
       this.fetchCategoryImages();
       this.resetSelections();
       this.updateAvailableColors();
@@ -197,11 +205,10 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
     // Flatten all products from all categories and filter by bumperDiscount flag
     this.filteredProducts = this.categories
-      .flatMap((category:any) => category.products)
+      .flatMap((category: any) => category.products)
       .filter(product => product.bumperdiscount === true);
 
     this.searchResultMessage = 'Showing all bumper discounted products';
-    console.log(this.filteredProducts);
 
   }
 
@@ -214,6 +221,14 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.filteredProducts = this.categories.flatMap(category => category.products);
 
     this.searchResultMessage = 'Showing all available products';
+    if (this.searchQueryFromHomePageNav != null) {
+      this.filteredProducts = this.filteredProducts.filter((product) =>
+        product.name.toLowerCase().includes(this.searchQueryFromHomePageNav.toLowerCase())
+      );
+
+
+      // this.applyFilters()
+    }
   }
   ngAfterViewInit() {
     this.setupScrollListener();
@@ -300,9 +315,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   // Don't forget to clear timeout in ngOnDestroy
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.checkPriceInView.bind(this));
-     // Reset body styles when component is destroyed
-     document.body.style.overflow = 'auto';
-     document.body.style.paddingRight = '0';
+    // Reset body styles when component is destroyed
+    document.body.style.overflow = 'auto';
+    document.body.style.paddingRight = '0';
   }
 
   resetSelections(): void {
@@ -547,8 +562,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
   // Apply filters on search button click
   applyFilters() {
-    console.log('Applying filters:', this.selectedFilters);
-
     // Start with all products in the current category
     let filtered: Product[] = [];
 
@@ -615,12 +628,13 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       this.filteredProducts = this.getRelatedProducts();
       this.searchResultMessage =
         'Your search query did not match any products. Showing related products instead.';
-    } else {
+    }else {
       this.searchResultMessage = filtered.length > 0
-      ? `Showing Available ${filtered.length} Variants`
-      : 'No products match your filters';
-      this.filteredProducts = filtered
+        ? `Showing Available ${filtered.length} Variants`
+        : 'No products match your filters';
+      this.filteredProducts = filtered;
     }
+
 
     // Close filter panel
     this.toggleFilterPanel();
@@ -690,8 +704,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   // Proceed to buy
   proceedToBuy(): void {
-    console.log(this.selectedProduct?.basePrice);
-
     if (this.selection.mainOption && this.selection.subOption && this.selectedProduct) {
       let price = this.prices[this.selection.subOption] + this.selectedProduct?.basePrice
       // Prepare product data for Step 3 display
@@ -707,7 +719,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       const totalPrice = price; // Add frame price
 
       // Log product data for debugging
-      console.log('Proceeding to buy:', productData, `Total Price: ₹${totalPrice}`);
 
       // Navigate to checkout or payment page
       this.hideModal();

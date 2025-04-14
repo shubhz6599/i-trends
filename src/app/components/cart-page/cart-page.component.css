@@ -1,0 +1,42 @@
+.card {
+  border-radius: 15px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.cart-item img {
+  border-radius: 10px;
+}
+
+.cart-item {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.cart-summary {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.cart-summary h4 {
+  font-weight: bold;
+}
+
+button {
+  transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
