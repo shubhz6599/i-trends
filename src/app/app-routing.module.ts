@@ -17,19 +17,15 @@ import { AuthComponent } from './components/auth/auth.component';
 const routes: Routes = [
   {
     path: '',
-    component: AuthComponent,
+    component: AuthComponent
+  },
+  {
+    path: 'home',
     children: [
-      { path: 'home', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomepageComponent },
+      { path: '', component: HomepageComponent }, // loads when /home
       { path: 'error', component: ErrorPageComponent },
-      // {
-      //   path: 'products/bumper-discount',
-      //   component: ProductExplorerComponent
-      // },
-      // {
-      //   path: 'products/all',
-      //   component: ProductExplorerComponent
-      // },
+      // { path: 'products/bumper-discount', component: ProductExplorerComponent },
+      // { path: 'products/all', component: ProductExplorerComponent },
       { path: 'category/:category', component: ProductExplorerComponent },
       { path: 'category/:category/:searchQuery', component: ProductExplorerComponent },
       { path: 'book-online-consultation', component: OnlineConsultationComponent },
@@ -39,10 +35,11 @@ const routes: Routes = [
       { path: 'payment', component: PaymentProcessComponent },
       { path: 'account', component: AccountPageComponent },
       { path: 'cart', component: CartPageComponent },
-    ],
+    ]
   },
-
+  { path: '**', redirectTo: 'error' } // fallback for invalid routes
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
