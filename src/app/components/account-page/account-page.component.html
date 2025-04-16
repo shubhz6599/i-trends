@@ -1,91 +1,155 @@
-<div class="container my-5">
-  <div class="card shadow-lg">
-    <div class="card-header bg-primary text-white text-center">
-      <h2>My Account</h2>
+<div class="profile-page-container">
+  <!-- Loader -->
+  <div *ngIf="isLoading" class="loader-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Alert Section -->
+  <div *ngIf="alertMessage" class="alert text-center" [ngClass]="alertType" role="alert">
+    {{ alertMessage }}
+  </div>
+
+  <!-- Profile Card -->
+  <div class="profile-card">
+    <!-- Profile Picture -->
+    <div class="profile-picture-container text-center">
+      <img
+        src="https://thumbs.dreamstime.com/b/default-avatar-profile-placeholder-abstract-vector-silhouette-element-292939268.jpg"
+        alt="Profile Picture"
+        class="profile-picture"
+      />
+      <h2 class="profile-name mt-3">{{ accountForm.get('name')?.value }}</h2>
     </div>
-    <div class="card-body">
-      <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
-        <!-- Name -->
+
+    <!-- Form Section -->
+    <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+      <!-- Name -->
+      <div class="form-group mb-4">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': accountForm.get('name')?.invalid }"
+        />
+        <div *ngIf="accountForm.get('name')?.invalid" class="invalid-feedback">
+          <small>Name is required.</small>
+        </div>
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="form-group mb-4">
+        <label for="dob">Date of Birth</label>
+        <input
+          type="date"
+          id="dob"
+          formControlName="dob"
+          class="form-control"
+        />
+        <div *ngIf="accountForm.get('dob')?.invalid" class="invalid-feedback">
+          <small>Date of Birth is required.</small>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group mb-4">
+        <label for="phone">Phone</label>
+        <input
+          type="text"
+          id="phone"
+          formControlName="phone"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': accountForm.get('phone')?.invalid }"
+        />
+        <div *ngIf="accountForm.get('phone')?.invalid" class="invalid-feedback">
+          <small>Invalid phone number.</small>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group mb-4">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          readonly
+        />
+      </div>
+
+      <!-- Email Verified Section -->
+      <div class="form-group mb-4 email-verified-status">
+        <label>Email Verified</label>
+        <div class="email-status-container">
+          <span
+            *ngIf="isEmailVerified; else notVerified"
+            class="badge bg-success py-2 px-4 rounded-pill"
+          >
+            Verified
+          </span>
+          <ng-template #notVerified>
+            <span class="badge bg-danger py-2 px-4 rounded-pill">Not Verified</span>
+            <button
+              type="button"
+              class="btn verify-btn ms-2"
+              (click)="onResendOtp()"
+            >
+              Verify Email
+            </button>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+
+<div
+class="modal fade"
+id="otpModal"
+tabindex="-1"
+aria-labelledby="otpModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="otpModalLabel">Verify OTP</h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
         <div class="form-group mb-3">
-          <label for="name">Name</label>
+          <label for="otp">Enter OTP</label>
           <input
             type="text"
-            id="name"
-            formControlName="name"
+            id="otp"
+            formControlName="otp"
             class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+            placeholder="Enter your OTP"
           />
-          <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
-            <small *ngIf="f['name'].errors['required']">Name is required.</small>
-            <small *ngIf="f['name'].errors['minLength']">Minimum 3 characters.</small>
+          <div
+            *ngIf="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched"
+            class="text-danger"
+          >
+            <small>OTP is required.</small>
           </div>
         </div>
-
-        <!-- Address -->
-        <div class="form-group mb-3">
-          <label for="address">Address</label>
-          <input
-            type="text"
-            id="address"
-            formControlName="address"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"
-          />
-          <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
-            <small>Address is required.</small>
-          </div>
-        </div>
-
-        <!-- Phone -->
-        <div class="form-group mb-3">
-          <label for="phone">Phone</label>
-          <input
-            type="text"
-            id="phone"
-            formControlName="phone"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }"
-          />
-          <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
-            <small *ngIf="f['phone'].errors['required']">Phone is required.</small>
-            <small *ngIf="f['phone'].errors['pattern']">Invalid phone number.</small>
-          </div>
-        </div>
-
-        <!-- Email -->
-        <div class="form-group mb-3">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            formControlName="email"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
-          />
-          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-            <small *ngIf="f['email'].errors['required']">Email is required.</small>
-            <small *ngIf="f['email'].errors['email']">Invalid email address.</small>
-          </div>
-        </div>
-
-        <!-- Purchase History -->
-        <div class="form-group mb-3">
-          <label for="purchaseHistory">Purchase History</label>
-          <textarea
-            id="purchaseHistory"
-            formControlName="purchaseHistory"
-            class="form-control"
-            rows="4"
-            readonly
-          ></textarea>
-        </div>
-
-        <!-- Buttons -->
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary">Save Changes</button>
-          <button type="button" class="btn btn-secondary ms-2" (click)="onReset()">Reset</button>
-        </div>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="otpForm.invalid">
+          Verify OTP
+        </button>
       </form>
     </div>
   </div>
+</div>
 </div>

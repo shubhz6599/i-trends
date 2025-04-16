@@ -1,0 +1,195 @@
+<div *ngIf="isLoading" class="loader-overlay">
+  <div class="spinner"></div>
+</div>
+<div class="auth-page-container d-flex flex-column">
+  <!-- Header Section -->
+  <header class="auth-header text-center py-4">
+    <h1 class="brand-name">i-Trends</h1>
+    <p class="brand-tagline">Your Vision, Our Mission</p>
+  </header>
+
+  <div class="alert-container">
+    <div
+      *ngIf="alertMessage"
+      class="alert text-center"
+      [ngClass]="alertType"
+      role="alert"
+    >
+      {{ alertMessage }}
+    </div>
+  </div>
+
+
+  <!-- Main Auth Section -->
+  <div class="auth-container d-flex justify-content-center align-items-center">
+    <div class="auth-box">
+      <form
+      *ngIf="isOtpVerificationMode"
+      [formGroup]="otpVerificationForm"
+      (ngSubmit)="onOtpVerificationSubmit()"
+    >
+    <h3 class="text-center mb-4">Verify OTP</h3>
+    <div class="mb-3 text-center">
+      <p>Please enter the OTP sent to your email.</p>
+    </div>
+    <div class="mb-3">
+      <label for="otp" class="form-label">Enter OTP</label>
+      <input
+        type="text"
+        id="otp"
+        class="form-control"
+        formControlName="otp"
+      />
+      <div *ngIf="otpVerificationForm.get('otp')?.invalid && otpVerificationForm.get('otp')?.touched" class="text-danger">
+        OTP is required and must be a 6-digit number.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary w-100" [disabled]="otpVerificationForm.invalid">
+      Verify OTP
+    </button>
+    <div class="text-center mt-3">
+      <button type="button" class="btn btn-link text-decoration-none" (click)="onResendOtp()">Resend OTP</button>
+    </div>
+      </form>
+
+
+
+      <form *ngIf="isResetPasswordMode && !isOtpVerificationMode " [formGroup]="resetPasswordForm" (ngSubmit)="onResetPasswordSubmit()">
+        <h3 class="text-center mb-4">Change Password</h3>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">Enter New Password</label>
+          <input type="password" id="newPassword" class="form-control" formControlName="newPassword" />
+          <div *ngIf="resetPasswordForm.get('newPassword')?.invalid && resetPasswordForm.get('newPassword')?.touched"
+            class="text-danger">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Re-enter New Password</label>
+          <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" />
+          <div
+            *ngIf="resetPasswordForm.hasError('passwordsMismatch') && resetPasswordForm.get('confirmPassword')?.touched"
+            class="text-danger">
+            Passwords do not match!
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="resetPasswordForm.invalid">
+          Change Password
+        </button>
+      </form>
+
+      <div class="form-toggle mb-4 text-center" *ngIf="!isOtpVerificationMode && !isResetPasswordMode">
+        <button class="btn toggle-btn" [class.active]="isSignupMode" (click)="toggleMode(true)">
+          Sign Up
+        </button>
+        <button class="btn toggle-btn" [class.active]="!isSignupMode" (click)="toggleMode(false)">
+          Login
+        </button>
+      </div>
+
+      <!-- Sign Up Form -->
+      <form *ngIf="isSignupMode && !isOtpVerificationMode && !isResetPasswordMode" [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()" [@fadeInOut]>
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" id="firstName" class="form-control" formControlName="firstName" />
+          <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched" class="text-danger">
+            First name is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" id="lastName" class="form-control" formControlName="lastName" />
+        </div>
+        <div class="mb-3">
+          <label for="dob" class="form-label">Date of Birth</label>
+          <input type="date" id="dob" class="form-control" formControlName="dob" />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" formControlName="email" />
+          <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger">
+            Please enter a valid email address.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="mobile" class="form-label">Mobile</label>
+          <input type="text" id="mobile" class="form-control" formControlName="mobile" />
+          <div *ngIf="signupForm.get('mobile')?.invalid && signupForm.get('mobile')?.touched" class="text-danger">
+            Mobile number must be 10 digits long.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" formControlName="password" />
+          <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-danger">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="signupForm.invalid">
+          Sign Up
+        </button>
+      </form>
+
+      <!-- Login Form -->
+      <form *ngIf="!isSignupMode && !isOtpVerificationMode && !isResetPasswordMode" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" [@fadeInOut]>
+        <div class="mb-3">
+          <label for="loginEmail" class="form-label">Email</label>
+          <input type="email" id="loginEmail" class="form-control" formControlName="email" />
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+            Please enter a valid email address.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="loginPassword" class="form-label">Password</label>
+          <input type="password" id="loginPassword" class="form-control" formControlName="password" />
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+            Password is required.
+          </div>
+        </div>
+        <div class="text-end">
+          <a href="javascript:void(0);" (click)="openForgotPasswordModal()">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="forgotPasswordForm" (ngSubmit)="onForgotPasswordSubmit()">
+            <div class="mb-3">
+              <label for="forgotEmail" class="form-label">Email Address</label>
+              <input type="email" id="forgotEmail" class="form-control" formControlName="email" />
+              <div *ngIf="forgotPasswordForm.get('email')?.invalid && forgotPasswordForm.get('email')?.touched"
+                class="text-danger">
+                Please enter a valid email address.
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" [disabled]="forgotPasswordForm.invalid">
+              Send Reset Link
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="auth-footer text-center py-3">
+    <p class="footer-text mb-0">© 2023 i-Trends, All Rights Reserved.</p>
+    <p>
+      <a class="text-decoration-none">Privacy Policy</a> |
+      <a class="text-decoration-none">Terms of Service</a>
+    </p>
+  </footer>
+</div>

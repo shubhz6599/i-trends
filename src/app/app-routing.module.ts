@@ -12,11 +12,12 @@ import { KnowMoreAboutUsComponent } from './components/know-more-about-us/know-m
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 import { AccountPageComponent } from './components/account-page/account-page.component';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
+    component: AuthComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'error', component: ErrorPageComponent },

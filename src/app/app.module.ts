@@ -19,6 +19,7 @@ import { OfflinePageComponent } from './components/offline-page/offline-page.com
 import { AccountPageComponent } from './components/account-page/account-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CartPageComponent } from './components/cart-page/cart-page.component';
     OfflinePageComponent,
     AccountPageComponent,
     CartPageComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
