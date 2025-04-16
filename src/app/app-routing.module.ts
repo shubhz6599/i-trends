@@ -37,7 +37,7 @@ const routes: Routes = [
       { path: 'cart', component: CartPageComponent },
     ]
   },
-  { path: '**', redirectTo: 'home/error' } // fallback for invalid routes
+  // { path: '**', redirectTo: 'home/error' } // fallback for invalid routes
 ];
 
 
