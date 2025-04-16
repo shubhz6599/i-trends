@@ -19,9 +19,9 @@ const routes: Routes = [
     path: '',
     component: AuthComponent,
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'error', component: ErrorPageComponent },
+      { path: 'home', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomepageComponent },
+      { path: 'error', component: ErrorPageComponent },
       // {
       //   path: 'products/bumper-discount',
       //   component: ProductExplorerComponent

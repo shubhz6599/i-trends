@@ -1573,48 +1573,50 @@
   padding: 0 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
-
-  &:hover {
-    background: linear-gradient(45deg, #e91e63, #ff6b6b);
-  }
-
-  i {
-    font-size: 1.2rem;
-  }
 }
+
+.search-button:hover {
+  background: linear-gradient(45deg, #e91e63, #ff6b6b);
+}
+
+.search-button i {
+  font-size: 1.2rem;
+}
+
 
 .menu-items {
   list-style: none;
   padding: 0;
   margin: 1rem 0 0;
-
-  li {
-    margin-bottom: 0.5rem;
-    overflow: hidden;
-
-    a {
-      display: flex;
-      align-items: center;
-      padding: 0.8rem 1rem;
-      color: #333;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      background: rgba(0, 0, 0, 0.02);
-
-      &:hover {
-        background: rgba(233, 30, 99, 0.1);
-        color: #e91e63;
-        transform: translateX(5px);
-      }
-
-      i {
-        margin-right: 0.8rem;
-        font-size: 1.2rem;
-      }
-    }
-  }
 }
+
+.menu-items li {
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.menu-items li a {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  color: #333;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.menu-items li a:hover {
+  background: rgba(233, 30, 99, 0.1);
+  color: #e91e63;
+  transform: translateX(5px);
+}
+
+.menu-items li a i {
+  margin-right: 0.8rem;
+  font-size: 1.2rem;
+}
+
 
 /* Desktop Styles */
 @media (min-width: 768px) {
@@ -1654,19 +1656,20 @@
   .menu-items {
     display: flex;
     margin: 0;
-
-    li {
-      margin: 0 0.5rem;
-
-      a {
-        padding: 0.5rem 1rem;
-
-        &:hover {
-          transform: translateY(-3px);
-        }
-      }
-    }
   }
+
+  .menu-items li {
+    margin: 0 0.5rem;
+  }
+
+  .menu-items li a {
+    padding: 0.5rem 1rem;
+  }
+
+  .menu-items li a:hover {
+    transform: translateY(-3px);
+  }
+
 
   .desktop-only {
     display: block !important;
