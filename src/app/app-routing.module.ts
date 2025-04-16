@@ -16,11 +16,11 @@ import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
     component: AuthComponent
   },
   {
-    path: 'home',
+    path: '',
     children: [
       { path: '', component: HomepageComponent }, // loads when /home
       { path: 'error', component: ErrorPageComponent },
@@ -37,7 +37,7 @@ const routes: Routes = [
       { path: 'cart', component: CartPageComponent },
     ]
   },
-  { path: '**', redirectTo: 'error' } // fallback for invalid routes
+  { path: '**', redirectTo: 'home/error' } // fallback for invalid routes
 ];
 
 
