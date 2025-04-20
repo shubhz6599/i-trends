@@ -69,6 +69,7 @@ export class AuthComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    localStorage.clear()
     // Check if the current route is 'reset-password/:token'
     this.route.params.subscribe((params) => {
       this.token = params['token'] || null;
@@ -172,8 +173,10 @@ export class AuthComponent implements OnInit {
           console.log('OTP Verified:', response);
           this.isOtpVerificationMode = false; // Exit OTP verification mode after success
           localStorage.setItem('jwtToken', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
           this.isLoading = false;
           this.showAlert('Email verified successfully!', 'success');
+          this.router.navigate(['/'])
 
         },
         (error) => {
@@ -226,8 +229,9 @@ export class AuthComponent implements OnInit {
           console.log('Login Successful:', response);
           this.isLoading = false;
           localStorage.setItem('jwtToken', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
           this.showAlert('Login Successful!', 'success');
-          this.router.navigate(['/home'])
+          this.router.navigate(['/'])
         },
         (error) => {
           console.error('Login Error:', error);

@@ -13,6 +13,10 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
 import { AccountPageComponent } from './components/account-page/account-page.component';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { TrackOrderComponent } from './components/track-order/track-order.component';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
+import { AdminGuard } from './guard/admin.guard';
 
 const routes: Routes = [
   {
@@ -35,6 +39,15 @@ const routes: Routes = [
       { path: 'payment', component: PaymentProcessComponent },
       { path: 'account', component: AccountPageComponent },
       { path: 'cart', component: CartPageComponent },
+      { path: 'my-orders', component: MyOrdersComponent },
+      {
+        path: 'track-order/:orderId',
+        component: TrackOrderComponent
+      },
+      { path: 'admin', component: AdminDashboardComponent }
+      // { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard] }
+
+
     ]
   },
   // { path: '**', redirectTo: 'home/error' } // fallback for invalid routes

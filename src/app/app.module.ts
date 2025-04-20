@@ -20,6 +20,9 @@ import { AccountPageComponent } from './components/account-page/account-page.com
 import { HttpClientModule } from '@angular/common/http';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { TrackOrderComponent } from './components/track-order/track-order.component';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { AuthComponent } from './components/auth/auth.component';
     AccountPageComponent,
     CartPageComponent,
     AuthComponent,
+    MyOrdersComponent,
+    TrackOrderComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { ImagePreloaderService } from 'src/app/services/image-preloader.service'
 import { SharedStateService } from 'src/app/services/shared-state.service';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { ViewportScroller } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
 interface Variant {
   color: string;
   colorCode: string;
@@ -170,7 +171,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   isAllProductsView: boolean = false;
   searchQueryFromHomePageNav: string = '';
   currentCategoryImage: string = '';
-  constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private sharedStateService: SharedStateService, private viewportScroller: ViewportScroller) {
+  constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private sharedStateService: SharedStateService, private viewportScroller: ViewportScroller, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -197,14 +198,14 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       this.updateAvailableColors();
 
     });
- this.scrollTop();
+    this.scrollTop();
   }
-scrollTop(){
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  })
-}
+  scrollTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
   showBumperDiscountProducts(): void {
     this.isBumperDiscountView = true;
     this.isAllProductsView = false;
@@ -390,7 +391,7 @@ scrollTop(){
     setTimeout(() => {
       this.startPriceAnimation();
     }, 1000);
- this.scrollTop();
+    this.scrollTop();
   }
 
 
@@ -514,7 +515,7 @@ scrollTop(){
 
   goBack() {
     this.hideModal()
-    this.router.navigateByUrl('/home')
+    this.router.navigateByUrl('/')
   }
 
   sortProducts(sortOption: string): void {
@@ -635,7 +636,7 @@ scrollTop(){
       this.filteredProducts = this.getRelatedProducts();
       this.searchResultMessage =
         'Your search query did not match any products. Showing related products instead.';
-    }else {
+    } else {
       this.searchResultMessage = filtered.length > 0
         ? `Showing Available ${filtered.length} Variants`
         : 'No products match your filters';
@@ -772,5 +773,34 @@ scrollTop(){
         }
       }, 300); // Match the transition duration in your CSS (0.3s)
     }
+  }
+
+  AddToCart() {
+    let req = {
+      productId: this.selectedProduct?.id,
+      name: this.selectedProduct?.name,
+      quantity: 1,
+      img: this.selectedVariant.images[0],
+      actualPrice: this.selectedProduct?.basePrice,
+      discountedPrice: this.getFinalPriceDigits().join(''),
+      ratings: '4.5',
+      description: this.selectedProduct?.description
+    }
+    console.log(req);
+
+    this.isLoading = true;
+    this.authService.addToCart(req).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+
+        console.log('Added to cart:', res);
+        // You can show a toast/snackbar here
+      },
+      error: (err) => {
+        this.isLoading = false;
+
+        console.error('Error adding to cart:', err);
+      }
+    });
   }
 }

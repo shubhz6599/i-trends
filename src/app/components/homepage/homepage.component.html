@@ -14,8 +14,8 @@
 
     <!-- Cart Icon -->
     <div class="cart-icon">
-      <i class="bi bi-cart3"></i>
-      <span class="cart-count">0</span>
+      <i class="bi bi-cart3" routerLink="/cart"></i>
+      <span class="cart-count">{{cartCount}}</span>
     </div>
   </div>
 
@@ -50,9 +50,9 @@
         </a>
       </li>
       <li class="desktop-only">
-        <a routerLink="/cart">
+        <a routerLink="/my-orders">
           <i class="bi bi-cart3"></i>
-          <span>Cart</span>
+          <span>My Orders</span>
         </a>
       </li>
     </ul>

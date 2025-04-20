@@ -1,0 +1,31 @@
+<div class="container my-4" *ngIf="order">
+  <h2>Track Order</h2>
+
+  <div class="card mb-3">
+    <div class="card-header">
+      <strong>Order ID:</strong> {{ order._id }}<br />
+      <strong>Date:</strong> {{ order.createdAt | date:'medium' }}
+    </div>
+    <div class="card-body">
+      <div *ngFor="let item of order.items" class="row mb-3">
+        <div class="col-md-2">
+          <img [src]="item.img" class="img-fluid rounded" />
+        </div>
+        <div class="col-md-10">
+          <h5>{{ item.name }}</h5>
+          <p>{{ item.description }}</p>
+          <div><strong>Quantity:</strong> {{ item.quantity }}</div>
+          <div><strong>Price:</strong> ₹{{ item.discountedPrice }}</div>
+        </div>
+      </div>
+      <hr />
+      <div class="text-end">
+        <strong>Total Amount:</strong> ₹{{ order.totalAmount }}
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <strong>Status:</strong> {{ getStatusMessage(order) }}
+  </div>
+</div>

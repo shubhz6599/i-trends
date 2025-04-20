@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { ImagePreloaderService } from 'src/app/services/image-preloader.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   isLoading = true; // State to track image loading for placeholders
   imagesLoaded = 0;
   totalImages = 2;
+  cartCount = 0;
   private navLinks!: HTMLElement;
   private scrollLeftBtn!: HTMLElement;
   private scrollRightBtn!: HTMLElement;
@@ -108,7 +110,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     },
   ];
   searchQuery: string = '';
-  constructor(private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef) { }
+  constructor(private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.imagePreloader.lazyLoadHomePageImages();
@@ -117,6 +119,27 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
 
     // this.checkImageCache();
+    this.fetchCartItems()
+  }
+
+  fetchCartItems(): void {
+    this.isLoading = true;
+
+    this.authService.getCart().subscribe(
+      (response) => {
+        this.isLoading = false;
+
+        if (response.length > 0) {
+          this.cartCount = response.length;
+        } else {
+          this.cartCount = 0;
+        }
+      },
+      (error) => {
+        this.isLoading = false;
+        console.error('Error fetching cart items:', error);
+      }
+    );
   }
 
   ngAfterViewInit(): void {

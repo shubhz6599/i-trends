@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -64,4 +64,72 @@ export class AuthService {
     const headers = { Authorization: `Bearer ${token}` };
     return this.http.get(`${this.userbaseUrl}/feedback`, { headers });
   }
+
+  //cart
+  getCart(): Observable<any> {
+    const token = localStorage.getItem('jwtToken'); // Fetch token from localStorage
+    const headers = { Authorization: `Bearer ${token}` }; // Add Authorization header
+    return this.http.get(`${this.userbaseUrl}/cart`, { headers });
+  }
+
+  // Add product to cart
+  addToCart(product: any): Observable<any> {
+    const token = localStorage.getItem('jwtToken'); // Fetch token from localStorage
+    const headers = { Authorization: `Bearer ${token}` }; // Add Authorization header
+    return this.http.post(`${this.userbaseUrl}/cart`, product, { headers });
+  }
+
+  // Remove an item from the cart
+  removeFromCart(productId: string): Observable<any> {
+    const token = localStorage.getItem('jwtToken'); // Fetch token from localStorage
+    const headers = { Authorization: `Bearer ${token}` }; // Add Authorization header
+    return this.http.delete(`${this.userbaseUrl}/cart`, { headers, body: { productId } });
+  }
+
+
+  // orders
+  placeOrder(): Observable<any> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.post(`${this.userbaseUrl}/order`, {}, { headers });
+  }
+
+  getOrders(): Observable<any> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get(`${this.userbaseUrl}/orders`, { headers });
+  }
+
+  trackOrder(orderId: string): Observable<any> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get(`${this.userbaseUrl}/track/${orderId}`, { headers });
+  }
+
+  //admin
+  getCurrentUser() {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  // (Optional) Use this to save user after login
+  setCurrentUser(user: any) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+  }
+
+  updateStatus(orderId: string, status: string): Observable<any> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.put(`${this.userbaseUrl}/order-status/${orderId}`, { status }, { headers });
+  }
+
+  exportOrders(): void {
+    window.open(`${this.userbaseUrl}/export`, '_blank');
+  }
+
+
 }

@@ -40,7 +40,6 @@ export class ImagePreloaderService {
       'https://static1.lenskart.com/media/desktop/img/Aug21/Desktop/VC-Banner.jpg',
       'https://static1.lenskart.com/media/desktop/img/Aug21/25-Aug/LK-AIR-Banner.jpg',
       'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0457.jpg?alt=media&token=1db700db-c21f-4682-9e67-64a8b76301f5',
-      'http://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0458.jpg?alt=media&token=ce288b72-b9d0-4774-87b2-6d9d628f1aeb',
       'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0232.jpg?alt=media&token=64925148-c94f-4668-83e3-9cf61a9bb40d',
       'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0233.jpg?alt=media&token=bdbd701c-a618-4273-b467-9c8f1209c870',
       'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0504.jpg?alt=media&token=63d871aa-a376-46e3-a09e-196315db54ad',
