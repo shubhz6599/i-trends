@@ -24,7 +24,7 @@ interface Product {
   variants: Variant[];
   features: string[];
   rating?: number; // Optional property
-  basePriceWithDiscount?: number; // Optional property
+  basePriceWithDiscount: number; // Optional property
   bumperdiscount?: boolean; // Add this new optional property
   isTodaysDeal?: boolean; // Existing optional property
 }
@@ -471,15 +471,19 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   getFinalPriceDigits(): string[] {
     if (!this.selectedProduct || !this.selectedVariant) return [];
-    const price = (this.selectedProduct.basePrice + this.selectedVariant.priceModifier).toString();
+    console.log(this.selectedProduct.basePrice);
+    console.log(this.selectedVariant.priceModifier);
+    console.log(this.selectedProduct);
+
+    const price = (this.selectedProduct.basePrice - this.selectedProduct.basePriceWithDiscount).toString();
 
     return price.split('');
   }
 
   getOriginalPrice(): number {
     if (!this.selectedProduct || !this.selectedVariant) return 0;
-    const finalPrice = this.selectedProduct.basePrice + this.selectedVariant.priceModifier;
-    return Math.round(finalPrice / (1 - this.discountPercent / 100));
+      return this.selectedProduct.basePrice;
+
   }
 
   selectColor(color: string): void {
@@ -642,6 +646,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         : 'No products match your filters';
       this.filteredProducts = filtered;
     }
+
 
 
     // Close filter panel

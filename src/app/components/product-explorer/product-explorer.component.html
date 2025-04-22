@@ -120,7 +120,7 @@
         </div>
         <div class="product-info cursiveFont">
           <h3 class="fw-600">{{product.name}}</h3>
-          <p class="price">From ₹{{product.basePrice}}</p>
+          <p class="price">₹{{product.basePrice}}</p>
           <div class="color-options">
             <span *ngFor="let variant of product.variants" class="color-dot" [style.background]="variant.colorCode"
               [title]="variant.color"></span>
@@ -137,6 +137,7 @@
         Back to Collection
       </nav>
 
+      <div class="centerAlign">
       <div class="photo">
         <div class="image-loading" *ngIf="!imageLoaded">
           <div class="loading-spinner"></div>
@@ -200,6 +201,7 @@
           {{selectedVariant.inStock ? 'Buy Now' : 'Out of Stock'}}
         </button> -->
       </div>
+    </div>
     </div>
   </div>
 </div>

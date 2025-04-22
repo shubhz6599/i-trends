@@ -6,7 +6,7 @@ body {
 
 /* Base Styles */
 .explorer-container {
-  max-width: 1200px;
+  /* max-width: 95%; */
   margin: 0 auto;
   padding: 5px;
   background-color: mintcream;
@@ -425,7 +425,7 @@ nav i {
 }
 
 .mDiv .card {
-  max-width: 650px;
+  max-width: 100%;
   width: 100%;
   position: relative;
   background: white;
@@ -790,6 +790,7 @@ nav i {
 /* Responsive Design */
 @media (min-width: 768px) {
   .mDiv .card {
+      max-width: 650px;
     display: flex;
     flex-wrap: wrap;
   }

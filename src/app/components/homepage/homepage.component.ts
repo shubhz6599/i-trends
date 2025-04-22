@@ -283,4 +283,5 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     window.open(googleMapsLink, '_blank'); // Opens the link in a new tab
   }
 
+
 }
