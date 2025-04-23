@@ -1,0 +1,34 @@
+<div class="order-details-container">
+  <button class="btn btn-secondary" routerLink="/user-orders">Back</button>
+  <h1>Order Details</h1>
+
+  <div *ngIf="!orderDetails">
+    <p>Loading...</p>
+  </div>
+
+  <div *ngIf="orderDetails">
+    <h2>Order ID: {{ orderId }}</h2>
+
+    <h3>User Information</h3>
+    <p><strong>Name:</strong> {{ orderDetails.user.name }}</p>
+    <p><strong>Email:</strong> {{ orderDetails.user.email }}</p>
+    <p><strong>Phone:</strong> {{ orderDetails.user.phone }}</p>
+    <p><strong>Address:</strong> {{ orderDetails.user.address }}</p>
+
+    <h3>Products</h3>
+    <div *ngFor="let item of orderDetails.items" class="product-item">
+      <img [src]="item.imageUrl || item.img" alt="{{ item.name }}" class="product-image" />
+      <div class="product-info">
+        <h4>{{ item.name }}</h4>
+        <p>{{ item.description }}</p>
+        <p>Price: ₹{{ item.price }}</p>
+        <p>Quantity: {{ item.quantity }}</p>
+      </div>
+    </div>
+
+    <h3>Payment Details</h3>
+    <p><strong>Total Amount:</strong> ₹{{ orderDetails.totalAmount }}</p>
+    <p><strong>Payment ID:</strong> {{ orderDetails.paymentId }}</p>
+    <p class="payment-status"><strong>Status:</strong> {{ orderDetails.status }}</p>
+  </div>
+</div>

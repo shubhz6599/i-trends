@@ -88,12 +88,30 @@ export class AuthService {
 
 
   // orders
-  placeOrder(): Observable<any> {
+  placeOrder(orderData: { razorpay_order_id: string; paymentId: string }): Observable<any> {
     const token = localStorage.getItem('jwtToken');
     const headers = { Authorization: `Bearer ${token}` };
-    return this.http.post(`${this.userbaseUrl}/order`, {}, { headers });
+    return this.http.post(`${this.userbaseUrl}/order`, orderData, { headers });
+  }
+  confirmOrder(payload:any): Observable<any> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.post(`${this.userbaseUrl}/confirm-order`, payload, { headers });
   }
 
+  // Get all orders for the logged-in user
+  getOrdersByUser(): Observable<any> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get(`${this.userbaseUrl}/user-orders`, { headers });
+  }
+
+  // Get order details by order ID
+  getOrderDetailsById(orderId: string): Observable<any> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get(`${this.userbaseUrl}/${orderId}`, { headers });
+  }
   getOrders(): Observable<any> {
     const token = localStorage.getItem('jwtToken');
     const headers = { Authorization: `Bearer ${token}` };
@@ -131,5 +149,20 @@ export class AuthService {
     window.open(`${this.userbaseUrl}/export`, '_blank');
   }
 
+  createOrder(orderData: { items: any[]; amount: number }): Observable<any> {
+    const token = localStorage.getItem('jwtToken'); // Fetch token from localStorage
+    const headers = { Authorization: `Bearer ${token}` }; // Add Authorization header
+    return this.http.post(`${this.baseUrl}/create-order`, orderData, { headers });
+  }
 
+  // Payment: Verify Payment
+  verifyPayment(paymentData: {
+    razorpay_order_id: string;
+    razorpay_payment_id: string;
+    razorpay_signature: string;
+  }): Observable<any> {
+    const token = localStorage.getItem('jwtToken'); // Fetch token from localStorage
+    const headers = { Authorization: `Bearer ${token}` }; // Add Authorization header
+    return this.http.post(`${this.baseUrl}/verify-payment`, paymentData, { headers });
+  }
 }

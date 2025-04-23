@@ -1262,6 +1262,7 @@ nav i {
 
 .proceed-btn-container {
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .proceed-btn {
@@ -1491,6 +1492,7 @@ body.modal-open {
   height: 100%;
   background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 9999;

@@ -1,6 +1,7 @@
 <div class="explorer-container">
   <div *ngIf="isLoading" class="loader-overlay">
     <div class="spinner"></div>
+    <p class="mt-3" *ngIf="paymentMsg">{{paymentMsg}}</p>
   </div>
   <!-- Category Header -->
   <div class="category-header d-flex align-items-center" *ngIf="!selectedProduct">
@@ -385,8 +386,8 @@
 
                   <div class="price-summary">
                     <div class="price-row">
-                      <span>Product Price:</span>
-                      <span>₹{{ selectedProduct?.basePrice }}</span>
+                      <span>Product Discounted Price:</span>
+                      <span>₹{{ selectedProduct?.basePrice - selectedProduct?.basePriceWithDiscount}}</span>
                     </div>
                     <div class="price-row">
                       <span>Frame + Lens:</span>
@@ -394,7 +395,7 @@
                     </div>
                     <div class="price-row total">
                       <span>Total:</span>
-                      <span>₹{{ prices[selection.subOption] + selectedProduct?.basePrice }}</span>
+                      <span>₹{{ prices[selection.subOption] + selectedProduct?.basePrice - selectedProduct?.basePriceWithDiscount}}</span>
                     </div>
                   </div>
 

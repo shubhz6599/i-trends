@@ -6,6 +6,8 @@ import { SharedStateService } from 'src/app/services/shared-state.service';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { ViewportScroller } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
+declare var Razorpay: any;
 interface Variant {
   color: string;
   colorCode: string;
@@ -24,7 +26,7 @@ interface Product {
   variants: Variant[];
   features: string[];
   rating?: number; // Optional property
-  basePriceWithDiscount: number; // Optional property
+  basePriceWithDiscount: any; // Optional property
   bumperdiscount?: boolean; // Add this new optional property
   isTodaysDeal?: boolean; // Existing optional property
 }
@@ -66,6 +68,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   selectedQuantity: any = "Select Quantity";
   quantityOptions: any[] = ["Select Quantity", 1, 2, 3, 4, 5];
   imageLoaded: boolean = false;
+  paymentMsg:string = ''
   loadingMessages = [
     "Carrots are healthy for eyes!",
     "Did you know: Blinking helps keep eyes moist",
@@ -471,10 +474,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   getFinalPriceDigits(): string[] {
     if (!this.selectedProduct || !this.selectedVariant) return [];
-    console.log(this.selectedProduct.basePrice);
-    console.log(this.selectedVariant.priceModifier);
-    console.log(this.selectedProduct);
-
     const price = (this.selectedProduct.basePrice - this.selectedProduct.basePriceWithDiscount).toString();
 
     return price.split('');
@@ -482,7 +481,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   getOriginalPrice(): number {
     if (!this.selectedProduct || !this.selectedVariant) return 0;
-      return this.selectedProduct.basePrice;
+    return this.selectedProduct.basePrice;
 
   }
 
@@ -556,7 +555,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   filterByDiscount(discount: number) {
     if (!this.selectedFilters.find((filter: any) => filter.label === `${discount}% or more`)) {
-      this.selectedFilters.push({ label: ` ${discount}% or more`, value: discount });
+      this.selectedFilters.push({ label: `${discount}% or more`, value: discount });
     }
   }
 
@@ -718,28 +717,22 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   // Proceed to buy
   proceedToBuy(): void {
     if (this.selection.mainOption && this.selection.subOption && this.selectedProduct) {
-      let price = this.prices[this.selection.subOption] + this.selectedProduct?.basePrice
+      let price = this.prices[this.selection.subOption] + this.selectedProduct?.basePrice - this.selectedProduct?.basePriceWithDiscount
       // Prepare product data for Step 3 display
       const productData = {
         name: this.selectedProduct?.name,
         variant: this.selectedVariant?.color,
-        quantity: this.selectedQuantity || 1,
+        quantity: 1,
         price: price,
         imageUrl: this.selectedVariant?.images[0],
-        ...this.selection
+        ...this.selection,
+        productId: this.selectedProduct?.id
       };
 
-      const totalPrice = price; // Add frame price
 
-      // Log product data for debugging
-
-      // Navigate to checkout or payment page
       this.hideModal();
       this.manualFixBodyStyles();
-      this.router.navigate(['/payment'], { state: { product: productData, totalPrice } });
-
-      // Reset selection
-      this.resetSelection();
+      this.initiatePayment([productData], productData.price);
     } else {
       alert('Please make all selections!');
     }
@@ -760,8 +753,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       price: price.join(""),
       imageUrl: this.selectedVariant.images[0],
     };
-    this.hideModal()
-    this.router.navigate(['/payment'], { state: { product: productData } });
+    this.hideModal();
+    this.initiatePayment([productData], productData.price)
+    // this.router.navigate(['/payment'], { state: { product: productData } });
 
   }
   hideModal(): void {
@@ -786,26 +780,139 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       name: this.selectedProduct?.name,
       quantity: 1,
       img: this.selectedVariant.images[0],
+      variant: this.selectedVariant?.color,
       actualPrice: this.selectedProduct?.basePrice,
       discountedPrice: this.getFinalPriceDigits().join(''),
       ratings: '4.5',
       description: this.selectedProduct?.description
     }
-    console.log(req);
-
     this.isLoading = true;
     this.authService.addToCart(req).subscribe({
       next: (res) => {
         this.isLoading = false;
-
-        console.log('Added to cart:', res);
-        // You can show a toast/snackbar here
       },
       error: (err) => {
         this.isLoading = false;
-
-        console.error('Error adding to cart:', err);
       }
     });
+  }
+
+
+  initiatePayment(items: any[], amount: number) {
+    this.isLoading = true;
+    let userdetails: any = localStorage.getItem('user');
+    userdetails = JSON.parse(userdetails);
+    this.authService.createOrder({ items, amount }).subscribe((response: any) => {
+      if (response.success) {
+        const options = {
+          key: environment.razorPayKey, // Razorpay Key ID
+          amount: response.order.amount,
+          currency: response.order.currency,
+          name: "i-trends",
+          description: "Payment For Spec Purchase",
+          order_id: response.order.id,
+          handler: (paymentResponse: any) => {
+            this.verifyPayment(paymentResponse);
+          },
+          prefill: {
+            name: userdetails.name,
+            email: userdetails.email,
+            contact: userdetails.mobile
+          },
+          theme: {
+            color: "#3399cc"
+          }
+        };
+        this.isLoading = false;
+
+        const razorpay = new Razorpay(options);
+        razorpay.open();
+      }
+    });
+  }
+
+  verifyPayment(paymentResponse: any) {
+    this.isLoading = true;
+    this.paymentMsg = 'Please Wait, Verifying Your Payment'
+    const paymentData = {
+      razorpay_order_id: paymentResponse.razorpay_order_id,
+      razorpay_payment_id: paymentResponse.razorpay_payment_id,
+      razorpay_signature: paymentResponse.razorpay_signature,
+    };
+
+    this.authService.verifyPayment(paymentData).subscribe((response: any) => {
+      if (response.success) {
+        console.log("Payment verification successful:", response);
+
+        // Trigger order placement
+        this.placeOrder(paymentResponse.razorpay_order_id, paymentResponse.razorpay_payment_id); // Pass verified order_id
+      } else {
+        console.error("Payment verification failed:", response.message);
+        this.isLoading = false;
+
+      }
+    }, (error: any) => {
+      console.error("Payment verification failed:", error);
+      this.isLoading = false;
+
+    });
+  }
+
+  placeOrder(razorpay_order_id: string, paymentId: string) {
+    const orderData = { razorpay_order_id, paymentId };
+    this.authService.placeOrder(orderData).subscribe((response: any) => {
+      if (response.success) {
+        const orderId = response.order._id;
+        this.getOrderDetailsById(orderId)
+      } else {
+        this.isLoading = false;
+
+        console.error("Order placement failed:", response.message);
+      }
+    }, (error: any) => {
+      this.isLoading = false;
+
+      console.error("Order placement failed:", error);
+    });
+  }
+  confirmOrder(payload: any, orderId: any) {
+    this.authService.confirmOrder(payload).subscribe((response: any) => {
+      if (response.success) {
+        this.isLoading = false;
+
+        this.router.navigate(['/payment-success'], { queryParams: { orderId: orderId } });
+      } else {
+        console.error("Order placement failed:", response.message);
+        this.isLoading = false;
+
+      }
+    }, (error: any) => {
+      console.error("Order placement failed:", error);
+      this.isLoading = false;
+
+    });
+  }
+  getOrderDetailsById(orderId: any) {
+    this.authService.getOrderDetailsById(orderId).subscribe(
+      (response: any) => {
+        if (response.success) {
+          let payload = {
+            'paymentId': response.order.paymentId,
+            'totalAmount': response.order.totalAmount,
+            'items': response.order.items
+          }
+          this.confirmOrder(payload, orderId)
+        } else {
+          this.isLoading = false;
+
+          console.error('Failed to fetch order details:', response.message);
+        }
+      },
+      (error: any) => {
+        this.isLoading = false;
+
+        console.error('Error fetching order details:', error);
+      }
+    );
   }
 }

@@ -23,6 +23,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { TrackOrderComponent } from './components/track-order/track-order.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
     MyOrdersComponent,
     TrackOrderComponent,
     AdminDashboardComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,10 +9,10 @@
           "id": "Metal-001",
           "name": "Metal Frames - Avtar",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 300,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Black",
@@ -59,9 +59,9 @@
           "id": "Metal-002",
           "name": "Metal Frames - Hexagonal Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "YellowOcher",
@@ -108,9 +108,9 @@
           "id": "Metal-003",
           "name": "Metal Frames - Hexagonal Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -134,9 +134,9 @@
           "id": "Metal-004",
           "name": "Metal Frames - Hexagonal Single Tone(Silver Golden)",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Silver",
@@ -160,9 +160,9 @@
           "id": "Metal-005",
           "name": "Metal Frames - Rounded Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -197,10 +197,10 @@
           "id": "Metal-006",
           "name": "Metal Frames - Rounded Mixed Tone(Black Golden)",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 300,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Gold&Black",
@@ -235,9 +235,9 @@
           "id": "Metal-007",
           "name": "Metal Frames - Rounded Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "WhitePurple",
@@ -261,9 +261,9 @@
           "id": "Metal-008",
           "name": "Metal Frames - Rounded Single Tone(Black Golden)",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Gold&Black",
@@ -287,9 +287,9 @@
           "id": "Metal-008",
           "name": "Metal Frames - Rounded Dual Tone(Blue Golden)",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Blue&Gold",
@@ -313,9 +313,9 @@
           "id": "Metal-009",
           "name": "Metal Frames - Rounded Dual Tone(Black Golden)",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Gold&Black",
@@ -339,10 +339,10 @@
           "id": "Metal-010",
           "name": "Metal Frames - Rounded Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 300,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Gold",
@@ -366,9 +366,9 @@
           "id": "Metal-011",
           "name": "Metal Frames - Rounded Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Gold&Black",
@@ -392,9 +392,9 @@
           "id": "Metal-012",
           "name": "Metal Frames - Rounded Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "BabyPink",
@@ -418,9 +418,9 @@
           "id": "Metal-013",
           "name": "Metal Frames - Rounded Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Black",
@@ -444,9 +444,9 @@
           "id": "Metal-014",
           "name": "Metal Frames - Rounded Double Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Gold&Black",
@@ -470,10 +470,10 @@
           "id": "Metal-015",
           "name": "Metal Frames - Rounded Double Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1599,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 400,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Gold&Black",
@@ -497,9 +497,11 @@
           "id": "Metal-016",
           "name": "Metal Frames - Rounded Double Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1599,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 400,
+          "bumperdiscount": true,
+
           "variants": [
             {
               "color": "Gold&Brown",
@@ -523,9 +525,9 @@
           "id": "Metal-017",
           "name": "Metal Frames - Square Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -549,9 +551,9 @@
           "id": "Metal-018",
           "name": "Metal Frames - Square Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -574,7 +576,7 @@
           "id": "Metal-019",
           "name": "Metal Frames - Square Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
           "basePriceWithDiscount": 100,
           "variants": [
@@ -599,7 +601,7 @@
           "id": "Metal-020",
           "name": "Metal Frames - Square Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
           "basePriceWithDiscount": 100,
           "variants": [
@@ -624,10 +626,10 @@
           "id": "Metal-021",
           "name": "Metal Frames - Square Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 200,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Black",
@@ -650,9 +652,9 @@
           "id": "Metal-022",
           "name": "Metal Frames - Square Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -675,7 +677,7 @@
           "id": "Metal-023",
           "name": "Metal Frames - Square Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
           "basePriceWithDiscount": 100,
           "variants": [
@@ -712,9 +714,9 @@
           "id": "Metal-024",
           "name": "Metal Frames - Square Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Black",
@@ -738,9 +740,9 @@
           "id": "Metal-025",
           "name": "Metal Frames - Square Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Blue",
@@ -764,9 +766,9 @@
           "id": "Metal-026",
           "name": "Metal Frames - Square Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Blue",
@@ -790,9 +792,9 @@
           "id": "Metal-027",
           "name": "Metal Frames - Square Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Blue",
@@ -816,10 +818,10 @@
           "id": "Metal-028",
           "name": "Metal Frames - Square Mixed Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 300,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Gold&Black",
@@ -843,9 +845,9 @@
           "id": "Metal-029",
           "name": "Metal Frames - Square Mix Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Gold&Black",
@@ -880,9 +882,9 @@
           "id": "Metal-030",
           "name": "Metal Frames - Square Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -918,9 +920,9 @@
           "id": "Metal-031",
           "name": "Metal Frames - Square Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Blue&Black",
@@ -966,7 +968,7 @@
           "id": "Metal-032",
           "name": "Metal Frames - Square Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
           "basePriceWithDiscount": 100,
           "variants": [
@@ -1003,10 +1005,10 @@
           "id": "Metal-033",
           "name": "Metal Frames - Square Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 200,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Gold&Black",
@@ -1041,9 +1043,9 @@
           "id": "Metal-034",
           "name": "Metal Frames - Square Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Black",
@@ -1089,9 +1091,9 @@
           "id": "Metal-035",
           "name": "Metal Frames - Square Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Gold&Black",
@@ -1114,9 +1116,9 @@
           "id": "Metal-036",
           "name": "Metal Frames - Square Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "DarkMatBlack",
@@ -1140,9 +1142,9 @@
           "id": "Metal-037",
           "name": "Metal Frames - Supra Dual Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Gold&Black",
@@ -1166,10 +1168,10 @@
           "id": "Metal-038",
           "name": "Metal Frames - Supra Transparent Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 300,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Transparent",
@@ -1215,9 +1217,9 @@
           "id": "Metal-039",
           "name": "Metal Frames - Supra Transparent Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Gold",
@@ -1241,9 +1243,9 @@
           "id": "Metal-040",
           "name": "Metal Frames - Supra Single Tone",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1099,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Black",
@@ -1291,8 +1293,8 @@
           "description": "Timeless square frames with thin profile",
           "basePrice": 1099,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 400,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Brown",
@@ -1312,7 +1314,6 @@
             "Anti-reflective coating"
           ]
         }
-
       ]
     },
     {
@@ -1324,10 +1325,10 @@
           "id": "Sq-101",
           "name": "Vintage Square",
           "description": "Retro-inspired Square frames with modern comfort",
-          "basePrice": 1799,
+          "basePrice": 1599,
           "rating": 1,
-          "basePriceWithDiscount": 200,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 500,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Blue",
@@ -1369,9 +1370,9 @@
           "id": "Sq-102",
           "name": "Transparent Square - Dual Tone(Silver & Black )",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2199,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Silver&Black",
@@ -1391,10 +1392,10 @@
           "id": "Sq-103",
           "name": "Transparent Square - Dual Tone(Gold & Black)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2199,
+          "basePrice": 1599,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 400,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Gold&Black",
@@ -1408,15 +1409,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "High Quailty", "Lightweight"]
         },
         {
           "id": "Sq-104",
           "name": "Transparent Square - Mix Tone",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1499,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Mix",
@@ -1430,15 +1431,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Fix pad", "Lightweight"]
         },
         {
           "id": "Sq-105",
           "name": "Transparent Square - Single Tone(Pistachio green)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1499,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "PistachioGreen",
@@ -1452,15 +1453,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Trendsetter", "Lightweight"]
         },
         {
           "id": "Sq-106",
           "name": "Transparent Square - Double Tone",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2099,
+          "basePrice": 1499,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Blue&Gold",
@@ -1518,16 +1519,16 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Fancy look", "Lightweight"]
         },
         {
           "id": "Sq-107",
           "name": "Transparent Square - Tripple Tone(Black Brown Blue)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1599,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 400,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "BlackBrownBlue",
@@ -1541,15 +1542,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-Allergic", "Lightweight"]
         },
         {
           "id": "Sq-108",
           "name": "Transparent Square - Double Tone(Light-Purple Gold)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1799,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Light&Purple",
@@ -1563,15 +1564,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-109",
           "name": "Vintage Square - Double Tone(Black Silver)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1499,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -1596,15 +1597,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-110",
           "name": "Transparent Square - Double Tone(Transparent Black)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1499,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "TransparentBlack",
@@ -1618,15 +1619,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-111",
           "name": "Formal Square - Single Tone(Black)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 1699,
+          "basePrice": 1799,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -1640,15 +1641,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-112",
           "name": "Transparent Sage - Dual Tone(Sage & Light Green)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1799,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Sage&LightGreen",
@@ -1662,15 +1663,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-113",
           "name": "Transparent Brown - Mix Tone(Light Brown & Blue & Silver)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1799,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Mix",
@@ -1684,15 +1685,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-114",
           "name": "Transparent Black Gold - Dual Tone(Black & Gold)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Gold&Black",
@@ -1706,16 +1707,16 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet  frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-115",
           "name": "Square Blue Silver - Dual Tone(Blue & Silver)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 400,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "Silver&Blue",
@@ -1729,15 +1730,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-116",
           "name": "Square Black Gold - Dual Tone(Black & Gold)",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1599,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Gold&Black",
@@ -1751,15 +1752,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-117",
           "name": "Single Tone Transparent",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Transparent",
@@ -1776,15 +1777,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-118",
           "name": "Square Premium - Single Tone",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1799,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 400,
           "variants": [
             {
               "color": "Black",
@@ -1809,15 +1810,15 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Metal frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         },
         {
           "id": "Sq-119",
           "name": "Square Plain Premium - Single Tone",
           "description": "Contemporary take on Square frames",
-          "basePrice": 2499,
+          "basePrice": 1799,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 400,
           "variants": [
             {
               "color": "Black",
@@ -1831,7 +1832,7 @@
               "priceModifier": 200
             }
           ],
-          "features": ["Fiber frame", "Adjustable nose pads", "Lightweight"]
+          "features": ["Sheet frame", "Anti-allergic", "Lightweight"]
         }
       ]
     },
@@ -1844,9 +1845,9 @@
           "id": "Sq12-201",
           "name": "12X Classic Square - Single Tone",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1599,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 500,
           "variants": [
             {
               "color": "Black",
@@ -1882,20 +1883,16 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "Sq12-202",
           "name": "12X Classic Square - Dual Tone",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1299,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 500,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "TransparentBlack",
@@ -1909,19 +1906,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "Sq12-203",
           "name": "12X Classic Square - Dual Tone Transparent",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1299,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 500,
           "variants": [
             {
               "color": "TransparentBlack&Greenyellow",
@@ -1946,20 +1939,16 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "Sq12-203",
           "name": "12X Classic Square - Single Tone Transparent",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1399,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
-          "bumperdiscount":true,
+          "basePriceWithDiscount": 500,
+          "bumperdiscount": true,
           "variants": [
             {
               "color": "MatWhite",
@@ -1984,11 +1973,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Anti-reflective coating"]
         }
       ]
     },
@@ -2001,9 +1986,9 @@
           "id": "RL-301",
           "name": "Hexagonal RimLess - Dual Tone",
           "description": "Hexa Rimless round frames with thick profile",
-          "basePrice": 1599,
+          "basePrice": 1699,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 400,
           "variants": [
             {
               "color": "Black",
@@ -2028,19 +2013,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-allergic"]
         },
         {
           "id": "RL-302",
           "name": "Rounded RimLess - Single Tone",
           "description": "Round RimLess Round frames with thick profile",
-          "basePrice": 1599,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 400,
           "variants": [
             {
               "color": "Black",
@@ -2065,19 +2046,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-allergic"]
         },
         {
           "id": "RL-303",
           "name": "Sharp Square RimLess - Single Tone",
           "description": "Square RimLess Round frames with thick profile",
-          "basePrice": 1599,
+          "basePrice": 1399,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -2091,19 +2068,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-allergic"]
         },
         {
           "id": "RL-304",
           "name": "Curved Square RimLess - Single/Dual Tone",
           "description": "Square RimLess Round frames with thick profile",
-          "basePrice": 1599,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Brown",
@@ -2128,19 +2101,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-allergic"]
         },
         {
           "id": "RL-305",
           "name": "Curved Square RimLess - Dual Tone",
           "description": "Square RimLess Round frames with thick profile",
-          "basePrice": 1599,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Gold&Brown",
@@ -2154,19 +2123,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-allergic"]
         },
         {
           "id": "RL-306",
           "name": "Curved Square RimLess - Dual Tone",
           "description": "Square RimLess Round frames with thin profile",
-          "basePrice": 1599,
+          "basePrice": 1999,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Gold&Brown",
@@ -2190,19 +2155,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-allergic"]
         },
         {
           "id": "RL-307",
-          "name": "Unique RimLess - Dual Tone",
+          "name": "Unique RimLess - Superlite Titanium",
           "description": "Unique RimLess Round frames with thin profile",
-          "basePrice": 1599,
+          "basePrice": 3999,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Gold",
@@ -2227,19 +2188,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight ", "Anti-allergic titanium"]
         },
         {
           "id": "RL-308",
-          "name": "Unique RimLess 2- Dual Tone",
+          "name": "Unique RimLess 2- ODYSEY",
           "description": "Unique RimLess Round frames with thin profile",
-          "basePrice": 1599,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 400,
           "variants": [
             {
               "color": "Gold",
@@ -2253,11 +2210,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-allergic"]
         }
       ]
     },
@@ -2268,11 +2221,11 @@
       "products": [
         {
           "id": "RO-401",
-          "name": "Rounded - Dual Tone",
+          "name": "Rounded - 12x ",
           "description": "Rounded frames with thick Fiber profile",
-          "basePrice": 1899,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 500,
           "variants": [
             {
               "color": "TransparentBlack&Greenyellow",
@@ -2287,19 +2240,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-allergic"]
         },
         {
           "id": "RO-402",
-          "name": "Rounded - Matte Single Tone",
+          "name": "Rounded -12x Matte Single Tone",
           "description": "Rounded frames with thick Fiber profile",
-          "basePrice": 1899,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 500,
           "variants": [
             {
               "color": "MatteBrown",
@@ -2324,19 +2273,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-allergic"]
         },
         {
           "id": "RO-403",
-          "name": "Rounded - Transparent Single Tone",
+          "name": "Rounded - 12x Transparent Single Tone",
           "description": "Rounded frames with thick Fiber profile",
-          "basePrice": 1899,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 500,
           "variants": [
             {
               "color": "TransparentYellow",
@@ -2361,19 +2306,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "RO-404",
-          "name": "Rounded - Transparent Dual Tone",
+          "name": "Rounded -  12x Transparent Dual Tone",
           "description": "Rounded frames with thick Fiber profile",
-          "basePrice": 1899,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 500,
           "variants": [
             {
               "color": "Transparent",
@@ -2386,15 +2327,11 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "RO-405",
-          "name": "Rounded - Single Tone Glossy",
+          "name": "Rounded - 12x Single Tone Glossy",
           "description": "Rounded frames with thin Fiber profile",
           "basePrice": 1699,
           "rating": 4,
@@ -2412,19 +2349,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "RO-406",
-          "name": "Rounded - Transparent Dual Tone",
+          "name": "Rounded -12x  Transparent Dual Tone",
           "description": "Rounded frames with thin glossy profile",
-          "basePrice": 1699,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 500,
           "variants": [
             {
               "color": "Black",
@@ -2449,11 +2382,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         }
       ]
     },
@@ -2466,9 +2395,9 @@
           "id": "HS-501",
           "name": "Husler - Transparent Purple",
           "description": "Husler frames with thick Fiber profile",
-          "basePrice": 1899,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "TransparentPurple",
@@ -2481,19 +2410,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "HS-502",
           "name": "Husler - Transparent Yellow",
           "description": "Husler frames with thick Fiber profile",
-          "basePrice": 1899,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "TransparentYellow",
@@ -2506,19 +2431,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "HS-503",
           "name": "Husler - Matte Black",
           "description": "Husler frames with thick Fiber profile",
-          "basePrice": 1899,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -2532,19 +2453,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "HS-504",
           "name": "Husler - Transparent Cream White",
           "description": "Husler frames with thick Fiber profile",
-          "basePrice": 1899,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "TransparentCreamWhite",
@@ -2558,19 +2475,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "HS-505",
           "name": "Husler - Transparent Yellow White",
           "description": "Husler frames with thick Fiber profile",
-          "basePrice": 1899,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "TransparentYellow",
@@ -2584,19 +2497,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "HS-506",
           "name": "Husler - Rich Matte Blue",
           "description": "Husler frames with thick Fiber profile",
-          "basePrice": 2099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "MatteBlue",
@@ -2610,19 +2519,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "HS-507",
           "name": "Husler - Rich Matte Cyan",
           "description": "Husler frames with thick Fiber profile",
-          "basePrice": 2099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "MatteCyan",
@@ -2637,19 +2542,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "HS-508",
           "name": "Husler - Rich Matte Brown",
           "description": "Husler frames with thick Fiber profile",
-          "basePrice": 2099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "MatteBrown",
@@ -2663,11 +2564,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "Anti-reflective coating"]
         }
       ]
     },
@@ -2679,10 +2576,10 @@
         {
           "id": "US-601",
           "name": "Womens - Trending Daily wear",
-          "description": "Unisex Sunglasses with thin metal profile",
+          "description": "Womens Sunglasses with thin sides profile",
           "basePrice": 999,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "BlackZigZag",
@@ -2697,19 +2594,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Polorized", "UV-400 "]
         },
         {
           "id": "US-602",
           "name": "Mens - Trending Daily wear",
-          "description": "Unisex Sunglasses with thin metal profile",
+          "description": "Unisex Sunglasses with thin Sheet profile",
           "basePrice": 999,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "BlackZigZag",
@@ -2723,11 +2616,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "UV-400"]
         },
         {
           "id": "US-603",
@@ -2735,7 +2624,7 @@
           "description": "Unisex Sunglasses with thin metal profile",
           "basePrice": 999,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
               "color": "Gold&Black",
@@ -2749,22 +2638,18 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "UV-400"]
         },
         {
           "id": "US-604",
           "name": "Mens - Trending Daily wear",
-          "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "description": "Unisex Sunglasses with thin Sheet profile",
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
-              "color": "MatWhite",
+              "color": "Matsky blue",
               "colorCode": "#F2F3F4",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0402.jpg?alt=media&token=99e6fa8c-3d82-4363-9f24-f60aef3b60df",
@@ -2786,19 +2671,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Light Weight", "UV-400"]
         },
         {
           "id": "US-605",
           "name": "Mens - Sun Eye Protector",
           "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "basePrice": 1500,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
               "color": "Black",
@@ -2812,7 +2693,7 @@
               "priceModifier": 200
             },
             {
-              "color": "Blue",
+              "color": "Brown",
               "colorCode": "#090979",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0399.jpg?alt=media&token=7ce2c3e3-6948-456d-9cb8-969d65037c18",
@@ -2823,22 +2704,18 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Polorized", "UV-400"]
         },
         {
           "id": "US-606",
           "name": "Mens - Sun Eye Protector",
-          "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "description": "Unisex Sunglasses with thin Sheet profile",
+          "basePrice": 1500,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
-              "color": "Black",
+              "color": "Mirror Coating",
               "colorCode": "#000000",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0406.jpg?alt=media&token=a1568134-ce56-49fc-84bb-1530157fe865",
@@ -2849,23 +2726,19 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Polorized", "UV-400"]
         },
         {
-          "id": "US-607",
-          "name": "Mens - Sun Eye Protector",
+          "id": "US-607 ",
+          "name": "Mens - Fastrack Sun Eye Protector",
           "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "basePrice": 2000,
           "rating": 4,
           "basePriceWithDiscount": 100,
           "variants": [
             {
-              "color": "Black",
-              "colorCode": "#000000",
+              "color": "Green",
+              "colorCode": "#M264BK2V",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0408.jpg?alt=media&token=c3a5b49b-0656-4abc-973a-13d2848e7486",
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0409.jpg?alt=media&token=d825434b-8054-47c5-979c-376f0f295b70"
@@ -2875,19 +2748,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "UV -400", "FASTRACK -cooling"]
         },
         {
           "id": "US-608",
           "name": "Unisex - Sun Eye Protector",
           "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "basePrice": 1500,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
               "color": "BlackZigZag",
@@ -2911,7 +2780,7 @@
         {
           "id": "US-609",
           "name": "Unisex - Sportswear",
-          "description": "Unisex Sunglasses with thin metal profile",
+          "description": "Unisex Sunglasses with thin Sheet profile",
           "basePrice": 999,
           "rating": 4,
           "basePriceWithDiscount": 100,
@@ -2928,19 +2797,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Polarized", "Light Weight"]
         },
         {
           "id": "US-610",
           "name": "Unisex - Unique Daily Wear",
           "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Black",
@@ -2954,22 +2819,18 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "UV-400", "Light Weight"]
         },
         {
           "id": "US-611",
           "name": "Unisex - Trendy",
           "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "basePrice": 1500,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
-              "color": "Gold&Black",
+              "color": "Brown&Black",
               "colorCode": "#FEBA17",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0428.jpg?alt=media&token=6a412dd3-fd68-45e5-9f86-14887ce9b54c",
@@ -2980,19 +2841,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Polarized", "UV-400"]
         },
         {
           "id": "US-612",
           "name": "Unisex - Trendy2",
           "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "basePrice": 1500,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
               "color": "Black",
@@ -3006,22 +2863,18 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Polarized", "UV-400"]
         },
         {
           "id": "US-613",
           "name": "Unisex - Trendy3",
           "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "basePrice": 1500,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
-              "color": "Black",
+              "color": "Green",
               "colorCode": "#000000",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0432.jpg?alt=media&token=bd8a9211-6162-402e-9538-b8facbf1bd6a",
@@ -3032,19 +2885,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Polarized", "UV-400"]
         },
         {
           "id": "US-614",
           "name": "Womes - Trendy",
           "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "basePrice": 1500,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
               "color": "BlackZigZag",
@@ -3058,22 +2907,18 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Polarized", "UV-400"]
         },
         {
           "id": "US-615",
           "name": "Unisex - Matte Finish Trendy4",
           "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "basePrice": 1500,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
-              "color": "BlackZigZag",
+              "color": "GreenZigZag",
               "colorCode": "#000000",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/UNISEX%20SUNGLSSES%2FDSC_0436.jpg?alt=media&token=ebcd7ed6-55d6-4985-b03e-a430f8fa4afd",
@@ -3084,19 +2929,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Polarized", "UV-400"]
         },
         {
           "id": "US-616",
           "name": "Unisex - Sun Eye Protector",
           "description": "Unisex Sunglasses with thin metal profile",
-          "basePrice": 999,
+          "basePrice": 1500,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 250,
           "variants": [
             {
               "color": "Black",
@@ -3110,19 +2951,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "Polarized", "UV-400"]
         },
         {
           "id": "US-616",
           "name": "Unisex - Trendy5",
-          "description": "Unisex Sunglasses with thin metal profile",
+          "description": "Unisex Sunglasses with thin Sheet profile",
           "basePrice": 999,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Black",
@@ -3136,11 +2973,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Trendy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Trendy Look", "UV-400", "Light Weight"]
         }
       ]
     },
@@ -3153,9 +2986,9 @@
           "id": "kd-701",
           "name": "Kids Sunglasses",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "basePrice": 1199,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Black",
@@ -3217,11 +3050,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Polarized", "UV-400"]
         },
         {
           "id": "kd-703",
@@ -3229,7 +3058,7 @@
           "description": "Timeless square frames with thick profile",
           "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -3243,11 +3072,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Polarized", "UV-400"]
         },
         {
           "id": "kd-704",
@@ -3255,7 +3080,7 @@
           "description": "Timeless square frames with thick profile",
           "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Baby Pink",
@@ -3269,19 +3094,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Polarized", "UV-400"]
         },
         {
           "id": "kd-705",
           "name": "Kids Sunglasses",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1299,
+          "basePrice": 799,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Blue",
@@ -3295,7 +3116,7 @@
               "priceModifier": 200
             },
             {
-              "color": "Orange",
+              "color": "Blue",
               "colorCode": "#FF4D00",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0457.jpg?alt=media&token=1db700db-c21f-4682-9e67-64a8b76301f5",
@@ -3306,22 +3127,18 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "UV-400", "Light Weight"]
         },
         {
           "id": "kd-706",
           "name": "Kids Sunglasses ",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1299,
+          "basePrice": 799,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
-              "color": "Orange",
+              "color": "Red",
               "colorCode": "#FF4D00",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0459.jpg?alt=media&token=0071ec74-dcdb-4008-a1e9-22bcd519ac7a",
@@ -3332,11 +3149,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "UV-400", "Light Weight"]
         },
         {
           "id": "kd-707",
@@ -3344,7 +3157,7 @@
           "description": "Timeless square frames with thick profile",
           "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 400,
           "variants": [
             {
               "color": "White",
@@ -3391,11 +3204,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Trendy"]
         },
         {
           "id": "kd-708",
@@ -3403,10 +3212,10 @@
           "description": "Timeless square frames with thick profile",
           "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 400,
           "variants": [
             {
-              "color": "Brown",
+              "color": "red",
               "colorCode": "#f0f2d7",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Frames%2FDSC_0334.jpg?alt=media&token=3f7a8dad-7e85-4410-a701-b612a321564a",
@@ -3450,21 +3259,16 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Trendy"]
         },
         {
           "id": "kd-709",
           "name": "Kids Frames - Dual Tone",
-          "description": "Timeless square frames with thick profile",
+          "description": "Timeless cat eye frames with thick profile",
           "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 400,
           "variants": [
-
             {
               "color": "Black",
               "colorCode": "#000000",
@@ -3488,19 +3292,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "kd-710",
           "name": "Kids Frames - Dual Tone",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1299,
+          "basePrice": 799,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Indigo",
@@ -3558,19 +3358,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "kd-711",
           "name": "Kids Frames - Single Tone",
-          "description": "Timeless square frames with thick profile",
-          "basePrice": 1299,
+          "description": "Timeless cat eye frames with thick profile",
+          "basePrice": 799,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -3606,11 +3402,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Trendy"]
         }
       ]
     },
@@ -3623,9 +3415,9 @@
           "id": "CE-801",
           "name": "Cat Eye Frames",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Gold",
@@ -3650,22 +3442,18 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Trendy"]
         },
         {
           "id": "CE-802",
           "name": "Cat Eye Frames",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
-              "color": "Silver",
+              "color": "Light Green",
               "colorCode": "#FFFFFF00",
               "images": [
                 "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0170.jpg?alt=media&token=9480637a-6081-49d1-806c-b0a568549e86",
@@ -3687,19 +3475,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Trendy"]
         },
         {
           "id": "CE-803",
           "name": "Cat Eye Frames - Side ZigZag",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -3713,19 +3497,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Trendy"]
         },
         {
           "id": "CE-804",
           "name": "Cat Eye Frames",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Silver",
@@ -3739,19 +3519,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Trendy"]
         },
         {
           "id": "CE-805",
           "name": "Cat Eye Frames",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Transparent",
@@ -3765,19 +3541,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "CE-806",
           "name": "Cat Eye Frames",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Black",
@@ -3791,19 +3563,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Trendy"]
         },
         {
           "id": "CE-807",
           "name": "Cat Eye Frames - Dual Tone",
-          "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "description": "Timeless cat eye frames with thick profile",
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "TransparentBlack",
@@ -3817,19 +3585,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Anti-reflective coating"]
         },
         {
           "id": "CE-808",
           "name": "Cat Eye Frames - Dual Tone MilkWhite",
-          "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "description": "Timeless cat eye frames with thick profile",
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "TransparentCreamWhite",
@@ -3843,19 +3607,15 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Trendy"]
         },
         {
           "id": "CE-808",
           "name": "Cat Eye Frames - Single Tone",
-          "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "description": "Timeless Cat eye frames with thick profile",
+          "basePrice": 1299,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 300,
           "variants": [
             {
               "color": "Gold&Black",
@@ -3869,11 +3629,7 @@
               "priceModifier": 200
             }
           ],
-          "features": [
-            "Glossy Look",
-            "Magnetic sunglasses clip-on",
-            "Anti-reflective coating"
-          ]
+          "features": ["Glossy Look", "Light Weight", "Trendy"]
         }
       ]
     },
@@ -3886,9 +3642,9 @@
           "id": "kd-701",
           "name": "computer glasses",
           "description": "Timeless square frames with thick profile",
-          "basePrice": 1099,
+          "basePrice": 1499,
           "rating": 4,
-          "basePriceWithDiscount": 100,
+          "basePriceWithDiscount": 200,
           "variants": [
             {
               "color": "Black",
@@ -3926,7 +3682,7 @@
           ],
           "features": [
             "Glossy Look",
-            "Magnetic sunglasses clip-on",
+            "with blue block lenses",
             "Anti-reflective coating"
           ]
         }

@@ -17,6 +17,7 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { TrackOrderComponent } from './components/track-order/track-order.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guard/admin.guard';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 const routes: Routes = [
   {
@@ -36,10 +37,11 @@ const routes: Routes = [
       { path: 'buying-guide', component: BuyingGuideComponent },
       { path: 'know-more-about-us', component: KnowMoreAboutUsComponent },
       { path: 'feedback', component: FeedbackFormComponent },
-      { path: 'payment', component: PaymentProcessComponent },
+      { path: 'payment-success', component: PaymentProcessComponent },
       { path: 'account', component: AccountPageComponent },
       { path: 'cart', component: CartPageComponent },
-      { path: 'my-orders', component: MyOrdersComponent },
+      { path: 'user-orders', component: MyOrdersComponent },
+      { path: 'order-details/:orderId', component: OrderDetailsComponent },
       {
         path: 'track-order/:orderId',
         component: TrackOrderComponent
