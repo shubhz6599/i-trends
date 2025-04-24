@@ -50,7 +50,8 @@ export class AuthComponent implements OnInit {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      adminCode: ['']
     });
 
     this.forgotPasswordForm = this.fb.group({
@@ -220,7 +221,8 @@ export class AuthComponent implements OnInit {
     if (this.loginForm.valid) {
       const data = {
         email: this.loginForm.value.email,
-        password: this.loginForm.value.password
+        password: this.loginForm.value.password,
+        adminCode:this.loginForm.value.adminCode
       };
       this.isLoading = true;
 
