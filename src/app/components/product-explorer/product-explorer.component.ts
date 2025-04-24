@@ -8,6 +8,7 @@ import { ViewportScroller } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 declare var Razorpay: any;
+declare var bootstrap: any;
 interface Variant {
   color: string;
   colorCode: string;
@@ -68,7 +69,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   selectedQuantity: any = "Select Quantity";
   quantityOptions: any[] = ["Select Quantity", 1, 2, 3, 4, 5];
   imageLoaded: boolean = false;
-  paymentMsg:string = ''
+  paymentMsg: string = '';
   loadingMessages = [
     "Carrots are healthy for eyes!",
     "Did you know: Blinking helps keep eyes moist",
@@ -174,6 +175,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   isAllProductsView: boolean = false;
   searchQueryFromHomePageNav: string = '';
   currentCategoryImage: string = '';
+  alertMessage: any='';
+  alertType: string ='';
   constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private sharedStateService: SharedStateService, private viewportScroller: ViewportScroller, private authService: AuthService) {
   }
 
@@ -390,7 +393,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.showDiscountPercent = false;
     this.showFinalPrice = false;
     this.updateAvailableColorsForProduct();
-    this.sharedStateService.setDetailViewVisible(true);
+    this.sharedStateService.setDetailViewVisible(false);
     setTimeout(() => {
       this.startPriceAnimation();
     }, 1000);
@@ -549,7 +552,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   filterByRating(rating: number) {
 
     if (!this.selectedFilters.find((filter: any) => filter.label === `${rating} ★ & Up`)) {
-      this.selectedFilters.push({ label: `${rating} ★ & Up`, value: rating });
+      this.selectedFilters.push({ label:`${rating} ★ & Up`, value: rating });
     }
   }
 
@@ -648,6 +651,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
 
 
+
     // Close filter panel
     this.toggleFilterPanel();
   }
@@ -669,18 +673,63 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   // Apply filters and close the filter panel
+  popoverMessage: string = 'You are not logged in, Please Log in to process further, Redirecting To Login Page Please Wait';
   openModal(): void {
-    const lensModal = document.getElementById('lensModal');
-    if (lensModal) {
-      const modalInstance = new (window as any).bootstrap.Modal(lensModal);
-      modalInstance.show(); // Show the modal
+    let jwt = localStorage.getItem('jwtToken')
+    let user:any = localStorage.getItem('user');
+    user = JSON.parse(user)
+    console.log(jwt, user);
+    console.log(user.address);
+    if ((jwt == null || jwt == undefined) && (user == null || user == undefined) || (user.address == undefined)) {
 
-      // Apply fade-in effect to backdrop (optional, handled via CSS)
-      const backdrop = document.querySelector('.modal-backdrop');
-      if (backdrop) {
-        backdrop.classList.add('fade');
+      if((user.address == null || user.address == undefined)){
+        const button = document.querySelector('.customBtn') as HTMLElement;
+        this.popoverMessage = 'Address & Other Details Not Verified. Please Verify through Account Page. Please Wait Navigating You To Account Page';
+        const popover = new (window as any).bootstrap.Popover(button, {
+          content: this.popoverMessage,
+          placement: 'top',
+          trigger: 'manual', // Trigger manually
+        });
+        popover.show();
+        setTimeout(() => {
+          popover.hide();
+        }, 3000);
+        setTimeout(() => {
+          this.router.navigate(['/account'])
+        }, 3000);
+      }else{
+      const button = document.querySelector('.customBtn') as HTMLElement;
+      this.popoverMessage = 'You are not logged in, Please Log in to process further, Redirecting To Login Page Please Wait';
+      const popover = new (window as any).bootstrap.Popover(button, {
+        content: this.popoverMessage,
+        placement: 'top',
+        trigger: 'manual', // Trigger manually
+      });
+      popover.show();
+
+      // Hide popover after 3 seconds
+      setTimeout(() => {
+        popover.hide();
+      }, 3000);
+      setTimeout(() => {
+        this.router.navigate(['/auth'])
+      }, 3000);
+    }
+    } else {
+      const lensModal = document.getElementById('lensModal');
+      if (lensModal) {
+        const modalInstance = new (window as any).bootstrap.Modal(lensModal);
+        modalInstance.show(); // Show the modal
+
+        // Apply fade-in effect to backdrop (optional, handled via CSS)
+        // const backdrop = document.querySelector('.modal-backdrop');
+        // if (backdrop) {
+        //   backdrop.classList.add('fade');
+        // }
       }
     }
+
+
   }
 
 
@@ -761,42 +810,61 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   hideModal(): void {
     const lensModal = document.getElementById('lensModal');
     if (lensModal) {
+      // Get the Bootstrap modal instance
       const modalInstance = new (window as any).bootstrap.Modal(lensModal);
-      modalInstance.hide(); // Trigger Bootstrap's hide functionality
 
-      // Delay removal for transition effect
+      // Hide the modal programmatically
+      modalInstance.hide();
+
+      // Remove the backdrop immediately
       setTimeout(() => {
-        const backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) {
-          backdrop.remove(); // Remove the backdrop after animation completes
-        }
-      }, 300); // Match the transition duration in your CSS (0.3s)
+        const backdrops = document.querySelectorAll('.modal-backdrop');
+        backdrops.forEach((backdrop) => backdrop.remove());
+
+        // Remove modal-open class from the body to enable scrolling
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = ''; // Reset overflow styling
+      }, 300); // Match the modal transition duration
     }
   }
 
   AddToCart() {
-    let req = {
-      productId: this.selectedProduct?.id,
-      name: this.selectedProduct?.name,
-      quantity: 1,
-      img: this.selectedVariant.images[0],
-      variant: this.selectedVariant?.color,
-      actualPrice: this.selectedProduct?.basePrice,
-      discountedPrice: this.getFinalPriceDigits().join(''),
-      ratings: '4.5',
-      description: this.selectedProduct?.description
+    if (this.selection.mainOption && this.selection.subOption && this.selectedProduct) {
+      let price = this.prices[this.selection.subOption] + this.selectedProduct?.basePrice - this.selectedProduct?.basePriceWithDiscount
+      // Prepare product data for Step 3 display
+      const productData = {
+        name: this.selectedProduct?.name,
+        variant: this.selectedVariant?.color,
+        quantity: 1,
+        price: price,
+        imageUrl: this.selectedVariant?.images[0],
+        ...this.selection,
+        productId: this.selectedProduct?.id,
+        description: this.selectedProduct?.description
+      };
+      this.isLoading = true;
+      this.authService.addToCart(productData).subscribe({
+        next: (res) => {
+          this.isLoading = false;
+            this.showAlert('Product added to cart', 'success');
+            this.hideModal()
+            this.router.navigate(['/'])
+        },
+        error: (err) => {
+          this.showAlert(err.error.message, 'danger');
+          this.isLoading = false;
+        }
+      });
     }
-    this.isLoading = true;
-    this.authService.addToCart(req).subscribe({
-      next: (res) => {
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.isLoading = false;
-      }
-    });
   }
 
+  showAlert(message: string, type: string): void {
+    this.alertMessage = message;
+    this.alertType = `alert-${type}`; // Bootstrap classes: alert-success, alert-danger
+    setTimeout(() => {
+      this.alertMessage = null; // Clear alert after 3 seconds
+    }, 3000);
+  }
 
   initiatePayment(items: any[], amount: number) {
     this.isLoading = true;

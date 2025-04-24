@@ -79,6 +79,77 @@
         />
       </div>
 
+      <!-- Address Section -->
+<div class="form-group mb-4">
+  <label for="street">Street</label>
+  <input
+    type="text"
+    id="street"
+    formControlName="street"
+    class="form-control"
+    [ngClass]="{ 'is-invalid': accountForm.get('street')?.invalid && accountForm.get('street')?.touched }"
+  />
+  <div *ngIf="accountForm.get('street')?.invalid && accountForm.get('street')?.touched" class="invalid-feedback">
+    <small>Street is required.</small>
+  </div>
+</div>
+
+<div class="form-group mb-4">
+  <label for="landmark">Landmark</label>
+  <input
+    type="text"
+    id="landmark"
+    formControlName="landmark"
+    class="form-control"
+    [ngClass]="{ 'is-invalid': accountForm.get('landmark')?.invalid && accountForm.get('landmark')?.touched }"
+  />
+  <div *ngIf="accountForm.get('landmark')?.invalid && accountForm.get('landmark')?.touched" class="invalid-feedback">
+    <small>Landmark is required.</small>
+  </div>
+</div>
+
+<div class="form-group mb-4">
+  <label for="city">City</label>
+  <input
+    type="text"
+    id="city"
+    formControlName="city"
+    class="form-control"
+    [ngClass]="{ 'is-invalid': accountForm.get('city')?.invalid && accountForm.get('city')?.touched }"
+  />
+  <div *ngIf="accountForm.get('city')?.invalid && accountForm.get('city')?.touched" class="invalid-feedback">
+    <small>City is required.</small>
+  </div>
+</div>
+
+<div class="form-group mb-4">
+  <label for="state">State</label>
+  <input
+    type="text"
+    id="state"
+    formControlName="state"
+    class="form-control"
+    [ngClass]="{ 'is-invalid': accountForm.get('state')?.invalid && accountForm.get('state')?.touched }"
+  />
+  <div *ngIf="accountForm.get('state')?.invalid && accountForm.get('state')?.touched" class="invalid-feedback">
+    <small>State is required.</small>
+  </div>
+</div>
+
+<div class="form-group mb-4">
+  <label for="pincode">Pincode</label>
+  <input
+    type="text"
+    id="pincode"
+    formControlName="pincode"
+    class="form-control"
+    [ngClass]="{ 'is-invalid': accountForm.get('pincode')?.invalid && accountForm.get('pincode')?.touched }"
+  />
+  <div *ngIf="accountForm.get('pincode')?.invalid && accountForm.get('pincode')?.touched" class="invalid-feedback">
+    <small>Pincode must be a valid 6-digit number.</small>
+  </div>
+</div>
+
       <!-- Email Verified Section -->
       <div class="form-group mb-4 email-verified-status">
         <label>Email Verified</label>

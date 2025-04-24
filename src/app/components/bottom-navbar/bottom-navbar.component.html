@@ -2,7 +2,7 @@
   <div class="bottom-nav">
     <!-- Home -->
     <input type="radio" name="radio" value="1" id="tab-1" checked />
-    <label class="icon home-icon" for="tab-1" routerLink="/home" routerLinkActive="active">
+    <label class="icon home-icon" for="tab-1" routerLink="/" routerLinkActive="active">
       <i class="bi bi-house"></i>
       <span class="nav-text">Home</span>
     </label>
@@ -29,18 +29,20 @@
     </label>
 
 
-    <!-- EyeWears -->
-    <input type="radio" name="radio" value="3" id="tab-3" />
-    <label class="icon eyewear-icon" for="tab-3" routerLink="/category/all-products" routerLinkActive="active">
-      <i class="bi bi-eye"></i>
-      <span class="nav-text">EyeWears</span>
-    </label>
+
 
     <!-- Cart -->
-    <input disabled type="radio" name="radio" value="4" id="tab-4" />
+    <input  type="radio" name="radio" value="4" id="tab-4" />
     <label class="icon cart-icon" for="tab-4" routerLink="/cart" routerLinkActive="active">
       <i class="bi bi-bag"></i>
       <span class="nav-text">Cart</span>
     </label>
+
+     <!-- EyeWears -->
+     <input type="radio" name="radio" value="3" id="tab-3" />
+     <label class="icon logout-icon" for="tab-3" routerLink="/auth" routerLinkActive="active">
+      <i class="bi bi-box-arrow-right"></i>
+       <span class="nav-text">Logout</span>
+     </label>
   </div>
 </div>

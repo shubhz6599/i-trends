@@ -135,7 +135,7 @@ export class AuthComponent implements OnInit {
   onSignupSubmit(): void {
     if (this.signupForm.valid) {
       const data = {
-        name: `${this.signupForm.value.firstName} ${this.signupForm.value.lastName}`, // Concatenate names
+        name:`${this.signupForm.value.firstName} ${this.signupForm.value.lastName}`, // Concatenate names
         email: this.signupForm.value.email,
         password: this.signupForm.value.password,
         dob: this.signupForm.value.dob,
@@ -175,8 +175,8 @@ export class AuthComponent implements OnInit {
           localStorage.setItem('jwtToken', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
           this.isLoading = false;
-          this.showAlert('Email verified successfully!', 'success');
-          this.router.navigate(['/'])
+          this.showAlert('Email verified successfully! You can Login Now', 'success');
+          // this.router.navigate(['/'])
 
         },
         (error) => {

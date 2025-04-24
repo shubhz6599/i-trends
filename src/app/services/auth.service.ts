@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -62,7 +62,7 @@ export class AuthService {
   getMyFeedback(): Observable<any> {
     const token = localStorage.getItem('jwtToken'); // Fetch token from localStorage
     const headers = { Authorization: `Bearer ${token}` };
-    return this.http.get(`${this.userbaseUrl}/feedback`, { headers });
+    return this.http.get(`${this.baseUrl}/feedback`, { headers });
   }
 
   //cart
@@ -93,7 +93,7 @@ export class AuthService {
     const headers = { Authorization: `Bearer ${token}` };
     return this.http.post(`${this.userbaseUrl}/order`, orderData, { headers });
   }
-  confirmOrder(payload:any): Observable<any> {
+  confirmOrder(payload: any): Observable<any> {
     const token = localStorage.getItem('jwtToken');
     const headers = { Authorization: `Bearer ${token}` };
     return this.http.post(`${this.userbaseUrl}/confirm-order`, payload, { headers });
@@ -142,12 +142,52 @@ export class AuthService {
   updateStatus(orderId: string, status: string): Observable<any> {
     const token = localStorage.getItem('jwtToken');
     const headers = { Authorization: `Bearer ${token}` };
-    return this.http.put(`${this.userbaseUrl}/order-status/${orderId}`, { status }, { headers });
+    return this.http.put(`${this.baseUrl}/order-status/${orderId}`, { status }, { headers });
+  }
+  getAdminOrders(paramsObj: any) {
+    const token = localStorage.getItem('jwtToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    let params = new HttpParams();
+    for (const key in paramsObj) {
+      if (paramsObj[key]) {
+        params = params.set(key, paramsObj[key]);
+      }
+    }
+    return this.http.get(`${this.baseUrl}/orders`, { headers, params });
   }
 
-  exportOrders(): void {
-    window.open(`${this.userbaseUrl}/export`, '_blank');
+  exportOrdersToExcel(paramsObj: any) {
+    const token = localStorage.getItem('jwtToken');
+    const headers = new Headers({
+      Authorization: `Bearer ${token}`
+    });
+    const query = new URLSearchParams(paramsObj).toString();
+    const url = `${this.baseUrl}/export?${query}`;
+
+    fetch(url, {
+      method: 'GET',
+      headers
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to download');
+        }
+        return response.blob();
+      })
+      .then(blob => {
+        const a = document.createElement('a');
+        const url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = `Orders_${Date.now()}.xlsx`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      })
+      .catch(err => {
+        console.error('Download error:', err);
+      });
   }
+
 
   createOrder(orderData: { items: any[]; amount: number }): Observable<any> {
     const token = localStorage.getItem('jwtToken'); // Fetch token from localStorage

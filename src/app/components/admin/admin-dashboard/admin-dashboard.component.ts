@@ -10,6 +10,11 @@ export class AdminDashboardComponent implements OnInit {
   orders: any[] = [];
   isLoading = false;
 
+  // Filters
+  searchTerm = '';
+  fromDate = '';
+  toDate = '';
+
   constructor(private orderService: AuthService) {}
 
   ngOnInit() {
@@ -18,9 +23,14 @@ export class AdminDashboardComponent implements OnInit {
 
   getOrders() {
     this.isLoading = true;
-    this.orderService.getOrders().subscribe({
+    const params: any = {};
+    if (this.searchTerm) params.search = this.searchTerm;
+    if (this.fromDate) params.from = this.fromDate;
+    if (this.toDate) params.to = this.toDate;
+
+    this.orderService.getAdminOrders(params).subscribe({
       next: (res: any) => {
-        this.orders = res.map((order: any) => ({
+        this.orders = res.orders.map((order: any) => ({
           ...order,
           selectedStatus: order.status
         }));
@@ -33,7 +43,16 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+  clearFilters() {
+    this.searchTerm = '';
+    this.fromDate = '';
+    this.toDate = '';
+    this.getOrders();
+  }
+
   updateStatus(order: any) {
+    console.log(order);
+
     const status = order.selectedStatus;
     this.orderService.updateStatus(order._id, status).subscribe({
       next: () => this.getOrders(),
@@ -42,6 +61,11 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   exportToExcel() {
-    this.orderService.exportOrders();
+    const params: any = {};
+    if (this.searchTerm) params.search = this.searchTerm;
+    if (this.fromDate) params.from = this.fromDate;
+    if (this.toDate) params.to = this.toDate;
+
+    this.orderService.exportOrdersToExcel(params);
   }
 }

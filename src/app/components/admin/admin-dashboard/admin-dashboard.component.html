@@ -1,5 +1,22 @@
 <h2 class="h4 fw-bold mb-4">📦 Admin Dashboard - Orders</h2>
 
+<!-- Filters -->
+<div class="row g-3 mb-3">
+  <div class="col-md-3">
+    <input type="text" class="form-control" placeholder="Search by Email/Phone/UserId" [(ngModel)]="searchTerm" />
+  </div>
+  <div class="col-md-3">
+    <input type="date" class="form-control" [(ngModel)]="fromDate" />
+  </div>
+  <div class="col-md-3">
+    <input type="date" class="form-control" [(ngModel)]="toDate" />
+  </div>
+  <div class="col-md-3 d-flex">
+    <button class="btn btn-primary me-2" (click)="getOrders()">Search</button>
+    <button class="btn btn-outline-secondary" (click)="clearFilters()">Reset</button>
+  </div>
+</div>
+
 <button class="btn btn-success mb-3" (click)="exportToExcel()">📥 Export Orders</button>
 
 <div *ngIf="isLoading" class="alert alert-info text-center">Loading orders...</div>

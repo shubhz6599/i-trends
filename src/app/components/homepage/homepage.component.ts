@@ -129,8 +129,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       (response) => {
         this.isLoading = false;
 
-        if (response.length > 0) {
-          this.cartCount = response.length;
+        if (response.cart.items.length > 0) {
+          this.cartCount = response.cart.items.length;
         } else {
           this.cartCount = 0;
         }

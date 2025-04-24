@@ -34,6 +34,11 @@ export class AccountPageComponent implements OnInit {
       dob: ['', [Validators.required]],
       phone: new FormControl({ value: '', disabled: true }, [Validators.pattern('^[0-9]{10}$')]),
       email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
+      street: ['', [Validators.required]],
+      landmark: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]],
     });
     this.otpForm = this.formBuilder.group({
       otp: ['', Validators.required],
@@ -61,6 +66,11 @@ export class AccountPageComponent implements OnInit {
           dob: formattedDobForInput,
           phone: user.phone || '',
           email: user.email,
+          street: user.address?.street || '',
+          landmark: user.address?.landmark || '',
+          city: user.address?.city || '',
+          state: user.address?.state || '',
+          pincode: user.address?.pincode || '',
         });
 
         this.isEmailVerified = user.isOtpVerified; // Check email verification status

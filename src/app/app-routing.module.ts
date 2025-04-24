@@ -25,7 +25,12 @@ const routes: Routes = [
     component: AuthComponent
   },
   {
+    path: 'reset-password/:token',
+    component: AuthComponent
+  },
+  {
     path: '',
+    component: LayoutComponent,
     children: [
       { path: '', component: HomepageComponent }, // loads when /home
       { path: 'error', component: ErrorPageComponent },

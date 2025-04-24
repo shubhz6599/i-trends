@@ -27,8 +27,8 @@ export class CartPageComponent implements OnInit {
       (response) => {
         this.isLoading = false;
 
-        if (response.length > 0) {
-          this.cartItems = response;
+        if (response.cart.items.length > 0) {
+          this.cartItems = response.cart.items;
           this.calculateTotal();
         } else {
           this.cartItems = [];
@@ -85,11 +85,12 @@ export class CartPageComponent implements OnInit {
     //       this.isLoading =false
     //     }
     //   );
+
     const productData = {
       name: this.cartItems[0].name,
       variant: this.cartItems[0].color,
       quantity: this.cartItems[0].quantity,
-      price: this.cartItems[0].discountedPrice,
+      price: this.totalAmount,
       imageUrl: this.cartItems[0].img,
       productId: this.cartItems[0].productId
     };
