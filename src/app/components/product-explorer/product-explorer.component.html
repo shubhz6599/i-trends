@@ -4,7 +4,6 @@
     <p class="mt-3" *ngIf="paymentMsg">{{paymentMsg}}</p>
   </div>
 
-  <!-- Category Header -->
   <div class="category-header d-flex align-items-center" *ngIf="!selectedProduct">
     <button class="backBtn me-3" (click)="goBack()">
       <i class="bi bi-arrow-left"></i>
@@ -17,17 +16,13 @@
     <button class="filter-btn ms-auto btn" (click)="toggleFilterPanel()">Filters</button>
   </div>
 
-  <!-- Button to Open Filter -->
 
-  <!-- Filter Panel -->
-  <!-- Filter Panel -->
   <div class="filter-panel" [class.active]="isFilterPanelVisible">
     <div class="filter-header">
       <h3>Filters</h3>
       <button type="button" class="btn-close" aria-label="Close" (click)="toggleFilterPanel()"></button>
     </div>
 
-    <!-- Selected Filters Section -->
     <div class="selected-filters" *ngIf="selectedFilters.length > 0">
       <h4>Selected Filters</h4>
       <div class="selected-filter" *ngFor="let filter of selectedFilters; let i = index">
@@ -36,7 +31,6 @@
       </div>
     </div>
 
-    <!-- Sort Section -->
     <div class="filter-section">
       <h4>Sort</h4>
       <select id="sortSelect" [(ngModel)]="selectedSort" (change)="sortProducts(selectedSort)">
@@ -45,8 +39,6 @@
       </select>
     </div>
 
-    <!-- Other Filter Sections -->
-    <!-- Color Section -->
     <div class="filter-section">
       <h4>Color Options</h4>
       <div class="color-options">
@@ -57,7 +49,6 @@
       </div>
     </div>
 
-    <!-- Price Range Section -->
     <div class="filter-section">
       <h4>Price Range</h4>
       <div *ngFor="let range of priceRanges" class="price-option" (click)="filterByPrice(range)">
@@ -65,7 +56,6 @@
       </div>
     </div>
 
-    <!-- Ratings Section -->
     <div class="filter-section">
       <h4>Ratings</h4>
       <div *ngFor="let rating of ratingsOptions" class="rating-option" (click)="filterByRating(rating)">
@@ -73,7 +63,6 @@
       </div>
     </div>
 
-    <!-- Discounts Section -->
     <div class="filter-section">
       <h4>Discounts</h4>
       <div *ngFor="let discount of discountOptions" class="discount-option" (click)="filterByDiscount(discount)">
@@ -81,7 +70,6 @@
       </div>
     </div>
 
-    <!-- Search Button -->
     <button class="btn btn-outline-secondary w-100" (click)="resetFilters()">Clear all filters</button>
     <button class="search-btn" (click)="applyFilters()">Search</button>
   </div>
@@ -89,7 +77,6 @@
   <div class="search-result-message" *ngIf="searchResultMessage && !selectedProduct">
     <p class="professional-message">{{ searchResultMessage }}</p>
   </div>
-  <!-- Main Content -->
   <div class="main-content" [class.hidden]="isFilterPanelVisible">
     <div class="category-banner" *ngIf="currentCategoryImage && !selectedProduct" >
       <div class="category-banner-content">
@@ -100,7 +87,6 @@
         />
       </div>
     </div>
-    <!-- Product Grid Section -->
     <div class="products-grid" *ngIf="!selectedProduct">
       <div class="product-card" *ngFor="let product of filteredProducts; let i = index"
         (click)="selectProduct(product)">
@@ -169,7 +155,6 @@
             [style.backgroundColor]="variant.colorCode" (click)="selectVariant(variant)"></span>
         </div>
 
-        <!-- Updated Price Display Section -->
         <div class="price-display" #priceDisplay>
           <div *ngIf="showOriginalPrice" class="price-step" @priceStep>
             <span class="original-price">
@@ -200,47 +185,28 @@
         [attr.data-bs-toggle]="'popover'"
         [attr.data-bs-content]="popoverMessage"
         [attr.data-bs-placement]="'top'">Select Lenses</button>
-        <!-- <button class="btn btn-secondary" (click)="AddToCart()">Add To Cart</button> -->
-
-        <!-- <button class="customBtn" [disabled]="!selectedVariant.inStock" (click)="openModal()">
-          {{selectedVariant.inStock ? 'Buy Now' : 'Out of Stock'}}
-        </button> -->
       </div>
     </div>
     </div>
   </div>
 </div>
 
-
-
-<!-- Bootstrap Modal -->
 <div class="modal fade" id="lensModal" tabindex="-1" aria-labelledby="lensModalLabel" style="overflow-y: auto;" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content">
-      <!-- Modal Header -->
       <div class="modal-header">
-
-        <!-- Back Button -->
         <button *ngIf="currentStep > 1" class="btn btn-back" (click)="goBackForToggle()">
           <i class="bi bi-chevron-left"></i>
           <span class="visually-hidden">Back</span>
         </button>
-
-        <!-- Title -->
         <h5 class="modal-title">
           {{ currentStep === 1 ? 'Select Lens Type' : currentStep === 2 ? 'Choose Package' : 'Order Summary' }}
         </h5>
-
-        <!-- Close Button -->
         <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
-      <!-- Modal Body -->
       <div class="modal-body">
-
-        <!-- Step Navigation -->
         <div class="steps">
           <div *ngFor="let step of steps; let index = index" class="step"
                [class.active]="currentStep === index + 1"
@@ -250,11 +216,8 @@
           </div>
           <div class="step-connector"></div>
         </div>
-
-        <!-- Step 1: Select Lenses -->
         <div *ngIf="currentStep === 1" class="step-content slide-in">
           <ul class="list-group lens-options">
-            <!-- Single Vision -->
             <li class="list-group-item lens-option"
                 (click)="selectMainOption('single-vision')"
                 [class.active]="selection.mainOption === 'single-vision'">
@@ -272,7 +235,6 @@
               </div>
             </li>
 
-            <!-- Bifocal/Progressive -->
             <li class="list-group-item lens-option"
                 (click)="selectMainOption('bifocal')"
                 [class.active]="selection.mainOption === 'bifocal'">
@@ -290,7 +252,6 @@
               </div>
             </li>
 
-            <!-- Zero Power -->
             <li class="list-group-item lens-option"
                 (click)="selectMainOption('zero-power')"
                 [class.active]="selection.mainOption === 'zero-power'">
@@ -308,7 +269,6 @@
               </div>
             </li>
 
-            <!-- Frame Only -->
             <li class="list-group-item lens-option"
                 (click)="selectFrameOnly()"
                 [class.active]="selection.mainOption === 'frame-only'">
@@ -328,7 +288,6 @@
           </ul>
         </div>
 
-        <!-- Step 2: Sub-options -->
         <div *ngIf="currentStep === 2" class="step-content slide-in">
           <div class="row">
             <div class="col-md-6 mb-4" *ngFor="let option of subOptions">
@@ -355,13 +314,11 @@
           </div>
         </div>
 
-        <!-- Step 3: Order Review -->
         <div *ngIf="currentStep === 3" class="step-content slide-in">
           <h5 class="section-title">Review Your Order</h5>
 
           <div class="order-summary-card">
             <div class="row g-0">
-              <!-- Product Image -->
               <div class="col-md-4 position-relative">
                 <img [src]="selectedVariant.images[0]" class="product-image"
                   alt="{{ selectedProduct?.name || 'Product Image' }}" />
@@ -370,7 +327,6 @@
                 </div>
               </div>
 
-              <!-- Product Details -->
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="product-title">{{ selectedProduct?.name }}</h5>
@@ -426,7 +382,6 @@
                       <i class="bi bi-arrow-right"></i>
                     </button>
                   </div>
-
                 </div>
               </div>
             </div>

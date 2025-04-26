@@ -1,27 +1,19 @@
 <nav class="navbar">
-  <!-- Mobile Header -->
   <div class="mobile-header">
-    <!-- Hamburger Menu -->
     <button class="hamburger" (click)="toggleMenu()" aria-label="Menu">
       <i class="bi" [ngClass]="{'bi-list': !isMenuOpen, 'bi-x': isMenuOpen}"></i>
     </button>
-
-    <!-- Logo -->
     <a  class="logo">
       <img src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2FitrendsLogo.png?alt=media&token=827321c7-4251-42c3-8a0f-8e3d3481a453"
            alt="i-trends Logo" loading="lazy">
     </a>
-
-    <!-- Cart Icon -->
     <div class="cart-icon">
       <i class="bi bi-cart3" routerLink="/cart"></i>
       <span class="cart-count">{{cartCount}}</span>
     </div>
   </div>
 
-  <!-- Navigation Content -->
   <div class="nav-content" [class.active]="isMenuOpen">
-    <!-- Search Bar -->
     <div class="search-container">
       <input type="text" placeholder="Search for products..." class="search-bar"  [(ngModel)]="searchQuery">
       <button class="search-button"  (click)="onSearch()">
@@ -29,7 +21,6 @@
       </button>
     </div>
 
-    <!-- Menu Items -->
     <ul class="menu-items">
       <li>
         <a >
@@ -86,22 +77,17 @@
     </div>
 
     <div class="contentBx">
-
       <h2>Trendy Specs</h2>
       <p>Stylish, durable eyewear designed to match your personality and make a statement.</p>
-
       <div class="offer">
         <marquee id="exclusiveOffer" scrollamount="3" onmouseover="this.stop()" onmouseout="this.start()">
           <strong>*Exclusive Offer:</strong> Get a free lens upgrade with your first purchase!
         </marquee>
       </div>
-
-
-
     </div>
-
   </div>
 </div>
+
 <div class="trans2 hover-trigger" (click)="navigate('bumper-discount')">
   <article>
     <figure class="">
@@ -110,7 +96,7 @@
         alt="">
       <div class="cardDetails">
         <h4>Specs at prices  that you <span style="color: #e74c3c; font-weight: bold;">never expected</span></h4>
-        <button class="trans2Btn" (click)="navigate('bumper-discount')">Buy Now</button>
+        <button class="trans2Btn">Buy Now</button>
       </div>
     </figure>
   </article>
@@ -121,7 +107,6 @@
     <span>Shop by</span> <strong>Category</strong>
   </h2>
   <div class="card" *ngFor="let image of images; let i = index">
-    <!-- Placeholder that shows until both images are loaded -->
     <div class="image-flipper" [ngClass]="{ 'visible': image.loaded, 'hidden': !image.loaded }">
       <img [src]="image.front" class="flipper-image front" (load)="onImageLoaded(i, 'front')" alt="Square Frame Front">
       <img [src]="image.back" class="flipper-image back" (load)="onImageLoaded(i, 'back')" alt="Square Frame Back">
@@ -134,27 +119,20 @@
 
 
 <div class="maincardDoctor hover-trigger">
-
   <div class="imgBox">
     <img src="https://srmglobalhospitals.com/wp-content/uploads/2023/12/Dr.-Venkatesan.png" alt="Specs" class="mouse"
       loading="lazy">
   </div>
-
   <div class="contentBox">
     <h3>Book Experts Consultation</h3>
     <h3>At Just</h3>
     <h2 class="price">650<span>*</span></h2>
     <a routerLink="/book-online-consultation" class="buy">Book Now</a>
   </div>
-
 </div>
 
 
-
-
-
 <div class="main">
-  <!-- <div *ngIf="isLoading" class="placeholder"></div> -->
   <img src="https://static1.lenskart.com/media/desktop/img/Oct22/kiara/Refresh-Banner-Web.gif" loading="lazy">
 </div>
 <div class="main hidedesktop">
@@ -162,8 +140,6 @@
     src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Feyeglasses-wear-VEED.gif?alt=media&token=8e740f32-7434-4ca6-afdf-8244f1135d72"
     loading="lazy">
 </div>
-
-
 
 
 <div class="banner">
@@ -195,13 +171,9 @@
   </div>
 </div>
 
-
-
 <div class="main-img">
   <img src="https://static1.lenskart.com/media/desktop/img/Aug21/25-Aug/LK-AIR-Banner.jpg">
 </div>
-
-
 
 <div class="footer">
   <div class="list">
@@ -225,8 +197,4 @@
       </li>
     </ul>
   </div>
-
-
-
-
 </div>

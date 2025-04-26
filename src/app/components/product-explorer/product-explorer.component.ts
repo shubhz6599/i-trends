@@ -18,7 +18,6 @@ interface Variant {
   imagesLoaded: boolean;
 }
 
-// In your product.model.ts or where you define interfaces
 interface Product {
   id: string;
   name: string;
@@ -82,23 +81,22 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     "The cornea is the only tissue in the body without blood vessels",
     "Eye exercises can help reduce digital eye strain"
   ];
-
   currentLoadingMessage = this.loadingMessages[0];
   isLoading: boolean = true;
   categoryId: string | any = '';
   products: any[] = [];
   cachedImages: string[] = [];
   showImgPlaceholder: boolean = true;
-  showDiscount: boolean = true; // Set to false if you don't want to show discount
+  showDiscount: boolean = true;
   discountPercent: number = 20;
   priceAnimationTriggered = false;
   showOriginalPrice = false;
   showDiscountPercent = false;
   showFinalPrice = false;
-  selectedSort: string = ''; // Tracks selected sorting option
-  selectedPriceRange: any = null; // Tracks selected price range
-  selectedRating: number | null = null; // Tracks selected rating
-  selectedDiscount: number | null = null; // Tracks selected discount
+  selectedSort: string = '';
+  selectedPriceRange: any = null;
+  selectedRating: number | null = null;
+  selectedDiscount: number | null = null;
   isFilterPanelVisible: boolean = false;
   priceRanges = [
     { label: '₹500 - ₹1000', min: 500, max: 1000 },
@@ -107,20 +105,17 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     { label: '₹2000 - ₹2500', min: 2000, max: 2500 },
     { label: '₹2500 - ₹3000', min: 2500, max: 3000 },
   ];
-  ratingsOptions = [4, 3, 2, 1]; // Ratings options: 4 stars & up, 3 stars & up, etc.
+  ratingsOptions = [4, 3, 2, 1];
   discountOptions = [10, 20, 30, 40, 50];
   selectedFilters: { label: string, value: any }[] = [];
   searchResultMessage: string = '';
-  currentStep: number = 1; // Tracks the current step (1, 2, or 3)
-  steps = [1, 2, 3]; // Step numbers
-
+  currentStep: number = 1;
+  steps = [1, 2, 3];
   selection = {
     mainOption: '',
     subOption: ''
   };
-
-  subOptions: string[] = []; // Sub-options for the selected main option
-
+  subOptions: string[] = [];
   subOptionsMap: Record<string, string[]> = {
     'single-vision': [
       'Anti-Glare Premium',
@@ -175,10 +170,19 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   isAllProductsView: boolean = false;
   searchQueryFromHomePageNav: string = '';
   currentCategoryImage: string = '';
-  alertMessage: any='';
-  alertType: string ='';
-  constructor(private route: ActivatedRoute, private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private sharedStateService: SharedStateService, private viewportScroller: ViewportScroller, private authService: AuthService) {
-  }
+  alertMessage: any = '';
+  alertType: string = '';
+  private imageLoadTimeout: any;
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private imagePreloader: ImagePreloaderService,
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+    private sharedStateService: SharedStateService,
+    private viewportScroller: ViewportScroller,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -202,86 +206,60 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       this.fetchCategoryImages();
       this.resetSelections();
       this.updateAvailableColors();
-
     });
     this.scrollTop();
   }
+
   scrollTop() {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     })
   }
+
   showBumperDiscountProducts(): void {
     this.isBumperDiscountView = true;
     this.isAllProductsView = false;
-
-    // Flatten all products from all categories and filter by bumperDiscount flag
     this.filteredProducts = this.categories
       .flatMap((category: any) => category.products)
       .filter(product => product.bumperdiscount === true);
-
     this.searchResultMessage = 'Showing all bumper discounted products';
-
   }
 
   showAllProducts(): void {
     this.imagePreloader.preloadAllProductsImages();
     this.isAllProductsView = true;
     this.isBumperDiscountView = false;
-
-    // Flatten all products from all categories
     this.filteredProducts = this.categories.flatMap(category => category.products);
-
     this.searchResultMessage = 'Showing all available products';
     if (this.searchQueryFromHomePageNav != null) {
       this.filteredProducts = this.filteredProducts.filter((product) =>
         product.name.toLowerCase().includes(this.searchQueryFromHomePageNav.toLowerCase())
       );
-
-
-      // this.applyFilters()
     }
   }
   ngAfterViewInit() {
     this.setupScrollListener();
-
   }
 
-
-  @HostListener('window:popstate', ['$event'])
-  onPopState(event: any) {
-    // Reset body styles when modal closes (including via browser back button)
-    document.body.style.overflow = 'auto';
-    document.body.style.paddingRight = '0';
-  }
-
-  manualFixBodyStyles() {
-    // Call this when you open/close the modal programmatically
-    document.body.style.overflow = 'auto';
-    document.body.style.paddingRight = '0';
-  }
   fetchCategoryImages(): void {
-    this.isLoading = true; // Show loader
-    this.cachedImages = this.imagePreloader.getCategoryImages(this.categoryId); // Get cached images
-    this.products = this.getCategoryProducts(); // Load products dynamically
-
-    // If there are uncached images, preload them sequentially
+    this.isLoading = true;
+    this.cachedImages = this.imagePreloader.getCategoryImages(this.categoryId);
+    this.products = this.getCategoryProducts();
     if (this.cachedImages.length < this.products.length) {
       this.imagePreloader.preloadCategoryImages(this.categoryId);
       this.showImgPlaceholder = false;
     }
-
     setTimeout(() => {
-      this.isLoading = false; // Hide loader after images are fetched
-    }, 2000); // Simulate loading delay (adjust based on real data fetching time)
+      this.isLoading = false;
+    }, 2000);
   }
-
 
   getCategoryProducts(): any[] {
     const category = productsData.categories.find((cat) => cat.id === this.categoryId);
     return category?.products || [];
   }
+
   onImageLoad(): void {
     this.imageLoaded = true;
     const randomIndex = Math.floor(Math.random() * this.loadingMessages.length);
@@ -297,38 +275,22 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     return '#ffffff';
   }
 
-  navigateToHome() {
-    const lensModal = document.getElementById('lensModal');
-    this.hideModal()
-    this.router.navigateByUrl('/home');
-  }
-
-  // Add to your component
-  private imageLoadTimeout: any;
-
   setMainImage(imgUrl: string): void {
     this.imageLoaded = false;
     this.currentMainImage = imgUrl;
-
-    // Clear any existing timeout
     if (this.imageLoadTimeout) {
       clearTimeout(this.imageLoadTimeout);
     }
-
-    // Set a timeout (e.g., 10 seconds)
     this.imageLoadTimeout = setTimeout(() => {
       if (!this.imageLoaded) {
         console.warn('Image load timed out:', imgUrl);
-        this.imageLoaded = true; // Give up trying to show loading indicator
-        // Optionally set a fallback image here
+        this.imageLoaded = true;
       }
     }, 10000);
   }
 
-  // Don't forget to clear timeout in ngOnDestroy
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.checkPriceInView.bind(this));
-    // Reset body styles when component is destroyed
     document.body.style.overflow = 'auto';
     document.body.style.paddingRight = '0';
   }
@@ -349,23 +311,16 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   updateAvailableColors(): void {
     let productsToCheck: Product[] = [];
-
     if (this.isBumperDiscountView) {
-      // Get all bumper discount products across all categories
       productsToCheck = this.categories
         .flatMap(category => category.products)
         .filter(product => product.bumperdiscount);
     } else if (this.isAllProductsView) {
-      // Get all products across all categories
       productsToCheck = this.categories.flatMap(category => category.products);
     } else if (this.currentCategory) {
-      // Get products from current category
       productsToCheck = this.currentCategory.products;
     }
-
-    // Collect unique colors with their codes
     const colorsWithCodes: { name: string; colorCode: string }[] = [];
-
     productsToCheck.forEach(product => {
       product.variants.forEach(variant => {
         if (!colorsWithCodes.some(color => color.name === variant.color)) {
@@ -376,11 +331,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         }
       });
     });
-
     this.availableColors = colorsWithCodes;
   }
-
-
 
   selectProduct(product: Product): void {
     this.selectedProduct = product;
@@ -399,8 +351,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     }, 1000);
     this.scrollTop();
   }
-
-
 
   updateAvailableColorsForProduct(): void {
     if (!this.selectedProduct) return;
@@ -425,39 +375,29 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   checkPriceInView(): void {
     if (this.priceAnimationTriggered || !this.priceDisplay) return;
-
     const element = this.priceDisplay.nativeElement;
     const rect = element.getBoundingClientRect();
     const isVisible = (
       rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
       rect.bottom >= 0
     );
-
     if (isVisible) {
       this.priceAnimationTriggered = true;
       this.startPriceAnimation();
     }
   }
 
-
-
   setupScrollListener(): void {
     window.addEventListener('scroll', this.checkPriceInView.bind(this));
-    // Initial check in case price is already visible
     setTimeout(() => this.checkPriceInView(), 500);
   }
 
   startPriceAnimation(): void {
-    // Show original price first
     this.showOriginalPrice = true;
     this.cdr.detectChanges();
-
-    // After 1 second, show discount percent
     setTimeout(() => {
       this.showDiscountPercent = true;
       this.cdr.detectChanges();
-
-      // After another second, hide both and show final price
       setTimeout(() => {
         this.showOriginalPrice = false;
         this.showDiscountPercent = false;
@@ -469,29 +409,26 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   showPriceWithDiscount() {
     this.showDiscount = false;
-    this.cdr.detectChanges(); // Force view to update and detect the change
+    this.cdr.detectChanges();
     setTimeout(() => {
       this.showDiscount = true;
-    }, 10); // Small delay to allow DOM update
+    }, 10);
   }
 
   getFinalPriceDigits(): string[] {
     if (!this.selectedProduct || !this.selectedVariant) return [];
     const price = (this.selectedProduct.basePrice - this.selectedProduct.basePriceWithDiscount).toString();
-
     return price.split('');
   }
 
   getOriginalPrice(): number {
     if (!this.selectedProduct || !this.selectedVariant) return 0;
     return this.selectedProduct.basePrice;
-
   }
 
   selectColor(color: string): void {
     this.selectedColor = color;
     if (!this.selectedProduct) return;
-
     const variant = this.selectedProduct.variants.find(v =>
       v.color === color && v.inStock
     );
@@ -500,27 +437,15 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
-
-  buyNow(): void {
-    if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
-
-
-
-    // Optional: Navigate to checkout
-    // this.router.navigate(['/checkout']);
-  }
-
   onImageLoaded(index: number): void {
     this.ngZone.run(() => {
       const image: any = this.filteredProducts[index].variants[0].images[0];
-      // image.loaded = true;
       this.filteredProducts[index].variants[0].imagesLoaded = true;
     });
     this.cdr.detectChanges()
   }
 
   goBack() {
-    this.hideModal()
     this.router.navigateByUrl('/')
   }
 
@@ -532,27 +457,21 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
-  // Filter products by color
   filterByColor(colorName: string) {
-    // Check if filter is already selected
     if (!this.selectedFilters.find(filter => filter.label === colorName)) {
       this.selectedFilters.push({ label: colorName, value: colorName });
-      // this.applyFilters(); // Apply filters immediately
     }
   }
 
   filterByPrice(priceRange: any) {
-
     if (!this.selectedFilters.find(filter => filter.label === priceRange.label)) {
       this.selectedFilters.push({ label: priceRange.label, value: priceRange });
     }
-
   }
 
   filterByRating(rating: number) {
-
     if (!this.selectedFilters.find((filter: any) => filter.label === `${rating} ★ & Up`)) {
-      this.selectedFilters.push({ label:`${rating} ★ & Up`, value: rating });
+      this.selectedFilters.push({ label: `${rating} ★ & Up`, value: rating });
     }
   }
 
@@ -562,23 +481,18 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
-  // Remove filter from selectedFilters array
   removeFilter(filter: { label: string, value: any }) {
     this.selectedFilters = this.selectedFilters.filter(f => f.label !== filter.label);
-
   }
 
   resetFilters() {
     if (this.currentCategory?.products) this.filteredProducts = this.currentCategory?.products;
     this.searchResultMessage = ''
     this.toggleFilterPanel();
-
   }
-  // Apply filters on search button click
-  applyFilters() {
-    // Start with all products in the current category
-    let filtered: Product[] = [];
 
+  applyFilters() {
+    let filtered: Product[] = [];
     if (this.isBumperDiscountView) {
       filtered = this.categories
         .flatMap(category => category.products)
@@ -588,8 +502,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     } else {
       filtered = [...this.currentCategory?.products || []];
     }
-
-    // Apply color filters
     const colorFilters = this.selectedFilters
       .filter(filter => this.availableColors.some(color => color.name === filter.value))
       .map(filter => filter.value);
@@ -599,12 +511,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         product.variants.some(variant => colorFilters.includes(variant.color))
       );
     }
-
-    // Apply price filters
     const priceFilters = this.selectedFilters
       .filter(filter => this.priceRanges.some(range => range.label === filter.label))
       .map(filter => filter.value);
-
     if (priceFilters.length > 0) {
       filtered = filtered.filter(product =>
         priceFilters.some(range =>
@@ -612,23 +521,17 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         )
       );
     }
-
-    // Apply rating filters (if applicable)
     const ratingFilters = this.selectedFilters
       .filter(filter => filter.label.endsWith('★ & Up'))
       .map(filter => filter.value);
-
     if (ratingFilters.length > 0) {
       filtered = filtered.filter((product: any) =>
         product.rating && ratingFilters.some(rating => product.rating >= rating)
       );
     }
-
-    // Apply discount filters
     const discountFilters = this.selectedFilters
       .filter(filter => filter.label.endsWith('% or more'))
       .map(filter => filter.value);
-
     if (discountFilters.length > 0) {
       filtered = filtered.filter((product: any) =>
         discountFilters.some(discount =>
@@ -636,8 +539,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         )
       );
     }
-
-    // If no products match, prepare related products
     if (filtered.length === 0) {
       this.filteredProducts = this.getRelatedProducts();
       this.searchResultMessage =
@@ -649,46 +550,39 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       this.filteredProducts = filtered;
     }
 
-
-
-
-    // Close filter panel
     this.toggleFilterPanel();
   }
 
   getRelatedProducts(): Product[] {
     return this.currentCategory?.products || [];
   }
-  // Filter products by today's deals
+
   filterTodaysDeals(): void {
     this.filteredProducts = this.currentCategory?.products.filter((product: any) =>
-      product.isTodaysDeal // Assuming isTodaysDeal exists in product data
+      product.isTodaysDeal
     ) || [];
 
   }
 
   toggleFilterPanel(): void {
-
     this.isFilterPanelVisible = !this.isFilterPanelVisible;
   }
 
-  // Apply filters and close the filter panel
   popoverMessage: string = 'You are not logged in, Please Log in to process further, Redirecting To Login Page Please Wait';
   openModal(): void {
     let jwt = localStorage.getItem('jwtToken')
-    let user:any = localStorage.getItem('user');
+    let user: any = localStorage.getItem('user');
     user = JSON.parse(user)
     console.log(jwt, user);
     console.log(user.address);
     if ((jwt == null || jwt == undefined) && (user == null || user == undefined) || (user.address == undefined)) {
-
-      if((user.address == null || user.address == undefined)){
+      if ((user.address == null || user.address == undefined)) {
         const button = document.querySelector('.customBtn') as HTMLElement;
         this.popoverMessage = 'Address & Other Details Not Verified. Please Verify through Account Page. Please Wait Navigating You To Account Page';
         const popover = new (window as any).bootstrap.Popover(button, {
           content: this.popoverMessage,
           placement: 'top',
-          trigger: 'manual', // Trigger manually
+          trigger: 'manual',
         });
         popover.show();
         setTimeout(() => {
@@ -697,61 +591,46 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         setTimeout(() => {
           this.router.navigate(['/account'])
         }, 3000);
-      }else{
-      const button = document.querySelector('.customBtn') as HTMLElement;
-      this.popoverMessage = 'You are not logged in, Please Log in to process further, Redirecting To Login Page Please Wait';
-      const popover = new (window as any).bootstrap.Popover(button, {
-        content: this.popoverMessage,
-        placement: 'top',
-        trigger: 'manual', // Trigger manually
-      });
-      popover.show();
-
-      // Hide popover after 3 seconds
-      setTimeout(() => {
-        popover.hide();
-      }, 3000);
-      setTimeout(() => {
-        this.router.navigate(['/auth'])
-      }, 3000);
-    }
+      } else {
+        const button = document.querySelector('.customBtn') as HTMLElement;
+        this.popoverMessage = 'You are not logged in, Please Log in to process further, Redirecting To Login Page Please Wait';
+        const popover = new (window as any).bootstrap.Popover(button, {
+          content: this.popoverMessage,
+          placement: 'top',
+          trigger: 'manual',
+        });
+        popover.show();
+        setTimeout(() => {
+          popover.hide();
+        }, 3000);
+        setTimeout(() => {
+          this.router.navigate(['/auth'])
+        }, 3000);
+      }
     } else {
       const lensModal = document.getElementById('lensModal');
       if (lensModal) {
         const modalInstance = new (window as any).bootstrap.Modal(lensModal);
-        modalInstance.show(); // Show the modal
-
-        // Apply fade-in effect to backdrop (optional, handled via CSS)
-        // const backdrop = document.querySelector('.modal-backdrop');
-        // if (backdrop) {
-        //   backdrop.classList.add('fade');
-        // }
+        modalInstance.show();
       }
     }
-
-
   }
 
-
-
-  // Handle main option selection
   selectMainOption(option: string): void {
     if (option === 'frame-only') {
       this.selectFrameOnly()
     } else {
       this.selection.mainOption = option;
       this.subOptions = this.subOptionsMap[option];
-      this.currentStep = 2; // Navigate to Step 2
+      this.currentStep = 2;
     }
   }
 
-  // Handle sub-option selection
   selectSubOption(option: string): void {
     this.selection.subOption = option;
-    this.currentStep = 3; // Navigate to Step 3
+    this.currentStep = 3;
   }
 
-  // Go back to the previous step
   goBackForToggle(): void {
     if (this.currentStep > 1) {
       this.currentStep--;
@@ -763,11 +642,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
-  // Proceed to buy
   proceedToBuy(): void {
     if (this.selection.mainOption && this.selection.subOption && this.selectedProduct) {
       let price = this.prices[this.selection.subOption] + this.selectedProduct?.basePrice - this.selectedProduct?.basePriceWithDiscount
-      // Prepare product data for Step 3 display
       const productData = {
         name: this.selectedProduct?.name,
         variant: this.selectedVariant?.color,
@@ -777,61 +654,40 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         ...this.selection,
         productId: this.selectedProduct?.id
       };
-
-
-      this.hideModal();
-      this.manualFixBodyStyles();
       this.initiatePayment([productData], productData.price);
     } else {
       alert('Please make all selections!');
     }
   }
 
-  // Reset the selection after proceeding
   resetSelection(): void {
     this.selection = { mainOption: '', subOption: '' };
     this.currentStep = 1;
   }
+
   selectFrameOnly(): void {
     let price: any = this.getFinalPriceDigits();
     if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
+    console.log(this.selectedProduct);
+    console.log(this.selectedVariant);
+    console.log(price.join(""));
     const productData = {
       name: this.selectedProduct.name,
       variant: this.selectedVariant.color,
-      quantity: this.selectedQuantity,
+      quantity: 1,
       price: price.join(""),
       imageUrl: this.selectedVariant.images[0],
+      productId: this.selectedProduct.id,
+      mainOption: "Frame-Only",
+      subOption: "No Suboption(Only Frame)",
+      description: this.selectedProduct.description
     };
-    this.hideModal();
     this.initiatePayment([productData], productData.price)
-    // this.router.navigate(['/payment'], { state: { product: productData } });
-
-  }
-  hideModal(): void {
-    const lensModal = document.getElementById('lensModal');
-    if (lensModal) {
-      // Get the Bootstrap modal instance
-      const modalInstance = new (window as any).bootstrap.Modal(lensModal);
-
-      // Hide the modal programmatically
-      modalInstance.hide();
-
-      // Remove the backdrop immediately
-      setTimeout(() => {
-        const backdrops = document.querySelectorAll('.modal-backdrop');
-        backdrops.forEach((backdrop) => backdrop.remove());
-
-        // Remove modal-open class from the body to enable scrolling
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = ''; // Reset overflow styling
-      }, 300); // Match the modal transition duration
-    }
   }
 
   AddToCart() {
     if (this.selection.mainOption && this.selection.subOption && this.selectedProduct) {
       let price = this.prices[this.selection.subOption] + this.selectedProduct?.basePrice - this.selectedProduct?.basePriceWithDiscount
-      // Prepare product data for Step 3 display
       const productData = {
         name: this.selectedProduct?.name,
         variant: this.selectedVariant?.color,
@@ -846,9 +702,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       this.authService.addToCart(productData).subscribe({
         next: (res) => {
           this.isLoading = false;
-            this.showAlert('Product added to cart', 'success');
-            this.hideModal()
-            this.router.navigate(['/'])
+          this.showAlert('Product added to cart', 'success');
+          this.router.navigate(['/'])
         },
         error: (err) => {
           this.showAlert(err.error.message, 'danger');
@@ -860,9 +715,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   showAlert(message: string, type: string): void {
     this.alertMessage = message;
-    this.alertType = `alert-${type}`; // Bootstrap classes: alert-success, alert-danger
+    this.alertType =` alert-${type}`;
     setTimeout(() => {
-      this.alertMessage = null; // Clear alert after 3 seconds
+      this.alertMessage = null;
     }, 3000);
   }
 
@@ -873,7 +728,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.authService.createOrder({ items, amount }).subscribe((response: any) => {
       if (response.success) {
         const options = {
-          key: environment.razorPayKey, // Razorpay Key ID
+          key: environment.razorPayKey,
           amount: response.order.amount,
           currency: response.order.currency,
           name: "i-trends",
@@ -892,7 +747,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
           }
         };
         this.isLoading = false;
-
         const razorpay = new Razorpay(options);
         razorpay.open();
       }
@@ -907,22 +761,17 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       razorpay_payment_id: paymentResponse.razorpay_payment_id,
       razorpay_signature: paymentResponse.razorpay_signature,
     };
-
     this.authService.verifyPayment(paymentData).subscribe((response: any) => {
       if (response.success) {
         console.log("Payment verification successful:", response);
-
-        // Trigger order placement
-        this.placeOrder(paymentResponse.razorpay_order_id, paymentResponse.razorpay_payment_id); // Pass verified order_id
+        this.placeOrder(paymentResponse.razorpay_order_id, paymentResponse.razorpay_payment_id);
       } else {
         console.error("Payment verification failed:", response.message);
         this.isLoading = false;
-
       }
     }, (error: any) => {
       console.error("Payment verification failed:", error);
       this.isLoading = false;
-
     });
   }
 
@@ -934,32 +783,29 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         this.getOrderDetailsById(orderId)
       } else {
         this.isLoading = false;
-
         console.error("Order placement failed:", response.message);
       }
     }, (error: any) => {
       this.isLoading = false;
-
       console.error("Order placement failed:", error);
     });
   }
+
   confirmOrder(payload: any, orderId: any) {
     this.authService.confirmOrder(payload).subscribe((response: any) => {
       if (response.success) {
         this.isLoading = false;
-
         this.router.navigate(['/payment-success'], { queryParams: { orderId: orderId } });
       } else {
         console.error("Order placement failed:", response.message);
         this.isLoading = false;
-
       }
     }, (error: any) => {
       console.error("Order placement failed:", error);
       this.isLoading = false;
-
     });
   }
+
   getOrderDetailsById(orderId: any) {
     this.authService.getOrderDetailsById(orderId).subscribe(
       (response: any) => {
@@ -972,15 +818,14 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
           this.confirmOrder(payload, orderId)
         } else {
           this.isLoading = false;
-
           console.error('Failed to fetch order details:', response.message);
         }
       },
       (error: any) => {
         this.isLoading = false;
-
         console.error('Error fetching order details:', error);
       }
     );
   }
+
 }

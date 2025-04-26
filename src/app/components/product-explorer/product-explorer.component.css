@@ -1,12 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
-
 body {
   font-family: 'Raleway', sans-serif;
 }
-
-/* Base Styles */
 .explorer-container {
-  /* max-width: 95%; */
   margin: 0 auto;
   padding: 5px;
   background-color: mintcream;
@@ -14,11 +10,6 @@ body {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   height: 108%;
 }
-
-/* .main-content{
-  margin-bottom: 50%;
-} */
-/* Back Button Styling */
 
 .backBtn {
   background: none;
@@ -71,7 +62,6 @@ body {
   color: #d9534f;
 }
 
-/* Search Button */
 .search-btn {
   width: 100%;
   padding: 10px;
@@ -108,7 +98,6 @@ body {
   position: fixed;
   top: 0;
   right: -100%;
-  /* Initially hidden */
   width: 300px;
   height: 100%;
   background: #fff;
@@ -121,7 +110,6 @@ body {
 
 .filter-panel.active {
   right: 0;
-  /* Slide in when active */
 }
 
 .filter-header {
@@ -228,12 +216,10 @@ body {
   background-color: #2c3e50;
 }
 
-/* Main content hidden when filter is active */
 .main-content.hidden {
   display: none;
 }
 
-/* Button to open the filter panel */
 .open-filter-btn {
   position: fixed;
   bottom: 20px;
@@ -255,18 +241,13 @@ body {
 .backBtn:active,
 .backBtn:hover {
   color: #222f3c;
-  /* Change color on hover */
 }
 
 .backBtn i,
 nav i {
   margin-right: 5px;
-  /* Add spacing between icon and text */
 }
 
-
-
-/* Category Header */
 .category-header {
   display: flex;
   align-items: center;
@@ -320,17 +301,13 @@ nav i {
   }
 }
 
-/* Emphasize the professional message text */
 .search-result-message .professional-message {
   font-weight: 600;
   color: #555;
-  /* line-height: 1.5; */
   font-size: 0.8rem;
   margin-bottom: 0 !important;
 }
 
-
-/* Products Grid */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -338,13 +315,11 @@ nav i {
 }
 
 .product-card {
-  /* background: white; */
   border-radius: 10px;
   overflow: hidden;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
-  /* margin-bottom: 5%; */
 }
 
 .product-card:hover,
@@ -372,7 +347,6 @@ nav i {
   aspect-ratio: 1/1;
   width: 100%;
   height: 100%;
-  /* Match your image container height */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -421,7 +395,6 @@ nav i {
   border: 1px solid #ddd;
 }
 
-/* New Product Detail View Styles */
 .mDiv {
   font-family: "Raleway";
 }
@@ -445,7 +418,6 @@ nav i {
   color: black;
   padding: 20px;
   border-bottom: 2px solid #efefef;
-  /* font-size: 12px; */
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -476,8 +448,6 @@ nav i {
   padding: 5px 25px;
   width: 100%;
 }
-
-/* Add these new styles to your existing CSS */
 
 .price-display {
   min-height: 30px;
@@ -572,7 +542,6 @@ nav i {
   }
 }
 
-/* Animation states */
 .price-step {
   opacity: 0;
   transform: translateY(20px);
@@ -584,14 +553,12 @@ nav i {
   transition: all 0.5s ease-out;
 }
 
-
 .mDiv .card .description h2 {
   color: black;
   margin: 0;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 1.3rem;
-
 }
 
 .mDiv .card .description h4 {
@@ -609,7 +576,6 @@ nav i {
   padding: 20px 0;
   margin: 0;
   font-family: "Roboto Condensed", sans-serif;
-
 }
 
 .mDiv .card .description button {
@@ -623,7 +589,6 @@ nav i {
   margin-right: 5px;
   transition: all 0.3s ease;
   font-family: "Roboto Condensed", sans-serif;
-
 }
 
 .mDiv .card .description button:hover:not(:disabled),
@@ -646,7 +611,6 @@ nav i {
   display: inline-block;
   width: 25px;
   height: 25px;
-  /* margin-right: 10px; */
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid #ddd;
@@ -658,7 +622,6 @@ nav i {
   border: 2px solid #aedaa6;
 }
 
-/* Loading animation styles */
 .image-loading {
   position: fixed;
   top: 0;
@@ -681,7 +644,6 @@ nav i {
   border-top-color: #07f;
   animation: spin 1s ease-in-out infinite;
   margin-bottom: 15px;
-  /* Add space between spinner and message */
 }
 
 @keyframes spin {
@@ -699,7 +661,6 @@ nav i {
   opacity: 1;
 }
 
-/* Image thumbnails styles */
 .image-thumbnails {
   display: flex;
   gap: 10px;
@@ -721,9 +682,7 @@ nav i {
   overflow: hidden;
   border-radius: 4px;
   position: relative;
-  /* Add this */
   background: #f5f5f5;
-  /* Add background for loading state */
 }
 
 .thumbnail.active {
@@ -748,15 +707,6 @@ nav i {
   opacity: 1;
 }
 
-/* .image-thumbnails .thumbnail img:not(.loaded) {
-  opacity: 0;
-}
-
-.image-thumbnails .thumbnail img.loaded {
-  opacity: 1;
-} */
-
-/* Image dots navigation */
 .image-dots {
   display: flex;
   justify-content: center;
@@ -776,7 +726,6 @@ nav i {
   background: #07f;
 }
 
-/* Responsive adjustments */
 @media (max-width: 767px) {
   .image-thumbnails {
     justify-content: center;
@@ -788,7 +737,6 @@ nav i {
   }
 }
 
-/* Responsive Design */
 @media (min-width: 768px) {
   .mDiv .card {
     max-width: 650px;
@@ -879,11 +827,9 @@ nav i {
   margin-bottom: 10px !important;
 }
 
-/* Modal header styling */
 .modal {
   transition: transform 0.3s ease-out, opacity 0.3s ease-out;
   overflow-y: auto !important;
-  /* Smooth transition for opening */
 }
 
 .modal-dialog {
@@ -892,7 +838,6 @@ nav i {
   overflow-y: auto;
 }
 
-/* Modal Transition Effects */
 .modal.fade {
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   transform: translateY(-20px);
@@ -913,7 +858,6 @@ nav i {
   opacity: 0.5;
 }
 
-/* Modal Content Styling */
 .modal-content {
   overflow: auto;
   border: none;
@@ -972,7 +916,6 @@ nav i {
   color: #dc3545;
 }
 
-/* Step Indicator */
 .steps {
   display: flex;
   justify-content: center;
@@ -1019,7 +962,6 @@ nav i {
   z-index: 1;
 }
 
-/* Step Content Animation */
 .step-content {
   animation: fadeInUp 0.4s ease-out;
 }
@@ -1036,7 +978,6 @@ nav i {
   }
 }
 
-/* Step 1: Lens Options */
 .lens-options {
   border-radius: 10px;
   overflow: hidden;
@@ -1103,7 +1044,6 @@ nav i {
   color: #2575fc;
 }
 
-/* Step 2: Sub Options */
 .option-card {
   border: none;
   border-radius: 10px;
@@ -1181,7 +1121,6 @@ nav i {
   font-size: 0.95rem;
 }
 
-/* Step 3: Order Review */
 .section-title {
   color: #2c3e50;
   text-align: center;
@@ -1319,7 +1258,6 @@ nav i {
   transform: translateX(3px);
 }
 
-/* Blink Animation */
 @keyframes blink {
   0% {
     opacity: 1;
@@ -1351,9 +1289,6 @@ body.modal-open {
 }
 
 .bumper-discount-badge {
-  /* position: absolute; */
-  /* top: 10px;
-  left: 10px; */
   z-index: 10;
   background: linear-gradient(45deg, #ff6f61, #ffcc00);
   color: #fff;
@@ -1453,7 +1388,6 @@ body.modal-open {
   }
 }
 
-/* Category Banner */
 .category-banner {
   display: flex;
   justify-content: center;
@@ -1462,7 +1396,6 @@ body.modal-open {
   position: relative;
   margin-bottom: 1rem;
   overflow: hidden;
-  /* Prevent overflow during animations */
 }
 
 .category-banner-content {
@@ -1523,7 +1456,6 @@ body.modal-open {
   transform: scale(1.03);
 }
 
-/* Apply animations to banner */
 .category-banner-content:hover .category-image {
   animation: pulse 2s infinite;
 }
@@ -1542,7 +1474,6 @@ body.modal-open {
   animation: fadeIn 1s ease-in-out;
 }
 
-/* Loader */
 .loader-overlay {
   position: fixed;
   top: 0;
@@ -1550,7 +1481,6 @@ body.modal-open {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  /* Semi-transparent overlay */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1579,11 +1509,8 @@ body.modal-open {
 
 .popover {
   background-color: #f8d7da;
-  /* Light red for warning */
   border: 1px solid #f5c6cb;
-  /* Border color */
   color: #721c24;
-  /* Text color */
 }
 
 .popover-header {
