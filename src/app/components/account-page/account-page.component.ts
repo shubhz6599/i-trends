@@ -21,7 +21,7 @@ export class AccountPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -31,7 +31,7 @@ export class AccountPageComponent implements OnInit {
   initializeForm(): void {
     this.accountForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      dob: ['', [Validators.required]],
+      dob: new FormControl({ value: '', disabled: true }),
       phone: new FormControl({ value: '', disabled: true }, [Validators.pattern('^[0-9]{10}$')]),
       email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
       street: ['', [Validators.required]],
@@ -108,6 +108,8 @@ export class AccountPageComponent implements OnInit {
   }
 
   onSubmit(): void {
+
+
     if (this.accountForm.invalid) {
       this.showAlert('Please fix the errors in the form before submitting.', 'danger');
       return;
@@ -118,6 +120,20 @@ export class AccountPageComponent implements OnInit {
       (response) => {
         this.isLoading = false;
         this.showAlert('User details updated successfully!', 'success');
+        let oldUser: any = localStorage.getItem('user');
+        oldUser = JSON.parse(oldUser);
+
+        let address = {
+          city: this.accountForm.get('city')?.value,
+          landmark: this.accountForm.get('landmark')?.value,
+          pincode: this.accountForm.get('pincode')?.value,
+          state: this.accountForm.get('state')?.value,
+          street: this.accountForm.get('street')?.value
+        }
+
+        oldUser.address = address
+        oldUser.name = this.accountForm.get('name')?.value;
+        localStorage.setItem('user', JSON.stringify(oldUser))
       },
       (error) => {
         this.isLoading = false;

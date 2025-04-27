@@ -4,10 +4,7 @@
     <div class="spinner"></div>
   </div>
 
-  <!-- Alert Section -->
-  <div *ngIf="alertMessage" class="alert text-center" [ngClass]="alertType" role="alert">
-    {{ alertMessage }}
-  </div>
+
 
   <!-- Profile Card -->
   <div class="profile-card">
@@ -33,7 +30,7 @@
           class="form-control"
           [ngClass]="{ 'is-invalid': accountForm.get('name')?.invalid }"
         />
-        <div *ngIf="accountForm.get('name')?.invalid" class="invalid-feedback">
+        <div *ngIf="accountForm.get('name')?.invalid && accountForm.get('name')?.touched" class="invalid-feedback">
           <small>Name is required.</small>
         </div>
       </div>
@@ -173,11 +170,18 @@
         </div>
       </div>
 
+      <!-- Alert Section -->
+      <div *ngIf="alertMessage" class="alert text-center" [ngClass]="alertType" role="alert">
+        {{ alertMessage }}
+      </div>
+
       <!-- Buttons -->
       <div class="text-center">
         <button type="submit" class="btn btn-primary">Save Changes</button>
       </div>
     </form>
+
+
   </div>
 
 <div
@@ -222,5 +226,6 @@ aria-hidden="true"
       </form>
     </div>
   </div>
+</div>
 </div>
 </div>

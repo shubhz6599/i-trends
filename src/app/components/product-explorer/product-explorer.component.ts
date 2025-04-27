@@ -238,6 +238,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       );
     }
   }
+  private lensModalInstance: any;
+
   ngAfterViewInit() {
     this.setupScrollListener();
   }
@@ -293,6 +295,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     window.removeEventListener('scroll', this.checkPriceInView.bind(this));
     document.body.style.overflow = 'auto';
     document.body.style.paddingRight = '0';
+    this.hideModal()
   }
 
   resetSelections(): void {
@@ -345,7 +348,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.showDiscountPercent = false;
     this.showFinalPrice = false;
     this.updateAvailableColorsForProduct();
-    this.sharedStateService.setDetailViewVisible(false);
+    this.sharedStateService.setDetailViewVisible(true);
     setTimeout(() => {
       this.startPriceAnimation();
     }, 1000);
@@ -570,44 +573,42 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   popoverMessage: string = 'You are not logged in, Please Log in to process further, Redirecting To Login Page Please Wait';
   openModal(): void {
-    let jwt = localStorage.getItem('jwtToken')
+    let jwt = localStorage.getItem('jwtToken');
     let user: any = localStorage.getItem('user');
-    user = JSON.parse(user)
+    user = user ? JSON.parse(user) : null;
+
     console.log(jwt, user);
-    console.log(user.address);
-    if ((jwt == null || jwt == undefined) && (user == null || user == undefined) || (user.address == undefined)) {
-      if ((user.address == null || user.address == undefined)) {
-        const button = document.querySelector('.customBtn') as HTMLElement;
-        this.popoverMessage = 'Address & Other Details Not Verified. Please Verify through Account Page. Please Wait Navigating You To Account Page';
-        const popover = new (window as any).bootstrap.Popover(button, {
-          content: this.popoverMessage,
-          placement: 'top',
-          trigger: 'manual',
-        });
-        popover.show();
-        setTimeout(() => {
-          popover.hide();
-        }, 3000);
-        setTimeout(() => {
-          this.router.navigate(['/account'])
-        }, 3000);
-      } else {
-        const button = document.querySelector('.customBtn') as HTMLElement;
-        this.popoverMessage = 'You are not logged in, Please Log in to process further, Redirecting To Login Page Please Wait';
-        const popover = new (window as any).bootstrap.Popover(button, {
-          content: this.popoverMessage,
-          placement: 'top',
-          trigger: 'manual',
-        });
-        popover.show();
-        setTimeout(() => {
-          popover.hide();
-        }, 3000);
-        setTimeout(() => {
-          this.router.navigate(['/auth'])
-        }, 3000);
-      }
+
+    if (!jwt || !user) {
+      // If jwt or user is missing → Not Logged In
+      const button = document.querySelector('.customBtn') as HTMLElement;
+      this.popoverMessage = 'You are not logged in. Please log in to continue. Redirecting to Login Page...';
+      const popover = new (window as any).bootstrap.Popover(button, {
+        content: this.popoverMessage,
+        placement: 'top',
+        trigger: 'manual',
+      });
+      popover.show();
+      setTimeout(() => {
+        popover.hide();
+        this.router.navigate(['/auth']);
+      }, 3000);
+    } else if (!user.address || Object.keys(user.address).length === 0) {
+      // If user is logged in but address not filled properly
+      const button = document.querySelector('.customBtn') as HTMLElement;
+      this.popoverMessage = 'Address details are missing. Redirecting to Account Page...';
+      const popover = new (window as any).bootstrap.Popover(button, {
+        content: this.popoverMessage,
+        placement: 'top',
+        trigger: 'manual',
+      });
+      popover.show();
+      setTimeout(() => {
+        popover.hide();
+        this.router.navigate(['/account']);
+      }, 3000);
     } else {
+      // User is logged in and address is filled → Open Lens Selection Modal
       const lensModal = document.getElementById('lensModal');
       if (lensModal) {
         const modalInstance = new (window as any).bootstrap.Modal(lensModal);
@@ -615,6 +616,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       }
     }
   }
+
 
   selectMainOption(option: string): void {
     if (option === 'frame-only') {
@@ -642,6 +644,12 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
+
+  hideModal(){
+    const modalElement = document.getElementById('lensModal');
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    modal?.hide();
+  }
   proceedToBuy(): void {
     if (this.selection.mainOption && this.selection.subOption && this.selectedProduct) {
       let price = this.prices[this.selection.subOption] + this.selectedProduct?.basePrice - this.selectedProduct?.basePriceWithDiscount
@@ -654,6 +662,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         ...this.selection,
         productId: this.selectedProduct?.id
       };
+      this.hideModal()
       this.initiatePayment([productData], productData.price);
     } else {
       alert('Please make all selections!');
@@ -703,7 +712,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         next: (res) => {
           this.isLoading = false;
           this.showAlert('Product added to cart', 'success');
-          this.router.navigate(['/'])
         },
         error: (err) => {
           this.showAlert(err.error.message, 'danger');
