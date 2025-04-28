@@ -217,6 +217,7 @@
 @media (max-width: 768px) {
   .container {
     display: flex;
+    bottom: 90px;
     /* Show bottom navigation on mobile */
   }
 

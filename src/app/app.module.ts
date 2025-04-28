@@ -25,6 +25,7 @@ import { TrackOrderComponent } from './components/track-order/track-order.compon
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { LensDetailsComponent } from './components/lens-details/lens-details.component';
+import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { LensDetailsComponent } from './components/lens-details/lens-details.com
     AdminDashboardComponent,
     OrderDetailsComponent,
     LensDetailsComponent,
+    TopNavbarComponent,
   ],
   imports: [
     BrowserModule,
