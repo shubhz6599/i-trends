@@ -108,9 +108,18 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       frontLoaded: false,
       backLoaded: false,
     },
+    {
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Lenses%2FCJVAWD86_1_lar_1.webp?alt=media&token=ba134290-515b-4355-a4c5-a0c6ba1fbd58',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Lenses%2Fcbicwc86_iconnect-pack-shot_2_8.webp?alt=media&token=c7e02074-27e8-445a-a7ca-bc315b3e8e1e',
+      title: 'Contact Lenses',
+      category: 'Contact Lenses',
+      loaded: false, // Placeholder visibility
+      frontLoaded: false,
+      backLoaded: false,
+    },
   ];
   searchQuery: string = '';
-  constructor(private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef,private authService:AuthService) { }
+  constructor(private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.imagePreloader.lazyLoadHomePageImages();
@@ -200,14 +209,19 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   navigate(categoryId: string): void {
     console.log(54);
 
-    if(categoryId === 'bumper-discount'){
-    this.imagePreloader.preloadBumperDiscountImages(); // Preload selected category images
-    } else if(categoryId === 'all-products'){
+    if (categoryId === 'bumper-discount') {
+      this.imagePreloader.preloadBumperDiscountImages(); // Preload selected category images
+    } else if (categoryId === 'all-products') {
       this.imagePreloader.preloadAllProductsImages(); // Preload all category images
-      }else{
-        this.imagePreloader.preloadCategoryImages(categoryId); // Preload selected category images
-      }
-    this.router.navigateByUrl(`category/${categoryId}`); // Redirect to specific category
+    } else {
+      this.imagePreloader.preloadCategoryImages(categoryId); // Preload selected category images
+    }
+    if(categoryId !== 'Contact Lenses'){
+      this.router.navigateByUrl(`category/${categoryId}`); // Redirect to specific category
+    }else{
+      this.router.navigateByUrl(`/contact-lenses`); // Redirect to specific category
+
+    }
   }
 
 

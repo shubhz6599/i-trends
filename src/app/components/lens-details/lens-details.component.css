@@ -1,0 +1,70 @@
+.container {
+  max-width: 960px;
+}
+
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.main-image {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.main-image:hover {
+  transform: scale(1.05);
+}
+
+.thumbnail-image {
+  max-width: 60px;
+  height: auto;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.thumbnail-image:hover {
+  transform: scale(1.1);
+}
+
+.thumbnail-image.selected {
+  border-color: #007bff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.eye-section {
+  flex: 1 1 45%; /* Ensure each section takes 45% of the width */
+  max-width: 45%; /* Prevent sections from growing too wide */
+}
+
+.error-message {
+  font-size: 12px;
+  color: red;
+  word-wrap: break-word; /* Allow error messages to break */
+  white-space: normal;
+  max-width: 100%; /* Keep the error message within the section */
+  line-height: 1.2;
+  margin-top: 4px;
+}
+
+.btn-sm {
+  padding: 8px 20px;
+  font-size: 14px;
+}
+
+.form-label.small {
+  font-size: 12px;
+}

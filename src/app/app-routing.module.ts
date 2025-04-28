@@ -18,6 +18,7 @@ import { TrackOrderComponent } from './components/track-order/track-order.compon
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guard/admin.guard';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { LensDetailsComponent } from './components/lens-details/lens-details.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,7 @@ const routes: Routes = [
       { path: 'error', component: ErrorPageComponent },
       // { path: 'products/bumper-discount', component: ProductExplorerComponent },
       // { path: 'products/all', component: ProductExplorerComponent },
+      { path: 'contact-lenses', component: LensDetailsComponent },
       { path: 'category/:category', component: ProductExplorerComponent },
       { path: 'category/:category/:searchQuery', component: ProductExplorerComponent },
       { path: 'book-online-consultation', component: OnlineConsultationComponent },

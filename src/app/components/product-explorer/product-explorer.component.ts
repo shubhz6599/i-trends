@@ -88,7 +88,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   cachedImages: string[] = [];
   showImgPlaceholder: boolean = true;
   showDiscount: boolean = true;
-  discountPercent: number = 20;
+  discountPercent: number = 0;
   priceAnimationTriggered = false;
   showOriginalPrice = false;
   showDiscountPercent = false;
@@ -347,6 +347,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.showOriginalPrice = false;
     this.showDiscountPercent = false;
     this.showFinalPrice = false;
+    this.discountPercent = this.calculateDiscountPercentage(product.basePrice,product.basePriceWithDiscount)
     this.updateAvailableColorsForProduct();
     this.sharedStateService.setDetailViewVisible(true);
     setTimeout(() => {
@@ -355,6 +356,14 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.scrollTop();
   }
 
+
+  calculateDiscountPercentage(basePrice: number, discountPrice: number): number {
+    if (basePrice === 0) {
+      throw new Error("Base price cannot be zero.");
+    }
+    const discountPercentage = (discountPrice / basePrice) * 100;
+    return parseFloat(discountPercentage.toFixed(2)); // Round to 2 decimal places
+  }
   updateAvailableColorsForProduct(): void {
     if (!this.selectedProduct) return;
     this.availableColors = this.selectedProduct.variants

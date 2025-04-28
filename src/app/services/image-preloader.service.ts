@@ -45,8 +45,9 @@ export class ImagePreloaderService {
       'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0504.jpg?alt=media&token=63d871aa-a376-46e3-a09e-196315db54ad',
       'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Cat%20Eye%2FDSC_0497.jpg?alt=media&token=ac0bedbc-b243-427b-a25f-49cb6ac270fd',
       'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Metal%2FRound%2FDSC_0094.jpg?alt=media&token=4dd9f9d0-bcaf-4d46-84b2-495f478b66ee',
-      'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Metal%2FRound%2FDSC_0095.jpg?alt=media&token=9ce63975-5692-436b-942b-36ca1f5fa610'
-
+      'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Metal%2FRound%2FDSC_0095.jpg?alt=media&token=9ce63975-5692-436b-942b-36ca1f5fa610',
+ 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Lenses%2FCJVAWD86_1_lar_1.webp?alt=media&token=ba134290-515b-4355-a4c5-a0c6ba1fbd58',
+      'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Lenses%2Fcbicwc86_iconnect-pack-shot_2_8.webp?alt=media&token=c7e02074-27e8-445a-a7ca-bc315b3e8e1e'
 
       // Add other homepage images as required
     ];

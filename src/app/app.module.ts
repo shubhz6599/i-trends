@@ -24,6 +24,7 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { TrackOrderComponent } from './components/track-order/track-order.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { LensDetailsComponent } from './components/lens-details/lens-details.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
     TrackOrderComponent,
     AdminDashboardComponent,
     OrderDetailsComponent,
+    LensDetailsComponent,
   ],
   imports: [
     BrowserModule,

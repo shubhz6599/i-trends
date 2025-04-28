@@ -1,0 +1,125 @@
+<div class="container mt-5">
+  <!-- Card View -->
+  <div *ngIf="!isDetailsView">
+    <div class="row">
+      <h2 class="text-center mb-4">Available Contact Lenses</h2>
+      <!-- Loop through products and display each as a card -->
+      <div class="col-md-4 mb-4" *ngFor="let product of products">
+        <div class="card mb-5 shadow-lg product-card">
+          <img [src]="product.image[0]" class="card-img-top" alt="{{ product.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text text-muted small">{{ product.description | slice:0:100 }}...</p>
+            <p class="card-text"><strong>Price:</strong> ₹ {{ product.price }}</p>
+            <button class="btn btn-primary btn-sm w-100" (click)="viewDetails(product)">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Details View -->
+  <div *ngIf="isDetailsView">
+    <button class="btn btn-secondary mb-4" (click)="goBack()">← Back to Products</button>
+    <div class="card shadow-lg mb-5">
+      <div class="card-body mb-5">
+        <!-- Main Image -->
+        <div class="text-center">
+          <img [src]="selectedImage || selectedProduct.image[0]" class="img-fluid main-image" alt="{{ selectedProduct.name }}">
+        </div>
+
+        <!-- Thumbnails -->
+        <div class="d-flex justify-content-center mt-3">
+          <img
+            *ngFor="let img of selectedProduct.image"
+            [src]="img"
+            class="img-thumbnail thumbnail-image me-2"
+            [class.selected]="img === selectedImage"
+            (click)="changeImage(img)"
+            alt="Thumbnail">
+        </div>
+
+        <!-- Product Description -->
+        <div class="mt-4">
+          <h3 class="text-primary">{{ selectedProduct.name }}</h3>
+          <p class="text-muted">{{ selectedProduct.description }}</p>
+          <p><strong>Price:</strong> ₹ {{ selectedProduct.price }}</p>
+        </div>
+
+        <!-- Form -->
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="mt-4">
+          <h5 class="text-dark mb-3">Enter Power for Both Eyes</h5>
+
+          <!-- Right Eye and Left Eye Sections -->
+          <div class="d-flex justify-content-between align-items-start flex-nowrap">
+            <!-- Right Eye Section -->
+            <div class="eye-section text-start pe-3">
+              <h6 class="text-success mb-2">Right Eye</h6>
+              <div class="mb-2">
+                <label for="rightEyePower" class="form-label small">Power (SPH):</label>
+                <select class="form-select form-select-sm" id="rightEyePower" formControlName="rightEyePower">
+                  <option  value="">Select Right Power</option>
+                  <option *ngFor="let sph of sphOptions" [value]="sph">{{ sph }}</option>
+                </select>
+                <div *ngIf="productForm.get('rightEyePower')?.invalid && productForm.get('rightEyePower')?.touched" class="error-message">
+                  Please select a valid power for the right eye!
+                </div>
+              </div>
+              <div class="mb-2">
+                <label for="rightEyeAxis" class="form-label small">Axis:</label>
+                <select class="form-select form-select-sm" id="rightEyeAxis" formControlName="rightEyeAxis">
+                  <option  value="">Select Right Axis</option>
+                  <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
+                </select>
+                <div *ngIf="productForm.get('rightEyeAxis')?.invalid && productForm.get('rightEyeAxis')?.touched" class="error-message">
+                  Please select a valid axis for the right eye!
+                </div>
+              </div>
+            </div>
+
+            <!-- Left Eye Section -->
+            <div class="eye-section text-start ps-3">
+              <h6 class="text-danger mb-2">Left Eye</h6>
+              <div class="mb-2">
+                <label for="leftEyePower" class="form-label small">Power (SPH):</label>
+                <select class="form-select form-select-sm" id="leftEyePower" formControlName="leftEyePower">
+                  <option  value="">Select Left Power</option>
+                  <option *ngFor="let sph of sphOptions" [value]="sph">{{ sph }}</option>
+                </select>
+                <div *ngIf="productForm.get('leftEyePower')?.invalid && productForm.get('leftEyePower')?.touched" class="error-message">
+                  Please select a valid power for the left eye!
+                </div>
+              </div>
+              <div class="mb-2">
+                <label for="leftEyeAxis" class="form-label small">Axis:</label>
+                <select class="form-select form-select-sm" id="leftEyeAxis" formControlName="leftEyeAxis">
+                  <option  value="">Select Left Axis</option>
+                  <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
+                </select>
+                <div *ngIf="productForm.get('leftEyeAxis')?.invalid && productForm.get('leftEyeAxis')?.touched" class="error-message">
+                  Please select a valid axis for the left eye!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Number of Boxes -->
+          <div class="mt-3">
+            <label for="numberOfBoxes" class="form-label small">Number of Boxes:</label>
+            <select class="form-select form-select-sm" id="numberOfBoxes" formControlName="numberOfBoxes">
+              <option *ngFor="let count of boxesOptions" [value]="count">{{ count }}</option>
+            </select>
+            <div *ngIf="productForm.get('numberOfBoxes')?.invalid && productForm.get('numberOfBoxes')?.touched" class="error-message">
+              Please select a valid number of boxes!
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center mt-4 ">
+            <button type="submit" class="btn btn-success btn-sm w-50" [disabled]="productForm.invalid">Buy Now</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
