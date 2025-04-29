@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="container my-3">
   <!-- Loader -->
   <div *ngIf="isLoading" class="loader-overlay">
     <div class="spinner"></div>
@@ -6,7 +6,7 @@
 
   <!-- Empty Cart Message -->
   <div *ngIf="!isLoading && cartItems.length === 0" class="empty-cart text-center">
-    <h1>Your cart is empty!</h1>
+    <h2>Your cart is empty!</h2>
     <p>Explore our products and add something cool to your cart!</p>
     <div class="animation-container">
       <img
@@ -14,7 +14,7 @@
         alt="Empty Cart"
         class="img-fluid"
       />
-      <button class="btn btn-success btn-lg mt-4" routerLink="/category/all-products">
+      <button class="btn btn-success btn-lg customFont" routerLink="/category/all-products">
         Explore Products
       </button>
     </div>

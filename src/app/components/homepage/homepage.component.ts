@@ -117,6 +117,16 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       frontLoaded: false,
       backLoaded: false,
     },
+    {
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Sports%20%26%20Swimming%2FSoccer-Football-Prescription-Sports-Glasses.jpeg?alt=media&token=faeaf302-75f2-43db-ae27-2259c945b054',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Sports%20%26%20Swimming%2F514CmWROAyL._AC_UY1100_FMwebp_.webp?alt=media&token=79dfbee3-d46f-4314-9191-6e81a54d5efc',
+      title: 'Unisex Sports & Swimming',
+      category: 'Unisex Sports & Swimming',
+      loaded: false, // Placeholder visibility
+      frontLoaded: false,
+      backLoaded: false,
+    }
+
   ];
   searchQuery: string = '';
   constructor(private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private authService: AuthService) { }

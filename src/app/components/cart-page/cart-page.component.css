@@ -115,14 +115,8 @@ button:hover {
   }
 }
 
-/* Empty Cart Section */
-.empty-cart {
-  margin-top: 50px;
-}
-
 .animation-container img {
   animation: bounce 2s infinite;
-  margin-top: 20px;
 }
 
 @keyframes bounce {
@@ -167,4 +161,7 @@ button:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
+.customFont{
+  font-size: 0.8rem;
 }

@@ -296,6 +296,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     document.body.style.overflow = 'auto';
     document.body.style.paddingRight = '0';
     this.hideModal()
+    this.sharedStateService.setDetailViewVisible(false)
   }
 
   resetSelections(): void {

@@ -25,8 +25,7 @@ app-bottom-navbar {
 
 .content-area {
   flex: 1;
-  margin-top: 60px; /* Same as top navbar height */
-  margin-bottom: 100px; /* Same as bottom navbar height */
+  margin-top: 78px;
+  margin-bottom: 0px;
   overflow-y: auto; /* Only router-outlet content will scroll */
-  padding: 1rem 0; /* Optional: inner padding for router-outlet content */
 }

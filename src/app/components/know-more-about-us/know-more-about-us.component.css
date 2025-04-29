@@ -1,38 +1,120 @@
+/* Overall Container */
 .about-us-container {
   padding: 20px;
   max-width: 800px;
   margin: auto;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
+  background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.about-us-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Title Styling */
 .about-us-container h1 {
-  font-size: 2.0rem;
+  font-size: 2.5rem;
   color: #2c3e50;
   margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+  animation: slideInDown 1s ease-out;
 }
 
+/* Subheadings */
 .about-us-container h2 {
   font-size: 1.8rem;
   color: #34495e;
   margin-top: 30px;
+  position: relative;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e74c3c;
 }
 
+/* Paragraph Styling */
 .about-us-container p {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.8;
   margin-bottom: 20px;
+  color: #555;
+  text-align: justify;
+  animation: fadeIn 1.5s ease;
 }
 
+/* List Styling */
 .about-us-container ul {
   list-style-type: disc;
   padding-left: 20px;
+  animation: fadeIn 1.5s ease;
 }
 
 .about-us-container li {
   margin-bottom: 10px;
+  color: #555;
+  font-size: 1.1rem;
 }
 
+/* Highlighted Text */
 .about-us-container strong {
   color: #e74c3c;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-us-container {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  .about-us-container h1 {
+    font-size: 2rem;
+  }
+
+  .about-us-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-us-container p,
+  .about-us-container li {
+    font-size: 1rem;
+  }
+}
+
+/* Animations */
+@keyframes slideInDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-title {
+  animation: slideInDown 1s ease-out;
+}
+
+.animate-fade {
+  animation: fadeIn 1.5s ease;
+}
+
+.animate-list {
+  animation: fadeIn 1.5s ease;
 }
