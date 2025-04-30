@@ -70,8 +70,8 @@
       </div>
     </div>
 
-    <button class="btn btn-outline-secondary w-100" (click)="resetFilters()">Clear all filters</button>
-    <button class="search-btn" (click)="applyFilters()">Search</button>
+    <button class="btn btn-outline-secondary customResetBtn w-100" (click)="resetFilters()">Clear all filters</button>
+    <button class="btn-primary" (click)="applyFilters()">Search</button>
   </div>
 
   <div class="search-result-message" *ngIf="searchResultMessage && !selectedProduct">
@@ -240,7 +240,7 @@
                 [class.active]="selection.mainOption === 'bifocal'">
               <div class="option-content">
                 <div class="option-icon">
-                  <i class="bi bi-glasses"></i>
+                  <i class="bi bi-eyeglasses"></i>
                 </div>
                 <div class="option-text">
                   <h5>Bifocal/Progressive</h5>
@@ -371,15 +371,15 @@
                     </div>
                   </div>
                   <div class="proceed-btn-container">
-                    <button class="btn cart-btn blink-animation" (click)="AddToCart()">
+                    <button class="btn cart-btn" (click)="AddToCart()">
                       <span>Add To Cart</span>
-                      <i class="bi bi-arrow-right"></i>
+                      <!-- <i class="bi bi-cart-plus"></i> -->
                     </button>
                   </div>
                   <div class="proceed-btn-container">
-                    <button class="btn proceed-btn blink-animation" (click)="proceedToBuy()">
+                    <button class="btn proceed-btn" (click)="proceedToBuy()">
                       <span>Proceed to Buy</span>
-                      <i class="bi bi-arrow-right"></i>
+                      <!-- <i class="bi bi-arrow-right-circle"></i> -->
                     </button>
                   </div>
                 </div>

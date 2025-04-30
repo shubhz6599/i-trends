@@ -32,4 +32,19 @@ export class MyOrdersComponent  implements OnInit{
   viewOrderDetails(orderId: string): void {
     this.router.navigate(['/order-details', orderId]);
   }
+
+  getStatusColor(status: string): string {
+    console.log(status);
+
+    switch (status.toLowerCase()) {
+      case 'deliveryday':
+        return '#f6c23e'; // Yellow
+      case 'processing':
+        return '#28a745'; // Green
+      case 'cancelled':
+        return '#dc3545'; // Red
+      default:
+        return '#6c757d'; // Gray
+    }
+  }
 }

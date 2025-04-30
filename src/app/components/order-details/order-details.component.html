@@ -1,34 +1,52 @@
 <div class="order-details-container">
-  <button class="btn btn-secondary" routerLink="/user-orders">Back</button>
-  <h1>Order Details</h1>
+  <div class="header-bar">
+    <button class="btn btn-back" routerLink="/user-orders">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <h1>Order Details</h1>
+  </div>
 
-  <div *ngIf="!orderDetails">
+  <div *ngIf="!orderDetails" class="loading">
     <p>Loading...</p>
   </div>
 
   <div *ngIf="orderDetails">
-    <h2>Order ID: {{ orderId }}</h2>
+    <div class="section">
+      <h2>Order ID: {{ orderId }}</h2>
+    </div>
 
-    <h3>User Information</h3>
-    <p><strong>Name:</strong> {{ orderDetails.user.name }}</p>
-    <p><strong>Email:</strong> {{ orderDetails.user.email }}</p>
-    <p><strong>Phone:</strong> {{ orderDetails.user.phone }}</p>
-    <p><strong>Address:</strong> {{ orderDetails.user.address.street}}{{orderDetails.user.address.landmark }}  {{orderDetails.user.address.city }}  {{orderDetails.user.address.state }}   {{orderDetails.user.address.pincode }}</p>
+    <div class="section">
+      <h3>User Information</h3>
+      <ul class="user-info">
+        <li><strong>Name:</strong> {{ orderDetails.user.name }}</li>
+        <li><strong>Email:</strong> {{ orderDetails.user.email }}</li>
+        <li><strong>Phone:</strong> {{ orderDetails.user.mobile }}</li>
+        <li><strong>Address:</strong> {{ orderDetails.user.address.street }}, {{ orderDetails.user.address.landmark }}, {{ orderDetails.user.address.city }}, {{ orderDetails.user.address.state }}, {{ orderDetails.user.address.pincode }}</li>
+      </ul>
+    </div>
 
-    <h3>Products</h3>
-    <div *ngFor="let item of orderDetails.items" class="product-item">
-      <img [src]="item.imageUrl || item.img" alt="{{ item.name }}" class="product-image" />
-      <div class="product-info">
-        <h4>{{ item.name }}</h4>
-        <p>{{ item.description }}</p>
-        <p>Price: ₹{{ item.price }}</p>
-        <p>Quantity: {{ item.quantity }}</p>
+    <div class="section">
+      <h3>Products</h3>
+      <div class="products-list">
+        <div *ngFor="let item of orderDetails.items" class="product-item">
+          <img [src]="item.imageUrl || item.img" alt="{{ item.name }}" class="product-image" />
+          <div class="product-info">
+            <h4>{{ item.name }}</h4>
+            <p>{{ item.description }}</p>
+            <p><strong>Price:</strong> ₹{{ item.price }}</p>
+            <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <h3>Payment Details</h3>
-    <p><strong>Total Amount:</strong> ₹{{ orderDetails.totalAmount }}</p>
-    <p><strong>Payment ID:</strong> {{ orderDetails.paymentId }}</p>
-    <p class="payment-status"><strong>Status:</strong> {{ orderDetails.status }}</p>
+    <div class="section">
+      <h3>Payment Details</h3>
+      <ul class="payment-info">
+        <li><strong>Total Amount:</strong> ₹{{ orderDetails.totalAmount }}</li>
+        <li><strong>Payment ID:</strong> {{ orderDetails.paymentId }}</li>
+        <li class="payment-status"><strong>Status:</strong> {{ orderDetails.status }}</li>
+      </ul>
+    </div>
   </div>
 </div>

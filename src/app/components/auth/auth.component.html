@@ -102,7 +102,10 @@
         </div>
         <div class="mb-3">
           <label for="dob" class="form-label">Date of Birth</label>
-          <input type="date" id="dob" class="form-control" formControlName="dob" />
+          <input type="date" id="dob" class="form-control" formControlName="dob" max="{{ maxDob }}"/>
+          <div *ngIf="signupForm.get('dob')?.errors?.['minAge'] && signupForm.get('dob')?.touched" class="text-danger">
+            You must be at least 18 years old.
+          </div>
         </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>

@@ -1,15 +1,19 @@
 <div class="orders-container">
-  <button class="btn btn-secondary" routerLink="/">Back</button>
-  <h1>Your Orders</h1>
+  <div class="header-bar">
+    <button class="btn btn-back" routerLink="/">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <h1>Your Orders</h1>
+  </div>
 
-  <div *ngIf="orders.length === 0">
+  <div *ngIf="orders.length === 0" class="no-orders">
     <p>No orders found.</p>
   </div>
 
   <div *ngFor="let order of orders" class="order-card">
     <div class="order-header">
-      <span>Order ID: {{ order._id }}</span>
-      <span class="order-status">{{ order.status }}</span>
+      <span>Order ID: <strong>{{ order._id }}</strong></span>
+      <span class="order-status" [ngStyle]="{'color': getStatusColor(order.status)}">{{ order.status }}</span>
     </div>
 
     <div class="products">

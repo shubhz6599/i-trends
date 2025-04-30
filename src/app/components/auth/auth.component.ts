@@ -35,6 +35,8 @@ export class AuthComponent implements OnInit {
   alertType: string | null = null; // Holds the alert type (Bootstrap classes)
   isOtpVerificationMode = false;
   otpVerificationForm: FormGroup;
+  maxDob = new Date(new Date().setFullYear(new Date().getFullYear() - 18)).toISOString().split('T')[0];
+
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -42,7 +44,7 @@ export class AuthComponent implements OnInit {
     this.signupForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: [''],
-      dob: [''],
+      dob: ['', [Validators.required, this.minAgeValidator(18)]],
       email: ['', [Validators.required, Validators.email]],
       mobile: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -79,6 +81,24 @@ export class AuthComponent implements OnInit {
       }
     });
   }
+
+
+  minAgeValidator(minAge: number) {
+    return (control: any) => {
+      const dob = new Date(control.value);
+      const today = new Date();
+
+      const age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      const d = today.getDate() - dob.getDate();
+
+      const isBirthdayPassed = m > 0 || (m === 0 && d >= 0);
+      const isOldEnough = isBirthdayPassed ? age >= minAge : age - 1 >= minAge;
+
+      return isOldEnough ? null : { minAge: { requiredAge: minAge } };
+    };
+  }
+
 
   passwordsMatchValidator(form: FormGroup): { [key: string]: boolean } | null {
     const newPassword = form.get('newPassword')?.value;
@@ -174,10 +194,16 @@ export class AuthComponent implements OnInit {
           console.log('OTP Verified:', response);
           this.isOtpVerificationMode = false; // Exit OTP verification mode after success
           localStorage.setItem('jwtToken', response.token);
-          localStorage.setItem('user', JSON.stringify(response.user));
+          const user = {
+            mobile : response.user.mobile,
+            name : response.user.name,
+            email: response.user.email,
+            dob:response.user.dob
+          }
+          localStorage.setItem('user', JSON.stringify(user));
           this.isLoading = false;
           this.showAlert('Email verified successfully! You can Login Now', 'success');
-          // this.router.navigate(['/'])
+          this.router.navigate(['/'])
 
         },
         (error) => {

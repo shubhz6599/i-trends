@@ -670,7 +670,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         price: price,
         imageUrl: this.selectedVariant?.images[0],
         ...this.selection,
-        productId: this.selectedProduct?.id
+        productId: this.selectedProduct?.id,
+        productType:'specs'
       };
       this.hideModal()
       this.initiatePayment([productData], productData.price);
@@ -699,7 +700,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       productId: this.selectedProduct.id,
       mainOption: "Frame-Only",
       subOption: "No Suboption(Only Frame)",
-      description: this.selectedProduct.description
+      description: this.selectedProduct.description,
+      productType:'specs'
     };
     this.initiatePayment([productData], productData.price)
   }
@@ -715,6 +717,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         imageUrl: this.selectedVariant?.images[0],
         ...this.selection,
         productId: this.selectedProduct?.id,
+        productType:'specs',
         description: this.selectedProduct?.description
       };
       this.isLoading = true;

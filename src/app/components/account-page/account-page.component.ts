@@ -64,7 +64,7 @@ export class AccountPageComponent implements OnInit {
         this.accountForm.patchValue({
           name: user.name,
           dob: formattedDobForInput,
-          phone: user.phone || '',
+          phone: user.mobile,
           email: user.email,
           street: user.address?.street || '',
           landmark: user.address?.landmark || '',
@@ -76,7 +76,7 @@ export class AccountPageComponent implements OnInit {
         this.isEmailVerified = user.isOtpVerified; // Check email verification status
 
         // Enable phone field if it's blank
-        if (!user.phone) {
+        if (!user.mobile) {
           this.accountForm.get('phone')?.enable(); // Dynamically enable the phone field
         }
       },

@@ -1,70 +1,156 @@
+body {
+  font-family: var(--font-primary);
+  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+  color: var(--gray-light);
+  margin: 0;
+  padding: 0;
+}
+
+h2, h3, h5, h6 {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  color: var(--gray-light);
+}
+
 .container {
-  max-width: 960px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.product-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Card Styles */
+.card {
+  background-color: var(--light-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.product-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .card-img-top {
-  height: 200px;
+  height: 260px;
   object-fit: cover;
+  border-bottom: 5px solid var(--primary-color);
+  transition: transform 0.4s ease;
 }
 
-.main-image {
-  max-width: 100%;
-  height: auto;
-  border: 2px solid #007bff;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-.main-image:hover {
+.card-img-top:hover {
   transform: scale(1.05);
 }
 
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 14px;
+  color: var(--gray-dark);
+}
+
+/* Buttons */
+.btn {
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  color: var(--gray-light);
+}
+
+.btn-primary:hover {
+  background: var(--accent-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+  background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+  border: none;
+  color: var(--gray-light);
+}
+
+.btn-secondary:hover {
+  background: var(--danger-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Main Image */
+.main-image {
+  max-width: 100%;
+  height: auto;
+  border: 4px solid var(--primary-color);
+  border-radius: 15px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.main-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Thumbnail Images */
 .thumbnail-image {
-  max-width: 60px;
+  max-width: 70px;
   height: auto;
   cursor: pointer;
   border: 2px solid transparent;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  border-radius: 8px;
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .thumbnail-image:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .thumbnail-image.selected {
-  border-color: #007bff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent-color);
 }
 
+/* Eye Section */
 .eye-section {
-  flex: 1 1 45%; /* Ensure each section takes 45% of the width */
-  max-width: 45%; /* Prevent sections from growing too wide */
+  flex: 1 1 45%;
+  max-width: 45%;
+  background: var(--light-bg);
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Error Message */
 .error-message {
   font-size: 12px;
-  color: red;
-  word-wrap: break-word; /* Allow error messages to break */
-  white-space: normal;
-  max-width: 100%; /* Keep the error message within the section */
-  line-height: 1.2;
+  color: var(--danger-color);
   margin-top: 4px;
 }
 
-.btn-sm {
-  padding: 8px 20px;
+/* Form Labels and Submit Button */
+.form-label {
   font-size: 14px;
+  font-weight: 600;
 }
 
-.form-label.small {
-  font-size: 12px;
+.btn-sm {
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 700;
 }

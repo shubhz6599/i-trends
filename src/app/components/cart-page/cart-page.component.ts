@@ -86,18 +86,22 @@ export class CartPageComponent implements OnInit {
     //     }
     //   );
 
-    const productData = {
-      name: this.cartItems[0].name,
-      variant: this.cartItems[0].color,
-      quantity: this.cartItems[0].quantity,
-      price: this.totalAmount,
-      imageUrl: this.cartItems[0].img,
-      productId: this.cartItems[0].productId
-    };
+    const productData = this.cartItems.map(item => ({
+      name: item.name,
+      variant: item.color, // or item.variant if that's the correct key
+      quantity: item.quantity,
+      price: item.price, // use individual item price instead of totalAmount
+      imageUrl: item.img,
+      productId: item.productId,
+      productType: item.productType,
+      userSelectionDetails: item.userSelectionDetails || null // optional for contact-lens
+    }));
+    const totalAmount = this.cartItems.reduce((sum, item) => {
+      return sum + item.price * item.quantity;
+    }, 0);
 
 
-
-    this.initiatePayment([productData], productData.price);
+    this.initiatePayment(productData, totalAmount);
   }
 
   initiatePayment(items: any[], amount: number) {

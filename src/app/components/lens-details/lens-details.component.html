@@ -1,17 +1,17 @@
-<div class="container mt-5">
+<div class="container">
   <!-- Card View -->
   <div *ngIf="!isDetailsView">
+    <h2 class="text-center text-dark mb-4">Available Contact Lenses</h2>
     <div class="row">
-      <h2 class="text-center mb-4">Available Contact Lenses</h2>
       <!-- Loop through products and display each as a card -->
-      <div class="col-md-4 mb-4" *ngFor="let product of products">
-        <div class="card mb-5 shadow-lg product-card">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of products">
+        <div class="card product-card">
           <img [src]="product.image[0]" class="card-img-top" alt="{{ product.name }}">
           <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text text-muted small">{{ product.description | slice:0:100 }}...</p>
+            <p class="card-text">{{ product.description | slice:0:100 }}...</p>
             <p class="card-text"><strong>Price:</strong> ₹ {{ product.price }}</p>
-            <button class="btn btn-primary btn-sm w-100" (click)="viewDetails(product)">View Details</button>
+            <button class="btn btn-primary btn-sm w-100 mt-3" (click)="viewDetails(product)">View Details</button>
           </div>
         </div>
       </div>
@@ -21,102 +21,141 @@
   <!-- Details View -->
   <div *ngIf="isDetailsView">
     <button class="btn btn-secondary mb-4" (click)="goBack()">← Back to Products</button>
-    <div class="card shadow-lg mb-5">
-      <div class="card-body mb-5">
+    <div class="card shadow-lg">
+      <div class="card-body">
         <!-- Main Image -->
-        <div class="text-center">
-          <img [src]="selectedImage || selectedProduct.image[0]" class="img-fluid main-image" alt="{{ selectedProduct.name }}">
+        <div class="text-center mb-4">
+          <img [src]="selectedImage || selectedProduct.image[0]" class="main-image" alt="{{ selectedProduct.name }}">
         </div>
 
         <!-- Thumbnails -->
-        <div class="d-flex justify-content-center mt-3">
+        <div class="d-flex justify-content-center flex-wrap mb-4">
           <img
             *ngFor="let img of selectedProduct.image"
             [src]="img"
-            class="img-thumbnail thumbnail-image me-2"
+            class="thumbnail-image me-2"
             [class.selected]="img === selectedImage"
             (click)="changeImage(img)"
             alt="Thumbnail">
         </div>
 
-        <!-- Product Description -->
-        <div class="mt-4">
+        <!-- Product Details -->
+        <div class="mb-4 text-center">
           <h3 class="text-primary">{{ selectedProduct.name }}</h3>
-          <p class="text-muted">{{ selectedProduct.description }}</p>
+          <p>{{ selectedProduct.description }}</p>
           <p><strong>Price:</strong> ₹ {{ selectedProduct.price }}</p>
         </div>
 
         <!-- Form -->
-        <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="mt-4">
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
           <h5 class="text-dark mb-3">Enter Power for Both Eyes</h5>
+          <div class="d-flex justify-content-between flex-wrap">
+            <!-- Right Eye -->
+            <div class="eye-section">
+              <h6 class="text-success">Right Eye</h6>
+              <!-- SPH -->
+              <label for="rightEyePowerSPH" class="form-label">Power (SPH):</label>
+              <select
+                class="form-select form-select-sm mb-2"
+                id="rightEyePowerSPH"
+                formControlName="rightEyePowerSPH"
+              >
+                <option value="">Select SPH</option>
+                <option *ngFor="let sph of sphOptions" [value]="sph">{{ sph }}</option>
+              </select>
 
-          <!-- Right Eye and Left Eye Sections -->
-          <div class="d-flex justify-content-between align-items-start flex-nowrap">
-            <!-- Right Eye Section -->
-            <div class="eye-section text-start pe-3">
-              <h6 class="text-success mb-2">Right Eye</h6>
-              <div class="mb-2">
-                <label for="rightEyePower" class="form-label small">Power (SPH):</label>
-                <select class="form-select form-select-sm" id="rightEyePower" formControlName="rightEyePower">
-                  <option  value="">Select Right Power</option>
-                  <option *ngFor="let sph of sphOptions" [value]="sph">{{ sph }}</option>
-                </select>
-                <div *ngIf="productForm.get('rightEyePower')?.invalid && productForm.get('rightEyePower')?.touched" class="error-message">
-                  Please select a valid power for the right eye!
-                </div>
-              </div>
-              <div class="mb-2">
-                <label for="rightEyeAxis" class="form-label small">Axis:</label>
-                <select class="form-select form-select-sm" id="rightEyeAxis" formControlName="rightEyeAxis">
-                  <option  value="">Select Right Axis</option>
-                  <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
-                </select>
-                <div *ngIf="productForm.get('rightEyeAxis')?.invalid && productForm.get('rightEyeAxis')?.touched" class="error-message">
-                  Please select a valid axis for the right eye!
-                </div>
-              </div>
+              <!-- CYL -->
+              <label for="rightEyePowerCYL" class="form-label">Power (CYL):</label>
+              <select
+                class="form-select form-select-sm mb-2"
+                id="rightEyePowerCYL"
+                formControlName="rightEyePowerCYL"
+              >
+                <option value="">Select CYL</option>
+                <option *ngFor="let cyl of cylOptions" [value]="cyl">{{ cyl }}</option>
+              </select>
+
+              <!-- Axis -->
+              <label for="rightEyeAxis" class="form-label">Axis:</label>
+              <select
+                class="form-select form-select-sm mb-2"
+                id="rightEyeAxis"
+                formControlName="rightEyeAxis"
+              >
+                <option value="">Select Axis</option>
+                <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
+              </select>
+
+              <!-- Number of Boxes -->
+              <label for="rightNumberOfBoxes" class="form-label">Number of Boxes:</label>
+              <select
+                class="form-select form-select-sm mb-2"
+                id="rightNumberOfBoxes"
+                formControlName="rightNumberOfBoxes"
+              >
+                <option value="">Select Number of Boxes</option>
+                <option *ngFor="let count of boxesOptions" [value]="count">{{ count }}</option>
+              </select>
             </div>
 
-            <!-- Left Eye Section -->
-            <div class="eye-section text-start ps-3">
-              <h6 class="text-danger mb-2">Left Eye</h6>
-              <div class="mb-2">
-                <label for="leftEyePower" class="form-label small">Power (SPH):</label>
-                <select class="form-select form-select-sm" id="leftEyePower" formControlName="leftEyePower">
-                  <option  value="">Select Left Power</option>
-                  <option *ngFor="let sph of sphOptions" [value]="sph">{{ sph }}</option>
-                </select>
-                <div *ngIf="productForm.get('leftEyePower')?.invalid && productForm.get('leftEyePower')?.touched" class="error-message">
-                  Please select a valid power for the left eye!
-                </div>
-              </div>
-              <div class="mb-2">
-                <label for="leftEyeAxis" class="form-label small">Axis:</label>
-                <select class="form-select form-select-sm" id="leftEyeAxis" formControlName="leftEyeAxis">
-                  <option  value="">Select Left Axis</option>
-                  <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
-                </select>
-                <div *ngIf="productForm.get('leftEyeAxis')?.invalid && productForm.get('leftEyeAxis')?.touched" class="error-message">
-                  Please select a valid axis for the left eye!
-                </div>
-              </div>
-            </div>
-          </div>
+            <!-- Left Eye -->
+            <div class="eye-section">
+              <h6 class="text-danger">Left Eye</h6>
+              <!-- SPH -->
+              <label for="leftEyePowerSPH" class="form-label">Power (SPH):</label>
+              <select
+                class="form-select form-select-sm mb-2"
+                id="leftEyePowerSPH"
+                formControlName="leftEyePowerSPH"
+              >
+                <option value="">Select SPH</option>
+                <option *ngFor="let sph of sphOptions" [value]="sph">{{ sph }}</option>
+              </select>
 
-          <!-- Number of Boxes -->
-          <div class="mt-3">
-            <label for="numberOfBoxes" class="form-label small">Number of Boxes:</label>
-            <select class="form-select form-select-sm" id="numberOfBoxes" formControlName="numberOfBoxes">
-              <option *ngFor="let count of boxesOptions" [value]="count">{{ count }}</option>
-            </select>
-            <div *ngIf="productForm.get('numberOfBoxes')?.invalid && productForm.get('numberOfBoxes')?.touched" class="error-message">
-              Please select a valid number of boxes!
+              <!-- CYL -->
+              <label for="leftEyePowerCYL" class="form-label">Power (CYL):</label>
+              <select
+                class="form-select form-select-sm mb-2"
+                id="leftEyePowerCYL"
+                formControlName="leftEyePowerCYL"
+              >
+                <option value="">Select CYL</option>
+                <option *ngFor="let cyl of cylOptions" [value]="cyl">{{ cyl }}</option>
+              </select>
+
+              <!-- Axis -->
+              <label for="leftEyeAxis" class="form-label">Axis:</label>
+              <select
+                class="form-select form-select-sm mb-2"
+                id="leftEyeAxis"
+                formControlName="leftEyeAxis"
+              >
+                <option value="">Select Axis</option>
+                <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
+              </select>
+
+              <!-- Number of Boxes -->
+              <label for="leftNumberOfBoxes" class="form-label">Number of Boxes:</label>
+              <select
+                class="form-select form-select-sm mb-2"
+                id="leftNumberOfBoxes"
+                formControlName="leftNumberOfBoxes"
+              >
+                <option value="">Select Number of Boxes</option>
+                <option *ngFor="let count of boxesOptions" [value]="count">{{ count }}</option>
+              </select>
             </div>
           </div>
 
           <!-- Submit Button -->
-          <div class="text-center mt-4 ">
-            <button type="submit" class="btn btn-success btn-sm w-50" [disabled]="productForm.invalid">Buy Now</button>
+          <div class="text-center mt-4">
+            <button
+              type="submit"
+              class="btn btn-success btn-sm w-50"
+              [disabled]="productForm.invalid"
+            >
+              Buy Now
+            </button>
           </div>
         </form>
       </div>
