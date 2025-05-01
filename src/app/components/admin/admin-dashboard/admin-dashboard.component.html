@@ -51,7 +51,12 @@
             <th>Email</th>
             <th>Total</th>
             <th>Status</th>
+            <th>Product Type</th>
             <th>Products</th>
+            <th>Main Option</th>
+            <th>Sub Option</th>
+            <th>Quantity</th>
+            <th>Variant</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -65,8 +70,43 @@
             </td>
             <td>
               <ul class="ps-0 mb-0 text-start">
-                <li *ngFor="let item of order.products">
+                <li *ngFor="let item of order.items">
+                  {{ item.productType }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="ps-0 mb-0 text-start">
+                <li *ngFor="let item of order.items">
                   {{ item.name }} × {{ item.quantity }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="ps-0 mb-0 text-start">
+                <li *ngFor="let item of order.items">
+                  {{ item.mainOption }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="ps-0 mb-0 text-start">
+                <li *ngFor="let item of order.items">
+                  {{ item.subOption }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="ps-0 mb-0 text-start">
+                <li *ngFor="let item of order.items">
+                  {{ item.quantity }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="ps-0 mb-0 text-start">
+                <li *ngFor="let item of order.items">
+                  {{ item.variant }}
                 </li>
               </ul>
             </td>
