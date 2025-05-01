@@ -8,6 +8,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AdminDashboardComponent implements OnInit {
   orders: any[] = [];
+  todaysOrders: any[] = [];
+  lastMonthOrders: any[] = [];
+  lastYearOrders: any[] = [];
   isLoading = false;
 
   // Filters
@@ -22,6 +25,8 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   getOrders() {
+    this.isLoading = true;
+
     const params: any = {};
     if (this.searchTerm) params.search = this.searchTerm;
     if (this.fromDate) params.from = this.fromDate; // Add start date filter
@@ -33,10 +38,38 @@ export class AdminDashboardComponent implements OnInit {
           ...order,
           selectedStatus: order.status
         }));
+        this.filterOrders(); // Call filterOrders to compute counts
+        this.isLoading = false;
       },
       error: () => {
         alert('Failed to load orders.');
+        this.isLoading = false;
       }
+    });
+  }
+
+  // Filter Orders into Categories
+  filterOrders() {
+    const today = new Date();
+    const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    const oneYearAgo = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+
+    // Filter today's orders
+    this.todaysOrders = this.orders.filter(order => {
+      const orderDate = new Date(order.createdAt);
+      return orderDate.toDateString() === today.toDateString(); // Match today's date
+    });
+
+    // Filter last month's orders
+    this.lastMonthOrders = this.orders.filter(order => {
+      const orderDate = new Date(order.createdAt);
+      return orderDate >= oneMonthAgo && orderDate <= today;
+    });
+
+    // Filter last year's orders
+    this.lastYearOrders = this.orders.filter(order => {
+      const orderDate = new Date(order.createdAt);
+      return orderDate >= oneYearAgo && orderDate <= today;
     });
   }
 
@@ -72,7 +105,7 @@ export class AdminDashboardComponent implements OnInit {
     const today = new Date();
     this.fromDate = today.toISOString().split('T')[0]; // Start of today
     this.toDate = today.toISOString().split('T')[0];   // End of today
-    this.getOrders();
+    this.orders = [...this.todaysOrders];              // Show only today's orders in the table
   }
 
   // Filter for Last 1 Month Orders
@@ -81,7 +114,7 @@ export class AdminDashboardComponent implements OnInit {
     const oneMonthAgo = new Date(today.setMonth(today.getMonth() - 1));
     this.fromDate = oneMonthAgo.toISOString().split('T')[0]; // Start date (1 month ago)
     this.toDate = new Date().toISOString().split('T')[0];    // End date (today)
-    this.getOrders();
+    this.orders = [...this.lastMonthOrders];                // Show only last month's orders in the table
   }
 
   // Filter for Last 1 Year Orders
@@ -90,6 +123,6 @@ export class AdminDashboardComponent implements OnInit {
     const oneYearAgo = new Date(today.setFullYear(today.getFullYear() - 1));
     this.fromDate = oneYearAgo.toISOString().split('T')[0]; // Start date (1 year ago)
     this.toDate = new Date().toISOString().split('T')[0];   // End date (today)
-    this.getOrders();
+    this.orders = [...this.lastYearOrders];                // Show only last year's orders in the table
   }
 }

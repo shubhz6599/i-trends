@@ -2,16 +2,33 @@
   <!-- Page Title -->
   <h2 class="h4 fw-bold text-primary mb-4">📦 Admin Dashboard - Orders</h2>
 
-  <!-- Filter Buttons -->
-  <div class="row mb-4">
+  <!-- Dashboard Cards -->
+  <div class="row g-4 mb-4">
+    <!-- Today's Orders Card -->
     <div class="col-md-4">
-      <button class="btn btn-primary w-100" (click)="filterTodaysOrders()">Today's Orders</button>
+      <div class="card dashboard-card shadow-sm text-center p-4">
+        <h5 class="fw-bold text-primary">Today's Orders</h5>
+        <p class="display-6 fw-bold text-success">{{ todaysOrders.length }}</p>
+        <button class="btn btn-primary btn-sm mt-3" (click)="filterTodaysOrders()">View Details</button>
+      </div>
     </div>
+
+    <!-- Last 1 Month Orders Card -->
     <div class="col-md-4">
-      <button class="btn btn-primary w-100" (click)="filterLastMonthOrders()">Last 1 Month</button>
+      <div class="card dashboard-card shadow-sm text-center p-4">
+        <h5 class="fw-bold text-primary">Last 1 Month Orders</h5>
+        <p class="display-6 fw-bold text-success">{{ lastMonthOrders.length }}</p>
+        <button class="btn btn-primary btn-sm mt-3" (click)="filterLastMonthOrders()">View Details</button>
+      </div>
     </div>
+
+    <!-- Last 1 Year Orders Card -->
     <div class="col-md-4">
-      <button class="btn btn-primary w-100" (click)="filterLastYearOrders()">Last 1 Year</button>
+      <div class="card dashboard-card shadow-sm text-center p-4">
+        <h5 class="fw-bold text-primary">Last 1 Year Orders</h5>
+        <p class="display-6 fw-bold text-success">{{ lastYearOrders.length }}</p>
+        <button class="btn btn-primary btn-sm mt-3" (click)="filterLastYearOrders()">View Details</button>
+      </div>
     </div>
   </div>
 
@@ -21,49 +38,53 @@
     No orders found.
   </div>
 
-  <!-- Orders Table -->
+  <!-- Scrollable Orders Table -->
   <div *ngIf="orders.length > 0" class="card shadow-sm p-4">
     <h5 class="fw-bold mb-3">Orders</h5>
-    <table class="table table-hover align-middle text-center">
-      <thead class="table-primary">
-        <tr>
-          <th>User</th>
-          <th>Email</th>
-          <th>Total</th>
-          <th>Status</th>
-          <th>Products</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let order of orders">
-          <td class="fw-bold">{{ order.userId?.name }}</td>
-          <td>{{ order.userId?.email }}</td>
-          <td class="text-success fw-bold">₹{{ order.totalAmount }}</td>
-          <td class="text-capitalize">
-            <span class="badge bg-primary">{{ order.status }}</span>
-          </td>
-          <td>
-            <ul class="ps-0 mb-0 text-start">
-              <li *ngFor="let item of order.products">
-                {{ item.name }} × {{ item.quantity }}
-              </li>
-            </ul>
-          </td>
-          <td>
-            <div class="d-flex justify-content-center align-items-center">
-              <select [(ngModel)]="order.selectedStatus" class="form-select form-select-sm me-2 w-auto">
-                <option value="processing">Processing</option>
-                <option value="confirmed">Confirmed</option>
-                <option value="shippedtopune">Shipped to Pune</option>
-                <option value="deliveryday">Out for Delivery</option>
-                <option value="complete">Delivered</option>
-              </select>
-              <button class="btn btn-primary btn-sm" (click)="updateStatus(order)">Update</button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+    <!-- Scrollable Container -->
+    <div class="table-responsive">
+      <table class="table table-hover align-middle text-center">
+        <thead class="table-primary">
+          <tr>
+            <th>User</th>
+            <th>Email</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Products</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td class="fw-bold">{{ order.userId?.name }}</td>
+            <td>{{ order.userId?.email }}</td>
+            <td class="text-success fw-bold">₹{{ order.totalAmount }}</td>
+            <td class="text-capitalize">
+              <span class="badge bg-primary">{{ order.status }}</span>
+            </td>
+            <td>
+              <ul class="ps-0 mb-0 text-start">
+                <li *ngFor="let item of order.products">
+                  {{ item.name }} × {{ item.quantity }}
+                </li>
+              </ul>
+            </td>
+            <td>
+              <div class="d-flex justify-content-center align-items-center">
+                <select [(ngModel)]="order.selectedStatus" class="form-select form-select-sm me-2 w-auto">
+                  <option value="processing">Processing</option>
+                  <option value="confirmed">Confirmed</option>
+                  <option value="shippedtopune">Shipped to Pune</option>
+                  <option value="deliveryday">Out for Delivery</option>
+                  <option value="complete">Delivered</option>
+                </select>
+                <button class="btn btn-primary btn-sm" (click)="updateStatus(order)">Update</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

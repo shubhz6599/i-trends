@@ -37,7 +37,7 @@ export class CartPageComponent implements OnInit {
       (error) => {
         console.error('Error fetching cart items:', error);
         this.uiService.hideLoading();
-        this.uiService.showToast('Error', 'Error fetching cart items')
+        // this.uiService.showToast('Error', 'Error fetching cart items')
       }
     );
   }
