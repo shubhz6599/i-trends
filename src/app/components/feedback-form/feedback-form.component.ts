@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-feedback-form',
@@ -9,11 +10,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class FeedbackFormComponent implements OnInit {
   feedbackForm: FormGroup;
-  confirmationMessage: string | null = null;
   feedbackSubmitted: boolean = false; // Indicates whether feedback has already been submitted
-  isLoading: boolean = true; // Loader for API calls
 
-  constructor(private fb: FormBuilder, private feedbackService: AuthService) {
+  constructor(private fb: FormBuilder, private feedbackService: AuthService, private uiService:UiService) {
     // Initialize the form with FormBuilder
     this.feedbackForm = this.fb.group({
       websiteDesign: new FormControl({ value: '', disabled: false }, Validators.required),
@@ -29,13 +28,13 @@ export class FeedbackFormComponent implements OnInit {
 
   // Fetch existing feedback from the backend
   fetchExistingFeedback(): void {
+    this.uiService.showLoading()
     this.feedbackService.getMyFeedback().subscribe(
-      (feedback) => {
-        this.isLoading = false;
+      (feedback:any) => {
         console.log(feedback);
 
         // If feedback exists, populate the form and disable it
-        if (feedback && feedback.length != 0) {
+        if (feedback && feedback.feedbacks.length != 0) {
           this.feedbackSubmitted = true; // Mark as submitted
           this.feedbackForm.patchValue({
             websiteDesign: feedback[0].message.websiteDesign,
@@ -44,15 +43,19 @@ export class FeedbackFormComponent implements OnInit {
             additionalComments: feedback[0].message.additionalComments || '',
           });
           this.feedbackForm.disable(); // Disable the form fields
-          this.confirmationMessage = 'You have already submitted your feedback. Thank you!';
+          this.uiService.hideLoading();
+          this.uiService.showToast('Feedback Already Submitted', "Hey Chief! You've Already Submitted Feedback.")
         }else{
+          this.uiService.hideLoading();
           this.feedbackForm.enable(); // enable the form fields
           this.feedbackSubmitted = false; // Mark as submitted
 
         }
       },
       (error) => {
-        this.isLoading = false;
+        this.uiService.hideLoading();
+        this.uiService.showToast('Error', "Hey Chief! Error while fetching feedback.")
+
         console.error('Error fetching feedback:', error);
       }
     );
@@ -62,16 +65,18 @@ export class FeedbackFormComponent implements OnInit {
   onSubmit(): void {
     if (this.feedbackForm.valid) {
       const formDetails = this.feedbackForm.value;
-
+this.uiService.showLoading();
       this.feedbackService.submitFeedback(formDetails).subscribe(
         (response) => {
-          this.confirmationMessage = 'Thank you for your valuable feedback! Your opinions help us improve.';
           this.feedbackSubmitted = true; // Mark as submitted
           this.feedbackForm.disable(); // Disable the form fields
+          this.uiService.hideLoading();
+          this.uiService.showToast('Submitted', 'Feedback Submitted Successfully')
         },
         (error) => {
+          this.uiService.hideLoading();
+          this.uiService.showToast('Error', 'Error While Submitting Feedback')
           console.error('Error submitting feedback:', error);
-          this.confirmationMessage = 'An error occurred while submitting your feedback. Please try again.';
         }
       );
     }

@@ -2,6 +2,8 @@ import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@an
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImagePreloaderService } from 'src/app/services/image-preloader.service';
+import { SharedStateService } from 'src/app/services/shared-state.service';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-homepage',
@@ -129,9 +131,14 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
   ];
   searchQuery: string = '';
-  constructor(private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private authService: AuthService) { }
+  constructor(private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private authService: AuthService,
+    private sharedStateService : SharedStateService,
+    private uiService:UiService
+  ) { }
 
   ngOnInit(): void {
+    this.sharedStateService.setDetailViewVisible(false);
+
     this.imagePreloader.lazyLoadHomePageImages();
 
     // this.imagePreloader.preloadCategoryImages('Square');
@@ -142,11 +149,10 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   }
 
   fetchCartItems(): void {
-    this.isLoading = true;
-
+    this.uiService.showLoading()
     this.authService.getCart().subscribe(
       (response) => {
-        this.isLoading = false;
+        this.uiService.hideLoading()
 
         if (response.cart.items.length > 0) {
           this.cartCount = response.cart.items.length;
@@ -155,7 +161,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
         }
       },
       (error) => {
-        this.isLoading = false;
+        this.uiService.hideLoading()
         console.error('Error fetching cart items:', error);
       }
     );

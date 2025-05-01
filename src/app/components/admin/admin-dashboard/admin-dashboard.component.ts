@@ -22,7 +22,6 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   getOrders() {
-    this.isLoading = true;
     const params: any = {};
     if (this.searchTerm) params.search = this.searchTerm;
     if (this.fromDate) params.from = this.fromDate;
@@ -34,10 +33,8 @@ export class AdminDashboardComponent implements OnInit {
           ...order,
           selectedStatus: order.status
         }));
-        this.isLoading = false;
       },
       error: () => {
-        this.isLoading = false;
         alert('Failed to load orders.');
       }
     });

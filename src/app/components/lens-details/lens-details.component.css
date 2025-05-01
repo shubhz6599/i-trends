@@ -1,3 +1,4 @@
+/* Base Styling */
 body {
   font-family: var(--font-primary);
   background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
@@ -153,4 +154,24 @@ h2, h3, h5, h6 {
   padding: 12px 30px;
   font-size: 16px;
   font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .eye-section {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .card-img-top {
+    height: 200px;
+  }
+
+  .btn-sm {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  .card{
+    margin-bottom: 10%;
+  }
 }

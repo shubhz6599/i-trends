@@ -7,6 +7,7 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 import { ViewportScroller } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { UiService } from 'src/app/services/ui.service';
 declare var Razorpay: any;
 declare var bootstrap: any;
 interface Variant {
@@ -181,7 +182,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     private cdr: ChangeDetectorRef,
     private sharedStateService: SharedStateService,
     private viewportScroller: ViewportScroller,
-    private authService: AuthService
+    private authService: AuthService,
+    public uiService: UiService
   ) { }
 
   ngOnInit(): void {
@@ -245,7 +247,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   fetchCategoryImages(): void {
-    this.isLoading = true;
     this.cachedImages = this.imagePreloader.getCategoryImages(this.categoryId);
     this.products = this.getCategoryProducts();
     if (this.cachedImages.length < this.products.length) {
@@ -253,7 +254,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       this.showImgPlaceholder = false;
     }
     setTimeout(() => {
-      this.isLoading = false;
     }, 2000);
   }
 
@@ -348,9 +348,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.showOriginalPrice = false;
     this.showDiscountPercent = false;
     this.showFinalPrice = false;
-    this.discountPercent = this.calculateDiscountPercentage(product.basePrice,product.basePriceWithDiscount)
+    this.discountPercent = this.calculateDiscountPercentage(product.basePrice, product.basePriceWithDiscount)
     this.updateAvailableColorsForProduct();
-    this.sharedStateService.setDetailViewVisible(true);
+    // this.sharedStateService.setDetailViewVisible(true);
     setTimeout(() => {
       this.startPriceAnimation();
     }, 1000);
@@ -505,6 +505,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   applyFilters() {
+    this.uiService.showLoading();
     let filtered: Product[] = [];
     if (this.isBumperDiscountView) {
       filtered = this.categories
@@ -562,8 +563,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         : 'No products match your filters';
       this.filteredProducts = filtered;
     }
-
+    this.uiService.hideLoading()
     this.toggleFilterPanel();
+
   }
 
   getRelatedProducts(): Product[] {
@@ -655,7 +657,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
 
-  hideModal(){
+  hideModal() {
     const modalElement = document.getElementById('lensModal');
     const modal = bootstrap.Modal.getInstance(modalElement);
     modal?.hide();
@@ -671,7 +673,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         imageUrl: this.selectedVariant?.images[0],
         ...this.selection,
         productId: this.selectedProduct?.id,
-        productType:'specs'
+        productType: 'specs'
       };
       this.hideModal()
       this.initiatePayment([productData], productData.price);
@@ -701,7 +703,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       mainOption: "Frame-Only",
       subOption: "No Suboption(Only Frame)",
       description: this.selectedProduct.description,
-      productType:'specs'
+      productType: 'specs'
     };
     this.initiatePayment([productData], productData.price)
   }
@@ -717,18 +719,21 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         imageUrl: this.selectedVariant?.images[0],
         ...this.selection,
         productId: this.selectedProduct?.id,
-        productType:'specs',
+        productType: 'specs',
         description: this.selectedProduct?.description
       };
-      this.isLoading = true;
+      this.hideModal()
+      this.uiService.showLoading()
       this.authService.addToCart(productData).subscribe({
         next: (res) => {
-          this.isLoading = false;
           this.showAlert('Product added to cart', 'success');
+          this.uiService.hideLoading();
+          this.uiService.showToast('Success!', 'Product Added To Cart Successfully')
         },
         error: (err) => {
+          this.uiService.hideLoading()
+          this.uiService.showToast('Error!', 'Error While Adding Product To Cart')
           this.showAlert(err.error.message, 'danger');
-          this.isLoading = false;
         }
       });
     }
@@ -736,16 +741,16 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   showAlert(message: string, type: string): void {
     this.alertMessage = message;
-    this.alertType =` alert-${type}`;
+    this.alertType = ` alert-${type}`;
     setTimeout(() => {
       this.alertMessage = null;
     }, 3000);
   }
 
   initiatePayment(items: any[], amount: number) {
-    this.isLoading = true;
     let userdetails: any = localStorage.getItem('user');
     userdetails = JSON.parse(userdetails);
+    this.uiService.showLoading();
     this.authService.createOrder({ items, amount }).subscribe((response: any) => {
       if (response.success) {
         const options = {
@@ -767,67 +772,77 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
             color: "#3399cc"
           }
         };
-        this.isLoading = false;
         const razorpay = new Razorpay(options);
+        // this.uiService.hideLoading();
         razorpay.open();
       }
     });
   }
 
   verifyPayment(paymentResponse: any) {
-    this.isLoading = true;
     this.paymentMsg = 'Please Wait, Verifying Your Payment'
     const paymentData = {
       razorpay_order_id: paymentResponse.razorpay_order_id,
       razorpay_payment_id: paymentResponse.razorpay_payment_id,
       razorpay_signature: paymentResponse.razorpay_signature,
     };
+    this.uiService.showLoading()
     this.authService.verifyPayment(paymentData).subscribe((response: any) => {
       if (response.success) {
+        this.uiService.hideLoading()
         console.log("Payment verification successful:", response);
+        this.uiService.showToast('Payment Success', 'Please while verifying your payment')
         this.placeOrder(paymentResponse.razorpay_order_id, paymentResponse.razorpay_payment_id);
       } else {
         console.error("Payment verification failed:", response.message);
-        this.isLoading = false;
+        this.uiService.hideLoading()
+        this.uiService.showToast('Payment Failed', 'Error While verifying payment with merchant')
       }
     }, (error: any) => {
       console.error("Payment verification failed:", error);
-      this.isLoading = false;
+      this.uiService.hideLoading()
+      this.uiService.showToast('Payment Failed', 'Error while verifying payment')
     });
   }
 
   placeOrder(razorpay_order_id: string, paymentId: string) {
     const orderData = { razorpay_order_id, paymentId };
+    this.uiService.showLoading()
     this.authService.placeOrder(orderData).subscribe((response: any) => {
       if (response.success) {
         const orderId = response.order._id;
         this.getOrderDetailsById(orderId)
+        this.uiService.hideLoading()
       } else {
-        this.isLoading = false;
         console.error("Order placement failed:", response.message);
+        this.uiService.hideLoading();
+        this.uiService.showToast('Order Failed','Payment Success but unable to place order.')
       }
     }, (error: any) => {
-      this.isLoading = false;
       console.error("Order placement failed:", error);
     });
   }
 
   confirmOrder(payload: any, orderId: any) {
+    this.uiService.showLoading()
     this.authService.confirmOrder(payload).subscribe((response: any) => {
       if (response.success) {
-        this.isLoading = false;
+        this.uiService.hideLoading();
         this.router.navigate(['/payment-success'], { queryParams: { orderId: orderId } });
       } else {
+        this.uiService.hideLoading();
+        this.uiService.showToast('Unable To Place Order','Payment Success but unable to place order.')
         console.error("Order placement failed:", response.message);
-        this.isLoading = false;
       }
     }, (error: any) => {
+      this.uiService.hideLoading();
+      this.uiService.showToast('Unable To Place Order','Payment Success but unable to place order.')
       console.error("Order placement failed:", error);
-      this.isLoading = false;
     });
   }
 
   getOrderDetailsById(orderId: any) {
+    this.uiService.showLoading()
     this.authService.getOrderDetailsById(orderId).subscribe(
       (response: any) => {
         if (response.success) {
@@ -836,14 +851,17 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
             'totalAmount': response.order.totalAmount,
             'items': response.order.items
           }
+          this.uiService.hideLoading();
           this.confirmOrder(payload, orderId)
         } else {
-          this.isLoading = false;
+          this.uiService.hideLoading();
+          this.uiService.showToast('Unable To Place Order','Payment Success but unable to order')
           console.error('Failed to fetch order details:', response.message);
         }
       },
       (error: any) => {
-        this.isLoading = false;
+        this.uiService.hideLoading();
+        this.uiService.showToast('Unable To Place Order','Payment Success but unable to order')
         console.error('Error fetching order details:', error);
       }
     );

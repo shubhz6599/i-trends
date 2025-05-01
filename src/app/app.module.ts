@@ -26,6 +26,8 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { LensDetailsComponent } from './components/lens-details/lens-details.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ToasterComponent } from './components/toaster/toaster.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { TopNavbarComponent } from './components/top-navbar/top-navbar.component
     OrderDetailsComponent,
     LensDetailsComponent,
     TopNavbarComponent,
+    SpinnerComponent,
+    ToasterComponent,
   ],
   imports: [
     BrowserModule,

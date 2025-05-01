@@ -162,3 +162,5 @@
     </div>
   </div>
 </div>
+
+<app-spinner *ngIf="(uiService.loading$ | async) || false"></app-spinner>

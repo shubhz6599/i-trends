@@ -1,10 +1,4 @@
 <div class="profile-page-container">
-  <!-- Loader -->
-  <div *ngIf="isLoading" class="loader-overlay">
-    <div class="spinner"></div>
-  </div>
-
-
 
   <!-- Profile Card -->
   <div class="profile-card">
@@ -170,10 +164,6 @@
         </div>
       </div>
 
-      <!-- Alert Section -->
-      <div *ngIf="alertMessage" class="alert text-center" [ngClass]="alertType" role="alert">
-        {{ alertMessage }}
-      </div>
 
       <!-- Buttons -->
       <div class="text-center">

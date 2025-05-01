@@ -1,14 +1,27 @@
-<div class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-6 text-center">
-  <div class="bg-white shadow-xl rounded-2xl p-10 max-w-xl">
-    <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" class="w-20 mx-auto mb-4" />
-    <h2 class="text-3xl font-bold text-green-600">Payment Successful!</h2>
-    <p class="text-gray-600 mt-2">Thank you for your purchase.</p>
-    <p class="mt-4 text-sm text-gray-500">Order ID: <strong>{{ orderId }}</strong></p>
+<div class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-blue-100 to-blue-200 p-6 text-center">
+  <div class="bg-white shadow-2xl rounded-2xl p-10 max-w-xl transform transition hover:scale-105">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
+      class="w-24 mx-auto mb-6 bounce-icon"
+      alt="Success Icon"
+    />
+    <h2 class="text-4xl font-extrabold text-green-600">Payment Successful!</h2>
+    <p class="text-gray-700 mt-4 text-lg">Thank you for your purchase.</p>
+    <p class="mt-4 text-base text-gray-500">
+      Order ID: <strong class="text-gray-800">{{ orderId }}</strong>
+    </p>
 
     <div class="my-6">
-      <a routerLink="/my-orders" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg transition">View Orders</a>
+      <a
+        routerLink="/user-orders"
+        class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full shadow-lg transition transform hover:scale-105"
+      >
+        View Orders
+      </a>
     </div>
 
-    <div class="text-xs text-gray-400">You'll receive updates via email and WhatsApp</div>
+    <div class="text-sm text-gray-500 mt-4">
+      You'll receive updates via email and WhatsApp
+    </div>
   </div>
 </div>

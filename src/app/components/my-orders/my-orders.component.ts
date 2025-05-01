@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-my-orders',
@@ -10,12 +11,14 @@ import { AuthService } from 'src/app/services/auth.service';
 export class MyOrdersComponent  implements OnInit{
   orders: any[] = [];
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private uiService:UiService) {}
 
   ngOnInit(): void {
     // Fetch all orders for the logged-in user
+    this.uiService.showLoading()
     this.authService.getOrdersByUser().subscribe(
       (response: any) => {
+        this.uiService.hideLoading();
         if (response.success) {
           this.orders = response.orders;
         } else {
@@ -23,6 +26,8 @@ export class MyOrdersComponent  implements OnInit{
         }
       },
       (error: any) => {
+        this.uiService.hideLoading();
+        this.uiService.showToast('Error!','Error While Fetching Orders')
         console.error('Error fetching orders:', error);
       }
     );

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UiService } from 'src/app/services/ui.service';
 import { environment } from 'src/environments/environment';
 declare var Razorpay: any;
 
@@ -11,49 +12,52 @@ declare var Razorpay: any;
 })
 export class CartPageComponent implements OnInit {
   cartItems: any[] = [];
-  isLoading: boolean = true;
   totalAmount: number = 0;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, public uiService: UiService) { }
 
   ngOnInit(): void {
     this.fetchCartItems();
   }
 
   fetchCartItems(): void {
-    this.isLoading = true;
-
+    this.uiService.showLoading()
     this.authService.getCart().subscribe(
       (response) => {
-        this.isLoading = false;
 
         if (response.cart.items.length > 0) {
           this.cartItems = response.cart.items;
+          this.uiService.hideLoading();
           this.calculateTotal();
         } else {
           this.cartItems = [];
+          this.uiService.hideLoading();
         }
       },
       (error) => {
-        this.isLoading = false;
         console.error('Error fetching cart items:', error);
+        this.uiService.hideLoading();
+        this.uiService.showToast('Error', 'Error fetching cart items')
       }
     );
   }
 
   removeItem(productId: string): void {
-    this.isLoading = true
+    this.uiService.showLoading();
     this.authService.removeFromCart(productId).subscribe(
       (response) => {
-        this.isLoading = false
+        this.uiService.showToast('Success!', 'Product Removed From Cart')
         this.cartItems = Array.isArray(response) ? response : [response];
         this.calculateTotal();
         this.fetchCartItems()
+        this.uiService.hideLoading();
+
       },
       (error) => {
-        this.isLoading = false
+        this.uiService.hideLoading();
+        this.uiService.showToast('Erro!', 'Error while Removing From Cart')
         console.error('Error removing item from cart:', error);
-        this.isLoading = false
+
 
       }
     );
@@ -105,9 +109,10 @@ export class CartPageComponent implements OnInit {
   }
 
   initiatePayment(items: any[], amount: number) {
-    this.isLoading = true;
     let userdetails: any = localStorage.getItem('user');
     userdetails = JSON.parse(userdetails);
+
+    this.uiService.showLoading()
     this.authService.createOrder({ items, amount }).subscribe((response: any) => {
       if (response.success) {
         const options = {
@@ -129,8 +134,6 @@ export class CartPageComponent implements OnInit {
             color: "#3399cc"
           }
         };
-        this.isLoading = false;
-
         const razorpay = new Razorpay(options);
         razorpay.open();
       }
@@ -143,60 +146,69 @@ export class CartPageComponent implements OnInit {
       razorpay_payment_id: paymentResponse.razorpay_payment_id,
       razorpay_signature: paymentResponse.razorpay_signature,
     };
-
+    this.uiService.showLoading()
     this.authService.verifyPayment(paymentData).subscribe((response: any) => {
       if (response.success) {
         console.log("Payment verification successful:", response);
+        this.uiService.hideLoading();
 
-        // Trigger order placement
         this.placeOrder(paymentResponse.razorpay_order_id, paymentResponse.razorpay_payment_id); // Pass verified order_id
       } else {
         console.error("Payment verification failed:", response.message);
+        this.uiService.hideLoading();
+        this.uiService.showToast('Payment Failed', 'Error While Verifying Payment')
       }
     }, (error: any) => {
       console.error("Payment verification failed:", error);
+      this.uiService.hideLoading();
+      this.uiService.showToast('Payment Failed', 'Error While Verifying Payment')
     });
   }
 
   placeOrder(razorpay_order_id: string, paymentId: string) {
     const orderData = { razorpay_order_id, paymentId };
+    this.uiService.showLoading();
     this.authService.placeOrder(orderData).subscribe((response: any) => {
       if (response.success) {
         const orderId = response.order._id;
+        this.uiService.hideLoading();
         this.getOrderDetailsById(orderId)
       } else {
-        this.isLoading = false;
+        this.uiService.hideLoading();
+        this.uiService.showToast('Order Failed', 'Unable To Place Order')
 
         console.error("Order placement failed:", response.message);
       }
     }, (error: any) => {
-      this.isLoading = false;
-
+      this.uiService.hideLoading();
+      this.uiService.showToast('Order Failed', 'Unable To Place Order')
       console.error("Order placement failed:", error);
     });
   }
   confirmCartOrder(payload: any, orderId: any) {
+    this.uiService.showLoading();
     this.authService.confirmOrder(payload).subscribe((response: any) => {
       if (response.success) {
         const orderedItems = response.order.items;
         const confirmedProductIds: any = { productId: orderedItems[0].productId };
 
-
+        this.uiService.hideLoading()
         this.removeItem(confirmedProductIds.productId)
-        this.isLoading = false;
         this.router.navigate(['/payment-success'], { queryParams: { orderId: orderId } });
       } else {
         console.error("Order placement failed:", response.message);
-        this.isLoading = false;
-
+        this.uiService.hideLoading()
+        this.uiService.showToast('Order Failed', 'Unable To Place Order')
       }
     }, (error: any) => {
       console.error("Order placement failed:", error);
-      this.isLoading = false;
+      this.uiService.hideLoading()
+        this.uiService.showToast('Order Failed', 'Unable To Place Order')
 
     });
   }
   getOrderDetailsById(orderId: any) {
+    this.uiService.showLoading()
     this.authService.getOrderDetailsById(orderId).subscribe(
       (response: any) => {
         if (response.success) {
@@ -205,16 +217,17 @@ export class CartPageComponent implements OnInit {
             'totalAmount': response.order.totalAmount,
             'items': response.order.items
           }
+          this.uiService.hideLoading();
           this.confirmCartOrder(payload, orderId)
         } else {
-          this.isLoading = false;
-
+          this.uiService.hideLoading()
+          this.uiService.showToast('Order Failed', 'Unable To Place Order')
           console.error('Failed to fetch order details:', response.message);
         }
       },
       (error: any) => {
-        this.isLoading = false;
-
+        this.uiService.hideLoading()
+        this.uiService.showToast('Order Failed', 'Unable To Place Order')
         console.error('Error fetching order details:', error);
       }
     );

@@ -1,18 +1,10 @@
 <div class="feedback-form-container">
-  <!-- Loader -->
-  <div *ngIf="isLoading" class="loader">
-    <p>Loading...</p>
-  </div>
-
   <!-- Feedback Form -->
-  <div *ngIf="!isLoading">
+  <div>
     <h1>We Value Your Feedback</h1>
     <p *ngIf="!feedbackSubmitted">
       Please take a moment to share your thoughts about our website and services.
-      <span>Note: You can submit feedback only once</span>
-    </p>
-    <p *ngIf="feedbackSubmitted" class="feedback-submitted-message">
-      {{ confirmationMessage }}
+      <span style="color: var(--accent-color); font-weight: 600;">Note: You can submit feedback only once</span>
     </p>
 
     <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
@@ -26,8 +18,10 @@
           <option value="Average">Average</option>
           <option value="Poor">Poor</option>
         </select>
-        <div class="error"
-          *ngIf="feedbackForm.get('websiteDesign')?.invalid && feedbackForm.get('websiteDesign')?.touched">
+        <div
+          class="error"
+          *ngIf="feedbackForm.get('websiteDesign')?.invalid && feedbackForm.get('websiteDesign')?.touched"
+        >
           Please select a rating for the website design.
         </div>
       </div>
@@ -43,8 +37,10 @@
           <option value="Difficult">Difficult</option>
           <option value="Very Difficult">Very Difficult</option>
         </select>
-        <div class="error"
-          *ngIf="feedbackForm.get('navigationEase')?.invalid && feedbackForm.get('navigationEase')?.touched">
+        <div
+          class="error"
+          *ngIf="feedbackForm.get('navigationEase')?.invalid && feedbackForm.get('navigationEase')?.touched"
+        >
           Please select an option for navigation ease.
         </div>
       </div>
@@ -60,8 +56,10 @@
           <option value="Dissatisfied">Dissatisfied</option>
           <option value="Very Dissatisfied">Very Dissatisfied</option>
         </select>
-        <div class="error"
-          *ngIf="feedbackForm.get('serviceSatisfaction')?.invalid && feedbackForm.get('serviceSatisfaction')?.touched">
+        <div
+          class="error"
+          *ngIf="feedbackForm.get('serviceSatisfaction')?.invalid && feedbackForm.get('serviceSatisfaction')?.touched"
+        >
           Please select a satisfaction level for our services.
         </div>
       </div>

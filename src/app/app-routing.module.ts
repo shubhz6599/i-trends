@@ -21,19 +21,20 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { LensDetailsComponent } from './components/lens-details/lens-details.component';
 
 const routes: Routes = [
-  {
-    path: 'auth',
-    component: AuthComponent
-  },
-  {
-    path: 'reset-password/:token',
-    component: AuthComponent
-  },
+
   {
     path: '',
     component: LayoutComponent,
     children: [
       { path: '', component: HomepageComponent }, // loads when /home
+      {
+        path: 'auth',
+        component: AuthComponent
+      },
+      {
+        path: 'reset-password/:token',
+        component: AuthComponent
+      },
       { path: 'error', component: ErrorPageComponent },
       // { path: 'products/bumper-discount', component: ProductExplorerComponent },
       // { path: 'products/all', component: ProductExplorerComponent },

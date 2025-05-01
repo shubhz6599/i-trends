@@ -7,20 +7,18 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './top-navbar.component.html',
   styleUrls: ['./top-navbar.component.css']
 })
-export class TopNavbarComponent implements OnInit{
+export class TopNavbarComponent implements OnInit {
   isMenuOpen = false;
   cartCount = 0; // You can dynamically update it later from your cart service
-  searchQuery:string = '';
-constructor(private authService:AuthService, private router: Router){}
+  searchQuery: string = '';
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchCartItems()
   }
   fetchCartItems(): void {
-
     this.authService.getCart().subscribe(
       (response) => {
-
         if (response.cart.items.length > 0) {
           this.cartCount = response.cart.items.length;
         } else {

@@ -29,3 +29,7 @@ app-bottom-navbar {
   margin-bottom: 0px;
   overflow-y: auto; /* Only router-outlet content will scroll */
 }
+
+.content-area.no-margin {
+  margin-top: 0px !important;
+}

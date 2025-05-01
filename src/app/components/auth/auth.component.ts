@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UiService } from 'src/app/services/ui.service';
+import { SharedStateService } from 'src/app/services/shared-state.service';
 declare var bootstrap: any;
 
 
@@ -31,8 +33,6 @@ export class AuthComponent implements OnInit {
   resetPasswordForm: FormGroup;
   token: string | null = null;
   isResetPasswordMode = false;
-  alertMessage: string | null = null; // Holds the alert message
-  alertType: string | null = null; // Holds the alert type (Bootstrap classes)
   isOtpVerificationMode = false;
   otpVerificationForm: FormGroup;
   maxDob = new Date(new Date().setFullYear(new Date().getFullYear() - 18)).toISOString().split('T')[0];
@@ -40,7 +40,9 @@ export class AuthComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private ui: UiService,
+    private sharedStateService: SharedStateService) {
     this.signupForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: [''],
@@ -80,6 +82,7 @@ export class AuthComponent implements OnInit {
         this.isResetPasswordMode = true; // Enable Reset Password mode
       }
     });
+    this.sharedStateService.setDetailViewVisible(true);
   }
 
 
@@ -120,33 +123,26 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  showAlert(message: string, type: string): void {
-    this.alertMessage = message;
-    this.alertType = `alert-${type}`; // Bootstrap classes: alert-success, alert-danger
-    setTimeout(() => {
-      this.alertMessage = null; // Clear alert after 3 seconds
-    }, 3000);
-  }
   onResetPasswordSubmit(): void {
     if (this.resetPasswordForm.valid && this.token) {
       const data = {
         newPassword: this.resetPasswordForm.value.newPassword,
         token: this.token
       };
-      this.isLoading = true;
+      this.ui.showLoading
       this.authService.resetPassword(data).subscribe(
         (response) => {
           console.log('Password Reset Successful:', response);
-          this.isResetPasswordMode = false
-          this.isLoading = false;
-          this.showAlert('Password Reset Successful!', 'success');
+          this.isResetPasswordMode = false;
+          this.ui.hideLoading()
+          this.ui.showToast('Successful!', 'Password Reset Successful');
 
         },
         (error) => {
-          this.isLoading = false;
+          this.ui.hideLoading()
 
           console.error('Password Reset Error:', error);
-          this.showAlert(error.message, 'danger');
+          this.ui.showToast(error.message, 'danger');
         }
       );
     }
@@ -156,26 +152,25 @@ export class AuthComponent implements OnInit {
   onSignupSubmit(): void {
     if (this.signupForm.valid) {
       const data = {
-        name:`${this.signupForm.value.firstName} ${this.signupForm.value.lastName}`, // Concatenate names
+        name: `${this.signupForm.value.firstName} ${this.signupForm.value.lastName}`, // Concatenate names
         email: this.signupForm.value.email,
         password: this.signupForm.value.password,
         dob: this.signupForm.value.dob,
         mobile: this.signupForm.value.mobile,
       };
-      this.isLoading = true;
-
+      this.ui.showLoading();
       this.authService.signUp(data).subscribe(
         (response) => {
           // console.log('Sign Up Successful:', response);
           this.isOtpVerificationMode = true;
-          this.isLoading = false;
-          this.showAlert('Sign Up Successful! OTP sent to email.', 'success');
+          this.ui.hideLoading();
+          this.ui.showToast('Email Sent', 'Otp Verification Email Sent To Mail')
           // this.router.navigate(['/home'])
         },
         (error) => {
           console.error('Sign Up Error:', error);
-          this.isLoading = false;
-          this.showAlert(error.error.message, 'danger');
+          this.ui.hideLoading();
+          this.ui.showToast(error.error.message, 'danger');
         }
       );
     }
@@ -187,29 +182,28 @@ export class AuthComponent implements OnInit {
         email: this.signupForm.value.email, // Email from signup
         otp: this.otpVerificationForm.value.otp, // OTP entered by the user
       };
-      this.isLoading = true;
-
+      this.ui.showLoading();
       this.authService.verifyOtp(data).subscribe(
         (response) => {
           console.log('OTP Verified:', response);
           this.isOtpVerificationMode = false; // Exit OTP verification mode after success
           localStorage.setItem('jwtToken', response.token);
           const user = {
-            mobile : response.user.mobile,
-            name : response.user.name,
+            mobile: response.user.mobile,
+            name: response.user.name,
             email: response.user.email,
-            dob:response.user.dob
+            dob: response.user.dob
           }
           localStorage.setItem('user', JSON.stringify(user));
-          this.isLoading = false;
-          this.showAlert('Email verified successfully! You can Login Now', 'success');
+          this.ui.hideLoading()
+          this.ui.showToast('Verification Successfully Done!', 'Email verified successfully!');
           this.router.navigate(['/'])
 
         },
         (error) => {
           console.error('OTP Verification Error:', error);
-          this.isLoading = false;
-          this.showAlert('Invalid or expired OTP!', 'danger');
+          this.ui.hideLoading
+          this.ui.showToast('Invalid OTP!', 'OOps! You Entered Invalid or expired OTP!');
         }
       );
     }
@@ -219,25 +213,22 @@ export class AuthComponent implements OnInit {
     this.otpVerificationForm.reset();
     const email = this.signupForm.value.email; // Get email from signup form
     if (!email) {
-      this.showAlert('Email is required to resend OTP.', 'danger');
+      this.ui.showToast('Email is required to resend OTP.', 'danger');
       return;
     }
-    this.isLoading = true;
-
+    this.ui.showLoading();
     this.authService.resendOtp({ email }).subscribe(
       (response) => {
         console.log('Resend OTP Successful:', response);
-        this.isLoading = false;
-        this.showAlert('OTP resent successfully!', 'success');
+        this.ui.hideLoading();
+        this.ui.showToast('Success!', 'OTP resent successfully!');
       },
       (error) => {
         console.error('Resend OTP Error:', error);
         if (error.status === 429) {
-          this.isLoading = false;
-          this.showAlert('You exceeded the resend OTP limit. Please try after 24 hours.', 'danger');
+          this.ui.showToast('Daily OTP Limit Crossed','You exceeded the resend OTP limit of 3 times. Please try after 24 hours.');
         } else {
-          this.isLoading = false;
-          this.showAlert('Error resending OTP!', 'danger');
+          this.ui.showToast('Error','Error resending OTP!');
         }
       }
     );
@@ -248,23 +239,22 @@ export class AuthComponent implements OnInit {
       const data = {
         email: this.loginForm.value.email,
         password: this.loginForm.value.password,
-        adminCode:this.loginForm.value.adminCode
+        adminCode: this.loginForm.value.adminCode
       };
-      this.isLoading = true;
-
+      this.ui.showLoading();
       this.authService.login(data).subscribe(
         (response) => {
           console.log('Login Successful:', response);
-          this.isLoading = false;
           localStorage.setItem('jwtToken', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
-          this.showAlert('Login Successful!', 'success');
+          this.ui.hideLoading();
+          this.ui.showToast('Login Success!','Please Wait We Are Loading Stuff');
           this.router.navigate(['/'])
         },
         (error) => {
           console.error('Login Error:', error);
-          this.isLoading = false;
-          this.showAlert('Error Logging In!', 'danger');
+          this.ui.hideLoading();
+          this.ui.showToast('Oops Error!','Error while logging');
         }
       );
     }
@@ -275,18 +265,17 @@ export class AuthComponent implements OnInit {
       const data = {
         email: this.forgotPasswordForm.value.email
       };
-      this.isLoading = true;
-
+      this.ui.showLoading();
       this.authService.forgotPassword(data).subscribe(
         (response) => {
           console.log('Forgot Password Email Sent:', response);
-          this.isLoading = false;
-          this.showAlert('Password Reset Email Sent!', 'success');
+          this.ui.hideLoading()
+          this.ui.showToast('Success!','Password Reset Email Sent!');
         },
         (error) => {
           console.error('Forgot Password Error:', error);
-          this.isLoading = false;
-          this.showAlert('Error Sending Reset Email!', 'danger');
+          this.ui.hideLoading()
+          this.ui.showToast('Error','Error Sending Reset Email!', );
         }
       );
     }

@@ -1,0 +1,14 @@
+.toast-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(4px); /* Blur background */
+  background-color: rgba(0, 0, 0, 0.3); /* Optional dim */
+  z-index: 1040; /* Below toast */
+}
+
+.z-1050 {
+  z-index: 1050 !important;
+}

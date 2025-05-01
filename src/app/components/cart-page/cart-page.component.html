@@ -1,27 +1,24 @@
 <div class="container my-3">
-  <!-- Loader -->
-  <div *ngIf="isLoading" class="loader-overlay">
-    <div class="spinner"></div>
-  </div>
-
   <!-- Empty Cart Message -->
-  <div *ngIf="!isLoading && cartItems.length === 0" class="empty-cart text-center">
-    <h2>Your cart is empty!</h2>
-    <p>Explore our products and add something cool to your cart!</p>
+  <div *ngIf="cartItems.length === 0" class="empty-cart text-center">
+    <h2 class="text-success">Your cart is empty!</h2>
+    <p class="text-muted">Explore our products and add something cool to your cart!</p>
     <div class="animation-container">
+      <!-- Larger Image -->
       <img
         src="https://static.vecteezy.com/system/resources/previews/014/525/045/non_2x/cute-cat-illustration-free-png.png"
         alt="Empty Cart"
-        class="img-fluid"
+        class="img-fluid empty-cart-img"
       />
-      <button class="btn btn-success btn-lg customFont" routerLink="/category/all-products">
-        Explore Products
-      </button>
     </div>
+    <!-- Explore Products Button Below the Image -->
+    <button class="btn btn-success btn-lg customFont mt-4" routerLink="/category/all-products">
+      Explore Products
+    </button>
   </div>
 
   <!-- Cart Details -->
-  <div *ngIf="!isLoading && cartItems.length > 0" class="card shadow-lg">
+  <div *ngIf="cartItems.length > 0" class="card shadow-lg">
     <div class="card-header bg-primary text-white text-center">
       <h2>My Cart</h2>
     </div>
@@ -30,12 +27,12 @@
         <div *ngFor="let item of cartItems" class="cart-item row align-items-center mb-4">
           <!-- Product Image -->
           <div class="col-lg-2 col-md-3 col-sm-4">
-            <img [src]="item.img" alt="Product Image" class="img-fluid rounded" />
+            <img [src]="item.img" alt="Product Image" class="img-fluid rounded product-img" />
           </div>
 
           <!-- Product Details -->
           <div class="col-lg-6 col-md-5 col-sm-8">
-            <h5>{{ item.name }}</h5>
+            <h5 class="text-dark">{{ item.name }}</h5>
             <p class="text-muted">{{ item.description }}</p>
             <p class="text-muted">
               Ratings:
@@ -61,11 +58,11 @@
 
       <!-- Cart Summary -->
       <div class="cart-summary mt-5">
-        <h4>Cart Summary</h4>
+        <h4 class="text-dark">Cart Summary</h4>
         <hr />
         <div class="row">
           <div class="col-6">
-            <p>Total:</p>
+            <p class="text-muted">Total:</p>
           </div>
           <div class="col-6 text-end">
             <h4 class="text-success">Rs{{ totalAmount }}</h4>
@@ -78,3 +75,7 @@
     </div>
   </div>
 </div>
+
+
+<app-spinner *ngIf="(uiService.loading$ | async) || false"></app-spinner>
+

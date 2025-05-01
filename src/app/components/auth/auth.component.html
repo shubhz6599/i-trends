@@ -1,6 +1,4 @@
-<div *ngIf="isLoading" class="loader-overlay">
-  <div class="spinner"></div>
-</div>
+
 <div class="auth-page-container d-flex flex-column">
   <!-- Header Section -->
   <header class="auth-header text-center py-4">
@@ -8,16 +6,7 @@
     <p class="brand-tagline">Your Vision, Our Mission</p>
   </header>
 
-  <div class="alert-container">
-    <div
-      *ngIf="alertMessage"
-      class="alert text-center"
-      [ngClass]="alertType"
-      role="alert"
-    >
-      {{ alertMessage }}
-    </div>
-  </div>
+
 
 
   <!-- Main Auth Section -->

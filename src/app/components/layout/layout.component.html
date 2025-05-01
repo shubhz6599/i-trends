@@ -1,6 +1,13 @@
-<app-top-navbar></app-top-navbar>
+<app-top-navbar *ngIf="!isDetailViewVisible" ></app-top-navbar>
 
-<div class="content-area">
+<app-spinner [show]="(ui.loading$ | async) ?? false"></app-spinner>
+
+<app-toaster [show]="(ui.toast$ | async)?.show ?? false" [title]="(ui.toast$ | async)?.title ?? ''"
+  [message]="(ui.toast$ | async)?.message ?? ''">
+</app-toaster>
+
+
+<div class="content-area" [ngClass]="{ 'no-margin': isAuthRoute }">
   <router-outlet></router-outlet>
 </div>
 

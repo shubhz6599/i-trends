@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { UiService } from 'src/app/services/ui.service';
 declare var Razorpay: any;
 @Component({
   selector: 'app-lens-details',
@@ -22,7 +23,7 @@ export class LensDetailsComponent implements OnInit {
   axisOptions = [10, 20, 70, 80, 90, 100, 110, 160, 170];
   boxesOptions = Array.from({ length: 21 }, (_, i) => i);
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService,private router:Router) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService, private router: Router, public uiService: UiService) { }
 
   ngOnInit(): void {
     // Load products from JSON
@@ -100,36 +101,37 @@ export class LensDetailsComponent implements OnInit {
 
     let userdetails: any = localStorage.getItem('user');
     userdetails = JSON.parse(userdetails);
+    this.uiService.showLoading();
     this.authService.createOrder(orderPayload).subscribe({
       next: (res) => {
-      if (res.success) {
-             const options = {
-               key: environment.razorPayKey, // Razorpay Key ID
-               amount: res.order.amount,
-               currency: res.order.currency,
-               name: "i-trends",
-               description: "Payment For Spec Purchase",
-               order_id: res.order.id,
-               handler: (paymentResponse: any) => {
-                 this.verifyPayment(paymentResponse);
-               },
-               prefill: {
-                 name: userdetails.name,
-                 email: userdetails.email,
-                 contact: userdetails.mobile
-               },
-               theme: {
-                 color: "#3399cc"
-               }
-             };
+        if (res.success) {
+          const options = {
+            key: environment.razorPayKey, // Razorpay Key ID
+            amount: res.order.amount,
+            currency: res.order.currency,
+            name: "i-trends",
+            description: "Payment For Spec Purchase",
+            order_id: res.order.id,
+            handler: (paymentResponse: any) => {
+              this.verifyPayment(paymentResponse);
+            },
+            prefill: {
+              name: userdetails.name,
+              email: userdetails.email,
+              contact: userdetails.mobile
+            },
+            theme: {
+              color: "#3399cc"
+            }
+          };
 
-             const razorpay = new Razorpay(options);
-             razorpay.open();
-           }
+          const razorpay = new Razorpay(options);
+          razorpay.open();
+        }
       },
       error: (err) => {
-        console.error(err);
-        alert('Failed to place order. Please try again.');
+        this.uiService.hideLoading();
+        this.uiService.showToast('Error!', 'Failed To Place Order')
       }
     });
   }
@@ -141,60 +143,66 @@ export class LensDetailsComponent implements OnInit {
       razorpay_payment_id: paymentResponse.razorpay_payment_id,
       razorpay_signature: paymentResponse.razorpay_signature,
     };
-
+    this.uiService.showLoading();
     this.authService.verifyPayment(paymentData).subscribe((response: any) => {
       if (response.success) {
-        console.log("Payment verification successful:", response);
-
+        this.uiService.hideLoading();
         // Trigger order placement
         this.placeOrder(paymentResponse.razorpay_order_id, paymentResponse.razorpay_payment_id); // Pass verified order_id
       } else {
-        console.error("Payment verification failed:", response.message);
+        this.uiService.hideLoading();
+        this.uiService.showToast('Payment Failed!', 'Payment Verification Failed')
       }
     }, (error: any) => {
-      console.error("Payment verification failed:", error);
+      this.uiService.hideLoading();
+      this.uiService.showToast('Payment Failed!', 'Payment Verification Failed')
     });
   }
 
   placeOrder(razorpay_order_id: string, paymentId: string) {
     const orderData = { razorpay_order_id, paymentId };
+    this.uiService.showLoading();
     this.authService.placeOrder(orderData).subscribe((response: any) => {
       if (response.success) {
         const orderId = response.order._id;
+        this.uiService.hideLoading();
         this.getOrderDetailsById(orderId)
       } else {
 
 
-        console.error("Order placement failed:", response.message);
+        this.uiService.hideLoading();
+        this.uiService.showToast('Order Place Failed!', 'Unable To Place Order')
       }
     }, (error: any) => {
 
-
-      console.error("Order placement failed:", error);
+      this.uiService.hideLoading();
+      this.uiService.showToast('Order Place Failed!', 'Unable To Place Order')
     });
   }
   confirmCartOrder(payload: any, orderId: any) {
+    this.uiService.showLoading();
     this.authService.confirmOrder(payload).subscribe((response: any) => {
       if (response.success) {
         const orderedItems = response.order.items;
         const confirmedProductIds: any = { productId: orderedItems[0].productId };
-
-
-        // this.removeItem(confirmedProductIds.productId)
+        this.uiService.hideLoading();
 
         this.router.navigate(['/payment-success'], { queryParams: { orderId: orderId } });
       } else {
-        console.error("Order placement failed:", response.message);
+        this.uiService.hideLoading();
+        this.uiService.showToast('Order Failed', 'Unable To Place Order.')
 
 
       }
     }, (error: any) => {
-      console.error("Order placement failed:", error);
+      this.uiService.hideLoading();
+      this.uiService.showToast('Order Failed', 'Unable To Place Order.')
 
 
     });
   }
   getOrderDetailsById(orderId: any) {
+    this.uiService.showLoading()
     this.authService.getOrderDetailsById(orderId).subscribe(
       (response: any) => {
         if (response.success) {
@@ -203,17 +211,20 @@ export class LensDetailsComponent implements OnInit {
             'totalAmount': response.order.totalAmount,
             'items': response.order.items
           }
+          this.uiService.hideLoading();
           this.confirmCartOrder(payload, orderId)
         } else {
 
 
-          console.error('Failed to fetch order details:', response.message);
+          this.uiService.hideLoading();
+          this.uiService.showToast('Error','Unable To Place Order')
         }
       },
       (error: any) => {
 
 
-        console.error('Error fetching order details:', error);
+        this.uiService.hideLoading();
+        this.uiService.showToast('Error','Unable To Place Order')
       }
     );
   }

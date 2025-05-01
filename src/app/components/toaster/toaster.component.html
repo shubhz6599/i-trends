@@ -1,0 +1,13 @@
+<div class="toast-overlay" *ngIf="show"></div>
+
+<div class="position-fixed top-50 start-50 translate-middle z-1050" *ngIf="show">
+  <div class="toast show">
+    <div class="toast-header">
+      <strong class="me-auto">{{ title }}</strong>
+      <button type="button" class="btn-close" (click)="hide()"></button>
+    </div>
+    <div class="toast-body">
+      {{ message }}
+    </div>
+  </div>
+</div>
