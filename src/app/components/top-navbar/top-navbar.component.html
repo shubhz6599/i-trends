@@ -22,10 +22,10 @@
     </div>
 
     <ul class="menu-items">
-      <li><a routerLink="/account"><i class="bi bi-person"></i> Account</a></li>
-      <li><a routerLink="/user-orders"><i class="bi bi-cart3"></i> My Orders</a></li>
-      <li><a routerLink="/know-more-about-us"><i class="bi bi-box"></i> About</a></li>
-      <li><a routerLink="/auth"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+      <li (click)="closeMenu()"><a routerLink="/account"><i class="bi bi-person"></i> Account</a></li>
+      <li (click)="closeMenu()"><a routerLink="/user-orders"><i class="bi bi-cart3"></i> My Orders</a></li>
+      <li (click)="closeMenu()"><a routerLink="/know-more-about-us"><i class="bi bi-box"></i> About</a></li>
+      <li (click)="closeMenu()"><a routerLink="/auth"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
     </ul>
   </div>
   <div class="cart-icon">
