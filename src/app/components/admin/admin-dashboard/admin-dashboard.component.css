@@ -1,0 +1,194 @@
+/* Overall Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fc; /* Light background for dashboard */
+}
+
+/* Page Title */
+h2 {
+  font-family: 'Poppins', sans-serif;
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Dashboard Filter Buttons */
+.row button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 12px 20px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  color: var(--gray-light);
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.row button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.row button:focus {
+  outline: none;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+}
+
+.dashboard-card h5 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--success-color);
+  margin: 0;
+}
+
+.dashboard-card button {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 10px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  color: var(--gray-light);
+  border-radius: 8px;
+  padding: 8px 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Table Styling */
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-primary {
+  background-color: var(--primary-color);
+  color: var(--gray-light);
+  border: none;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.table td, .table th {
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+.text-success {
+  font-weight: bold;
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.5rem;
+}
+
+.alert {
+  border-radius: 10px;
+  font-size: 0.95rem;
+  padding: 15px;
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+/* Buttons */
+button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  color: var(--gray-light);
+}
+
+.btn-primary:hover {
+  background: var(--accent-color);
+}
+
+.btn-outline-secondary {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline-secondary:hover {
+  background: var(--primary-color);
+  color: var(--gray-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-card {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-card p {
+    font-size: 2rem;
+  }
+
+  .dashboard-card button {
+    font-size: 0.8rem;
+    padding: 10px 15px;
+  }
+
+  .table td, .table th {
+    font-size: 0.8rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 8px 15px;
+  }
+}

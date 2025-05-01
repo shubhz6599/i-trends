@@ -12,7 +12,7 @@ export class FeedbackFormComponent implements OnInit {
   feedbackForm: FormGroup;
   feedbackSubmitted: boolean = false; // Indicates whether feedback has already been submitted
 
-  constructor(private fb: FormBuilder, private feedbackService: AuthService, private uiService:UiService) {
+  constructor(private fb: FormBuilder, private feedbackService: AuthService, private uiService: UiService) {
     // Initialize the form with FormBuilder
     this.feedbackForm = this.fb.group({
       websiteDesign: new FormControl({ value: '', disabled: false }, Validators.required),
@@ -30,7 +30,7 @@ export class FeedbackFormComponent implements OnInit {
   fetchExistingFeedback(): void {
     this.uiService.showLoading()
     this.feedbackService.getMyFeedback().subscribe(
-      (feedback:any) => {
+      (feedback: any) => {
         console.log(feedback);
 
         // If feedback exists, populate the form and disable it
@@ -45,7 +45,7 @@ export class FeedbackFormComponent implements OnInit {
           this.feedbackForm.disable(); // Disable the form fields
           this.uiService.hideLoading();
           this.uiService.showToast('Feedback Already Submitted', "Hey Chief! You've Already Submitted Feedback.")
-        }else{
+        } else {
           this.uiService.hideLoading();
           this.feedbackForm.enable(); // enable the form fields
           this.feedbackSubmitted = false; // Mark as submitted
@@ -54,7 +54,7 @@ export class FeedbackFormComponent implements OnInit {
       },
       (error) => {
         this.uiService.hideLoading();
-        this.uiService.showToast('Error', "Hey Chief! Error while fetching feedback.")
+        // this.uiService.showToast('Error', "Hey Chief! Error while fetching feedback.")
 
         console.error('Error fetching feedback:', error);
       }
@@ -65,7 +65,7 @@ export class FeedbackFormComponent implements OnInit {
   onSubmit(): void {
     if (this.feedbackForm.valid) {
       const formDetails = this.feedbackForm.value;
-this.uiService.showLoading();
+      this.uiService.showLoading();
       this.feedbackService.submitFeedback(formDetails).subscribe(
         (response) => {
           this.feedbackSubmitted = true; // Mark as submitted

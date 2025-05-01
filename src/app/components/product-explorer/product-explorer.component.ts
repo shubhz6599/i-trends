@@ -583,7 +583,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.isFilterPanelVisible = !this.isFilterPanelVisible;
   }
 
-  popoverMessage: string = 'You are not logged in, Please Log in to process further, Redirecting To Login Page Please Wait';
   openModal(): void {
     let jwt = localStorage.getItem('jwtToken');
     let user: any = localStorage.getItem('user');
@@ -593,30 +592,16 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
     if (!jwt || !user) {
       // If jwt or user is missing → Not Logged In
-      const button = document.querySelector('.customBtn') as HTMLElement;
-      this.popoverMessage = 'You are not logged in. Please log in to continue. Redirecting to Login Page...';
-      const popover = new (window as any).bootstrap.Popover(button, {
-        content: this.popoverMessage,
-        placement: 'top',
-        trigger: 'manual',
-      });
-      popover.show();
+      this.uiService.showToast('OOPS!','You are not logged in. Please log in to continue. Redirecting to Login Page...')
       setTimeout(() => {
-        popover.hide();
         this.router.navigate(['/auth']);
       }, 3000);
     } else if (!user.address || Object.keys(user.address).length === 0) {
       // If user is logged in but address not filled properly
       const button = document.querySelector('.customBtn') as HTMLElement;
-      this.popoverMessage = 'Address details are missing. Redirecting to Account Page...';
-      const popover = new (window as any).bootstrap.Popover(button, {
-        content: this.popoverMessage,
-        placement: 'top',
-        trigger: 'manual',
-      });
-      popover.show();
+      this.uiService.showToast('OOPS!','Address details are missing. Redirecting to Account Page...')
+
       setTimeout(() => {
-        popover.hide();
         this.router.navigate(['/account']);
       }, 3000);
     } else {

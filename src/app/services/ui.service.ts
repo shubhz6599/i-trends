@@ -21,7 +21,7 @@ export class UiService {
 
   showToast(title: string, message: string) {
     this.toastSubject.next({ show: true, title, message });
-    setTimeout(() => this.toastSubject.next({ show: false }), 3000); // Auto-hide after 3s
+    setTimeout(() => this.toastSubject.next({ show: false }), 2000); // Auto-hide after 3s
   }
 
   hideToast() {
