@@ -130,23 +130,23 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     'frame-only': ['Stylish Frames', 'Lightweight', 'Durable']
   };
   optionDetails: Record<string, string[]> = {
-    'Anti-Glare Premium': ['6 Months Warranty', 'Double Side Anti-Glare'],
-    'BLU Screen Lenses': ['1 Year Warranty', 'Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant'],
+    'Anti-Glare Premium': [ 'Double Side Anti-Glare'],
+    'BLU Screen Lenses': [ 'Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant'],
     'Thin BLU Screen Lenses': ['Lightweight', 'Slim Design', 'High Optical Clarity'],
     'Owndays Japan Clear Vision Lenses': ['Premium Quality', 'Clear Vision', 'Anti-Reflection Coating'],
     'Owndays Japan Shatterproof': ['Shatterproof Design', 'Durable', 'Impact Resistant'],
-    'Circular Bi-focal KT': ['1 Year Warranty', 'UV-400 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Circular Reading Area in Lower Part'],
-    'Anti-Glare Normal Corridor Progressive': ['1 Year Warranty', 'UV-400 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'For Distance Intermediate & Near Vision', 'Smooth Lens with No Visible Line'],
-    'BLU Screen Normal Corridor Progressive': ['1 Year Warranty', 'UV-400 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'For Distance, Intermediate & Near Vision'],
-    'BLU Screen Wide Corridor Progressive': ['1 Year Warranty', 'UV-400 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'For Distance, Intermediate & Near Vision'],
-    'BLU Screen Lenses Zero Power': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'Double Side Anti-Glare'],
-    'Brown Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Pink Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Yellow Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Blue Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Green Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Grey Tinted Color Lenses': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Owndays Japan Clear Vision Lenses Zero Power': ['1 Year Warranty', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power']
+    'Circular Bi-focal KT': ['Scratch Resistant', 'UV-400 Protection', 'Water & Dust Repellent', 'Circular Reading Area in Lower Part', 'Index 1.50', 'Material CR'],
+    'Anti-Glare Normal Corridor Progressive': ['Double Side Anti Glare', 'Water & Dust Repellent', 'Crack & Scratch Resistant', 'For Distance Intermediate & Near Vision', 'Smooth Lens with No Visible Line','Index 1.50'],
+    'BLU Screen Normal Corridor Progressive': [ 'Protects from digital rays','Double Side Anti Glare', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'For Distance, Intermediate & Near Vision', 'Smooth Lens with No Visible Line'],
+    'BLU Screen Wide Corridor Progressive': [ 'Protects from digital rays', 'Double Side Anti Glare', 'Crack & Scratch Resistant','Eye Tracking','Power Optimiser', 'Nearmax', 'Auto adjust', 'Lightweight', 'Thinner'],
+    'BLU Screen Lenses Zero Power': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'Double Side Anti-Glare'],
+    'Brown Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Pink Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Yellow Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Blue Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Green Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Grey Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Owndays Japan Clear Vision Lenses Zero Power': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power']
   };
   prices: Record<string, number> = {
     'Anti-Glare Premium': 400,
@@ -154,13 +154,13 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     'Thin BLU Screen Lenses': 1000,
     'Owndays Japan Clear Vision Lenses': 1200,
     'Owndays Japan Shatterproof': 2000,
-    'Circular Bi-focal KT': 1000,
-    'Anti-Glare Normal Corridor Progressive': 1000,
-    'BLU Screen Normal Corridor Progressive': 1800,
-    'BLU Screen Wide Corridor Progressive': 2500,
-    'BLU Screen Lenses Zero Power': 1500,
+    'Circular Bi-focal KT': 1200,
+    'Anti-Glare Normal Corridor Progressive': 2200,
+    'BLU Screen Normal Corridor Progressive': 3200,
+    'BLU Screen Wide Corridor Progressive': 5500,
+    'BLU Screen Lenses Zero Power': 1000,
     'Brown Tinted Color Lenses': 1200,
-    'Pink Tinted Color Lenses': 120,
+    'Pink Tinted Color Lenses': 1200,
     'Yellow Tinted Color Lenses': 1200,
     'Blue Tinted Color Lenses': 1200,
     'Green Tinted Color Lenses': 1200,
@@ -174,6 +174,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   alertMessage: any = '';
   alertType: string = '';
   private imageLoadTimeout: any;
+  viewType: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -189,6 +190,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const viewType = params.get('category');
+      this.viewType = viewType
       const searchQuery = params.get('searchQuery')
       if (viewType === 'bumper-discount') {
         this.currentCategoryImage = 'https://media.istockphoto.com/id/842287212/vector/bright-sale-background-poster-in-orange-color.jpg?s=612x612&w=0&k=20&c=0y7tCbAmRQriR4080d2omzcuTDSamVU34Q1p3Ejqge0='

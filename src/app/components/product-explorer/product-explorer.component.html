@@ -38,16 +38,6 @@
     </div>
 
     <div class="filter-section">
-      <h4>Color Options</h4>
-      <div class="color-options">
-        <div *ngFor="let color of availableColors" class="color-option" (click)="filterByColor(color.name)">
-          <div class="color-shade" [style.backgroundColor]="color.colorCode"></div>
-          <span>{{color.name}}</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="filter-section">
       <h4>Price Range</h4>
       <div *ngFor="let range of priceRanges" class="price-option" (click)="filterByPrice(range)">
         <span>{{range.label}}</span>
@@ -65,6 +55,16 @@
       <h4>Discounts</h4>
       <div *ngFor="let discount of discountOptions" class="discount-option" (click)="filterByDiscount(discount)">
         <span>{{discount}}% or more</span>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <h4>Color Options</h4>
+      <div class="color-options">
+        <div *ngFor="let color of availableColors" class="color-option" (click)="filterByColor(color.name)">
+          <div class="color-shade" [style.backgroundColor]="color.colorCode"></div>
+          <span>{{color.name}}</span>
+        </div>
       </div>
     </div>
 
@@ -107,7 +107,7 @@
         <div class="product-info cursiveFont">
           <h3 class="fw-600 text-body-secondary">{{product.name}}</h3>
           <p class="price"><del> ₹{{product.basePrice}}</del></p>
-          <div class="color-options">
+          <div class="color-options justify-content-center">
             <span *ngFor="let variant of product.variants" class="color-dot" [style.background]="variant.colorCode"
               [title]="variant.color"></span>
           </div>
@@ -231,6 +231,7 @@
             </li>
 
             <li class="list-group-item lens-option"
+            *ngIf="viewType != 'Unisex Sunglasses' && viewType != 'Kids Sunglasses & Frames' && viewType!= 'Unisex Sports & Swimming'"
                 (click)="selectMainOption('bifocal')"
                 [class.active]="selection.mainOption === 'bifocal'">
               <div class="option-content">
