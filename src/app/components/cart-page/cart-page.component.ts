@@ -35,7 +35,6 @@ export class CartPageComponent implements OnInit {
         }
       },
       (error) => {
-        console.error('Error fetching cart items:', error);
         this.uiService.hideLoading();
         // this.uiService.showToast('Error', 'Error fetching cart items')
       }
@@ -56,16 +55,12 @@ export class CartPageComponent implements OnInit {
       (error) => {
         this.uiService.hideLoading();
         this.uiService.showToast('Erro!', 'Error while Removing From Cart')
-        console.error('Error removing item from cart:', error);
-
-
       }
     );
   }
 
   calculateTotal(): void {
     if (!Array.isArray(this.cartItems)) {
-      console.error('cartItems is not an array:', this.cartItems);
       this.totalAmount = 0;
       return;
     }
@@ -85,7 +80,6 @@ export class CartPageComponent implements OnInit {
     //     },
     //     (error) => {
     //       this.isLoading =false
-    //       console.error('Error removing item from cart:', error);
     //       this.isLoading =false
     //     }
     //   );
@@ -149,17 +143,14 @@ export class CartPageComponent implements OnInit {
     this.uiService.showLoading()
     this.authService.verifyPayment(paymentData).subscribe((response: any) => {
       if (response.success) {
-        console.log("Payment verification successful:", response);
         this.uiService.hideLoading();
 
         this.placeOrder(paymentResponse.razorpay_order_id, paymentResponse.razorpay_payment_id); // Pass verified order_id
       } else {
-        console.error("Payment verification failed:", response.message);
         this.uiService.hideLoading();
         this.uiService.showToast('Payment Failed', 'Error While Verifying Payment')
       }
     }, (error: any) => {
-      console.error("Payment verification failed:", error);
       this.uiService.hideLoading();
       this.uiService.showToast('Payment Failed', 'Error While Verifying Payment')
     });
@@ -177,12 +168,10 @@ export class CartPageComponent implements OnInit {
         this.uiService.hideLoading();
         this.uiService.showToast('Order Failed', 'Unable To Place Order')
 
-        console.error("Order placement failed:", response.message);
       }
     }, (error: any) => {
       this.uiService.hideLoading();
       this.uiService.showToast('Order Failed', 'Unable To Place Order')
-      console.error("Order placement failed:", error);
     });
   }
   confirmCartOrder(payload: any, orderId: any) {
@@ -196,12 +185,10 @@ export class CartPageComponent implements OnInit {
         this.removeItem(confirmedProductIds.productId)
         this.router.navigate(['/payment-success'], { queryParams: { orderId: orderId } });
       } else {
-        console.error("Order placement failed:", response.message);
         this.uiService.hideLoading()
         this.uiService.showToast('Order Failed', 'Unable To Place Order')
       }
     }, (error: any) => {
-      console.error("Order placement failed:", error);
       this.uiService.hideLoading()
         this.uiService.showToast('Order Failed', 'Unable To Place Order')
 
@@ -222,13 +209,11 @@ export class CartPageComponent implements OnInit {
         } else {
           this.uiService.hideLoading()
           this.uiService.showToast('Order Failed', 'Unable To Place Order')
-          console.error('Failed to fetch order details:', response.message);
         }
       },
       (error: any) => {
         this.uiService.hideLoading()
         this.uiService.showToast('Order Failed', 'Unable To Place Order')
-        console.error('Error fetching order details:', error);
       }
     );
   }

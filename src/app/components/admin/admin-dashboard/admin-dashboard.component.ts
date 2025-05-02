@@ -38,7 +38,6 @@ export class AdminDashboardComponent implements OnInit {
           ...order,
           selectedStatus: order.status
         }));
-        console.log(this.orders);
 
         this.filterOrders(); // Call filterOrders to compute counts
         this.isLoading = false;

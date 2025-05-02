@@ -80,7 +80,6 @@ export class AccountPageComponent implements OnInit {
         this.uiService.hideLoading();
       },
       (error) => {
-        console.error('Error fetching user details:', error);
         this.uiService.hideLoading()
         this.uiService.showToast('Failed', 'Failed to fetch user details. Please Re-Login.');
       }
@@ -101,7 +100,6 @@ export class AccountPageComponent implements OnInit {
         this.openOtpModal()
       },
       (error) => {
-        console.error('Resend OTP Error:', error);
         this.uiService.hideLoading()
         this.uiService.showToast('Error!', 'Error resending OTP!');
 
@@ -137,7 +135,6 @@ export class AccountPageComponent implements OnInit {
         this.uiService.showToast('Success','User details updated successfully!')
       },
       (error) => {
-        console.error('Error updating user details:', error);
         this.uiService.hideLoading();
         this.uiService.showToast('Failed', 'Failed to update user details. Please try again later.')
       }
@@ -155,7 +152,6 @@ export class AccountPageComponent implements OnInit {
       this.uiService.showLoading();
       this.authService.verifyOtp({ email: this.accountForm.value.email, otp }).subscribe(
         (response) => {
-          console.log('OTP Verified Successfully:', response);
           this.uiService.hideLoading();
           this.uiService.showToast('Email Verified','Email verified successfully!')
           this.isEmailVerified = true;
@@ -163,7 +159,6 @@ export class AccountPageComponent implements OnInit {
           otpModal.hide();
         },
         (error) => {
-          console.error('Error verifying OTP:', error);
           this.uiService.hideLoading();
           this.uiService.showToast('Invalid OTP','Invalid or expired OTP.')
         }

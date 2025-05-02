@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class TopNavbarComponent implements OnInit {
   isMenuOpen = false;
-  cartCount = 0; // You can dynamically update it later from your cart service
+  cartCount:any; // You can dynamically update it later from your cart service
   searchQuery: string = '';
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -23,24 +23,14 @@ export class TopNavbarComponent implements OnInit {
   closeMenu() {
     this.isMenuOpen = false;
   }
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private authService: AuthService, private router: Router) {
+      this.authService.cart$.subscribe((cart:any) => {
+        this.cartCount = cart?.items?.length || 0;
+      });
+
+    }
 
     ngOnInit(): void {
-      this.fetchCartItems()
-    }
-    fetchCartItems(): void {
-      this.authService.getCart().subscribe(
-        (response) => {
-          if (response.cart.items.length > 0) {
-            this.cartCount = response.cart.items.length;
-          } else {
-            this.cartCount = 0;
-          }
-        },
-        (error) => {
-          console.error('Error fetching cart items:', error);
-        }
-      );
     }
 
 

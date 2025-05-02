@@ -22,7 +22,6 @@ export class TrackOrderComponent implements OnInit {
     }
   }
   getStatusMessage(order: any): string {
-    console.log(order);
 
     switch (order.status) {
       case 'Processing':

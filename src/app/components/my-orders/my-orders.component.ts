@@ -22,13 +22,11 @@ export class MyOrdersComponent  implements OnInit{
         if (response.success) {
           this.orders = response.orders;
         } else {
-          console.error('Failed to fetch orders:', response.message);
         }
       },
       (error: any) => {
         this.uiService.hideLoading();
         this.uiService.showToast('Error!','Error While Fetching Orders')
-        console.error('Error fetching orders:', error);
       }
     );
   }
@@ -39,7 +37,6 @@ export class MyOrdersComponent  implements OnInit{
   }
 
   getStatusColor(status: string): string {
-    console.log(status);
 
     switch (status.toLowerCase()) {
       case 'deliveryday':

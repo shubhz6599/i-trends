@@ -8,6 +8,7 @@ import { ViewportScroller } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { UiService } from 'src/app/services/ui.service';
+import { FormBuilder } from '@angular/forms';
 declare var Razorpay: any;
 declare var bootstrap: any;
 interface Variant {
@@ -111,7 +112,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   selectedFilters: { label: string, value: any }[] = [];
   searchResultMessage: string = '';
   currentStep: number = 1;
-  steps = [1, 2, 3];
+  steps = [1, 2, 3, 4];
   selection = {
     mainOption: '',
     subOption: ''
@@ -130,23 +131,23 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     'frame-only': ['Stylish Frames', 'Lightweight', 'Durable']
   };
   optionDetails: Record<string, string[]> = {
-    'Anti-Glare Premium': [ 'Double Side Anti-Glare'],
-    'BLU Screen Lenses': [ 'Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant'],
+    'Anti-Glare Premium': ['Double Side Anti-Glare'],
+    'BLU Screen Lenses': ['Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant'],
     'Thin BLU Screen Lenses': ['Lightweight', 'Slim Design', 'High Optical Clarity'],
     'Owndays Japan Clear Vision Lenses': ['Premium Quality', 'Clear Vision', 'Anti-Reflection Coating'],
     'Owndays Japan Shatterproof': ['Shatterproof Design', 'Durable', 'Impact Resistant'],
     'Circular Bi-focal KT': ['Scratch Resistant', 'UV-400 Protection', 'Water & Dust Repellent', 'Circular Reading Area in Lower Part', 'Index 1.50', 'Material CR'],
-    'Anti-Glare Normal Corridor Progressive': ['Double Side Anti Glare', 'Water & Dust Repellent', 'Crack & Scratch Resistant', 'For Distance Intermediate & Near Vision', 'Smooth Lens with No Visible Line','Index 1.50'],
-    'BLU Screen Normal Corridor Progressive': [ 'Protects from digital rays','Double Side Anti Glare', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'For Distance, Intermediate & Near Vision', 'Smooth Lens with No Visible Line'],
-    'BLU Screen Wide Corridor Progressive': [ 'Protects from digital rays', 'Double Side Anti Glare', 'Crack & Scratch Resistant','Eye Tracking','Power Optimiser', 'Nearmax', 'Auto adjust', 'Lightweight', 'Thinner'],
-    'BLU Screen Lenses Zero Power': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'Double Side Anti-Glare'],
-    'Brown Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Pink Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Yellow Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Blue Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Green Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Grey Tinted Color Lenses': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Owndays Japan Clear Vision Lenses Zero Power': [ 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power']
+    'Anti-Glare Normal Corridor Progressive': ['Double Side Anti Glare', 'Water & Dust Repellent', 'Crack & Scratch Resistant', 'For Distance Intermediate & Near Vision', 'Smooth Lens with No Visible Line', 'Index 1.50'],
+    'BLU Screen Normal Corridor Progressive': ['Protects from digital rays', 'Double Side Anti Glare', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'For Distance, Intermediate & Near Vision', 'Smooth Lens with No Visible Line'],
+    'BLU Screen Wide Corridor Progressive': ['Protects from digital rays', 'Double Side Anti Glare', 'Crack & Scratch Resistant', 'Eye Tracking', 'Power Optimiser', 'Nearmax', 'Auto adjust', 'Lightweight', 'Thinner'],
+    'BLU Screen Lenses Zero Power': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'Double Side Anti-Glare'],
+    'Brown Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Pink Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Yellow Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Blue Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Green Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Grey Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Owndays Japan Clear Vision Lenses Zero Power': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power']
   };
   prices: Record<string, number> = {
     'Anti-Glare Premium': 400,
@@ -175,6 +176,38 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   alertType: string = '';
   private imageLoadTimeout: any;
   viewType: any;
+  productForm = this.fb.group({
+    rightEyePowerSPH: [''],
+    rightEyePowerCYL: [''],
+    rightEyeAxis: [''],
+    rightNumberOfBoxes: [''],
+    leftEyePowerSPH: [''],
+    leftEyePowerCYL: [''],
+    leftEyeAxis: [''],
+    leftNumberOfBoxes: ['']
+  });
+
+  sphOptions = [
+    -6.00, -5.75, -5.50, -5.25, -5.00, -4.75, -4.50, -4.25,
+    -4.00, -3.75, -3.50, -3.25, -3.00, -2.75, -2.50, -2.25,
+    -2.00, -1.75, -1.50, -1.25, -1.00, -0.75, -0.50, -0.25,
+    0.00, 0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75,
+    2.00, 2.25, 2.50, 2.75, 3.00, 3.25, 3.50, 3.75,
+    4.00, 4.25, 4.50, 4.75, 5.00, 5.25, 5.50, 5.75,
+    6.00
+  ];
+  cylOptions = [
+    -2.00, -1.75, -1.50, -1.25, -1.00, -0.75, -0.50, -0.25,
+    0.00, 0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75,
+    2.00
+  ];
+  axisOptions = [
+    0, 5, 10, 15, 20, 25, 30, 35, 40, 45,
+    50, 55, 60, 65, 70, 75, 80, 85, 90, 95,
+    100, 105, 110, 115, 120, 125, 130, 135, 140, 145,
+    150, 155, 160, 165, 170, 175, 180
+  ];
+  boxesOptions = [1, 2, 3, 4];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -184,7 +217,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     private sharedStateService: SharedStateService,
     private viewportScroller: ViewportScroller,
     private authService: AuthService,
-    public uiService: UiService
+    public uiService: UiService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -213,6 +247,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     });
     this.scrollTop();
   }
+
 
   scrollTop() {
     window.scrollTo({
@@ -287,7 +322,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     }
     this.imageLoadTimeout = setTimeout(() => {
       if (!this.imageLoaded) {
-        console.warn('Image load timed out:', imgUrl);
         this.imageLoaded = true;
       }
     }, 10000);
@@ -589,19 +623,16 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     let jwt = localStorage.getItem('jwtToken');
     let user: any = localStorage.getItem('user');
     user = user ? JSON.parse(user) : null;
-
-    console.log(jwt, user);
-
     if (!jwt || !user) {
       // If jwt or user is missing → Not Logged In
-      this.uiService.showToast('OOPS!','You are not logged in. Please log in to continue. Redirecting to Login Page...')
+      this.uiService.showToast('OOPS!', 'You are not logged in. Please log in to continue. Redirecting to Login Page...')
       setTimeout(() => {
         this.router.navigate(['/auth']);
       }, 3000);
     } else if (!user.address || Object.keys(user.address).length === 0) {
       // If user is logged in but address not filled properly
       const button = document.querySelector('.customBtn') as HTMLElement;
-      this.uiService.showToast('OOPS!','Address details are missing. Redirecting to Account Page...')
+      this.uiService.showToast('OOPS!', 'Address details are missing. Redirecting to Account Page...')
 
       setTimeout(() => {
         this.router.navigate(['/account']);
@@ -677,9 +708,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   selectFrameOnly(): void {
     let price: any = this.getFinalPriceDigits();
     if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
-    console.log(this.selectedProduct);
-    console.log(this.selectedVariant);
-    console.log(price.join(""));
     const productData = {
       name: this.selectedProduct.name,
       variant: this.selectedVariant.color,
@@ -707,7 +735,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         ...this.selection,
         productId: this.selectedProduct?.id,
         productType: 'specs',
-        description: this.selectedProduct?.description
+        description: this.selectedProduct?.description,
+        userSelectionDetails:this.productForm.value
       };
       this.hideModal()
       this.uiService.showLoading()
@@ -777,16 +806,13 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.authService.verifyPayment(paymentData).subscribe((response: any) => {
       if (response.success) {
         this.uiService.hideLoading()
-        console.log("Payment verification successful:", response);
         this.uiService.showToast('Payment Success', 'Please while verifying your payment')
         this.placeOrder(paymentResponse.razorpay_order_id, paymentResponse.razorpay_payment_id);
       } else {
-        console.error("Payment verification failed:", response.message);
         this.uiService.hideLoading()
         this.uiService.showToast('Payment Failed', 'Error While verifying payment with merchant')
       }
     }, (error: any) => {
-      console.error("Payment verification failed:", error);
       this.uiService.hideLoading()
       this.uiService.showToast('Payment Failed', 'Error while verifying payment')
     });
@@ -801,12 +827,10 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         this.getOrderDetailsById(orderId)
         this.uiService.hideLoading()
       } else {
-        console.error("Order placement failed:", response.message);
         this.uiService.hideLoading();
-        this.uiService.showToast('Order Failed','Payment Success but unable to place order.')
+        this.uiService.showToast('Order Failed', 'Payment Success but unable to place order.')
       }
     }, (error: any) => {
-      console.error("Order placement failed:", error);
     });
   }
 
@@ -818,13 +842,11 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         this.router.navigate(['/payment-success'], { queryParams: { orderId: orderId } });
       } else {
         this.uiService.hideLoading();
-        this.uiService.showToast('Unable To Place Order','Payment Success but unable to place order.')
-        console.error("Order placement failed:", response.message);
+        this.uiService.showToast('Unable To Place Order', 'Payment Success but unable to place order.')
       }
     }, (error: any) => {
       this.uiService.hideLoading();
-      this.uiService.showToast('Unable To Place Order','Payment Success but unable to place order.')
-      console.error("Order placement failed:", error);
+      this.uiService.showToast('Unable To Place Order', 'Payment Success but unable to place order.')
     });
   }
 
@@ -842,16 +864,17 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
           this.confirmOrder(payload, orderId)
         } else {
           this.uiService.hideLoading();
-          this.uiService.showToast('Unable To Place Order','Payment Success but unable to order')
-          console.error('Failed to fetch order details:', response.message);
+          this.uiService.showToast('Unable To Place Order', 'Payment Success but unable to order')
         }
       },
       (error: any) => {
         this.uiService.hideLoading();
-        this.uiService.showToast('Unable To Place Order','Payment Success but unable to order')
-        console.error('Error fetching order details:', error);
+        this.uiService.showToast('Unable To Place Order', 'Payment Success but unable to order')
       }
     );
   }
 
+  onSubmit(){
+    this.currentStep = 4;
+  }
 }

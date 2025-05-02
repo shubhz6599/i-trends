@@ -162,7 +162,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         this.uiService.hideLoading()
-        console.error('Error fetching cart items:', error);
       }
     );
   }
@@ -223,8 +222,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   }
 
   navigate(categoryId: string): void {
-    console.log(54);
-
     if (categoryId === 'bumper-discount') {
       this.imagePreloader.preloadBumperDiscountImages(); // Preload selected category images
     } else if (categoryId === 'all-products') {

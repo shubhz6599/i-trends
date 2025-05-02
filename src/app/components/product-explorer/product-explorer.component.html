@@ -311,6 +311,87 @@
         </div>
 
         <div *ngIf="currentStep === 3" class="step-content slide-in">
+          <div class="container">
+            <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+              <div class="card shadow-sm p-4">
+                <h4 class="mb-4 text-primary fw-bold text-center">Enter Power for Both Eyes</h4>
+
+                <div class="row">
+                  <!-- Right Eye -->
+                  <div class="col-md-6 mb-4">
+                    <div class="card border-success h-100 p-3">
+                      <h5 class="text-success mb-3">Right Eye</h5>
+
+                      <label class="form-label">Power (SPH)</label>
+                      <select class="form-select form-select-sm mb-2" formControlName="rightEyePowerSPH">
+                        <option value="">Select SPH</option>
+                        <option *ngFor="let sph of sphOptions" [value]="sph">{{ sph }}</option>
+                      </select>
+
+                      <label class="form-label">Power (CYL)</label>
+                      <select class="form-select form-select-sm mb-2" formControlName="rightEyePowerCYL">
+                        <option value="">Select CYL</option>
+                        <option *ngFor="let cyl of cylOptions" [value]="cyl">{{ cyl }}</option>
+                      </select>
+
+                      <label class="form-label">Axis</label>
+                      <select class="form-select form-select-sm mb-2" formControlName="rightEyeAxis">
+                        <option value="">Select Axis</option>
+                        <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
+                      </select>
+
+                      <label class="form-label">Number of Boxes</label>
+                      <select class="form-select form-select-sm" formControlName="rightNumberOfBoxes">
+                        <option value="">Select Number of Boxes</option>
+                        <option *ngFor="let count of boxesOptions" [value]="count">{{ count }}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Left Eye -->
+                  <div class="col-md-6 mb-4">
+                    <div class="card border-danger h-100 p-3">
+                      <h5 class="text-danger mb-3">Left Eye</h5>
+
+                      <label class="form-label">Power (SPH)</label>
+                      <select class="form-select form-select-sm mb-2" formControlName="leftEyePowerSPH">
+                        <option value="">Select SPH</option>
+                        <option *ngFor="let sph of sphOptions" [value]="sph">{{ sph }}</option>
+                      </select>
+
+                      <label class="form-label">Power (CYL)</label>
+                      <select class="form-select form-select-sm mb-2" formControlName="leftEyePowerCYL">
+                        <option value="">Select CYL</option>
+                        <option *ngFor="let cyl of cylOptions" [value]="cyl">{{ cyl }}</option>
+                      </select>
+
+                      <label class="form-label">Axis</label>
+                      <select class="form-select form-select-sm mb-2" formControlName="leftEyeAxis">
+                        <option value="">Select Axis</option>
+                        <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
+                      </select>
+
+                      <label class="form-label">Number of Index</label>
+                      <select class="form-select form-select-sm" formControlName="leftNumberOfBoxes">
+                        <option value="">Select Number of Index</option>
+                        <option *ngFor="let count of boxesOptions" [value]="count">{{ count }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="text-end mt-3">
+                  <button class="btn btn-primary px-4" type="submit" [disabled]="productForm.invalid">
+                    Save & Continue
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+        <div *ngIf="currentStep === 4" class="step-content slide-in">
           <h5 class="section-title">Review Your Order</h5>
 
           <div class="order-summary-card">
@@ -374,6 +455,7 @@
             </div>
           </div>
         </div>
+
       </div>
       <div class="modal-footer text-center">
         <p class="m-0 w-100 text-muted">© All rights reserved @i-trends-2025</p>

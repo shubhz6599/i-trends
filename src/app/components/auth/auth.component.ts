@@ -132,7 +132,6 @@ export class AuthComponent implements OnInit {
       this.ui.showLoading
       this.authService.resetPassword(data).subscribe(
         (response) => {
-          console.log('Password Reset Successful:', response);
           this.isResetPasswordMode = false;
           this.ui.hideLoading()
           this.ui.showToast('Successful!', 'Password Reset Successful');
@@ -141,7 +140,6 @@ export class AuthComponent implements OnInit {
         (error) => {
           this.ui.hideLoading()
 
-          console.error('Password Reset Error:', error);
           this.ui.showToast(error.message, 'danger');
         }
       );
@@ -161,14 +159,12 @@ export class AuthComponent implements OnInit {
       this.ui.showLoading();
       this.authService.signUp(data).subscribe(
         (response) => {
-          // console.log('Sign Up Successful:', response);
           this.isOtpVerificationMode = true;
           this.ui.hideLoading();
           this.ui.showToast('Email Sent', 'Otp Verification Email Sent To Mail')
           // this.router.navigate(['/home'])
         },
         (error) => {
-          console.error('Sign Up Error:', error);
           this.ui.hideLoading();
           this.ui.showToast(error.error.message, 'danger');
         }
@@ -185,7 +181,6 @@ export class AuthComponent implements OnInit {
       this.ui.showLoading();
       this.authService.verifyOtp(data).subscribe(
         (response) => {
-          console.log('OTP Verified:', response);
           this.isOtpVerificationMode = false; // Exit OTP verification mode after success
           localStorage.setItem('jwtToken', response.token);
           const user = {
@@ -201,7 +196,6 @@ export class AuthComponent implements OnInit {
 
         },
         (error) => {
-          console.error('OTP Verification Error:', error);
           this.ui.hideLoading
           this.ui.showToast('Invalid OTP!', 'OOps! You Entered Invalid or expired OTP!');
         }
@@ -219,12 +213,10 @@ export class AuthComponent implements OnInit {
     this.ui.showLoading();
     this.authService.resendOtp({ email }).subscribe(
       (response) => {
-        console.log('Resend OTP Successful:', response);
         this.ui.hideLoading();
         this.ui.showToast('Success!', 'OTP resent successfully!');
       },
       (error) => {
-        console.error('Resend OTP Error:', error);
         if (error.status === 429) {
           this.ui.showToast('Daily OTP Limit Crossed','You exceeded the resend OTP limit of 3 times. Please try after 24 hours.');
         } else {
@@ -244,7 +236,6 @@ export class AuthComponent implements OnInit {
       this.ui.showLoading();
       this.authService.login(data).subscribe(
         (response) => {
-          console.log('Login Successful:', response);
           localStorage.setItem('jwtToken', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
           this.ui.hideLoading();
@@ -252,7 +243,6 @@ export class AuthComponent implements OnInit {
           this.router.navigate(['/'])
         },
         (error) => {
-          console.error('Login Error:', error);
           this.ui.hideLoading();
           this.ui.showToast('Oops Error!','Error while logging');
         }
@@ -268,12 +258,10 @@ export class AuthComponent implements OnInit {
       this.ui.showLoading();
       this.authService.forgotPassword(data).subscribe(
         (response) => {
-          console.log('Forgot Password Email Sent:', response);
           this.ui.hideLoading()
           this.ui.showToast('Success!','Password Reset Email Sent!');
         },
         (error) => {
-          console.error('Forgot Password Error:', error);
           this.ui.hideLoading()
           this.ui.showToast('Error','Error Sending Reset Email!', );
         }
@@ -289,7 +277,6 @@ export class AuthComponent implements OnInit {
       const modalInstance = new bootstrap.Modal(modalElement); // Initialize Bootstrap modal
       modalInstance.show(); // Show the modal
     } else {
-      console.error('Modal element not found!');
     }
   }
 

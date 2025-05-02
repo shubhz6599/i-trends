@@ -31,7 +31,6 @@ export class FeedbackFormComponent implements OnInit {
     this.uiService.showLoading()
     this.feedbackService.getMyFeedback().subscribe(
       (feedback: any) => {
-        console.log(feedback);
 
         // If feedback exists, populate the form and disable it
         if (feedback && feedback.feedbacks.length != 0) {
@@ -56,7 +55,6 @@ export class FeedbackFormComponent implements OnInit {
         this.uiService.hideLoading();
         // this.uiService.showToast('Error', "Hey Chief! Error while fetching feedback.")
 
-        console.error('Error fetching feedback:', error);
       }
     );
   }
@@ -76,7 +74,6 @@ export class FeedbackFormComponent implements OnInit {
         (error) => {
           this.uiService.hideLoading();
           this.uiService.showToast('Error', 'Error While Submitting Feedback')
-          console.error('Error submitting feedback:', error);
         }
       );
     }

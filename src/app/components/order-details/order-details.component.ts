@@ -25,9 +25,7 @@ export class OrderDetailsComponent implements OnInit {
         this.uiService.hideLoading()
         if (response.success) {
           this.orderDetails = response.order;
-          console.log('Order Details:', this.orderDetails);
         } else {
-          console.error('Failed to fetch order details:', response.message);
         }
       },
       (error: any) => {

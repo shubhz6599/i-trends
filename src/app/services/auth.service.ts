@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,9 +9,16 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private baseUrl = environment.apiBaseUrl;
   private userbaseUrl = environment.userbaseUrl;
+  private cartSubject = new BehaviorSubject<any[]>([]);
+  cart$ = this.cartSubject.asObservable();
 
+  constructor(private http: HttpClient) {
+    this.getCart().subscribe({
+      next: res => this.cartSubject.next(res.cart), // ✅ full cart object
+      error: err => console.error('Failed to load cart on init', err)
+    });
 
-  constructor(private http: HttpClient) { }
+  }
 
   // Sign Up API
   signUp(data: { name: string; email: string; password: string }): Observable<any> {
@@ -74,17 +81,29 @@ export class AuthService {
 
   // Add product to cart
   addToCart(product: any): Observable<any> {
-    const token = localStorage.getItem('jwtToken'); // Fetch token from localStorage
-    const headers = { Authorization: `Bearer ${token}` }; // Add Authorization header
-    return this.http.post(`${this.userbaseUrl}/cart`, product, { headers });
+    const token = localStorage.getItem('jwtToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.post(`${this.userbaseUrl}/cart`, product, { headers }).pipe(
+      tap(() => this.refreshCart()) // ✅ This ensures cart UI gets updated after add
+    );
   }
 
   // Remove an item from the cart
   removeFromCart(productId: string): Observable<any> {
-    const token = localStorage.getItem('jwtToken'); // Fetch token from localStorage
-    const headers = { Authorization: `Bearer ${token}` }; // Add Authorization header
-    return this.http.delete(`${this.userbaseUrl}/cart`, { headers, body: { productId } });
+    const token = localStorage.getItem('jwtToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.delete(`${this.userbaseUrl}/cart`, { headers, body: { productId } }).pipe(
+      tap(() => this.refreshCart()) // update cart
+    );
   }
+
+  private refreshCart() {
+    this.getCart().subscribe({
+      next: res => this.cartSubject.next(res.cart), // ✅ again full cart object
+      error: err => console.error('Cart refresh failed', err)
+    });
+  }
+
 
 
   // orders
