@@ -21,8 +21,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   private scrollRightBtn!: HTMLElement;
   images = [
     {
-      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Metal%2FRound%2FDSC_0094.jpg?alt=media&token=4dd9f9d0-bcaf-4d46-84b2-495f478b66ee',
-      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Metal%2FRound%2FDSC_0095.jpg?alt=media&token=9ce63975-5692-436b-942b-36ca1f5fa610',
+     front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Metal%2FCompressed%20Rounded%2FDSC_0094.jpg?alt=media&token=6695b486-bdab-47cd-8c37-473f881a6133',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Metal%2FCompressed%20Rounded%2FDSC_0095.jpg?alt=media&token=f04febbe-c9b8-4436-8b28-ee5c3bdee02a',
       title: 'Metal Frames',
       category: 'Metal Frames',
       loaded: false, // Placeholder visibility
