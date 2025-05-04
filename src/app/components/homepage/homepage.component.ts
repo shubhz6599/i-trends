@@ -30,8 +30,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       backLoaded: false,
     },
     {
-      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0220.jpg?alt=media&token=89e9d23f-bc48-4121-8f07-1d7597f35fbd',
-      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0221.jpg?alt=media&token=340515a4-4bf3-46ef-95db-6da4312afd46',
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Squares%2FDSC_0220.jpg?alt=media&token=00ebfdde-649e-4cd3-a770-765f848f6226',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Squares%2FDSC_0221.jpg?alt=media&token=e3f217ce-0c5b-4a6d-8119-dfafb5ec1e51',
       title: 'Square Frames',
       category: 'Square',
       loaded: false, // Placeholder visibility
@@ -39,8 +39,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       backLoaded: false,
     },
     {
-      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FSquareMain12X.jpg?alt=media&token=9fd9c3ea-b95b-459a-a254-5525b6718a0e',
-      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FSquareMain12X2.jpg?alt=media&token=39fe9500-1dd5-40d6-9bd0-e8d8ce05156b',
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%2012X%20Square%2FDSC_0295.jpg?alt=media&token=47c407d3-8e3a-4ca7-ac02-c7f21aefddc9',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%2012X%20Square%2FDSC_0296.jpg?alt=media&token=0f4b0c70-ce61-4ef1-b087-2da200a62a69',
       title: '12X Square Frames',
       category: '12X Square Frames',
       loaded: false, // Placeholder visibility
@@ -48,8 +48,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       backLoaded: false,
     },
     {
-      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRimless.jpg?alt=media&token=fa26679b-febc-4c46-affe-b98fc22296a3',
-      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRimless2.jpg?alt=media&token=2569f6bc-03d1-4ea8-b01c-b034be9e95b1',
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Rim%20less%2FCompressed%20Hexagonal%2FDSC_0380.jpg?alt=media&token=625cc6dc-1ef4-4afd-88e9-1776e3990d63',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Rim%20less%2FCompressed%20Hexagonal%2FDSC_0383.jpg?alt=media&token=07c4e18f-8c77-4013-8875-cfa76138ee0a',
       title: 'Rim Less Frames',
       category: 'Rim Less Frames',
       loaded: false, // Placeholder visibility
@@ -57,8 +57,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       backLoaded: false,
     },
     {
-      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRounded.jpg?alt=media&token=b6dc8604-4da4-4ad5-86d5-b58a45628d52',
-      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FRounded2.jpg?alt=media&token=e68216e4-2286-48d6-9672-ca30f1b0db89',
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Rounded%2FDSC_0320.jpg?alt=media&token=c2c885d8-c94f-4e04-8591-d8f2552ccbae',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Rounded%2FDSC_0321.jpg?alt=media&token=efa42e64-a74b-424c-a2b1-6af3cb70cf9a',
       title: 'Rounded Frames',
       category: 'Rounded Frames',
       loaded: false, // Placeholder visibility
@@ -66,8 +66,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       backLoaded: false,
     },
     {
-      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FHuslr.jpg?alt=media&token=fffacfee-42a4-4b5a-992a-3e9063706d67',
-      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FHuslr2.jpg?alt=media&token=6bb29f8c-57bd-42d2-9f1c-57fc677f265c',
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Husler%2FDSC_0252.jpg?alt=media&token=e964ba07-a517-4725-b75d-b4f8f36518e1',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Husler%2FDSC_0253.jpg?alt=media&token=01f5a896-58fc-486c-8fd2-1a1e48d25f22',
       title: 'Husler Frames ',
       category: 'Husler Frames',
       loaded: false, // Placeholder visibility
@@ -75,8 +75,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       backLoaded: false,
     },
     {
-      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FUnisex.jpg?alt=media&token=ec671f5d-765b-49c8-a8c1-e42ef882aa1f',
-      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainFrames%2FUnisex2.jpg?alt=media&token=adcaa9ae-7427-4130-9ba6-7e4cd110ea1f',
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Unisex%20Sunglasses%2FDSC_0434.jpg?alt=media&token=a9e2d78b-9a19-445c-93b5-4aac86f6d5be',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Unisex%20Sunglasses%2FDSC_0435.jpg?alt=media&token=ed27d3cd-f256-44e1-864c-8f8177cdbfc2',
       title: 'Unisex Sunglasses',
       category: 'Unisex Sunglasses',
       loaded: false, // Placeholder visibility
@@ -84,8 +84,8 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       backLoaded: false,
     },
     {
-      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0457.jpg?alt=media&token=1db700db-c21f-4682-9e67-64a8b76301f5',
-      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Kids%20Sunglasses%2FDSC_0458.jpg?alt=media&token=ce288b72-b9d0-4774-87b2-6d9d628f1aeb',
+      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Kids%20Sunglasses%2FDSC_0457.jpg?alt=media&token=d4aab688-f75e-462e-b46e-5dfe9a2afbdd',
+      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Compressed%20Kids%20Sunglasses%2FDSC_0458.jpg?alt=media&token=56b79658-ff7f-43fd-bf60-debf9ec1f054',
       title: 'Kids Sunglasses & Frames',
       category: 'Kids Sunglasses & Frames',
       loaded: false, // Placeholder visibility
