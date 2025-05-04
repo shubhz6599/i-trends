@@ -61,7 +61,7 @@ export class ImagePreloaderService {
       .filter(product => product.bumperdiscount);
     const imageUrls = this.collectProductImages(bumperProducts);
     this.currentBatch = imageUrls;
-    this.preloadImagesSequentially();
+    this.preloadImagesInParallel();
   }
 
   // NEW: Preload all products regardless of category
@@ -70,7 +70,7 @@ export class ImagePreloaderService {
     const allProducts = productsData.categories.flatMap(category => category.products);
     const imageUrls = this.collectProductImages(allProducts);
     this.currentBatch = imageUrls;
-    this.preloadImagesSequentially();
+    this.preloadImagesInParallel();
   }
   private collectProductImages(products: any[]): string[] {
     const imageUrls: string[] = [];
@@ -97,33 +97,18 @@ export class ImagePreloaderService {
     });
 
     this.currentBatch = imageUrls; // Set the new batch
-    this.preloadImagesSequentially(); // Start fetching images one by one
+    this.preloadImagesInParallel(); // Start fetching images one by one
   }
 
   // Preload images sequentially (one image at a time)
-  private preloadImagesSequentially(): void {
-    let index = 0;
-
-    const loadNextImage = () => {
-      if (index >= this.currentBatch.length || !this.isPreloading) return; // Stop if preloading is canceled
-
-      const url = this.currentBatch[index];
+  private preloadImagesInParallel(): void {
+    this.currentBatch.forEach((url) => {
       if (!this.imageCache.has(url)) {
         const img = new Image();
-        img.src = url; // Trigger image loading
-        img.onload = () => {
-          this.imageCache.set(url, img); // Cache the loaded image
-          index++;
-          loadNextImage(); // Fetch the next image
-        };
-      } else {
-        index++;
-        loadNextImage(); // Skip already cached images
+        img.src = url;
+        this.imageCache.set(url, img);
       }
-    };
-
-    this.isPreloading = true; // Start preloading
-    loadNextImage();
+    });
   }
 
   // Preload images for other categories in the background
