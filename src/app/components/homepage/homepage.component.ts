@@ -102,15 +102,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       backLoaded: false,
     },
     {
-      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0232.jpg?alt=media&token=64925148-c94f-4668-83e3-9cf61a9bb40d',
-      back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Squares%2FDSC_0233.jpg?alt=media&token=bdbd701c-a618-4273-b467-9c8f1209c870',
-      title: 'Computer Sunglasses',
-      category: 'Computer Sunglasses',
-      loaded: false, // Placeholder visibility
-      frontLoaded: false,
-      backLoaded: false,
-    },
-    {
       front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Lenses%2FCJVAWD86_1_lar_1.webp?alt=media&token=ba134290-515b-4355-a4c5-a0c6ba1fbd58',
       back: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Lenses%2Fcbicwc86_iconnect-pack-shot_2_8.webp?alt=media&token=c7e02074-27e8-445a-a7ca-bc315b3e8e1e',
       title: 'Contact Lenses',
