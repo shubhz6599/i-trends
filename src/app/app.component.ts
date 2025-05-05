@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private router: Router,private connectionService: ConnectionService) { }
 
   ngOnInit(): void {
-    this.checkViewportSize();
+    // this.checkViewportSize();
     this.connectionService.showOfflinePage.subscribe(show => {
       this.showOfflinePage = show;
     });

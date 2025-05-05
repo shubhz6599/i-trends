@@ -2,34 +2,47 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden; /* Important to control scroll only inside content */
+  overflow: hidden;
+  /* Important to control scroll only inside content */
 }
 
 app-top-navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 60px; /* Adjust height according to your top navbar */
+  height: 60px;
+  /* Adjust height according to your top navbar */
   z-index: 1000;
-  background-color: white; /* Optional: set background */
+  background-color: white;
+  /* Optional: set background */
 }
 
 app-bottom-navbar {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 60px; /* Define bottom navbar height */
+  height: 0px !important;
+  /* Define bottom navbar height */
   z-index: 1000;
-  background-color: white; /* Optional: set background */
+  background-color: white;
+  /* Optional: set background */
 }
 
 .content-area {
   flex: 1;
   margin-top: 78px;
   margin-bottom: 0px;
-  overflow-y: auto; /* Only router-outlet content will scroll */
+  overflow-y: auto;
+  /* Only router-outlet content will scroll */
 }
 
 .content-area.no-margin {
   margin-top: 0px !important;
+}
+
+@media (max-width: 784) {
+  app-bottom-navbar {
+
+    display: none;
+  }
 }
