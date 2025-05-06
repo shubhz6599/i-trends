@@ -54,7 +54,7 @@ const routes: Routes = [
         path: 'track-order/:orderId',
         component: TrackOrderComponent
       },
-      { path: 'admin', component: AdminDashboardComponent }
+      { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard] }
       // { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard] }
 
 

@@ -6,125 +6,162 @@
   <div class="row g-4 mb-4">
     <!-- Today's Orders Card -->
     <div class="col-md-4">
-      <div class="card dashboard-card shadow-sm text-center p-4">
-        <h5 class="fw-bold text-primary">Today's Orders</h5>
-        <p class="display-6 fw-bold text-success">{{ todaysOrders.length }}</p>
-        <button class="btn btn-primary btn-sm mt-3" (click)="filterTodaysOrders()">View Details</button>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search orders..." [(ngModel)]="searchTerm"
+          (keyup.enter)="getOrders()">
       </div>
     </div>
-
-    <!-- Last 1 Month Orders Card -->
     <div class="col-md-4">
-      <div class="card dashboard-card shadow-sm text-center p-4">
-        <h5 class="fw-bold text-primary">Last 1 Month Orders</h5>
-        <p class="display-6 fw-bold text-success">{{ lastMonthOrders.length }}</p>
-        <button class="btn btn-primary btn-sm mt-3" (click)="filterLastMonthOrders()">View Details</button>
+      <div class="input-group">
+        <input type="date" class="form-control" [(ngModel)]="fromDate" placeholder="From date">
       </div>
     </div>
-
-    <!-- Last 1 Year Orders Card -->
     <div class="col-md-4">
-      <div class="card dashboard-card shadow-sm text-center p-4">
-        <h5 class="fw-bold text-primary">Last 1 Year Orders</h5>
-        <p class="display-6 fw-bold text-success">{{ lastYearOrders.length }}</p>
-        <button class="btn btn-primary btn-sm mt-3" (click)="filterLastYearOrders()">View Details</button>
+      <div class="input-group">
+        <input type="date" class="form-control" [(ngModel)]="toDate" placeholder="To date">
+      </div>
+    </div>
+
+    <div class="col-md-12 d-flex justify-content-center">
+      <div class="me-2">
+        <button class="btn btn-secondary" (click)="clearFilters()">
+          <i class="fas fa-times"></i> Clear
+        </button>
+      </div>
+      <div class="me-2">
+        <button class="btn btn-primary" (click)="getOrders()">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+      <div class="me-2">
+        <button class="btn btn-success" (click)="exportToExcel()">
+          <i class="fas fa-file-excel"></i> Export
+        </button>
+      </div>
+    </div>
+
+
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="card dashboard-card shadow-sm text-center p-4">
+          <h5 class="fw-bold text-primary">Today's Orders</h5>
+          <p class="display-6 fw-bold text-success">{{ todaysOrders.length }}</p>
+          <button class="btn btn-primary btn-sm mt-3" (click)="filterTodaysOrders()">View Details</button>
+        </div>
+      </div>
+
+      <!-- Last 1 Month Orders Card -->
+      <div class="col-md-4">
+        <div class="card dashboard-card shadow-sm text-center p-4">
+          <h5 class="fw-bold text-primary">Last 1 Month Orders</h5>
+          <p class="display-6 fw-bold text-success">{{ lastMonthOrders.length }}</p>
+          <button class="btn btn-primary btn-sm mt-3" (click)="filterLastMonthOrders()">View Details</button>
+        </div>
+      </div>
+
+      <!-- Last 1 Year Orders Card -->
+      <div class="col-md-4">
+        <div class="card dashboard-card shadow-sm text-center p-4">
+          <h5 class="fw-bold text-primary">Last 1 Year Orders</h5>
+          <p class="display-6 fw-bold text-success">{{ lastYearOrders.length }}</p>
+          <button class="btn btn-primary btn-sm mt-3" (click)="filterLastYearOrders()">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Messages -->
+    <div *ngIf="isLoading" class="alert alert-info text-center">Loading orders...</div>
+    <div *ngIf="!isLoading && orders.length === 0" class="alert alert-warning text-center">
+      No orders found.
+    </div>
+
+    <!-- Scrollable Orders Table -->
+    <div *ngIf="orders.length > 0" class="card shadow-sm p-4">
+      <h5 class="fw-bold mb-3">Orders</h5>
+
+      <!-- Scrollable Container -->
+      <div class="table-responsive">
+        <table class="table table-hover align-middle text-center">
+          <thead class="table-primary">
+            <tr>
+              <th>User</th>
+              <th>Email</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Product Type</th>
+              <th>Products</th>
+              <th>Main Option</th>
+              <th>Sub Option</th>
+              <th>Quantity</th>
+              <th>Variant</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <td class="fw-bold">{{ order.userId?.name }}</td>
+              <td>{{ order.userId?.email }}</td>
+              <td class="text-success fw-bold">₹{{ order.totalAmount }}</td>
+              <td class="text-capitalize">
+                <span class="badge bg-primary">{{ order.status }}</span>
+              </td>
+              <td>
+                <ul class="ps-0 mb-0 text-start">
+                  <li *ngFor="let item of order.items">
+                    {{ item.productType }}
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <ul class="ps-0 mb-0 text-start">
+                  <li *ngFor="let item of order.items">
+                    {{ item.name }} × {{ item.quantity }}
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <ul class="ps-0 mb-0 text-start">
+                  <li *ngFor="let item of order.items">
+                    {{ item.mainOption }}
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <ul class="ps-0 mb-0 text-start">
+                  <li *ngFor="let item of order.items">
+                    {{ item.subOption }}
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <ul class="ps-0 mb-0 text-start">
+                  <li *ngFor="let item of order.items">
+                    {{ item.quantity }}
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <ul class="ps-0 mb-0 text-start">
+                  <li *ngFor="let item of order.items">
+                    {{ item.variant }}
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <div class="d-flex justify-content-center align-items-center">
+                  <select [(ngModel)]="order.selectedStatus" class="form-select form-select-sm me-2 w-auto">
+                    <option value="processing">Processing</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="shippedtopune">Shipped to Pune</option>
+                    <option value="deliveryday">Out for Delivery</option>
+                    <option value="complete">Delivered</option>
+                  </select>
+                  <button class="btn btn-primary btn-sm" (click)="updateStatus(order)">Update</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-
-  <!-- Feedback Messages -->
-  <div *ngIf="isLoading" class="alert alert-info text-center">Loading orders...</div>
-  <div *ngIf="!isLoading && orders.length === 0" class="alert alert-warning text-center">
-    No orders found.
-  </div>
-
-  <!-- Scrollable Orders Table -->
-  <div *ngIf="orders.length > 0" class="card shadow-sm p-4">
-    <h5 class="fw-bold mb-3">Orders</h5>
-
-    <!-- Scrollable Container -->
-    <div class="table-responsive">
-      <table class="table table-hover align-middle text-center">
-        <thead class="table-primary">
-          <tr>
-            <th>User</th>
-            <th>Email</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th>Product Type</th>
-            <th>Products</th>
-            <th>Main Option</th>
-            <th>Sub Option</th>
-            <th>Quantity</th>
-            <th>Variant</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orders">
-            <td class="fw-bold">{{ order.userId?.name }}</td>
-            <td>{{ order.userId?.email }}</td>
-            <td class="text-success fw-bold">₹{{ order.totalAmount }}</td>
-            <td class="text-capitalize">
-              <span class="badge bg-primary">{{ order.status }}</span>
-            </td>
-            <td>
-              <ul class="ps-0 mb-0 text-start">
-                <li *ngFor="let item of order.items">
-                  {{ item.productType }}
-                </li>
-              </ul>
-            </td>
-            <td>
-              <ul class="ps-0 mb-0 text-start">
-                <li *ngFor="let item of order.items">
-                  {{ item.name }} × {{ item.quantity }}
-                </li>
-              </ul>
-            </td>
-            <td>
-              <ul class="ps-0 mb-0 text-start">
-                <li *ngFor="let item of order.items">
-                  {{ item.mainOption }}
-                </li>
-              </ul>
-            </td>
-            <td>
-              <ul class="ps-0 mb-0 text-start">
-                <li *ngFor="let item of order.items">
-                  {{ item.subOption }}
-                </li>
-              </ul>
-            </td>
-            <td>
-              <ul class="ps-0 mb-0 text-start">
-                <li *ngFor="let item of order.items">
-                  {{ item.quantity }}
-                </li>
-              </ul>
-            </td>
-            <td>
-              <ul class="ps-0 mb-0 text-start">
-                <li *ngFor="let item of order.items">
-                  {{ item.variant }}
-                </li>
-              </ul>
-            </td>
-            <td>
-              <div class="d-flex justify-content-center align-items-center">
-                <select [(ngModel)]="order.selectedStatus" class="form-select form-select-sm me-2 w-auto">
-                  <option value="processing">Processing</option>
-                  <option value="confirmed">Confirmed</option>
-                  <option value="shippedtopune">Shipped to Pune</option>
-                  <option value="deliveryday">Out for Delivery</option>
-                  <option value="complete">Delivered</option>
-                </select>
-                <button class="btn btn-primary btn-sm" (click)="updateStatus(order)">Update</button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>

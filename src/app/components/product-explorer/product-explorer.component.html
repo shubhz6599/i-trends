@@ -1,13 +1,13 @@
 <div class="explorer-container">
 
-    <p class="mt-3" *ngIf="paymentMsg">{{paymentMsg}}</p>
+  <p class="mt-3" *ngIf="paymentMsg">{{paymentMsg}}</p>
 
   <div class="category-header d-flex align-items-center" *ngIf="!selectedProduct">
     <button class="backBtn me-3" (click)="goBack()">
       <i class="bi bi-arrow-left"></i>
     </button>
     <h1 class="cursiveFont mb-0 fg2">
-      <span  *ngIf="isBumperDiscountView">Bumper Discount Products</span>
+      <span *ngIf="isBumperDiscountView">Bumper Discount Products</span>
       <span *ngIf="isAllProductsView">All Products</span>
       <span *ngIf="currentCategory && !isBumperDiscountView && !isAllProductsView">{{currentCategory.name}}</span>
     </h1>
@@ -76,13 +76,9 @@
     <p class="professional-message">{{ searchResultMessage }}</p>
   </div>
   <div class="main-content" [class.hidden]="isFilterPanelVisible">
-    <div class="category-banner" *ngIf="currentCategoryImage && !selectedProduct" >
+    <div class="category-banner" *ngIf="currentCategoryImage && !selectedProduct">
       <div class="category-banner-content">
-        <img
-          [src]="currentCategoryImage"
-          alt="N.A."
-          class="category-image animated-banner"
-        />
+        <img [src]="currentCategoryImage" alt="N.A." class="category-image animated-banner" />
       </div>
     </div>
     <div class="products-grid" *ngIf="!selectedProduct">
@@ -122,89 +118,89 @@
         <i class="bi bi-arrow-left"></i>
         Back to Collection
       </nav>
-<div class="grid-container">
-      <div class="photo">
-        <div class="image-loading" *ngIf="!imageLoaded">
-          <div class="loading-spinner"></div>
-          <div class="loading-message">{{currentLoadingMessage}}</div>
-        </div>
-        <img [src]="currentMainImage || selectedVariant.images[0]" [alt]="selectedProduct.name" (load)="onImageLoad()"
-          [class.loaded]="imageLoaded" loading="lazy">
+      <div class="grid-container">
+        <div class="photo">
+          <div class="image-loading" *ngIf="!imageLoaded">
+            <div class="loading-spinner"></div>
+            <div class="loading-message">{{currentLoadingMessage}}</div>
+          </div>
+          <img [src]="currentMainImage || selectedVariant.images[0]" [alt]="selectedProduct.name" (load)="onImageLoad()"
+            [class.loaded]="imageLoaded" loading="lazy">
 
-        <div class="image-thumbnails" *ngIf="selectedVariant.images.length > 1">
-          <div *ngFor="let img of selectedVariant.images; let i = index" class="thumbnail"
-            [class.active]="currentMainImage === img" [class.loaded]="imageLoaded" (click)="setMainImage(img)">
-            <img class="mt-10" [src]="img" [alt]="'Thumbnail ' + (i+1)" loading="lazy">
+          <div class="image-thumbnails" *ngIf="selectedVariant.images.length > 1">
+            <div *ngFor="let img of selectedVariant.images; let i = index" class="thumbnail"
+              [class.active]="currentMainImage === img" [class.loaded]="imageLoaded" (click)="setMainImage(img)">
+              <img class="mt-10" [src]="img" [alt]="'Thumbnail ' + (i+1)" loading="lazy">
+            </div>
+          </div>
+
+          <div class="image-dots" *ngIf="selectedVariant.images.length > 1">
+            <span *ngFor="let img of selectedVariant.images; let i = index" [class.active]="currentMainImage === img"
+              (click)="setMainImage(img)"></span>
           </div>
         </div>
 
-        <div class="image-dots" *ngIf="selectedVariant.images.length > 1">
-          <span *ngFor="let img of selectedVariant.images; let i = index" [class.active]="currentMainImage === img"
-            (click)="setMainImage(img)"></span>
-        </div>
-      </div>
-
-      <div class="description">
-        <h2>{{selectedProduct.name}}</h2>
-        <h4>{{currentCategory?.name}}</h4>
-        <div class="color-options">
-          <span *ngFor="let variant of selectedProduct.variants" class="color-option"
-            [style.backgroundColor]="variant.colorCode" (click)="selectVariant(variant)"></span>
-        </div>
-
-        <div class="price-display" #priceDisplay>
-          <div *ngIf="showOriginalPrice" class="price-step" @priceStep>
-            <span class="original-price">
-              ₹{{getOriginalPrice()}}
-              <span class="strike-through"></span>
-            </span>
+        <div class="description">
+          <h2>{{selectedProduct.name}}</h2>
+          <h4>{{currentCategory?.name}}</h4>
+          <div class="color-options">
+            <span *ngFor="let variant of selectedProduct.variants" class="color-option"
+              [style.backgroundColor]="variant.colorCode" (click)="selectVariant(variant)"></span>
           </div>
 
-          <div *ngIf="showDiscountPercent" class="price-step" @priceStep>
-            <span class="discount-percent">
-              {{discountPercent}}% OFF
-            </span>
-          </div>
-
-          <div *ngIf="showFinalPrice" class="price-step" @priceStep>
-            <span class="final-price">
-              ₹
-              <span *ngFor="let digit of getFinalPriceDigits(); let i = index" class="digit"
-                [style.animation-delay]="i * 100 + 'ms'">
-                {{digit}}
+          <div class="price-display" #priceDisplay>
+            <div *ngIf="showOriginalPrice" class="price-step" @priceStep>
+              <span class="original-price">
+                ₹{{getOriginalPrice()}}
+                <span class="strike-through"></span>
               </span>
-            </span>
-          </div>
-        </div>
+            </div>
 
-        <p>{{selectedProduct.description}}</p>
-        <button class="btn btn-primary customBtn" (click)="openModal()">Select Lenses</button>
+            <div *ngIf="showDiscountPercent" class="price-step" @priceStep>
+              <span class="discount-percent">
+                {{discountPercent}}% OFF
+              </span>
+            </div>
+
+            <div *ngIf="showFinalPrice" class="price-step" @priceStep>
+              <span class="final-price">
+                ₹
+                <span *ngFor="let digit of getFinalPriceDigits(); let i = index" class="digit"
+                  [style.animation-delay]="i * 100 + 'ms'">
+                  {{digit}}
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <p>{{selectedProduct.description}}</p>
+          <button class="btn btn-primary customBtn" (click)="openModal()">Select Lenses</button>
+        </div>
       </div>
-    </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="lensModal" tabindex="-1" aria-labelledby="lensModalLabel" style="overflow-y: auto;" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+<div class="modal fade" id="lensModal" tabindex="-1" aria-labelledby="lensModalLabel" style="overflow-y: auto;"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered  modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button *ngIf="currentStep > 1" class="btn btn-back" (click)="goBackForToggle()">
           <i class="bi bi-chevron-left"></i>
           <span class="visually-hidden">Back</span>
         </button>
-        <h5 class="modal-title">
+        <h5 class="modal-title text-truncate">
           {{ currentStep === 1 ? 'Select Lens Type' : currentStep === 2 ? 'Choose Package' : 'Order Summary' }}
         </h5>
         <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body p-3 p-md-4">
         <div class="steps">
-          <div *ngFor="let step of steps; let index = index" class="step"
-               [class.active]="currentStep === index + 1"
-               [class.completed]="currentStep > index + 1">
+          <div *ngFor="let step of steps; let index = index" class="step" [class.active]="currentStep === index + 1"
+            [class.completed]="currentStep > index + 1">
             <span *ngIf="currentStep <= index + 1">{{ index + 1 }}</span>
             <i *ngIf="currentStep > index + 1" class="bi bi-check"></i>
           </div>
@@ -212,9 +208,8 @@
         </div>
         <div *ngIf="currentStep === 1" class="step-content slide-in">
           <ul class="list-group lens-options">
-            <li class="list-group-item lens-option"
-                (click)="selectMainOption('single-vision')"
-                [class.active]="selection.mainOption === 'single-vision'">
+            <li class="list-group-item lens-option" (click)="selectMainOption('single-vision')"
+              [class.active]="selection.mainOption === 'single-vision'">
               <div class="option-content">
                 <div class="option-icon">
                   <i class="bi bi-eye-fill"></i>
@@ -230,9 +225,8 @@
             </li>
 
             <li class="list-group-item lens-option"
-            *ngIf="viewType != 'Unisex Sunglasses' && viewType != 'Kids Sunglasses & Frames' && viewType!= 'Unisex Sports & Swimming'"
-                (click)="selectMainOption('bifocal')"
-                [class.active]="selection.mainOption === 'bifocal'">
+              *ngIf="viewType != 'Unisex Sunglasses' && viewType != 'Kids Sunglasses & Frames' && viewType!= 'Unisex Sports & Swimming'"
+              (click)="selectMainOption('bifocal')" [class.active]="selection.mainOption === 'bifocal'">
               <div class="option-content">
                 <div class="option-icon">
                   <i class="bi bi-eyeglasses"></i>
@@ -247,9 +241,8 @@
               </div>
             </li>
 
-            <li class="list-group-item lens-option"
-                (click)="selectMainOption('zero-power')"
-                [class.active]="selection.mainOption === 'zero-power'">
+            <li class="list-group-item lens-option" (click)="selectMainOption('zero-power')"
+              [class.active]="selection.mainOption === 'zero-power'">
               <div class="option-content">
                 <div class="option-icon">
                   <i class="bi bi-shield-check"></i>
@@ -264,9 +257,8 @@
               </div>
             </li>
 
-            <li class="list-group-item lens-option"
-                (click)="selectFrameOnly()"
-                [class.active]="selection.mainOption === 'frame-only'">
+            <li class="list-group-item lens-option" (click)="selectFrameOnly()"
+              [class.active]="selection.mainOption === 'frame-only'">
               <div class="option-content">
                 <div class="option-icon">
                   <i class="bi bi-box"></i>
@@ -284,24 +276,23 @@
         </div>
 
         <div *ngIf="currentStep === 2" class="step-content slide-in">
-          <div class="row">
-            <div class="col-md-6 mb-4" *ngFor="let option of subOptions">
-              <div class="card option-card"
-                   (click)="selectSubOption(option)"
-                   [class.active]="selection.subOption === option">
-                <div class="card-body">
-                  <div class="card-header">
-                    <h5>{{ option }}</h5>
+          <div class="row g-3">
+            <div class="col-12 col-sm-6" *ngFor="let option of subOptions">
+              <div class="card option-card h-100" (click)="selectSubOption(option)"
+                [class.active]="selection.subOption === option">
+                <div class="card-body p-3">
+                  <div class="card-header p-0 mb-2">
+                    <h5 class="h6 mb-0">{{ option }}</h5>
                     <i class="bi bi-check-circle-fill"></i>
                   </div>
-                  <ul class="features-list">
-                    <li *ngFor="let detail of optionDetails[option]">
+                  <ul class="features-list list-unstyled small mb-2">
+                    <li *ngFor="let detail of optionDetails[option]"  class="mb-1">
                       <i class="bi bi-check-circle"></i>
                       {{ detail }}
                     </li>
                   </ul>
-                  <div class="price-tag">
-                     Lens: ₹{{ prices[option] }}
+                  <div class="price-tag small">
+                    Lens: ₹{{ prices[option] }}
                   </div>
                 </div>
               </div>
@@ -310,36 +301,36 @@
         </div>
 
         <div *ngIf="currentStep === 3" class="step-content slide-in">
-          <div class="container">
+          <div class="container-fluid px-0">
             <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-              <div class="card shadow-sm p-4">
-                <h4 class="mb-4 text-primary fw-bold text-center">Enter Power for Both Eyes</h4>
+              <div class="card shadow-sm p-3">
+                <h4 class="h5 mb-3 text-primary fw-bold text-center">Enter Power for Both Eyes</h4>
 
-                <div class="row">
+                <div class="row g-3">
                   <!-- Right Eye -->
-                  <div class="col-md-6 mb-4">
-                    <div class="card border-success h-100 p-3">
-                      <h5 class="text-success mb-3">Right Eye</h5>
+                  <div class="col-12 col-md-6">
+                    <div class="card border-success h-100 p-2">
+                      <h5 class="h6 text-success mb-2">Right Eye</h5>
 
-                      <label class="form-label">Power (SPH)</label>
+                      <label class="form-label small">Power (SPH)</label>
                       <select class="form-select form-select-sm mb-2" formControlName="rightEyePowerSPH">
                         <option value="">Select SPH</option>
                         <option *ngFor="let sph of sphOptions" [value]="sph">{{ sph }}</option>
                       </select>
 
-                      <label class="form-label">Power (CYL)</label>
+                      <label class="form-label small">Power (CYL)</label>
                       <select class="form-select form-select-sm mb-2" formControlName="rightEyePowerCYL">
                         <option value="">Select CYL</option>
                         <option *ngFor="let cyl of cylOptions" [value]="cyl">{{ cyl }}</option>
                       </select>
 
-                      <label class="form-label">Axis</label>
+                      <label class="form-label small">Axis</label>
                       <select class="form-select form-select-sm mb-2" formControlName="rightEyeAxis">
                         <option value="">Select Axis</option>
                         <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
                       </select>
 
-                      <label class="form-label">Number of Index</label>
+                      <label class="form-label small">Number of Index</label>
                       <select class="form-select form-select-sm" formControlName="rightNumberOfBoxes">
                         <option value="">Select Number of Index</option>
                         <option *ngFor="let count of boxesOptions" [value]="count">{{ count }}</option>
@@ -348,29 +339,29 @@
                   </div>
 
                   <!-- Left Eye -->
-                  <div class="col-md-6 mb-4">
-                    <div class="card border-danger h-100 p-3">
-                      <h5 class="text-danger mb-3">Left Eye</h5>
+                  <div class="col-12 col-md-6">
+                    <div class="card border-success h-100 p-2">
+                      <h5 class="h6 text-success mb-2">Left Eye</h5>
 
-                      <label class="form-label">Power (SPH)</label>
+                      <label class="form-label small">Power (SPH)</label>
                       <select class="form-select form-select-sm mb-2" formControlName="leftEyePowerSPH">
                         <option value="">Select SPH</option>
                         <option *ngFor="let sph of sphOptions" [value]="sph">{{ sph }}</option>
                       </select>
 
-                      <label class="form-label">Power (CYL)</label>
+                      <label class="form-label small">Power (CYL)</label>
                       <select class="form-select form-select-sm mb-2" formControlName="leftEyePowerCYL">
                         <option value="">Select CYL</option>
                         <option *ngFor="let cyl of cylOptions" [value]="cyl">{{ cyl }}</option>
                       </select>
 
-                      <label class="form-label">Axis</label>
+                      <label class="form-label small">Axis</label>
                       <select class="form-select form-select-sm mb-2" formControlName="leftEyeAxis">
                         <option value="">Select Axis</option>
                         <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
                       </select>
 
-                      <label class="form-label">Number of Index</label>
+                      <label class="form-label small">Number of Index</label>
                       <select class="form-select form-select-sm" formControlName="leftNumberOfBoxes">
                         <option value="">Select Number of Index</option>
                         <option *ngFor="let count of boxesOptions" [value]="count">{{ count }}</option>
@@ -380,7 +371,7 @@
                 </div>
 
                 <div class="text-end mt-3">
-                  <button class="btn btn-primary px-4" type="submit" [disabled]="productForm.invalid">
+                  <button class="btn btn-primary btn-sm px-3" type="submit" [disabled]="productForm.invalid">
                     Save & Continue
                   </button>
                 </div>
@@ -391,23 +382,23 @@
         </div>
 
         <div *ngIf="currentStep === 4" class="step-content slide-in">
-          <h5 class="section-title">Review Your Order</h5>
+          <h5 class="h6 section-title mb-3">Review Your Order</h5>
 
-          <div class="order-summary-card">
+          <div class="order-summary-card card mb-3">
             <div class="row g-0">
-              <div class="col-md-4 position-relative">
-                <img [src]="selectedVariant.images[0]" class="product-image"
+              <div class="col-12 col-md-4 position-relative">
+                <img [src]="selectedVariant.images[0]" class="img-fluid w-100 product-image"
                   alt="{{ selectedProduct?.name || 'Product Image' }}" />
                 <div class="badge-overlay">
-                  <span class="badge">Selected</span>
+                  <span class="badge bg-primary small">Selected</span>
                 </div>
               </div>
 
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="product-title">{{ selectedProduct?.name }}</h5>
+              <div class="col-12 col-md-8">
+                <div class="card-body p-3">
+                  <h5 class="h6 product-title mb-2">{{ selectedProduct?.name }}</h5>
 
-                  <div class="detail-grid">
+                  <div class="detail-grid small mb-2">
                     <div class="detail-item">
                       <span>Variant:</span>
                       <strong>{{ selectedVariant?.color || 'Default Variant' }}</strong>
@@ -422,7 +413,7 @@
                     </div>
                   </div>
 
-                  <div class="price-summary">
+                  <div class="price-summary small">
                     <div class="price-row">
                       <span>Product Discounted Price:</span>
                       <span>₹{{ selectedProduct?.basePrice - selectedProduct?.basePriceWithDiscount}}</span>
@@ -433,20 +424,17 @@
                     </div>
                     <div class="price-row total">
                       <span>Total:</span>
-                      <span>₹{{ prices[selection.subOption] + selectedProduct?.basePrice - selectedProduct?.basePriceWithDiscount}}</span>
+                      <span>₹{{ prices[selection.subOption] + selectedProduct?.basePrice -
+                        selectedProduct?.basePriceWithDiscount}}</span>
                     </div>
                   </div>
 
-                  <div class="proceed-btn-container">
-                    <button class="btn cart-btn" (click)="AddToCart()">
+                  <div class="d-flex flex-column flex-sm-row gap-2 mt-3">
+                    <button class="btn btn-outline-secondary btn-sm flex-grow-1 cart-btn" (click)="AddToCart()">
                       <span>Add To Cart</span>
-                      <!-- <i class="bi bi-cart-plus"></i> -->
                     </button>
-                  </div>
-                  <div class="proceed-btn-container">
-                    <button class="btn proceed-btn" (click)="proceedToBuy()">
+                    <button class="btn btn-primary btn-sm flex-grow-1 proceed-btn" (click)="proceedToBuy()">
                       <span>Proceed to Buy</span>
-                      <!-- <i class="bi bi-arrow-right-circle"></i> -->
                     </button>
                   </div>
                 </div>
@@ -456,7 +444,7 @@
         </div>
 
       </div>
-      <div class="modal-footer text-center">
+      <div class="modal-footer text-center py-2">
         <p class="m-0 w-100 text-muted">© All rights reserved @i-trends-2025</p>
       </div>
     </div>
