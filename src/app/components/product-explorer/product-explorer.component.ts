@@ -137,14 +137,14 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     'High Power Screen Lenses': ['Lightweight', 'Slim Design', 'High Optical Clarity', 'Double Side Anti-Glare', 'Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant', 'Uv Protection', 'Index 1.60', 'Material MR8'],
     'Hoya Nulux Blue Control Lenses Japan': ['Shatterproof Design', 'Durable', 'Impact Resistant', 'Lightweight', 'Slim Design', 'High Optical Clarity', 'Double Side Anti-Glare', 'Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant', 'Uv Protection', 'Index 1.60', 'Material MR8'],
     'Circular Bi-focal KT': ['Scratch Resistant', 'UV-400 Protection', 'Water & Dust Repellent', 'Circular Reading Area in Lower Part', 'Index 1.50', 'Material CR'],
-    'Normal Corridor Progressive': [ 'Water & Dust Repellent', 'Crack & Scratch Resistant', 'For Distance Intermediate & Near Vision', 'Smooth Lens with No Visible Line', 'Index 1.50'],
+    'Normal Corridor Progressive': ['Water & Dust Repellent', 'Crack & Scratch Resistant', 'For Distance Intermediate & Near Vision', 'Smooth Lens with No Visible Line', 'Index 1.50'],
     'Anti-Glare Normal Corridor Progressive': ['Double Side Anti Glare', 'Water & Dust Repellent', 'Crack & Scratch Resistant', 'For Distance Intermediate & Near Vision', 'Smooth Lens with No Visible Line', 'Index 1.50'],
     'BLU Screen Normal Corridor Progressive': ['Protects from digital rays', 'Double Side Anti Glare', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'For Distance, Intermediate & Near Vision', 'Smooth Lens with No Visible Line'],
     'BLU Screen Wide Corridor Progressive': ['Protects from digital rays', 'Double Side Anti Glare', 'Crack & Scratch Resistant', 'Eye Tracking', 'Power Optimiser', 'Nearmax', 'Auto adjust', 'Lightweight', 'Thinner'],
     'BLU Screen Lenses Zero Power': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'Double Side Anti-Glare'],
     'Brown Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
     'Pink Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Yellow Tinted Color Lenses': ['Best For Night Drive','UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Yellow Tinted Color Lenses': ['Best For Night Drive', 'UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
     'Blue Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
     'Green Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
     'Grey Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power']
@@ -643,6 +643,11 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       // User is logged in and address is filled → Open Lens Selection Modal
       const lensModal = document.getElementById('lensModal');
       if (lensModal) {
+        this.currentStep = 1;
+        this.selection = {
+          mainOption: '',
+          subOption: ''
+        };
         const modalInstance = new (window as any).bootstrap.Modal(lensModal);
         modalInstance.show();
       }
@@ -885,7 +890,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     console.log(userData);
 
     if (userData.rightEyePowerSPH || userData.rightEyePowerCYL || userData.leftEyePowerSPH || userData.leftEyePowerCYL) {
-console.log(userData.rightEyePowerCYL);
+      console.log(userData.rightEyePowerCYL);
 
 
       if ((userData.rightEyePowerCYL && userData.rightEyeAxis == '') || userData.leftEyePowerCYL && userData.leftEyeAxis == '') {
