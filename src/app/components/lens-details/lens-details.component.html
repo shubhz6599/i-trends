@@ -65,8 +65,9 @@
               </select>
 
               <!-- CYL -->
-              <label for="rightEyePowerCYL" class="form-label">Power (CYL):</label>
+              <label *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'" for="rightEyePowerCYL" class="form-label">Power (CYL):</label>
               <select
+              *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'"
                 class="form-select form-select-sm mb-2"
                 id="rightEyePowerCYL"
                 formControlName="rightEyePowerCYL"
@@ -76,8 +77,9 @@
               </select>
 
               <!-- Axis -->
-              <label for="rightEyeAxis" class="form-label">Axis:</label>
+              <label for="rightEyeAxis" class="form-label" *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'">Axis:</label>
               <select
+              *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'"
                 class="form-select form-select-sm mb-2"
                 id="rightEyeAxis"
                 formControlName="rightEyeAxis"
@@ -113,8 +115,9 @@
               </select>
 
               <!-- CYL -->
-              <label for="leftEyePowerCYL" class="form-label">Power (CYL):</label>
+              <label for="leftEyePowerCYL" class="form-label" *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'">Power (CYL):</label>
               <select
+              *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'"
                 class="form-select form-select-sm mb-2"
                 id="leftEyePowerCYL"
                 formControlName="leftEyePowerCYL"
@@ -124,8 +127,9 @@
               </select>
 
               <!-- Axis -->
-              <label for="leftEyeAxis" class="form-label">Axis:</label>
+              <label for="leftEyeAxis" class="form-label" *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'">Axis:</label>
               <select
+              *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'"
                 class="form-select form-select-sm mb-2"
                 id="leftEyeAxis"
                 formControlName="leftEyeAxis"

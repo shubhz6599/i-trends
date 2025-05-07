@@ -887,6 +887,9 @@ nav i {
   margin-bottom: 10px !important;
 }
 
+#lensModal{
+  left: 22%;
+}
 .modal {
   transition: transform 0.3s ease-out, opacity 0.3s ease-out;
   overflow-y: auto !important;
@@ -1601,6 +1604,9 @@ body.modal-open {
 }
 
 @media (max-width: 768px) {
+  #lensModal{
+    left: 0%;
+  }
   .cart-btn, .proceed-btn {
     font-size: 14px;
     padding: 0.6rem 1.5rem;

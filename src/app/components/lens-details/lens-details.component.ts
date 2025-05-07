@@ -70,13 +70,19 @@ export class LensDetailsComponent implements OnInit {
   }
 
   onSubmit(): void {
+    
     const formValues = this.productForm.value;
+    console.log(this.selectedProduct?.price);
+    console.log(formValues.rightNumberOfBoxes);
+    console.log((formValues.rightNumberOfBoxes + formValues.leftNumberOfBoxes));
+    
+    console.log(this.selectedProduct?.price * (+(formValues.rightNumberOfBoxes) + +(formValues.leftNumberOfBoxes)));
     const lensOrder = {
       description: this.selectedProduct?.description,
       imageUrl: this.selectedProduct?.image?.[0] || '',
       mainOption: "Contact-Lens",
       name: this.selectedProduct?.name || '',
-      price: this.selectedProduct?.price || 0,
+      price: this.selectedProduct?.price * (+(formValues.rightNumberOfBoxes) + +(formValues.leftNumberOfBoxes))|| 0,
       productId: this.selectedProduct?.id || '',
       productType: "contact-lens",
       quantity: 1,
@@ -96,7 +102,7 @@ export class LensDetailsComponent implements OnInit {
 
     const orderPayload = {
       items: [lensOrder],
-      amount: this.selectedProduct?.price || 0,
+      amount: lensOrder.price || 0,
     };
 
     let userdetails: any = localStorage.getItem('user');

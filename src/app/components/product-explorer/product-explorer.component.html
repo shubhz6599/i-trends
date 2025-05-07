@@ -264,7 +264,8 @@
                   <i class="bi bi-box"></i>
                 </div>
                 <div class="option-text">
-                  <h5>Frame Only</h5>
+                  <h5 *ngIf="viewType != 'Unisex Sunglasses' && viewType != 'Kids Sunglasses & Frames' && viewType!= 'Unisex Sports & Swimming'">Frame Only</h5>
+                  <h5 *ngIf="viewType == 'Unisex Sunglasses' || viewType == 'Kids Sunglasses & Frames' || viewType == 'Unisex Sports & Swimming'">Sunglass Only</h5>
                   <p>Buy Only Frame</p>
                 </div>
                 <div class="option-arrow">
@@ -330,10 +331,14 @@
                         <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
                       </select>
 
-                      <label class="form-label small">Number of Index</label>
-                      <select class="form-select form-select-sm" formControlName="rightNumberOfBoxes">
-                        <option value="">Select Number of Index</option>
+                      <label class="form-label small">{{selection.mainOption == 'bifocal' ? 'Add' : 'Index'}}</label>
+                      <select class="form-select form-select-sm" formControlName="rightNumberOfBoxes" *ngIf="selection.mainOption != 'bifocal'">
+                        <option value="">Select Index</option>
                         <option *ngFor="let count of boxesOptions" [value]="count">{{ count }}</option>
+                      </select>
+                      <select class="form-select form-select-sm" formControlName="rightNumberOfBoxes" *ngIf="selection.mainOption == 'bifocal'">
+                        <option value="">Select Add</option>
+                        <option *ngFor="let count of addOptions" [value]="count">{{ count }}</option>
                       </select>
                     </div>
                   </div>
@@ -361,15 +366,24 @@
                         <option *ngFor="let axis of axisOptions" [value]="axis">{{ axis }}</option>
                       </select>
 
-                      <label class="form-label small">Number of Index</label>
-                      <select class="form-select form-select-sm" formControlName="leftNumberOfBoxes">
-                        <option value="">Select Number of Index</option>
+
+
+                      <label class="form-label small">{{selection.mainOption == 'bifocal' ? 'Add' : 'Index'}}</label>
+                      <select class="form-select form-select-sm" formControlName="leftNumberOfBoxes" *ngIf="selection.mainOption != 'bifocal'">
+                        <option value="">Select Index</option>
                         <option *ngFor="let count of boxesOptions" [value]="count">{{ count }}</option>
+                      </select>
+                      <select class="form-select form-select-sm" formControlName="leftNumberOfBoxes" *ngIf="selection.mainOption == 'bifocal'">
+                        <option value="">Select Add</option>
+                        <option *ngFor="let count of addOptions" [value]="count">{{ count }}</option>
                       </select>
                     </div>
                   </div>
                 </div>
 
+                <div *ngIf="ErrorMsg" class="text-center text-danger">
+                  {{ErrorMsg}}
+                </div>
                 <div class="text-end mt-3">
                   <button class="btn btn-primary btn-sm px-3" type="submit" [disabled]="productForm.invalid">
                     Save & Continue
@@ -426,6 +440,10 @@
                       <span>Total:</span>
                       <span>₹{{ prices[selection.subOption] + selectedProduct?.basePrice -
                         selectedProduct?.basePriceWithDiscount}}</span>
+                    </div>
+                    <div class="price-row" style="font-size: 0.6rem;">
+                      <span >You Saved:</span>
+                      <span>₹{{ selectedProduct?.basePriceWithDiscount}}</span>
                     </div>
                   </div>
 

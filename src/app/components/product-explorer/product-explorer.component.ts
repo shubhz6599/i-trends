@@ -123,39 +123,40 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       'Anti-Glare Premium',
       'BLU Screen Lenses',
       'Thin BLU Screen Lenses',
-      'Owndays Japan Clear Vision Lenses',
-      'Owndays Japan Shatterproof'
+      'High Power Screen Lenses',
+      'Hoya Nulux Blue Control Lenses Japan'
     ],
-    'bifocal': ['Circular Bi-focal KT', 'Anti-Glare Normal Corridor Progressive', 'Anti-Glare Normal Corridor Progressive', 'BLU Screen Normal Corridor Progressive', 'BLU Screen Wide Corridor Progressive'],
-    'zero-power': ['BLU Screen Lenses Zero Power', 'Brown Tinted Color Lenses', 'Pink Tinted Color Lenses', 'Yellow Tinted Color Lenses', 'Blue Tinted Color Lenses', 'Green Tinted Color Lenses', 'Grey Tinted Color Lenses', 'Owndays Japan Clear Vision Lenses Zero Power'],
+    'bifocal': ['Circular Bi-focal KT', 'Normal Corridor Progressive', 'Anti-Glare Normal Corridor Progressive', 'BLU Screen Normal Corridor Progressive', 'BLU Screen Wide Corridor Progressive'],
+    'zero-power': ['BLU Screen Lenses Zero Power', 'Brown Tinted Color Lenses', 'Pink Tinted Color Lenses', 'Yellow Tinted Color Lenses', 'Blue Tinted Color Lenses', 'Green Tinted Color Lenses', 'Grey Tinted Color Lenses'],
     'frame-only': ['Stylish Frames', 'Lightweight', 'Durable']
   };
   optionDetails: Record<string, string[]> = {
-    'Anti-Glare Premium': ['Double Side Anti-Glare'],
-    'BLU Screen Lenses': ['Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant'],
-    'Thin BLU Screen Lenses': ['Lightweight', 'Slim Design', 'High Optical Clarity'],
-    'Owndays Japan Clear Vision Lenses': ['Premium Quality', 'Clear Vision', 'Anti-Reflection Coating'],
-    'Owndays Japan Shatterproof': ['Shatterproof Design', 'Durable', 'Impact Resistant'],
+    'Anti-Glare Premium': ['Double Side Anti-Glare', 'Scratch Resistant', 'Index 1.50'],
+    'BLU Screen Lenses': ['Double Side Anti-Glare', 'Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant'],
+    'Thin BLU Screen Lenses': ['Lightweight', 'Slim Design', 'High Optical Clarity', 'Double Side Anti-Glare', 'Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant', 'Uv Protection'],
+    'High Power Screen Lenses': ['Lightweight', 'Slim Design', 'High Optical Clarity', 'Double Side Anti-Glare', 'Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant', 'Uv Protection', 'Index 1.60', 'Material MR8'],
+    'Hoya Nulux Blue Control Lenses Japan': ['Shatterproof Design', 'Durable', 'Impact Resistant', 'Lightweight', 'Slim Design', 'High Optical Clarity', 'Double Side Anti-Glare', 'Protects from Digital Rays', 'Crack, Smudge & Scratch Resistant', 'Uv Protection', 'Index 1.60', 'Material MR8'],
     'Circular Bi-focal KT': ['Scratch Resistant', 'UV-400 Protection', 'Water & Dust Repellent', 'Circular Reading Area in Lower Part', 'Index 1.50', 'Material CR'],
+    'Normal Corridor Progressive': [ 'Water & Dust Repellent', 'Crack & Scratch Resistant', 'For Distance Intermediate & Near Vision', 'Smooth Lens with No Visible Line', 'Index 1.50'],
     'Anti-Glare Normal Corridor Progressive': ['Double Side Anti Glare', 'Water & Dust Repellent', 'Crack & Scratch Resistant', 'For Distance Intermediate & Near Vision', 'Smooth Lens with No Visible Line', 'Index 1.50'],
     'BLU Screen Normal Corridor Progressive': ['Protects from digital rays', 'Double Side Anti Glare', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'For Distance, Intermediate & Near Vision', 'Smooth Lens with No Visible Line'],
     'BLU Screen Wide Corridor Progressive': ['Protects from digital rays', 'Double Side Anti Glare', 'Crack & Scratch Resistant', 'Eye Tracking', 'Power Optimiser', 'Nearmax', 'Auto adjust', 'Lightweight', 'Thinner'],
     'BLU Screen Lenses Zero Power': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Protects from Digital Rays', 'Double Side Anti-Glare'],
     'Brown Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
     'Pink Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Yellow Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
+    'Yellow Tinted Color Lenses': ['Best For Night Drive','UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
     'Blue Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
     'Green Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Grey Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power'],
-    'Owndays Japan Clear Vision Lenses Zero Power': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power']
+    'Grey Tinted Color Lenses': ['UV-420 Protection', 'Crack & Scratch Resistant', 'Water & Dust Repellent', 'Lightweight Lenses', 'Applicable Only for Single Vision Power']
   };
   prices: Record<string, number> = {
-    'Anti-Glare Premium': 400,
-    'BLU Screen Lenses': 500,
-    'Thin BLU Screen Lenses': 1000,
-    'Owndays Japan Clear Vision Lenses': 1200,
-    'Owndays Japan Shatterproof': 2000,
+    'Anti-Glare Premium': 600,
+    'BLU Screen Lenses': 1000,
+    'Thin BLU Screen Lenses': 1500,
+    'High Power Screen Lenses': 2000,
+    'Hoya Nulux Blue Control Lenses Japan': 4000,
     'Circular Bi-focal KT': 1200,
+    'Normal Corridor Progressive': 1500,
     'Anti-Glare Normal Corridor Progressive': 2200,
     'BLU Screen Normal Corridor Progressive': 3200,
     'BLU Screen Wide Corridor Progressive': 5500,
@@ -165,8 +166,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     'Yellow Tinted Color Lenses': 1200,
     'Blue Tinted Color Lenses': 1200,
     'Green Tinted Color Lenses': 1200,
-    'Grey Tinted Color Lenses': 1200,
-    'Owndays Japan Clear Vision Lenses Zero Power': 1600
+    'Grey Tinted Color Lenses': 1200
   };
   isBumperDiscountView: boolean = false;
   isAllProductsView: boolean = false;
@@ -197,17 +197,19 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     6.00
   ];
   cylOptions = [
-    -2.00, -1.75, -1.50, -1.25, -1.00, -0.75, -0.50, -0.25,
+    -4.00, -3.75, -3.50, -3.25, -3.00, -2.75, -2.50, -2.25, -2.00, -1.75, -1.50, -1.25, -1.00, -0.75, -0.50, -0.25,
     0.00, 0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75,
     2.00
   ];
   axisOptions = [
-    0, 5, 10, 15, 20, 25, 30, 35, 40, 45,
-    50, 55, 60, 65, 70, 75, 80, 85, 90, 95,
-    100, 105, 110, 115, 120, 125, 130, 135, 140, 145,
-    150, 155, 160, 165, 170, 175, 180
+    10, 20, 30, 40,
+    50, 60, 70, 80, 90,
+    100, 110, 120, 130, 140,
+    150, 160, 170, 180
   ];
-  boxesOptions = [1, 2, 3, 4];
+  boxesOptions = [1.50, 1.60, 1.67, 1.74];
+  addOptions = ['+0.75', '+1.00', '+1.25', '+1.50', '+1.75', '+2.00', '+2.25', '+2.50', '+2.75', '+3.00'];
+  ErrorMsg: string = '';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -706,6 +708,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   selectFrameOnly(): void {
+
     let price: any = this.getFinalPriceDigits();
     if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
     const productData = {
@@ -736,7 +739,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         productId: this.selectedProduct?.id,
         productType: 'specs',
         description: this.selectedProduct?.description,
-        userSelectionDetails:this.productForm.value
+        userSelectionDetails: this.productForm.value
       };
       this.hideModal()
       this.uiService.showLoading()
@@ -768,6 +771,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     userdetails = JSON.parse(userdetails);
     this.uiService.showLoading();
     this.authService.createOrder({ items, amount }).subscribe((response: any) => {
+      console.log(response)
       if (response.success) {
         const options = {
           key: environment.razorPayKey,
@@ -874,7 +878,27 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     );
   }
 
-  onSubmit(){
-    this.currentStep = 4;
+  onSubmit() {
+
+
+    let userData = this.productForm.value;
+    console.log(userData);
+
+    if (userData.rightEyePowerSPH || userData.rightEyePowerCYL || userData.leftEyePowerSPH || userData.leftEyePowerCYL) {
+console.log(userData.rightEyePowerCYL);
+
+
+      if ((userData.rightEyePowerCYL && userData.rightEyeAxis == '') || userData.leftEyePowerCYL && userData.leftEyeAxis == '') {
+        this.ErrorMsg = 'To Proceed Ahead Please Select Valid Axis Selection*'
+        return
+      }
+      else {
+        this.currentStep = 4;
+
+      }
+    } else {
+      this.ErrorMsg = 'To Proceed Ahead Please Make Valid Selection*'
+    }
+
   }
 }
