@@ -14,6 +14,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     // this.checkViewportSize();
+    localStorage.clear();
     this.connectionService.showOfflinePage.subscribe(show => {
       this.showOfflinePage = show;
     });
