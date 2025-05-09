@@ -791,6 +791,9 @@ nav i {
     border-radius: 50px;
     border: 1px solid grey;
   }
+  .custommg{
+    margin-bottom: 32% !important;
+  }
 }
 
 @media (min-width: 768px) {
@@ -1615,4 +1618,5 @@ body.modal-open {
   .proceed-btn-container {
     margin-bottom: 10px;
   }
+
 }
