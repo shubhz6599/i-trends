@@ -658,16 +658,28 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   selectMainOption(option: string): void {
     if (option === 'frame-only') {
       this.selectFrameOnly()
-    } else {
+    }
+    else {
       this.selection.mainOption = option;
       this.subOptions = this.subOptionsMap[option];
+      if (option === 'zero-power' && this.viewType == 'Unisex Sunglasses') {
+        this.subOptions = this.subOptions.filter(
+          item => item !== 'BLU Screen Lenses Zero Power'
+        );
+      }
+
       this.currentStep = 2;
     }
   }
 
   selectSubOption(option: string): void {
     this.selection.subOption = option;
-    this.currentStep = 3;
+    if (this.selection.mainOption == 'zero-power') {
+      this.currentStep = 4
+    } else {
+      this.currentStep = 3;
+
+    }
   }
 
   goBackForToggle(): void {

@@ -3586,9 +3586,9 @@
           "id": "UST-1001",
           "name": "Unisex Sports Glass",
           "description": "Unisex Sports Glass",
-          "basePrice": 1499,
+          "basePrice": 2499,
           "rating": 4,
-          "basePriceWithDiscount": 200,
+          "basePriceWithDiscount": 299,
           "variants": [
             {
               "color": "Black",
@@ -3603,7 +3603,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 200
+              "priceModifier": 299
             },
             {
               "color": "Grey",
@@ -3613,7 +3613,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 200
+              "priceModifier": 299
             },
             {
               "color": "Blue",
@@ -3623,7 +3623,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 200
+              "priceModifier": 299
             }
           ],
           "features": [
@@ -3636,9 +3636,9 @@
           "id": "UST-1002",
           "name": "Unisex Sports Glass with cod",
           "description": "Unisex Sports Glass with cod",
-          "basePrice": 1499,
+          "basePrice": 2499,
           "rating": 4,
-          "basePriceWithDiscount": 200,
+          "basePriceWithDiscount": 299,
           "variants": [
             {
               "color": "Grey",
@@ -3653,7 +3653,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 200
+              "priceModifier": 299
             },
             {
               "color": "Black",
@@ -3663,7 +3663,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 200
+              "priceModifier": 299
             }
           ],
           "features": [
@@ -3676,9 +3676,9 @@
           "id": "UST-1003",
           "name": "Unisex Swimming",
           "description": "Unisex Swimming",
-          "basePrice": 1499,
+          "basePrice": 2499,
           "rating": 4,
-          "basePriceWithDiscount": 200,
+          "basePriceWithDiscount": 299,
           "variants": [
             {
               "color": "Black",
@@ -3690,7 +3690,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 200
+              "priceModifier": 299
             },
             {
               "color": "Black",
@@ -3700,7 +3700,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 200
+              "priceModifier": 299
             }
           ],
           "features": [

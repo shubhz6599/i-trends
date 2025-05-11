@@ -65,9 +65,9 @@
               </select>
 
               <!-- CYL -->
-              <label *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'" for="rightEyePowerCYL" class="form-label">Power (CYL):</label>
+              <label *ngIf="selectedProduct.showCYl" for="rightEyePowerCYL" class="form-label">Power (CYL):</label>
               <select
-              *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'"
+              *ngIf="selectedProduct.showCYl"
                 class="form-select form-select-sm mb-2"
                 id="rightEyePowerCYL"
                 formControlName="rightEyePowerCYL"
@@ -77,9 +77,9 @@
               </select>
 
               <!-- Axis -->
-              <label for="rightEyeAxis" class="form-label" *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'">Axis:</label>
+              <label for="rightEyeAxis" class="form-label" *ngIf="selectedProduct.showCYl">Axis:</label>
               <select
-              *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'"
+              *ngIf="selectedProduct.showCYl"
                 class="form-select form-select-sm mb-2"
                 id="rightEyeAxis"
                 formControlName="rightEyeAxis"
@@ -101,7 +101,7 @@
             </div>
 
             <!-- Left Eye -->
-            <div class="eye-section">
+            <div class="eye-section mt-2">
               <h6 class="text-danger">Left Eye</h6>
               <!-- SPH -->
               <label for="leftEyePowerSPH" class="form-label">Power (SPH):</label>
@@ -115,9 +115,9 @@
               </select>
 
               <!-- CYL -->
-              <label for="leftEyePowerCYL" class="form-label" *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'">Power (CYL):</label>
+              <label for="leftEyePowerCYL" class="form-label" *ngIf="selectedProduct.showCYl">Power (CYL):</label>
               <select
-              *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'"
+              *ngIf="selectedProduct.showCYl"
                 class="form-select form-select-sm mb-2"
                 id="leftEyePowerCYL"
                 formControlName="leftEyePowerCYL"
@@ -127,9 +127,9 @@
               </select>
 
               <!-- Axis -->
-              <label for="leftEyeAxis" class="form-label" *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'">Axis:</label>
+              <label for="leftEyeAxis" class="form-label" *ngIf="selectedProduct.showCYl">Axis:</label>
               <select
-              *ngIf="selectedProduct.name != 'Monthly Disposable I Connect Bausch and Lomb - 3 lens per Box'"
+              *ngIf="selectedProduct.showCYl"
                 class="form-select form-select-sm mb-2"
                 id="leftEyeAxis"
                 formControlName="leftEyeAxis"
@@ -151,6 +151,9 @@
             </div>
           </div>
 
+          <div *ngIf="ErrorMsg" class="text-center text-danger">
+            {{ErrorMsg}}
+          </div>
           <!-- Submit Button -->
           <div class="text-center mt-4">
             <button

@@ -17,11 +17,28 @@ export class LensDetailsComponent implements OnInit {
   selectedImage: string = '';
   isDetailsView: boolean = false;
   productForm!: FormGroup;
-  cylOptions: any
-  // Options
-  sphOptions = Array.from({ length: 25 }, (_, i) => (-8.5 + i * 0.5).toFixed(1));
-  axisOptions = [10, 20, 70, 80, 90, 100, 110, 160, 170];
+  sphOptions = [
+    -8.00, -7.50, -7.00, -6.50, -6.00, -5.75, -5.50, -5.25, -5.00, -4.75, -4.50, -4.25,
+    -4.00, -3.75, -3.50, -3.25, -3.00, -2.75, -2.50, -2.25,
+    -2.00, -1.75, -1.50, -1.25, -1.00, -0.75, -0.50, -0.25,
+    0.00, 0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75,
+    2.00, 2.25, 2.50, 2.75, 3.00, 3.25, 3.50, 3.75,
+    4.00, 4.25, 4.50, 4.75, 5.00, 5.25, 5.50, 5.75,
+    6.00
+  ];
+  cylOptions = [
+    -8.00, -7.50, -7.00, -6.50, -6.00, -5.50, -5.00, -4.50, -4.00, -3.75, -3.50, -3.25, -3.00, -2.75, -2.50, -2.25, -2.00, -1.75, -1.50, -1.25, -1.00, -0.75, -0.50, -0.25,
+    0.00, 0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75,
+    2.00
+  ];
+  axisOptions = [
+    10, 20, 30, 40,
+    50, 60, 70, 80, 90,
+    100, 110, 120, 130, 140,
+    150, 160, 170, 180
+  ];
   boxesOptions = Array.from({ length: 21 }, (_, i) => i);
+  ErrorMsg: string = '';
 
   constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService, private router: Router, public uiService: UiService) { }
 
@@ -30,7 +47,7 @@ export class LensDetailsComponent implements OnInit {
     this.http.get<any[]>('/assets/Json/lenses.json').subscribe((data) => {
       this.products = data;
     });
-    this.cylOptions = Array.from({ length: 9 }, (_, i) => (-2 + i * 0.5).toFixed(1)); // Example range: -2 to 2
+
 
     // Initialize the form
     this.productForm = this.fb.group({
@@ -70,19 +87,31 @@ export class LensDetailsComponent implements OnInit {
   }
 
   onSubmit(): void {
-    
+    let userData = this.productForm.value;
+    console.log(userData);
+
+    if (userData.rightEyePowerSPH || userData.rightEyePowerCYL || userData.leftEyePowerSPH || userData.leftEyePowerCYL) {
+      console.log(userData.rightEyePowerCYL);
+      if ((userData.rightEyePowerCYL && userData.rightEyeAxis == '') || userData.leftEyePowerCYL && userData.leftEyeAxis == '') {
+        this.ErrorMsg = 'To Proceed Ahead Please Select Valid Axis Selection*'
+        return
+      }
+    } else {
+      this.ErrorMsg = 'To Proceed Ahead Please Make Valid Selection*'
+      return
+    }
     const formValues = this.productForm.value;
     console.log(this.selectedProduct?.price);
     console.log(formValues.rightNumberOfBoxes);
     console.log((formValues.rightNumberOfBoxes + formValues.leftNumberOfBoxes));
-    
+
     console.log(this.selectedProduct?.price * (+(formValues.rightNumberOfBoxes) + +(formValues.leftNumberOfBoxes)));
     const lensOrder = {
       description: this.selectedProduct?.description,
       imageUrl: this.selectedProduct?.image?.[0] || '',
       mainOption: "Contact-Lens",
       name: this.selectedProduct?.name || '',
-      price: this.selectedProduct?.price * (+(formValues.rightNumberOfBoxes) + +(formValues.leftNumberOfBoxes))|| 0,
+      price: this.selectedProduct?.price * (Number(formValues.rightNumberOfBoxes) + Number(formValues.leftNumberOfBoxes)) || 0,
       productId: this.selectedProduct?.id || '',
       productType: "contact-lens",
       quantity: 1,
@@ -223,14 +252,14 @@ export class LensDetailsComponent implements OnInit {
 
 
           this.uiService.hideLoading();
-          this.uiService.showToast('Error','Unable To Place Order')
+          this.uiService.showToast('Error', 'Unable To Place Order')
         }
       },
       (error: any) => {
 
 
         this.uiService.hideLoading();
-        this.uiService.showToast('Error','Unable To Place Order')
+        this.uiService.showToast('Error', 'Unable To Place Order')
       }
     );
   }
