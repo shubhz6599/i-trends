@@ -123,5 +123,27 @@
       "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Lenses%2F12.webp?alt=media&token=5552b746-3f20-4133-8017-13e8c14b62f9"
     ],
     "price": 1050
+  },
+  {
+    "id": 13,
+    "name": "Purecon - X-CHROME (Spherical Power Only)",
+    "description": "Yearly disposable Traditional HO Contact lenses",
+    "showCYl":false,
+    "image": [
+      "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Lenses%2FX-CHROME_1_1024x1024.webp?alt=media&token=a085033a-2f9d-4c80-9995-d3201a20939c"
+    ],
+    "price": 3000,
+    "color":["Red","Green"]
+  },
+  {
+    "id": 14,
+    "name": "Purecon - PROSTHETIC (Spherical Power Only)",
+    "description": "Yearly disposable Traditional HO Contact lenses",
+    "showCYl":false,
+    "image": [
+      "https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Lenses%2FPROSTHETIC_1024x1024_1_1024x1024.webp?alt=media&token=65c38abd-8b6f-480e-bd85-9db78d23e36d"
+    ],
+    "price": 2500,
+    "colorstext":["Side Dark Brown & Center Black","Side Dark Brown & Center Transparent", "Side Light Brown & Center Transparent", "Side Medium Brown & Center Black", "Side Medium Brown & Center Transparent"]
   }
 ]

@@ -39,6 +39,7 @@ export class LensDetailsComponent implements OnInit {
   ];
   boxesOptions = Array.from({ length: 21 }, (_, i) => i);
   ErrorMsg: string = '';
+  selectedColor: any;
 
   constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService, private router: Router, public uiService: UiService) { }
 
@@ -54,12 +55,12 @@ export class LensDetailsComponent implements OnInit {
       rightEyePowerSPH: [''],
       rightEyePowerCYL: [''],
       rightEyeAxis: [''],
-      rightNumberOfBoxes: [''],
+      rightNumberOfBoxes: ['1'],
 
       leftEyePowerSPH: [''],
       leftEyePowerCYL: [''],
       leftEyeAxis: [''],
-      leftNumberOfBoxes: ['']
+      leftNumberOfBoxes: ['1']
     });
 
 
@@ -97,8 +98,16 @@ export class LensDetailsComponent implements OnInit {
         return
       }
     } else {
-      this.ErrorMsg = 'To Proceed Ahead Please Make Valid Selection*'
+      this.ErrorMsg = 'To Proceed Ahead Please Make Valid Selection First*'
       return
+    }
+    console.log(this.selectedProduct);
+
+    if (this.selectedProduct?.color || this.selectedProduct?.colorstext) {
+      if (this.selectedColor == undefined) {
+        this.ErrorMsg = 'To Proceed Ahead Please Make Valid Color Selection First*'
+        return;
+      }
     }
     const formValues = this.productForm.value;
     console.log(this.selectedProduct?.price);
@@ -116,7 +125,7 @@ export class LensDetailsComponent implements OnInit {
       productType: "contact-lens",
       quantity: 1,
       subOption: "contactLens",
-      variant: "",
+      variant: 'Selected Color :' + this.selectedColor ? this.selectedColor : 'NA',
       userSelectionDetails: {
         rightEyePowerSPH: formValues.rightEyePowerSPH || '',
         rightEyePowerCYL: formValues.rightEyePowerCYL || '',
@@ -263,6 +272,8 @@ export class LensDetailsComponent implements OnInit {
       }
     );
   }
-
+  selectColorText(val: any) {
+    this.selectedColor = val;
+  }
 
 }

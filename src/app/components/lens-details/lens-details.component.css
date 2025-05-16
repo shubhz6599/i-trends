@@ -7,7 +7,10 @@ body {
   padding: 0;
 }
 
-h2, h3, h5, h6 {
+h2,
+h3,
+h5,
+h6 {
   font-family: var(--font-secondary);
   font-weight: 600;
   color: var(--gray-light);
@@ -171,7 +174,37 @@ h2, h3, h5, h6 {
     padding: 10px 20px;
     font-size: 14px;
   }
-  .card{
+
+  .card {
     margin-bottom: 10%;
   }
 }
+
+.colorOpt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-circle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 1px solid #aaa;
+  vertical-align: middle;
+  margin-left: 2px !important;
+}
+
+.color-description {
+  display: inline-block;
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin: 4px 6px 4px 0;
+  border: 1px solid #ccc;
+}
+
