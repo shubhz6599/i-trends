@@ -9,9 +9,9 @@
           "id": "Metal-001",
           "name": "Metal Frames - Aviator",
           "description": "Timeless square frames with thin profile",
-          "basePrice": 1299,
+          "basePrice": 2,
           "rating": 4,
-          "basePriceWithDiscount": 300,
+          "basePriceWithDiscount": 1,
           "bumperdiscount": true,
           "variants": [
             {
@@ -23,7 +23,7 @@
               ],
               "inStock": true,
               "imagesLoaded": false,
-              "priceModifier": 200
+              "priceModifier": 1
             },
             {
               "color": "Gold",
