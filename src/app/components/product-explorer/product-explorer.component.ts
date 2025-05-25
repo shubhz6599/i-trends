@@ -712,7 +712,6 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
         productId: this.selectedProduct?.id,
         productType: 'specs'
       };
-      this.hideModal()
       this.initiatePayment([productData], productData.price);
     } else {
       alert('Please make all selections!');
@@ -784,6 +783,9 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   initiatePayment(items: any[], amount: number) {
+    const modalElement = document.getElementById('lensModal');
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    modal?.hide();
     let userdetails: any = localStorage.getItem('user');
     userdetails = JSON.parse(userdetails);
     this.uiService.showLoading();
@@ -807,11 +809,19 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
           },
           theme: {
             color: "#3399cc"
+          }, modal: {
+            // Called when user closes Razorpay modal
+            ondismiss: () => {
+              console.log('Razorpay payment popup closed');
+              this.uiService.hideLoading();
+            }
           }
         };
         const razorpay = new Razorpay(options);
         // this.uiService.hideLoading();
         razorpay.open();
+        this.uiService.hideLoading();
+
       }
     });
   }
