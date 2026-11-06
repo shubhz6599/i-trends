@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, NgOptimizedImage, ReactiveFormsModule],
   selector: 'app-online-consultation',
   templateUrl: './online-consultation.component.html',
   styleUrls: ['./online-consultation.component.css']

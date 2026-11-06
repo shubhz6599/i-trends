@@ -19,3 +19,27 @@
   font-size: 1.2rem;
   margin-top: 10px;
 }
+
+.error-page {
+  min-height: 60dvh;
+  height: auto;
+  padding: 32px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(ellipse at 50% 0, color-mix(in srgb, var(--brand) 12%, transparent), transparent 55%),
+    var(--surface);
+  color: var(--text);
+  font-family: var(--font-primary);
+}
+
+.error-page h1 {
+  color: var(--text);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+}
+
+.error-page p {
+  max-width: 520px;
+  color: var(--muted);
+  font-size: 1rem;
+}

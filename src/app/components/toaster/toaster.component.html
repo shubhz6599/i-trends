@@ -1,13 +1,23 @@
-<div class="toast-overlay" *ngIf="show"></div>
-
-<div class="position-fixed top-50 start-50 translate-middle z-1050" *ngIf="show">
-  <div class="toast show">
-    <div class="toast-header">
-      <strong class="me-auto">{{ title }}</strong>
-      <button type="button" class="btn-close" (click)="hide()"></button>
-    </div>
-    <div class="toast-body">
-      {{ message }}
-    </div>
-  </div>
-</div>
+<section
+  *ngIf="show"
+  class="toast-card"
+  [class.toast-card--success]="type === 'success'"
+  [class.toast-card--error]="type === 'error'"
+  [class.toast-card--info]="type === 'info'"
+  [attr.role]="type === 'error' ? 'alert' : 'status'"
+  aria-live="polite"
+  aria-atomic="true">
+  <span class="toast-icon" aria-hidden="true">
+    <i class="bi" [class.bi-check-lg]="type === 'success'"
+      [class.bi-exclamation-lg]="type === 'error'"
+      [class.bi-info-lg]="type === 'info'"></i>
+  </span>
+  <span class="toast-copy">
+    <span class="toast-eyebrow">{{ typeLabel }}</span>
+    <strong class="toast-title">{{ displayTitle }}</strong>
+    <span class="toast-message" *ngIf="displayMessage">{{ displayMessage }}</span>
+  </span>
+  <button type="button" class="toast-close" (click)="hide()" aria-label="Dismiss notification">
+    <i class="bi bi-x-lg" aria-hidden="true"></i>
+  </button>
+</section>

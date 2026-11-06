@@ -1,41 +1,151 @@
-/* Overlay Blur Background */
+:host {
+  position: relative;
+  z-index: 1100;
+}
+
 .blur-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  backdrop-filter: blur(5px); /* or reduce if too strong */
-  background-color: rgba(0, 0, 0, 0.2); /* slight dark overlay */
-  z-index: 1040;
+  z-index: 1100;
+  inset: 0;
+  background: color-mix(in srgb, var(--page) 66%, transparent);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
 }
 
-/* Centered Loader */
 .loader-container {
   position: fixed;
+  z-index: 1101;
   top: 50%;
   left: 50%;
+  display: grid;
+  justify-items: center;
+  width: min(290px, calc(100vw - 40px));
+  padding: 28px 24px 24px;
   transform: translate(-50%, -50%);
-  z-index: 1050;
+  border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+  border-radius: 26px;
+  background: var(--surface-raised);
+  box-shadow: 0 24px 70px color-mix(in srgb, var(--text) 20%, transparent);
+  color: var(--text);
+  animation: loader-arrive 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-/* Your Provided Spinner */
-.loader {
-  width: 45px;
-  aspect-ratio: 1;
-  --c: no-repeat linear-gradient(#1BBFE9 0 0);
-  background:
-    var(--c) 0%   50%,
-    var(--c) 50%  50%,
-    var(--c) 100% 50%;
-  background-size: 20% 100%;
-  animation: l1 1s infinite linear;
+.loader-orbit {
+  position: relative;
+  display: grid;
+  width: 116px;
+  height: 116px;
+  margin-bottom: 15px;
+  place-items: center;
 }
 
-@keyframes l1 {
-  0%  {background-size: 20% 100%,20% 100%,20% 100%}
-  33% {background-size: 20% 10% ,20% 100%,20% 100%}
-  50% {background-size: 20% 100%,20% 10% ,20% 100%}
-  66% {background-size: 20% 100%,20% 100%,20% 10% }
-  100%{background-size: 20% 100%,20% 100%,20% 100%}
+.orbit {
+  position: absolute;
+  border: 1px solid color-mix(in srgb, var(--brand) 24%, transparent);
+  border-radius: 50%;
+}
+
+.orbit--outer {
+  inset: 3px;
+  border-top-color: var(--brand);
+  border-right-color: color-mix(in srgb, var(--brand) 60%, transparent);
+  animation: orbit-spin 3.2s linear infinite;
+}
+
+.orbit--inner {
+  inset: 14px;
+  border-bottom-color: var(--accent);
+  border-left-color: color-mix(in srgb, var(--accent) 65%, transparent);
+  animation: orbit-spin 2.4s linear infinite reverse;
+}
+
+.loader-glasses {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--brand) 22%, var(--line));
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--brand) 10%, var(--surface));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--brand) 16%, transparent);
+  color: var(--brand);
+  font-size: 2rem;
+  animation: glasses-float 1.8s ease-in-out infinite;
+}
+
+.loader-spark {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.loader-spark--one {
+  top: 20px;
+  right: 12px;
+  animation: spark-pulse 1.5s ease-in-out infinite;
+}
+
+.loader-spark--two {
+  bottom: 20px;
+  left: 12px;
+  width: 5px;
+  height: 5px;
+  animation: spark-pulse 1.5s ease-in-out 700ms infinite;
+}
+
+.loader-title {
+  color: var(--text);
+  font-family: var(--font-heading, inherit);
+  font-size: 0.97rem;
+  font-weight: 750;
+  text-align: center;
+}
+
+.loader-caption {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@keyframes orbit-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glasses-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-4px) rotate(2deg); }
+}
+
+@keyframes spark-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.75); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes loader-arrive {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-container,
+  .orbit,
+  .loader-glasses,
+  .loader-spark {
+    animation: none;
+  }
 }

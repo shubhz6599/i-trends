@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { NgOptimizedImage } from '@angular/common';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
+  standalone: true,
+  imports: [NgOptimizedImage, RouterLink],
   selector: 'app-payment-process',
   templateUrl: './payment-process.component.html',
   styleUrls: ['./payment-process.component.css'],

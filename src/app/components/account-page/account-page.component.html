@@ -1,221 +1,165 @@
-<div class="profile-page-container">
+<main class="profile-page-container">
+  <header class="profile-heading">
+    <span class="eyebrow">YOUR DETAILS, ALL IN ONE PLACE</span>
+    <h1>My account</h1>
+    <p>Keep your profile and delivery details up to date.</p>
+  </header>
 
-  <!-- Profile Card -->
-  <div class="profile-card">
-    <!-- Profile Picture -->
-    <div class="profile-picture-container text-center">
+  <section class="profile-card">
+    <div class="profile-intro">
       <img
-        src="https://thumbs.dreamstime.com/b/default-avatar-profile-placeholder-abstract-vector-silhouette-element-292939268.jpg"
-        alt="Profile Picture"
+        ngSrc="https://thumbs.dreamstime.com/b/default-avatar-profile-placeholder-abstract-vector-silhouette-element-292939268.jpg"
+        alt=""
         class="profile-picture"
-      />
-      <h2 class="profile-name mt-3">{{ accountForm.get('name')?.value }}</h2>
+        width="96"
+        height="96"
+        priority
+        decoding="async">
+      <div>
+        <span class="eyebrow">PROFILE</span>
+        <h2 class="profile-name">{{ accountForm.get('name')?.value || 'Your name' }}</h2>
+        <p>Personal information and address</p>
+      </div>
     </div>
 
-    <!-- Form Section -->
     <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
-      <!-- Name -->
-      <div class="form-group mb-4">
-        <label for="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          formControlName="name"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': accountForm.get('name')?.invalid }"
-        />
-        <div *ngIf="accountForm.get('name')?.invalid && accountForm.get('name')?.touched" class="invalid-feedback">
-          <small>Name is required.</small>
+      <section class="profile-form-section">
+        <div class="form-section-heading">
+          <h2>Personal details</h2>
+          <p>Some information helps us personalize your experience.</p>
         </div>
-      </div>
 
-      <!-- Date of Birth -->
-      <div class="form-group mb-4">
-        <label for="dob">Date of Birth</label>
-        <input
-          type="date"
-          id="dob"
-          formControlName="dob"
-          class="form-control"
-        />
-        <div *ngIf="accountForm.get('dob')?.invalid" class="invalid-feedback">
-          <small>Date of Birth is required.</small>
-        </div>
-      </div>
+        <div class="profile-form-grid">
+          <div class="form-group">
+            <label for="name">Full name</label>
+            <input type="text" id="name" formControlName="name" class="form-control"
+              [ngClass]="{ 'is-invalid': accountForm.get('name')?.invalid }">
+            <div *ngIf="accountForm.get('name')?.invalid && accountForm.get('name')?.touched" class="invalid-feedback">
+              <small>Name is required.</small>
+            </div>
+          </div>
 
-      <!-- Phone -->
-      <div class="form-group mb-4">
-        <label for="phone">Phone</label>
-        <input
-          type="text"
-          id="phone"
-          formControlName="phone"
-          class="form-control"
-          [ngClass]="{ 'is-invalid': accountForm.get('phone')?.invalid }"
-        />
-        <div *ngIf="accountForm.get('phone')?.invalid" class="invalid-feedback">
-          <small>Invalid phone number.</small>
-        </div>
-      </div>
+          <div class="form-group">
+            <label for="dob">Date of birth</label>
+            <input type="date" id="dob" formControlName="dob" class="form-control">
+            <div *ngIf="accountForm.get('dob')?.invalid" class="invalid-feedback">
+              <small>Date of birth is required.</small>
+            </div>
+          </div>
 
-      <!-- Email -->
-      <div class="form-group mb-4">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          formControlName="email"
-          class="form-control"
-          readonly
-        />
-      </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" formControlName="phone" class="form-control"
+              [ngClass]="{ 'is-invalid': accountForm.get('phone')?.invalid }">
+            <div *ngIf="accountForm.get('phone')?.invalid" class="invalid-feedback">
+              <small>Invalid phone number.</small>
+            </div>
+          </div>
 
-      <!-- Address Section -->
-<div class="form-group mb-4">
-  <label for="street">Street</label>
-  <input
-    type="text"
-    id="street"
-    formControlName="street"
-    class="form-control"
-    [ngClass]="{ 'is-invalid': accountForm.get('street')?.invalid && accountForm.get('street')?.touched }"
-  />
-  <div *ngIf="accountForm.get('street')?.invalid && accountForm.get('street')?.touched" class="invalid-feedback">
-    <small>Street is required.</small>
-  </div>
-</div>
-
-<div class="form-group mb-4">
-  <label for="landmark">Landmark</label>
-  <input
-    type="text"
-    id="landmark"
-    formControlName="landmark"
-    class="form-control"
-    [ngClass]="{ 'is-invalid': accountForm.get('landmark')?.invalid && accountForm.get('landmark')?.touched }"
-  />
-  <div *ngIf="accountForm.get('landmark')?.invalid && accountForm.get('landmark')?.touched" class="invalid-feedback">
-    <small>Landmark is required.</small>
-  </div>
-</div>
-
-<div class="form-group mb-4">
-  <label for="city">City</label>
-  <input
-    type="text"
-    id="city"
-    formControlName="city"
-    class="form-control"
-    [ngClass]="{ 'is-invalid': accountForm.get('city')?.invalid && accountForm.get('city')?.touched }"
-  />
-  <div *ngIf="accountForm.get('city')?.invalid && accountForm.get('city')?.touched" class="invalid-feedback">
-    <small>City is required.</small>
-  </div>
-</div>
-
-<div class="form-group mb-4">
-  <label for="state">State</label>
-  <input
-    type="text"
-    id="state"
-    formControlName="state"
-    class="form-control"
-    [ngClass]="{ 'is-invalid': accountForm.get('state')?.invalid && accountForm.get('state')?.touched }"
-  />
-  <div *ngIf="accountForm.get('state')?.invalid && accountForm.get('state')?.touched" class="invalid-feedback">
-    <small>State is required.</small>
-  </div>
-</div>
-
-<div class="form-group mb-4">
-  <label for="pincode">Pincode</label>
-  <input
-    type="text"
-    id="pincode"
-    formControlName="pincode"
-    class="form-control"
-    [ngClass]="{ 'is-invalid': accountForm.get('pincode')?.invalid && accountForm.get('pincode')?.touched }"
-  />
-  <div *ngIf="accountForm.get('pincode')?.invalid && accountForm.get('pincode')?.touched" class="invalid-feedback">
-    <small>Pincode must be a valid 6-digit number.</small>
-  </div>
-</div>
-
-      <!-- Email Verified Section -->
-      <div class="form-group mb-4 email-verified-status">
-        <label>Email Verified</label>
-        <div class="email-status-container">
-          <span
-            *ngIf="isEmailVerified; else notVerified"
-            class="badge bg-success py-2 px-4 rounded-pill"
-          >
-            Verified
-          </span>
-          <ng-template #notVerified>
-            <span class="badge bg-danger py-2 px-4 rounded-pill">Not Verified</span>
-            <button
-              type="button"
-              class="btn verify-btn ms-2"
-              (click)="onResendOtp()"
-            >
-              Verify Email
-            </button>
-          </ng-template>
-        </div>
-      </div>
-
-
-      <!-- Buttons -->
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-      </div>
-    </form>
-
-
-  </div>
-
-<div
-class="modal fade"
-id="otpModal"
-tabindex="-1"
-aria-labelledby="otpModalLabel"
-aria-hidden="true"
->
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="otpModalLabel">Verify OTP</h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
-        <div class="form-group mb-3">
-          <label for="otp">Enter OTP</label>
-          <input
-            type="text"
-            id="otp"
-            formControlName="otp"
-            class="form-control"
-            placeholder="Enter your OTP"
-          />
-          <div
-            *ngIf="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched"
-            class="text-danger"
-          >
-            <small>OTP is required.</small>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" formControlName="email" class="form-control" readonly>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary w-100" [disabled]="otpForm.invalid">
-          Verify OTP
+      </section>
+
+      <section class="profile-form-section">
+        <div class="form-section-heading">
+          <h2>Delivery address</h2>
+          <p>Used when you place an order.</p>
+        </div>
+        <div class="profile-form-grid">
+          <div class="form-group">
+            <label for="street">Street address</label>
+            <input type="text" id="street" formControlName="street" class="form-control"
+              [ngClass]="{ 'is-invalid': accountForm.get('street')?.invalid && accountForm.get('street')?.touched }">
+            <div *ngIf="accountForm.get('street')?.invalid && accountForm.get('street')?.touched" class="invalid-feedback">
+              <small>Street is required.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="landmark">Landmark</label>
+            <input type="text" id="landmark" formControlName="landmark" class="form-control"
+              [ngClass]="{ 'is-invalid': accountForm.get('landmark')?.invalid && accountForm.get('landmark')?.touched }">
+            <div *ngIf="accountForm.get('landmark')?.invalid && accountForm.get('landmark')?.touched" class="invalid-feedback">
+              <small>Landmark is required.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" formControlName="city" class="form-control"
+              [ngClass]="{ 'is-invalid': accountForm.get('city')?.invalid && accountForm.get('city')?.touched }">
+            <div *ngIf="accountForm.get('city')?.invalid && accountForm.get('city')?.touched" class="invalid-feedback">
+              <small>City is required.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" id="state" formControlName="state" class="form-control"
+              [ngClass]="{ 'is-invalid': accountForm.get('state')?.invalid && accountForm.get('state')?.touched }">
+            <div *ngIf="accountForm.get('state')?.invalid && accountForm.get('state')?.touched" class="invalid-feedback">
+              <small>State is required.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="pincode">Pincode</label>
+            <input type="text" id="pincode" formControlName="pincode" class="form-control"
+              [ngClass]="{ 'is-invalid': accountForm.get('pincode')?.invalid && accountForm.get('pincode')?.touched }">
+            <div *ngIf="accountForm.get('pincode')?.invalid && accountForm.get('pincode')?.touched" class="invalid-feedback">
+              <small>Pincode must be a valid 6-digit number.</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="email-verified-status" aria-label="Email verification">
+        <div>
+          <span class="eyebrow">EMAIL STATUS</span>
+          <p>Confirm your email to keep your account secure.</p>
+        </div>
+        <div class="email-status-container">
+          <span *ngIf="isEmailVerified; else notVerified" class="email-status verified">
+            <i class="bi bi-check-circle-fill"></i> Verified
+          </span>
+          <ng-template #notVerified>
+            <span class="email-status not-verified"><i class="bi bi-exclamation-circle-fill"></i> Not verified</span>
+            <button type="button" class="verify-btn" (click)="onResendOtp()">Verify email</button>
+          </ng-template>
+        </div>
+      </section>
+
+      <div class="profile-actions">
+        <button type="submit" class="save-profile-btn">
+          Save changes <i class="bi bi-arrow-right"></i>
         </button>
-      </form>
+      </div>
+    </form>
+  </section>
+</main>
+
+<div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="otpModalLabel">Verify your email</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+          <div class="form-group mb-3">
+            <label for="otp">Enter the code sent to your email</label>
+            <input type="text" id="otp" formControlName="otp" class="form-control" placeholder="Enter your OTP">
+            <div *ngIf="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched" class="text-danger">
+              <small>OTP is required.</small>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100" [disabled]="otpForm.invalid">Verify email</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
-</div>
 </div>

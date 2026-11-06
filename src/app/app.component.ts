@@ -1,8 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { ConnectionService } from './services/connection.service';
+import { OfflinePageComponent } from './components/offline-page/offline-page.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, OfflinePageComponent, RouterOutlet],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -10,7 +14,7 @@ import { ConnectionService } from './services/connection.service';
 export class AppComponent {
   title = 'opticalApp';
   showOfflinePage = false;
-  constructor(private router: Router,private connectionService: ConnectionService) { }
+  constructor(private router: Router, private connectionService: ConnectionService) { }
 
   ngOnInit(): void {
     // this.checkViewportSize();
@@ -29,9 +33,7 @@ export class AppComponent {
   }
 
   checkViewportSize(): void {
-    const screenWidth = window.innerWidth;
-    if (screenWidth > 600) {
-      // Redirect to the error page if screen width exceeds 600px
+    if (window.innerWidth > 600) {
       this.router.navigate(['/error']);
     }
   }

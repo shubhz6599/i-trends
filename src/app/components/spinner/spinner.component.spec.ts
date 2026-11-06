@@ -8,7 +8,7 @@ describe('SpinnerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SpinnerComponent]
+      imports: [SpinnerComponent]
     });
     fixture = TestBed.createComponent(SpinnerComponent);
     component = fixture.componentInstance;
@@ -17,5 +17,16 @@ describe('SpinnerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('shows an accessible eyewear-themed loading indicator', async () => {
+    fixture.componentRef.setInput('show', true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.loader-container')).not.toBeNull();
+    expect(fixture.nativeElement.querySelector('.bi-eyeglasses')).not.toBeNull();
+    expect(fixture.nativeElement.querySelector('.loader-container').getAttribute('role')).toBe('status');
   });
 });

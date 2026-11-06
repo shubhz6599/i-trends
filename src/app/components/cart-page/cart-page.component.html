@@ -1,81 +1,72 @@
-<div class="container my-3">
-  <!-- Empty Cart Message -->
-  <div *ngIf="cartItems.length === 0" class="empty-cart text-center">
-    <h2 class="text-success">Your cart is empty!</h2>
-    <p class="text-muted">Explore our products and add something cool to your cart!</p>
-    <div class="animation-container">
-      <!-- Larger Image -->
-      <img
-        src="https://static.vecteezy.com/system/resources/previews/014/525/045/non_2x/cute-cat-illustration-free-png.png"
-        alt="Empty Cart"
-        class="img-fluid empty-cart-img"
-      />
+<main class="cart-page">
+  <header class="cart-heading">
+    <span class="eyebrow">YOUR EDITS, YOUR EVERYDAY</span>
+    <h1>Shopping bag</h1>
+    <p>Take another look at what you picked.</p>
+  </header>
+
+  <section *ngIf="cartItems.length === 0" class="empty-cart">
+    <div class="empty-cart-art" aria-hidden="true">
+      <span class="empty-cart-orbit"></span>
+      <i class="bi bi-bag"></i>
     </div>
-    <!-- Explore Products Button Below the Image -->
-    <button class="btn btn-success btn-lg customFont mt-4" routerLink="/category/all-products">
-      Explore Products
+    <span class="eyebrow">NOTHING IN HERE YET</span>
+    <h2>Your next favourite pair is waiting.</h2>
+    <p>Explore thoughtfully chosen frames and find the one that feels like you.</p>
+    <button type="button" class="cart-action" routerLink="/category/all-products">
+      Explore frames <i class="bi bi-arrow-up-right"></i>
     </button>
-  </div>
+  </section>
 
-  <!-- Cart Details -->
-  <div *ngIf="cartItems.length > 0" class="card shadow-lg">
-    <div class="card-header bg-primary text-white text-center">
-      <h2>My Cart</h2>
+  <section *ngIf="cartItems.length > 0" class="cart-layout" aria-label="Shopping cart">
+    <div class="cart-items">
+      <article *ngFor="let item of cartItems" class="cart-item">
+        <div class="cart-item-image">
+          <img [ngSrc]="item.img" [alt]="item.name" width="360" height="280" loading="lazy" decoding="async">
+        </div>
+        <div class="cart-item-details">
+          <span class="item-category">EYEWEAR</span>
+          <h2>{{ item.name }}</h2>
+          <p>{{ item.description }}</p>
+          <div class="item-rating" *ngIf="item.ratings">
+            <i class="bi bi-star-fill" aria-hidden="true"></i> {{ item.ratings }}
+          </div>
+          <div class="item-price">
+            <span class="discounted-price">₹{{ item.discountedPrice }}</span>
+            <span class="actual-price">₹{{ item.actualPrice }}</span>
+          </div>
+          <span class="item-quantity">Quantity: {{ item.quantity }}</span>
+        </div>
+        <button type="button" class="remove-item" (click)="removeItem(item.productId)">
+          <i class="bi bi-trash3" aria-hidden="true"></i>
+          <span>Remove</span>
+        </button>
+      </article>
     </div>
-    <div class="card-body">
-      <div class="cart-items">
-        <div *ngFor="let item of cartItems" class="cart-item row align-items-center mb-4">
-          <!-- Product Image -->
-          <div class="col-lg-2 col-md-3 col-sm-4">
-            <img [src]="item.img" alt="Product Image" class="img-fluid rounded product-img" />
-          </div>
 
-          <!-- Product Details -->
-          <div class="col-lg-6 col-md-5 col-sm-8">
-            <h5 class="text-dark">{{ item.name }}</h5>
-            <p class="text-muted">{{ item.description }}</p>
-            <p class="text-muted">
-              Ratings:
-              <span class="text-warning">
-                &#9733; {{ item.ratings }}
-              </span>
-            </p>
-            <p class="price">
-              <span class="actual-price">Rs{{ item.actualPrice }}</span>
-              <span class="discounted-price text-success">Rs{{ item.discountedPrice }}</span>
-            </p>
-            <p class="text-muted">Quantity : {{ item.quantity }}</p>
-          </div>
-
-          <!-- Remove Button -->
-          <div class="col-lg-2 col-md-2 text-end">
-            <button class="btn btn-danger btn-sm mt-2" (click)="removeItem(item.productId)">
-              Remove
-            </button>
-          </div>
-        </div>
+    <aside class="cart-summary">
+      <span class="eyebrow">THE TOTAL</span>
+      <h2>Order summary</h2>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <strong>₹{{ totalAmount }}</strong>
       </div>
-
-      <!-- Cart Summary -->
-      <div class="cart-summary mt-5">
-        <h4 class="text-dark">Cart Summary</h4>
-        <hr />
-        <div class="row">
-          <div class="col-6">
-            <p class="text-muted">Total:</p>
-          </div>
-          <div class="col-6 text-end">
-            <h4 class="text-success">Rs{{ totalAmount }}</h4>
-          </div>
-        </div>
-        <div class="text-center mt-4">
-          <button class="btn btn-success btn-lg" (click)="confirmOrder()">Proceed to Checkout</button>
-        </div>
+      <div class="summary-row">
+        <span>Delivery</span>
+        <span>Calculated at checkout</span>
       </div>
-    </div>
-  </div>
-</div>
-
+      <div class="summary-total">
+        <span>Total</span>
+        <strong>₹{{ totalAmount }}</strong>
+      </div>
+      <button type="button" class="cart-action checkout-action" (click)="confirmOrder()">
+        Continue to checkout <i class="bi bi-arrow-right"></i>
+      </button>
+      <a class="continue-shopping" routerLink="/category/all-products">
+        <i class="bi bi-arrow-left"></i> Continue shopping
+      </a>
+    </aside>
+  </section>
+</main>
 
 <app-spinner *ngIf="(uiService.loading$ | async) || false"></app-spinner>
-

@@ -1,65 +1,92 @@
-<div class="card shadow">
-  <div class="card-header">
-    <h4 class="step-header">Step {{ currentStep }} of 5</h4>
-  </div>
-  <div class="card-body">
-    <!-- Step 1: Lens Types -->
-    <div *ngIf="currentStep === 1" class="step-content">
-      <h5>Types of Lenses</h5>
-      <ul class="list-group">
-        <li *ngFor="let lens of lensTypes" class="list-group-item">
-          <strong>{{ lens.name }}</strong>: {{ lens.description }}
-        </li>
-      </ul>
-    </div>
+<main class="guide-page">
+  <header class="guide-heading">
+    <span class="eyebrow">A LITTLE KNOW-HOW GOES A LONG WAY</span>
+    <h1>The eyewear guide</h1>
+    <p>Everything you need to feel good about choosing, wearing and caring for your frames.</p>
+  </header>
 
-    <!-- Step 2: Frame Materials -->
-    <div *ngIf="currentStep === 2" class="step-content">
-      <h5>Frame Materials</h5>
-      <ul class="list-group">
-        <li *ngFor="let material of frameMaterials" class="list-group-item">
-          <strong>{{ material.name }}</strong>: {{ material.description }}
-        </li>
-      </ul>
-    </div>
-
-    <!-- Step 3: Face Shape and Frame Matching -->
-    <div *ngIf="currentStep === 3" class="step-content">
-      <h5>Frame Recommendations by Face Shape</h5>
-      <ul class="list-group">
-        <li *ngFor="let face of faceShapes" class="list-group-item">
-          <strong>{{ face.shape }}</strong>: {{ face.recommendation }}
-        </li>
-      </ul>
-    </div>
-
-    <!-- Step 4: Age Group Recommendations -->
-    <div *ngIf="currentStep === 4" class="step-content">
-      <h5>Recommendations by Age Group</h5>
-      <ul class="list-group">
-        <li *ngFor="let group of ageGroups" class="list-group-item">
-          <strong>{{ group.group }}</strong>: {{ group.advice }}
-        </li>
-      </ul>
-    </div>
-
-    <!-- Step 5: Care Tips -->
-    <div *ngIf="currentStep === 5" class="step-content">
-      <h5>Care Tips for Your Specs</h5>
-      <ul class="list-group">
-        <li *ngFor="let tip of careTips" class="list-group-item">
-          {{ tip }}
-        </li>
-      </ul>
+  <div class="guide-progress" aria-label="Guide progress">
+    <span>Step {{ currentStep }} of 5</span>
+    <div class="progress-track">
+      <span [style.width.%]="currentStep * 20"></span>
     </div>
   </div>
-  <div class="card-footer text-center">
-    <!-- Previous Button -->
-    <button class="btn btn-secondary me-2 custom-btn" (click)="previousStep()"
-      [disabled]="currentStep === 1">Previous</button>
 
-    <!-- Conditional Buttons -->
-    <button *ngIf="currentStep < 5" class="btn btn-primary custom-btn" (click)="nextStep()">Next</button>
-    <button *ngIf="currentStep === 5" class="btn btn-success custom-btn" routerLink="/home">Back to Home</button>
-  </div>
-</div>
+  <section class="guide-content">
+    <article *ngIf="currentStep === 1" class="guide-step">
+      <span class="step-index">01 / LENSES</span>
+      <h2>Types of lenses</h2>
+      <p class="step-intro">The right lens depends on your prescription and the way you use your glasses.</p>
+      <div class="guide-card-grid">
+        <article *ngFor="let lens of lensTypes" class="guide-card showcase-3d">
+          <span class="guide-card-icon"><i class="bi bi-eye"></i></span>
+          <h3>{{ lens.name }}</h3>
+          <p>{{ lens.description }}</p>
+        </article>
+      </div>
+    </article>
+
+    <article *ngIf="currentStep === 2" class="guide-step">
+      <span class="step-index">02 / MATERIALS</span>
+      <h2>Frame materials</h2>
+      <p class="step-intro">Weight, feel and flexibility all start with the material.</p>
+      <div class="guide-card-grid">
+        <article *ngFor="let material of frameMaterials" class="guide-card showcase-3d">
+          <span class="guide-card-icon"><i class="bi bi-layers"></i></span>
+          <h3>{{ material.name }}</h3>
+          <p>{{ material.description }}</p>
+        </article>
+      </div>
+    </article>
+
+    <article *ngIf="currentStep === 3" class="guide-step">
+      <span class="step-index">03 / YOUR FACE SHAPE</span>
+      <h2>Find a frame that fits your features</h2>
+      <p class="step-intro">A helpful starting point for finding a silhouette that feels balanced.</p>
+      <div class="guide-card-grid">
+        <article *ngFor="let face of faceShapes" class="guide-card showcase-3d">
+          <span class="guide-card-icon"><i class="bi bi-person-bounding-box"></i></span>
+          <h3>{{ face.shape }}</h3>
+          <p>{{ face.recommendation }}</p>
+        </article>
+      </div>
+    </article>
+
+    <article *ngIf="currentStep === 4" class="guide-step">
+      <span class="step-index">04 / EVERY AGE</span>
+      <h2>Comfort for every stage</h2>
+      <p class="step-intro">A few practical things to consider when choosing frames for different ages.</p>
+      <div class="guide-card-grid">
+        <article *ngFor="let group of ageGroups" class="guide-card showcase-3d">
+          <span class="guide-card-icon"><i class="bi bi-person"></i></span>
+          <h3>{{ group.group }}</h3>
+          <p>{{ group.advice }}</p>
+        </article>
+      </div>
+    </article>
+
+    <article *ngIf="currentStep === 5" class="guide-step">
+      <span class="step-index">05 / KEEP THEM LOOKING GOOD</span>
+      <h2>Care tips for your specs</h2>
+      <p class="step-intro">Small habits help your frames stay comfortable and clear.</p>
+      <ul class="care-tip-list">
+        <li *ngFor="let tip of careTips">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>{{ tip }}</span>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <footer class="guide-controls">
+    <button type="button" class="guide-button guide-button-secondary" (click)="previousStep()" [disabled]="currentStep === 1">
+      <i class="bi bi-arrow-left"></i> Previous
+    </button>
+    <button *ngIf="currentStep < 5" type="button" class="guide-button guide-button-primary" (click)="nextStep()">
+      Next step <i class="bi bi-arrow-right"></i>
+    </button>
+    <button *ngIf="currentStep === 5" type="button" class="guide-button guide-button-primary" routerLink="/home">
+      Back to home <i class="bi bi-house"></i>
+    </button>
+  </footer>
+</main>

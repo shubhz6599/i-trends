@@ -1,117 +1,264 @@
-/* Full Page Background */
-.profile-page-container {
-  background: linear-gradient(135deg, #6dd5ed, #2c3e50); /* Gradient background */
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-}
-
-/* Profile Card */
-.profile-card {
-  background-color: white;
+:host {
+  display: block;
   width: 100%;
-  max-width: 600px;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  margin-bottom: 15%;
 }
 
-/* Profile Picture Section */
-.profile-picture-container {
-  margin-bottom: 20px;
+.profile-page-container {
+  display: block;
+  width: min(100% - 40px, 1000px);
+  margin: 0 auto;
+  padding: clamp(30px, 5vw, 64px) 0 90px;
+}
+
+.eyebrow {
+  color: var(--brand);
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.profile-heading {
+  margin-bottom: 26px;
+}
+
+.profile-heading h1 {
+  margin: 7px 0 4px;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  letter-spacing: -0.07em;
+}
+
+.profile-heading p,
+.profile-intro p,
+.form-section-heading p,
+.email-verified-status p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.profile-card {
+  width: min(100%, 900px);
+  margin-inline: auto;
+  padding: clamp(20px, 4vw, 42px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-intro {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 30px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
 }
 
 .profile-picture {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%; /* Circular profile picture */
+  width: 76px;
+  height: 76px;
+  flex: 0 0 auto;
+  border: 3px solid var(--brand-soft);
+  border-radius: 50%;
+  background: var(--surface-raised);
   object-fit: cover;
-  border: 3px solid #6dd5ed; /* Add border to profile picture */
 }
 
 .profile-name {
-  font-size: 1.5rem;
-  color: #2c3e50;
+  margin: 5px 0 3px;
+  font-size: 1.4rem;
+  letter-spacing: -0.04em;
 }
 
-/* Form Styling */
-.form-control {
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 1rem;
+.profile-intro p {
+  font-size: 0.8rem;
 }
 
-.form-control:focus {
-  border-color: #6dd5ed;
-  box-shadow: 0 0 5px rgba(109, 213, 237, 0.7);
+.profile-form-section + .profile-form-section {
+  margin-top: 30px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+
+.form-section-heading {
+  margin-bottom: 18px;
+}
+
+.form-section-heading h2 {
+  margin: 0 0 4px;
+  font-size: 1.08rem;
+  letter-spacing: -0.025em;
+}
+
+.form-section-heading p {
+  font-size: 0.78rem;
+}
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 18px;
 }
 
 .form-group label {
-  font-weight: bold;
-  color: #2c3e50;
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 650;
 }
 
-/* Email Verified Section */
+.form-group .form-control {
+  min-height: 46px;
+  border-color: var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.form-group .form-control:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 13%, transparent);
+}
+
+.form-group .form-control[readonly] {
+  background: var(--page);
+  color: var(--muted);
+}
+
+.form-group .invalid-feedback {
+  font-size: 0.73rem;
+}
+
 .email-verified-status {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 18px;
+  margin-top: 28px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--page);
+}
+
+.email-verified-status p {
+  margin-top: 4px;
+  font-size: 0.76rem;
 }
 
 .email-status-container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
 }
 
-.badge {
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: capitalize;
+.email-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.email-status.verified {
+  color: var(--brand);
+}
+
+.email-status.not-verified {
+  color: #b15a34;
 }
 
 .verify-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--brand);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
-.verify-btn:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
+.profile-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
 }
 
-/* Buttons */
-button.btn-primary {
-  background-color: #2c3e50;
-  border: none;
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+.save-profile-btn {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--brand);
+  color: var(--brand-ink);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
-button.btn-primary:hover {
-  background-color: #6dd5ed;
-  transform: scale(1.05);
+.save-profile-btn:hover {
+  background: var(--brand-strong);
 }
 
-
-
-.form-control {
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 1rem;
+.modal-content {
+  border-color: var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
 }
 
-.form-control:focus {
-  border-color: #6dd5ed;
-  box-shadow: 0 0 5px rgba(109, 213, 237, 0.7);
+.modal-header {
+  border-bottom-color: var(--line);
 }
 
-.form-group label {
-  font-weight: bold;
-  color: #2c3e50;
+.modal-title {
+  color: var(--text);
+  font-weight: 750;
+}
+
+.modal-body .form-control {
+  min-height: 44px;
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.modal-body .btn-primary {
+  min-height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--brand);
+  color: var(--brand-ink);
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .profile-page-container {
+    width: min(100% - 24px, 500px);
+    padding-top: 28px;
+  }
+
+  .profile-card {
+    width: 100%;
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .profile-form-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .email-verified-status {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

@@ -1,48 +1,71 @@
-<div class="container">
-  <div class="bottom-nav">
-    <!-- Home -->
-    <input type="radio" name="radio" value="1" id="tab-1" checked />
-    <label class="icon home-icon" for="tab-1" routerLink="/" routerLinkActive="active">
-      <i class="bi bi-house"></i>
-      <span class="nav-text">Home</span>
-    </label>
+<nav class="bottom-nav" aria-label="Quick navigation">
+  <a class="bottom-nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <i class="bi bi-house" aria-hidden="true"></i>
+    <span class="nav-text">Home</span>
+  </a>
 
-    <!-- Contact -->
-    <input type="radio" name="radio" value="2" id="tab-2" />
-    <label class="icon contact-icon" for="tab-2" routerLinkActive="active" (click)="toggleOptions()">
-      <i class="bi bi-whatsapp"></i>
+  <div class="contact-nav-item">
+    <button
+      type="button"
+      class="bottom-nav-link"
+      (click)="toggleOptions()"
+      [attr.aria-expanded]="showContactOptions"
+      aria-controls="contact-options">
+      <i class="bi bi-chat-dots" aria-hidden="true"></i>
       <span class="nav-text">Contact</span>
-      <div *ngIf="showContactOptions" class="half-circle-options">
-        <button class="option-btn" (click)="call()">
-          <i class="bi bi-telephone-fill"></i>
+    </button>
+    <div *ngIf="showContactOptions" id="contact-options" class="contact-popover">
+      <div class="contact-popover-heading">
+        <strong>Need a hand?</strong>
+        <span>Choose how to reach us</span>
+      </div>
+      <div class="contact-options">
+        <button type="button" class="option-btn" (click)="call()">
+          <i class="bi bi-telephone-fill" aria-hidden="true"></i>
           <span>Call</span>
         </button>
-        <button class="option-btn" (click)="mail()">
-          <i class="bi bi-envelope-fill"></i>
+        <button type="button" class="option-btn" (click)="mail()">
+          <i class="bi bi-envelope-fill" aria-hidden="true"></i>
           <span>Mail</span>
         </button>
-        <button class="option-btn" (click)="whatsapp()">
-          <i class="bi bi-whatsapp"></i>
+        <button type="button" class="option-btn" (click)="whatsapp()">
+          <i class="bi bi-whatsapp" aria-hidden="true"></i>
           <span>WhatsApp</span>
         </button>
       </div>
-    </label>
-
-
-
-
-    <!-- Cart -->
-    <input  type="radio" name="radio" value="4" id="tab-4" />
-    <label class="icon cart-icon" for="tab-4" routerLink="/cart" routerLinkActive="active">
-      <i class="bi bi-bag"></i>
-      <span class="nav-text">Cart</span>
-    </label>
-
-     <!-- EyeWears -->
-     <input type="radio" name="radio" value="3" id="tab-3" />
-     <label class="icon logout-icon" for="tab-3" routerLink="/auth" routerLinkActive="active">
-      <i class="bi bi-box-arrow-right"></i>
-       <span class="nav-text">Logout</span>
-     </label>
+    </div>
   </div>
-</div>
+
+  <a class="bottom-nav-link" routerLink="/cart" routerLinkActive="active">
+    <i class="bi bi-bag" aria-hidden="true"></i>
+    <span class="nav-text">Cart</span>
+  </a>
+
+  <button
+    *ngIf="isAuthenticated; else accountLink"
+    type="button"
+    class="bottom-nav-link account-link"
+    disabled
+    aria-disabled="true"
+    aria-label="Account is available from the account page when signed in"
+    title="You are already signed in">
+    <i class="bi bi-person-check" aria-hidden="true"></i>
+    <span class="nav-text">Account</span>
+  </button>
+  <ng-template #accountLink>
+    <a class="bottom-nav-link" routerLink="/auth" routerLinkActive="active">
+      <i class="bi bi-person" aria-hidden="true"></i>
+      <span class="nav-text">Account</span>
+    </a>
+  </ng-template>
+
+  <button
+    type="button"
+    class="bottom-nav-link theme-nav-link"
+    (click)="toggleTheme()"
+    [attr.aria-label]="theme.usesSystemPreference() ? (theme.isDarkMode() ? 'Switch to light theme' : 'Switch to dark theme') : 'Use device theme'"
+    [title]="theme.usesSystemPreference() ? (theme.isDarkMode() ? 'Switch to light theme' : 'Switch to dark theme') : 'Use device theme'">
+    <i class="bi" [ngClass]="theme.isDarkMode() ? 'bi-sun-fill' : 'bi-moon-stars-fill'" aria-hidden="true"></i>
+    <span class="nav-text">{{ theme.usesSystemPreference() ? 'Theme' : 'System' }}</span>
+  </button>
+</nav>

@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { UiService } from 'src/app/services/ui.service';
-declare var Razorpay: any;
+import { SpinnerComponent } from '../spinner/spinner.component';
+import { RazorpayService } from 'src/app/services/razorpay.service';
+import lenses from '../../../assets/Json/lenses.json';
 @Component({
+  standalone: true,
+  imports: [CommonModule, NgOptimizedImage, FormsModule, ReactiveFormsModule, SpinnerComponent],
   selector: 'app-lens-details',
   templateUrl: './lens-details.component.html',
   styleUrls: ['./lens-details.component.css']
 })
 export class LensDetailsComponent implements OnInit {
-  products: any[] = [];
+  products: any[] = lenses;
   selectedProduct: any = null;
   selectedImage: string = '';
   isDetailsView: boolean = false;
@@ -41,15 +46,15 @@ export class LensDetailsComponent implements OnInit {
   ErrorMsg: string = '';
   selectedColor: any;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService, private router: Router, public uiService: UiService) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    public uiService: UiService,
+    private razorpayService: RazorpayService
+  ) { }
 
   ngOnInit(): void {
-    // Load products from JSON
-    this.http.get<any[]>('/assets/Json/lenses.json').subscribe((data) => {
-      this.products = data;
-    });
-
-
     // Initialize the form
     this.productForm = this.fb.group({
       rightEyePowerSPH: [''],
@@ -169,8 +174,13 @@ export class LensDetailsComponent implements OnInit {
             }
           };
 
-          const razorpay = new Razorpay(options);
-          razorpay.open();
+          this.razorpayService.openCheckout(options).then(() => {
+            this.uiService.hideLoading();
+          }).catch(error => {
+            this.uiService.hideLoading();
+            this.uiService.showToast('Payment unavailable', 'Unable to open the payment gateway. Please try again.');
+            console.error('Unable to open Razorpay checkout', error);
+          });
         }
       },
       error: (err) => {

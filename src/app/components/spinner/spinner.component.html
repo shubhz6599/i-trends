@@ -1,5 +1,13 @@
-<div class="blur-overlay" *ngIf="show">
-</div>
-<div class="loader-container" *ngIf="show">
-  <div class="loader"></div>
+<div class="blur-overlay" *ngIf="show" aria-hidden="true"></div>
+<div class="loader-container" *ngIf="show" role="status" aria-live="polite" aria-label="Loading">
+  <div class="loader-orbit" aria-hidden="true">
+    <span class="orbit orbit--outer"></span>
+    <span class="orbit orbit--inner"></span>
+    <span class="loader-glasses"><i class="bi bi-eyeglasses"></i></span>
+    <span class="loader-spark loader-spark--one"></span>
+    <span class="loader-spark loader-spark--two"></span>
+  </div>
+  <span class="loader-title">Finding your perfect view</span>
+  <span class="loader-caption">Just a moment</span>
+  <span class="sr-only">Loading, please wait</span>
 </div>

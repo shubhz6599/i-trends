@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
@@ -12,6 +16,7 @@ export class AdminDashboardComponent implements OnInit {
   lastMonthOrders: any[] = [];
   lastYearOrders: any[] = [];
   isLoading = false;
+  loadError = '';
 
   // Filters
   searchTerm = '';
@@ -26,6 +31,7 @@ export class AdminDashboardComponent implements OnInit {
 
   getOrders() {
     this.isLoading = true;
+    this.loadError = '';
 
     const params: any = {};
     if (this.searchTerm) params.search = this.searchTerm;
@@ -42,9 +48,10 @@ export class AdminDashboardComponent implements OnInit {
         this.filterOrders(); // Call filterOrders to compute counts
         this.isLoading = false;
       },
-      error: () => {
-        alert('Failed to load orders.');
+      error: (error: unknown) => {
+        this.loadError = 'Please check your connection and try again.';
         this.isLoading = false;
+        console.error('Failed to load admin orders.', error);
       }
     });
   }

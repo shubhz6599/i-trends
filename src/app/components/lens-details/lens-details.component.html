@@ -5,8 +5,9 @@
     <div class="row">
       <!-- Loop through products and display each as a card -->
       <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of products">
-        <div class="card product-card">
-          <img [src]="product.image[0]" class="card-img-top" alt="{{ product.name }}">
+        <div class="card product-card showcase-3d">
+          <img [ngSrc]="product.image[0]" class="card-img-top" alt="{{ product.name }}"
+            width="640" height="480" loading="lazy" decoding="async">
           <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">{{ product.description | slice:0:100 }}...</p>
@@ -25,13 +26,15 @@
       <div class="card-body">
         <!-- Main Image -->
         <div class="text-center mb-4">
-          <img [src]="selectedImage || selectedProduct.image[0]" class="main-image" alt="{{ selectedProduct.name }}">
+          <img [ngSrc]="selectedImage || selectedProduct.image[0]" class="main-image" alt="{{ selectedProduct.name }}"
+            width="1000" height="800" priority decoding="async">
         </div>
 
         <!-- Thumbnails -->
         <div class="d-flex justify-content-center flex-wrap mb-4">
-          <img *ngFor="let img of selectedProduct.image" [src]="img" class="thumbnail-image me-2"
-            [class.selected]="img === selectedImage" (click)="changeImage(img)" alt="Thumbnail">
+          <img *ngFor="let img of selectedProduct.image" [ngSrc]="img" class="thumbnail-image me-2"
+            [class.selected]="img === selectedImage" (click)="changeImage(img)" alt="Thumbnail"
+            width="120" height="96" loading="lazy" decoding="async">
         </div>
 
         <!-- Product Details -->

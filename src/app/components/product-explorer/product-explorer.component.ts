@@ -1,20 +1,22 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import type { FaceLandmarker, FaceLandmarkerResult, NormalizedLandmark } from '@mediapipe/tasks-vision';
 import productsData from '../../../assets/Json/products.json';
-import { ImagePreloaderService } from 'src/app/services/image-preloader.service';
 import { SharedStateService } from 'src/app/services/shared-state.service';
-import { trigger, transition, style, animate, state } from '@angular/animations';
-import { ViewportScroller } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { UiService } from 'src/app/services/ui.service';
-import { FormBuilder } from '@angular/forms';
-declare var Razorpay: any;
+import { RazorpayService } from 'src/app/services/razorpay.service';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SpinnerComponent } from '../spinner/spinner.component';
 declare var bootstrap: any;
 interface Variant {
   color: string;
   colorCode: string;
   images: string[];
+  tryOnImage?: string;
   inStock: boolean;
   priceModifier: number;
   imagesLoaded: boolean;
@@ -41,24 +43,16 @@ interface Category {
 }
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, NgOptimizedImage, FormsModule, ReactiveFormsModule, SpinnerComponent],
   selector: 'app-product-explorer',
   templateUrl: './product-explorer.component.html',
-  styleUrls: ['./product-explorer.component.css'],
-  animations: [
-    trigger('priceStep', [
-      state('void', style({ opacity: 0, transform: 'translateY(20px)' })),
-      state('*', style({ opacity: 1, transform: 'translateY(0)' })),
-      transition(':enter', [
-        animate('0.5s ease-out')
-      ]),
-      transition(':leave', [
-        animate('0.3s ease-in', style({ opacity: 0, transform: 'translateY(-20px)' }))
-      ])
-    ])
-  ]
+  styleUrls: ['./product-explorer.component.css']
 })
-export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewInit, OnDestroy {
-  @ViewChild('priceDisplay') priceDisplay!: ElementRef;
+export class ProductExplorerComponent implements OnInit, OnDestroy {
+  @ViewChild('tryOnVideo') private tryOnVideo?: ElementRef<HTMLVideoElement>;
+  @ViewChild('tryOnCanvas') private tryOnCanvas?: ElementRef<HTMLCanvasElement>;
+
   categories: Category[] = productsData.categories;
   currentCategory: Category | null = null;
   selectedProduct: Product | null = null;
@@ -86,15 +80,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   currentLoadingMessage = this.loadingMessages[0];
   isLoading: boolean = true;
   categoryId: string | any = '';
-  products: any[] = [];
-  cachedImages: string[] = [];
-  showImgPlaceholder: boolean = true;
-  showDiscount: boolean = true;
+  failedImageUrls = new Set<string>();
   discountPercent: number = 0;
-  priceAnimationTriggered = false;
-  showOriginalPrice = false;
-  showDiscountPercent = false;
-  showFinalPrice = false;
   selectedSort: string = '';
   selectedPriceRange: any = null;
   selectedRating: number | null = null;
@@ -174,7 +161,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   currentCategoryImage: string = '';
   alertMessage: any = '';
   alertType: string = '';
-  private imageLoadTimeout: any;
+  private imageLoadTimeout?: ReturnType<typeof setTimeout>;
+  private readonly pendingTimeouts = new Set<ReturnType<typeof setTimeout>>();
   viewType: any;
   productForm = this.fb.group({
     rightEyePowerSPH: [''],
@@ -210,40 +198,65 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   boxesOptions = [1.50, 1.60, 1.67, 1.74];
   addOptions = ['+0.75', '+1.00', '+1.25', '+1.50', '+1.75', '+2.00', '+2.25', '+2.50', '+2.75', '+3.00'];
   ErrorMsg: string = '';
+  isTryOnOpen = false;
+  isTryOnLoading = false;
+  tryOnError = '';
+  tryOnStatus = '';
+  private cameraStream: MediaStream | null = null;
+  private faceLandmarker: FaceLandmarker | null = null;
+  private tryOnContext: CanvasRenderingContext2D | null = null;
+  private tryOnProductImage: HTMLImageElement | null = null;
+  private tryOnProductImageUrl = '';
+  private tryOnProductImageLoadSource = '';
+  private tryOnProductImageLoad: Promise<HTMLImageElement> | null = null;
+  private animationFrameId: number | null = null;
+  private tryOnRequestId = 0;
+  private isTryOnStarting = false;
+  private lastVideoTime = -1;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private imagePreloader: ImagePreloaderService,
-    private ngZone: NgZone,
-    private cdr: ChangeDetectorRef,
     private sharedStateService: SharedStateService,
-    private viewportScroller: ViewportScroller,
     private authService: AuthService,
     public uiService: UiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private razorpayService: RazorpayService,
+    private ngZone: NgZone
   ) { }
+
+  get supportsVirtualTryOn(): boolean {
+    const productName = this.selectedProduct?.name ?? '';
+    const categoryName = this.currentCategory?.name ?? '';
+    return !!this.selectedProduct && !/(contact lens|lens care|accessor|case)/i.test(`${productName} ${categoryName}`);
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const viewType = params.get('category');
-      this.viewType = viewType
-      const searchQuery = params.get('searchQuery')
+      const searchQuery = params.get('searchQuery');
+      this.viewType = viewType;
+      this.searchQueryFromHomePageNav = searchQuery ?? '';
+      this.currentCategory = null;
+      this.categoryId = '';
+      this.filteredProducts = [];
+      this.isAllProductsView = false;
+      this.isBumperDiscountView = false;
+      this.currentCategoryImage = '';
+
       if (viewType === 'bumper-discount') {
-        this.currentCategoryImage = 'https://media.istockphoto.com/id/842287212/vector/bright-sale-background-poster-in-orange-color.jpg?s=612x612&w=0&k=20&c=0y7tCbAmRQriR4080d2omzcuTDSamVU34Q1p3Ejqge0='
         this.showBumperDiscountProducts();
-      } if (viewType === 'all-products' && searchQuery == null) {
-        this.currentCategoryImage = 'https://envision-eyecare.com/wp-content/uploads/2024/09/7-Reasons-To-Buy-Glasses-From-Your-Optometrist-Hero.jpg'
+      } else if (viewType === 'all-products' && searchQuery == null) {
+        this.currentCategoryImage = 'https://envision-eyecare.com/wp-content/uploads/2024/09/7-Reasons-To-Buy-Glasses-From-Your-Optometrist-Hero.jpg';
         this.showAllProducts();
-      } else if (viewType === 'all-products' && searchQuery != null) {
-        this.searchQueryFromHomePageNav = searchQuery
-        this.showAllProducts()
+      } else if (viewType === 'all-products') {
+        this.showAllProducts();
       }
-      if (viewType !== 'all-products' && viewType !== 'bumper-discount') {
+      else if (viewType) {
         this.categoryId = params.get('category');
         this.currentCategory = this.categories.find(c => c.id === this.categoryId) || null;
         this.filteredProducts = this.currentCategory?.products || [];
       }
-      this.fetchCategoryImages();
       this.resetSelections();
       this.updateAvailableColors();
     });
@@ -268,38 +281,40 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   showAllProducts(): void {
-    this.imagePreloader.preloadAllProductsImages();
     this.isAllProductsView = true;
     this.isBumperDiscountView = false;
-    this.filteredProducts = this.categories.flatMap(category => category.products);
+    this.filteredProducts = this.getBaseProducts();
     this.searchResultMessage = 'Showing all available products';
-    if (this.searchQueryFromHomePageNav != null) {
-      this.filteredProducts = this.filteredProducts.filter((product) =>
-        product.name.toLowerCase().includes(this.searchQueryFromHomePageNav.toLowerCase())
-      );
-    }
   }
+
+  private getBaseProducts(): Product[] {
+    if (this.isBumperDiscountView) {
+      return this.categories
+        .flatMap(category => category.products)
+        .filter(product => product.bumperdiscount);
+    }
+
+    if (this.isAllProductsView) {
+      const products = this.categories.flatMap(category => category.products);
+      return this.searchQueryFromHomePageNav.trim()
+        ? products.filter(product =>
+            product.name.toLowerCase().includes(this.searchQueryFromHomePageNav.toLowerCase())
+          )
+        : products;
+    }
+
+    return this.currentCategory?.products || [];
+  }
+
+  getDiscountedPrice(product: Product): number {
+    return product.basePrice - (product.basePriceWithDiscount || 0);
+  }
+
+  isFilterSelected(label: string): boolean {
+    return this.selectedFilters.some(filter => filter.label === label);
+  }
+
   private lensModalInstance: any;
-
-  ngAfterViewInit() {
-    this.setupScrollListener();
-  }
-
-  fetchCategoryImages(): void {
-    this.cachedImages = this.imagePreloader.getCategoryImages(this.categoryId);
-    this.products = this.getCategoryProducts();
-    if (this.cachedImages.length < this.products.length) {
-      this.imagePreloader.preloadCategoryImages(this.categoryId);
-      this.showImgPlaceholder = false;
-    }
-    setTimeout(() => {
-    }, 2000);
-  }
-
-  getCategoryProducts(): any[] {
-    const category = productsData.categories.find((cat) => cat.id === this.categoryId);
-    return category?.products || [];
-  }
 
   onImageLoad(): void {
     this.imageLoaded = true;
@@ -329,8 +344,292 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     }, 10000);
   }
 
+  openTryOn(): void {
+    if (!this.supportsVirtualTryOn || this.isTryOnStarting) return;
+    this.isTryOnOpen = true;
+    this.tryOnError = '';
+    if (!this.selectedVariant?.tryOnImage) {
+      this.tryOnError = 'A transparent try-on image is not available for this frame color yet. The catalog photo includes its background and cannot be used as a clean overlay.';
+      this.tryOnStatus = '';
+      return;
+    }
+    this.tryOnStatus = 'Preparing your camera preview…';
+    void this.startTryOn();
+  }
+
+  closeTryOn(): void {
+    this.tryOnRequestId++;
+    this.isTryOnOpen = false;
+    this.isTryOnLoading = false;
+    this.isTryOnStarting = false;
+    this.tryOnError = '';
+    this.tryOnStatus = '';
+    this.stopCamera();
+  }
+
+  @HostListener('document:keydown.escape')
+  onTryOnEscape(): void {
+    if (this.isTryOnOpen) this.closeTryOn();
+  }
+
+  private async startTryOn(): Promise<void> {
+    if (this.isTryOnStarting) return;
+
+    const requestId = ++this.tryOnRequestId;
+    this.isTryOnStarting = true;
+    this.isTryOnLoading = true;
+    this.tryOnError = '';
+
+    try {
+      if (!navigator.mediaDevices?.getUserMedia) {
+        throw new Error('Camera access is unavailable. Open this site over HTTPS in a supported browser.');
+      }
+
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: false,
+        video: {
+          facingMode: 'user',
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        }
+      });
+
+      if (requestId !== this.tryOnRequestId) {
+        stream.getTracks().forEach(track => track.stop());
+        return;
+      }
+
+      this.cameraStream = stream;
+      await new Promise<void>(resolve => setTimeout(resolve, 0));
+
+      const video = this.tryOnVideo?.nativeElement;
+      const canvas = this.tryOnCanvas?.nativeElement;
+      if (!this.selectedVariant?.tryOnImage) {
+        throw new Error('A transparent try-on image is not available for this frame color yet.');
+      }
+      if (!video || !canvas) {
+        throw new Error('The camera preview could not be initialized. Close it and try again.');
+      }
+
+      video.srcObject = stream;
+      await video.play();
+      if (requestId !== this.tryOnRequestId) return;
+
+      if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+        await new Promise<void>(resolve => video.addEventListener('loadeddata', () => resolve(), { once: true }));
+      }
+      if (requestId !== this.tryOnRequestId) return;
+
+      const [landmarker] = await Promise.all([
+        this.faceLandmarker ?? this.createFaceLandmarker(),
+        this.loadSelectedTryOnImage()
+      ]);
+      if (requestId !== this.tryOnRequestId) {
+        if (landmarker !== this.faceLandmarker) landmarker.close();
+        return;
+      }
+      this.faceLandmarker = landmarker;
+
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      this.tryOnContext = canvas.getContext('2d');
+      if (!this.tryOnContext) {
+        throw new Error('Your browser could not create the virtual try-on preview.');
+      }
+
+      this.lastVideoTime = -1;
+      this.tryOnStatus = 'Center your face in the frame to see the glasses.';
+      this.isTryOnLoading = false;
+      this.ngZone.runOutsideAngular(() => this.detectTryOnFrame());
+    } catch (error: unknown) {
+      if (requestId !== this.tryOnRequestId) return;
+      this.stopCamera();
+      this.tryOnError = this.getTryOnErrorMessage(error);
+      this.tryOnStatus = '';
+      this.isTryOnLoading = false;
+      console.error('Virtual try-on could not be started.', error);
+    } finally {
+      if (requestId === this.tryOnRequestId) this.isTryOnStarting = false;
+    }
+  }
+
+  private async createFaceLandmarker(): Promise<FaceLandmarker> {
+    const { FaceLandmarker, FilesetResolver } = await import('@mediapipe/tasks-vision');
+    const visionFiles = await FilesetResolver.forVisionTasks(
+      'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.2.2/wasm'
+    );
+    return FaceLandmarker.createFromOptions(visionFiles, {
+      baseOptions: {
+        modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'
+      },
+      runningMode: 'VIDEO',
+      numFaces: 1,
+      outputFaceBlendshapes: false,
+      outputFacialTransformationMatrixes: false
+    });
+  }
+
+  private detectTryOnFrame(): void {
+    const video = this.tryOnVideo?.nativeElement;
+    const canvas = this.tryOnCanvas?.nativeElement;
+    const context = this.tryOnContext;
+    const landmarker = this.faceLandmarker;
+    if (!this.isTryOnOpen || !video || !canvas || !context || !landmarker) return;
+
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA && video.currentTime !== this.lastVideoTime) {
+      this.lastVideoTime = video.currentTime;
+      const result: FaceLandmarkerResult = landmarker.detectForVideo(video, performance.now());
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      const face = result.faceLandmarks[0];
+      if (face) {
+        const selectedImageUrl = this.selectedVariant?.tryOnImage || '';
+        if (this.tryOnProductImage?.complete && this.tryOnProductImageUrl === selectedImageUrl) {
+          this.drawTryOnFrame(context, this.tryOnProductImage, face, canvas.width, canvas.height);
+          this.setTryOnStatus('');
+        } else if (selectedImageUrl) {
+          this.setTryOnStatus('Loading the selected frame…');
+          void this.loadSelectedTryOnImage().then(image => {
+            if (this.selectedVariant?.tryOnImage === image.src) {
+              this.tryOnProductImage = image;
+              this.tryOnProductImageUrl = image.src;
+              this.setTryOnStatus('Center your face in the frame to see the glasses.');
+            }
+          }).catch((error: unknown) => {
+            this.ngZone.run(() => {
+              this.tryOnError = 'The selected product image could not be loaded. Check your connection and try again.';
+              this.tryOnStatus = '';
+            });
+            console.error('Virtual try-on could not load the selected product image.', error);
+          });
+        }
+      } else {
+        this.setTryOnStatus('Center your face in the frame to see the glasses.');
+      }
+    }
+
+    this.animationFrameId = requestAnimationFrame(() => this.detectTryOnFrame());
+  }
+
+  private loadSelectedTryOnImage(): Promise<HTMLImageElement> {
+    const imageUrl = this.selectedVariant?.tryOnImage || '';
+    if (!imageUrl) return Promise.reject(new Error('A transparent try-on image is not available for this frame color yet.'));
+    if (this.tryOnProductImageUrl === imageUrl && this.tryOnProductImage?.complete) {
+      return Promise.resolve(this.tryOnProductImage);
+    }
+    if (this.tryOnProductImageLoadSource === imageUrl && this.tryOnProductImageLoad) {
+      return this.tryOnProductImageLoad;
+    }
+
+    const image = new Image();
+    image.decoding = 'async';
+    image.src = imageUrl;
+    const load = image.decode().then(() => {
+      if (!image.naturalWidth || !image.naturalHeight) {
+        throw new Error('The selected product image has no usable dimensions.');
+      }
+      if ((this.currentMainImage || this.selectedVariant?.images[0]) === imageUrl) {
+        this.tryOnProductImage = image;
+        this.tryOnProductImageUrl = imageUrl;
+      }
+      return image;
+    }).catch((error: unknown) => {
+      if (this.tryOnProductImageLoadSource === imageUrl) {
+        this.tryOnProductImageLoadSource = '';
+        this.tryOnProductImageLoad = null;
+      }
+      throw error;
+    });
+    this.tryOnProductImageLoadSource = imageUrl;
+    this.tryOnProductImageLoad = load;
+    return load;
+  }
+
+  private drawTryOnFrame(
+    context: CanvasRenderingContext2D,
+    productImage: HTMLImageElement,
+    landmarks: NormalizedLandmark[],
+    canvasWidth: number,
+    canvasHeight: number
+  ): void {
+    const point = (index: number) => ({
+      x: landmarks[index].x * canvasWidth,
+      y: landmarks[index].y * canvasHeight
+    });
+    const midpoint = (first: { x: number; y: number }, second: { x: number; y: number }) => ({
+      x: (first.x + second.x) / 2,
+      y: (first.y + second.y) / 2
+    });
+    const eyes = [
+      midpoint(point(33), point(133)),
+      midpoint(point(362), point(263))
+    ].sort((first, second) => first.x - second.x);
+    const [leftEye, rightEye] = eyes;
+    const center = midpoint(leftEye, rightEye);
+    const eyeDistance = Math.hypot(rightEye.x - leftEye.x, rightEye.y - leftEye.y);
+    if (!Number.isFinite(eyeDistance) || eyeDistance < 1) return;
+
+    const angle = Math.atan2(rightEye.y - leftEye.y, rightEye.x - leftEye.x);
+    const overlayWidth = eyeDistance * 2.35;
+    const overlayHeight = overlayWidth * productImage.naturalHeight / productImage.naturalWidth;
+
+    context.save();
+    context.translate(center.x, center.y);
+    context.rotate(angle);
+    context.drawImage(
+      productImage,
+      -overlayWidth / 2,
+      -overlayHeight / 2,
+      overlayWidth,
+      overlayHeight
+    );
+    context.restore();
+  }
+  private setTryOnStatus(status: string): void {
+    if (this.tryOnStatus === status) return;
+    this.ngZone.run(() => this.tryOnStatus = status);
+  }
+
+  private getTryOnErrorMessage(error: unknown): string {
+    if (error instanceof DOMException) {
+      if (error.name === 'NotAllowedError' || error.name === 'SecurityError') {
+        return 'Camera permission was blocked. Allow camera access in your browser settings, then try again.';
+      }
+      if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
+        return 'No camera was found. Connect a camera and try again.';
+      }
+      if (error.name === 'NotReadableError' || error.name === 'TrackStartError') {
+        return 'Your camera is already in use by another app. Close it there and try again.';
+      }
+    }
+    return error instanceof Error
+      ? error.message
+      : 'The virtual try-on could not start. Check your camera and network connection, then try again.';
+  }
+
+  private stopCamera(): void {
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
+    this.cameraStream?.getTracks().forEach(track => track.stop());
+    this.cameraStream = null;
+    const video = this.tryOnVideo?.nativeElement;
+    if (video) video.srcObject = null;
+    const canvas = this.tryOnCanvas?.nativeElement;
+    if (canvas) canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height);
+    this.tryOnContext = null;
+    this.lastVideoTime = -1;
+  }
+
   ngOnDestroy(): void {
-    window.removeEventListener('scroll', this.checkPriceInView.bind(this));
+    this.closeTryOn();
+    this.faceLandmarker?.close();
+    this.faceLandmarker = null;
+    this.pendingTimeouts.forEach(timeout => clearTimeout(timeout));
+    this.pendingTimeouts.clear();
+    if (this.imageLoadTimeout) {
+      clearTimeout(this.imageLoadTimeout);
+    }
     document.body.style.overflow = 'auto';
     document.body.style.paddingRight = '0';
     this.hideModal()
@@ -338,16 +637,13 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   resetSelections(): void {
+    this.closeTryOn();
     this.selectedProduct = null;
     this.selectedVariant = null;
     this.selectedColor = null;
     this.currentMainImage = '';
     this.selectedQuantity = "Select Quantity";
     this.sharedStateService.setDetailViewVisible(false);
-    this.priceAnimationTriggered = false;
-    this.showOriginalPrice = false;
-    this.showDiscountPercent = false;
-    this.showFinalPrice = false;
     this.updateAvailableColors();
   }
 
@@ -382,16 +678,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.currentMainImage = this.selectedVariant.images[0];
     this.imageLoaded = false;
     this.selectedColor = this.selectedVariant.color;
-    this.priceAnimationTriggered = false;
-    this.showOriginalPrice = false;
-    this.showDiscountPercent = false;
-    this.showFinalPrice = false;
     this.discountPercent = this.calculateDiscountPercentage(product.basePrice, product.basePriceWithDiscount)
     this.updateAvailableColorsForProduct();
-    // this.sharedStateService.setDetailViewVisible(true);
-    setTimeout(() => {
-      this.startPriceAnimation();
-    }, 1000);
     this.scrollTop();
   }
 
@@ -415,66 +703,21 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     this.currentMainImage = variant.images[0];
     this.imageLoaded = false;
     this.selectedColor = variant.color;
-    this.priceAnimationTriggered = false;
-    this.showOriginalPrice = false;
-    this.showDiscountPercent = false;
-    this.showFinalPrice = false;
-    setTimeout(() => {
-      this.startPriceAnimation();
-    }, 50);
-  }
-
-  checkPriceInView(): void {
-    if (this.priceAnimationTriggered || !this.priceDisplay) return;
-    const element = this.priceDisplay.nativeElement;
-    const rect = element.getBoundingClientRect();
-    const isVisible = (
-      rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.bottom >= 0
-    );
-    if (isVisible) {
-      this.priceAnimationTriggered = true;
-      this.startPriceAnimation();
+    if (this.selectedProduct) {
+      this.discountPercent = this.calculateDiscountPercentage(
+        this.selectedProduct.basePrice,
+        this.selectedProduct.basePriceWithDiscount
+      );
     }
   }
 
-  setupScrollListener(): void {
-    window.addEventListener('scroll', this.checkPriceInView.bind(this));
-    setTimeout(() => this.checkPriceInView(), 500);
-  }
-
-  startPriceAnimation(): void {
-    this.showOriginalPrice = true;
-    this.cdr.detectChanges();
-    setTimeout(() => {
-      this.showDiscountPercent = true;
-      this.cdr.detectChanges();
-      setTimeout(() => {
-        this.showOriginalPrice = false;
-        this.showDiscountPercent = false;
-        this.showFinalPrice = true;
-        this.cdr.detectChanges();
-      }, 2000);
-    }, 1000);
-  }
-
-  showPriceWithDiscount() {
-    this.showDiscount = false;
-    this.cdr.detectChanges();
-    setTimeout(() => {
-      this.showDiscount = true;
-    }, 10);
-  }
-
-  getFinalPriceDigits(): string[] {
-    if (!this.selectedProduct || !this.selectedVariant) return [];
-    const price = (this.selectedProduct.basePrice - this.selectedProduct.basePriceWithDiscount).toString();
-    return price.split('');
-  }
-
-  getOriginalPrice(): number {
-    if (!this.selectedProduct || !this.selectedVariant) return 0;
-    return this.selectedProduct.basePrice;
+  private scheduleTimeout(callback: () => void, delay: number): void {
+    let timeout: ReturnType<typeof setTimeout>;
+    timeout = setTimeout(() => {
+      this.pendingTimeouts.delete(timeout);
+      callback();
+    }, delay);
+    this.pendingTimeouts.add(timeout);
   }
 
   selectColor(color: string): void {
@@ -488,12 +731,23 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
-  onImageLoaded(index: number): void {
-    this.ngZone.run(() => {
-      const image: any = this.filteredProducts[index].variants[0].images[0];
-      this.filteredProducts[index].variants[0].imagesLoaded = true;
-    });
-    this.cdr.detectChanges()
+  onImageLoaded(product: Product): void {
+    const variant = product.variants[0];
+    if (variant) {
+      variant.imagesLoaded = true;
+    }
+  }
+
+  onProductImageError(product: Product): void {
+    const imageUrl = product.variants[0]?.images[0];
+    if (imageUrl) {
+      this.failedImageUrls.add(imageUrl);
+      product.variants[0].imagesLoaded = true;
+    }
+  }
+
+  trackByProductId(_index: number, product: Product): string {
+    return product.id;
   }
 
   goBack() {
@@ -502,33 +756,37 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
 
   sortProducts(sortOption: string): void {
     if (sortOption === 'lowToHigh') {
-      this.filteredProducts = [...this.filteredProducts].sort((a, b) => a.basePrice - b.basePrice);
+      this.filteredProducts = [...this.filteredProducts].sort(
+        (a, b) => this.getDiscountedPrice(a) - this.getDiscountedPrice(b)
+      );
     } else if (sortOption === 'highToLow') {
-      this.filteredProducts = [...this.filteredProducts].sort((a, b) => b.basePrice - a.basePrice);
+      this.filteredProducts = [...this.filteredProducts].sort(
+        (a, b) => this.getDiscountedPrice(b) - this.getDiscountedPrice(a)
+      );
     }
   }
 
   filterByColor(colorName: string) {
-    if (!this.selectedFilters.find(filter => filter.label === colorName)) {
-      this.selectedFilters.push({ label: colorName, value: colorName });
-    }
+    this.toggleFilterSelection(colorName, colorName);
   }
 
   filterByPrice(priceRange: any) {
-    if (!this.selectedFilters.find(filter => filter.label === priceRange.label)) {
-      this.selectedFilters.push({ label: priceRange.label, value: priceRange });
-    }
+    this.toggleFilterSelection(priceRange.label, priceRange);
   }
 
   filterByRating(rating: number) {
-    if (!this.selectedFilters.find((filter: any) => filter.label === `${rating} ★ & Up`)) {
-      this.selectedFilters.push({ label: `${rating} ★ & Up`, value: rating });
-    }
+    this.toggleFilterSelection(`${rating} ★ & Up`, rating);
   }
 
   filterByDiscount(discount: number) {
-    if (!this.selectedFilters.find((filter: any) => filter.label === `${discount}% or more`)) {
-      this.selectedFilters.push({ label: `${discount}% or more`, value: discount });
+    this.toggleFilterSelection(`${discount}% or more`, discount);
+  }
+
+  private toggleFilterSelection(label: string, value: any): void {
+    if (this.isFilterSelected(label)) {
+      this.selectedFilters = this.selectedFilters.filter(filter => filter.label !== label);
+    } else {
+      this.selectedFilters.push({ label, value });
     }
   }
 
@@ -537,23 +795,18 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   resetFilters() {
-    if (this.currentCategory?.products) this.filteredProducts = this.currentCategory?.products;
-    this.searchResultMessage = ''
+    this.selectedFilters = [];
+    this.selectedSort = '';
+    this.filteredProducts = this.getBaseProducts();
+    this.searchResultMessage = this.isAllProductsView
+      ? 'Showing all available products'
+      : '';
     this.toggleFilterPanel();
   }
 
   applyFilters() {
     this.uiService.showLoading();
-    let filtered: Product[] = [];
-    if (this.isBumperDiscountView) {
-      filtered = this.categories
-        .flatMap(category => category.products)
-        .filter(product => product.bumperdiscount);
-    } else if (this.isAllProductsView) {
-      filtered = this.categories.flatMap(category => category.products);
-    } else {
-      filtered = [...this.currentCategory?.products || []];
-    }
+    let filtered = this.getBaseProducts();
     const colorFilters = this.selectedFilters
       .filter(filter => this.availableColors.some(color => color.name === filter.value))
       .map(filter => filter.value);
@@ -569,7 +822,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     if (priceFilters.length > 0) {
       filtered = filtered.filter(product =>
         priceFilters.some(range =>
-          product.basePrice >= range.min && product.basePrice <= range.max
+          this.getDiscountedPrice(product) >= range.min && this.getDiscountedPrice(product) <= range.max
         )
       );
     }
@@ -587,7 +840,8 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     if (discountFilters.length > 0) {
       filtered = filtered.filter((product: any) =>
         discountFilters.some(discount =>
-          Math.round(100 - (product.basePrice / product.basePriceWithDiscount) * 100) >= discount
+          product.basePrice > 0 &&
+          Math.round((product.basePriceWithDiscount / product.basePrice) * 100) >= discount
         )
       );
     }
@@ -628,7 +882,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
     if (!jwt || !user) {
       // If jwt or user is missing → Not Logged In
       this.uiService.showToast('OOPS!', 'You are not logged in. Please log in to continue. Redirecting to Login Page...')
-      setTimeout(() => {
+      this.scheduleTimeout(() => {
         this.router.navigate(['/auth']);
       }, 3000);
     } else if (!user.address || Object.keys(user.address).length === 0) {
@@ -636,7 +890,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
       const button = document.querySelector('.customBtn') as HTMLElement;
       this.uiService.showToast('OOPS!', 'Address details are missing. Redirecting to Account Page...')
 
-      setTimeout(() => {
+      this.scheduleTimeout(() => {
         this.router.navigate(['/account']);
       }, 3000);
     } else {
@@ -724,14 +978,13 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   selectFrameOnly(): void {
-
-    let price: any = this.getFinalPriceDigits();
     if (!this.selectedProduct || !this.selectedVariant || !this.selectedVariant.inStock) return;
+    const price = this.getDiscountedPrice(this.selectedProduct);
     const productData = {
       name: this.selectedProduct.name,
       variant: this.selectedVariant.color,
       quantity: 1,
-      price: price.join(""),
+      price,
       imageUrl: this.selectedVariant.images[0],
       productId: this.selectedProduct.id,
       mainOption: "Frame-Only",
@@ -777,7 +1030,7 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
   showAlert(message: string, type: string): void {
     this.alertMessage = message;
     this.alertType = ` alert-${type}`;
-    setTimeout(() => {
+    this.scheduleTimeout(() => {
       this.alertMessage = null;
     }, 3000);
   }
@@ -817,10 +1070,13 @@ export class ProductExplorerComponent implements OnInit, OnDestroy, AfterViewIni
             }
           }
         };
-        const razorpay = new Razorpay(options);
-        // this.uiService.hideLoading();
-        razorpay.open();
-        this.uiService.hideLoading();
+        this.razorpayService.openCheckout(options).then(() => {
+          this.uiService.hideLoading();
+        }).catch(error => {
+          this.uiService.hideLoading();
+          this.uiService.showToast('Payment unavailable', 'Unable to open the payment gateway. Please try again.');
+          console.error('Unable to open Razorpay checkout', error);
+        });
 
       }
     });

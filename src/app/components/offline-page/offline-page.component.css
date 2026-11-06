@@ -19,3 +19,30 @@
 .offline-content h2 {
   color: #343a40;
 }
+
+.offline-container {
+  background: color-mix(in srgb, var(--page) 94%, transparent);
+  color: var(--text);
+  backdrop-filter: blur(8px);
+}
+
+.offline-content {
+  width: min(100% - 32px, 480px);
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+.offline-content i {
+  color: var(--brand);
+}
+
+.offline-content h2 {
+  color: var(--text);
+}
+
+.offline-content p {
+  color: var(--muted);
+}

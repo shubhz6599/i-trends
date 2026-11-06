@@ -1,16 +1,20 @@
 
-<div class="auth-page-container d-flex flex-column">
-  <!-- Header Section -->
-  <header class="auth-header text-center py-4">
-    <h1 class="brand-name">i-Trends</h1>
-    <p class="brand-tagline">Your Vision, Our Mission</p>
+<main class="auth-page-container">
+  <header class="auth-header">
+    <a class="brand-name" routerLink="/">i-trends<span>®</span></a>
+    <a class="auth-home-link" routerLink="/">Back to the store <i class="bi bi-arrow-up-right"></i></a>
   </header>
 
-
-
-
-  <!-- Main Auth Section -->
-  <div class="auth-container d-flex justify-content-center align-items-center">
+  <section class="auth-container">
+    <aside class="auth-aside">
+      <span class="auth-eyebrow">WELCOME TO A BETTER VIEW</span>
+      <h1>{{ isSignupMode ? 'Your next pair' : 'Good to see' }}<br>{{ isSignupMode ? 'starts here.' : 'you again.' }}</h1>
+      <p>{{ isSignupMode ? 'Create an account to find your fit and keep your favorites close.' : 'Sign in for a smoother way to find frames that feel like you.' }}</p>
+      <div class="auth-art" aria-hidden="true">
+        <i class="bi bi-eyeglasses"></i>
+        <span>i / 01</span>
+      </div>
+    </aside>
     <div class="auth-box">
       <form
       *ngIf="isOtpVerificationMode"
@@ -150,7 +154,7 @@
         </button>
       </form>
     </div>
-  </div>
+  </section>
 
   <!-- Forgot Password Modal -->
   <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
@@ -180,12 +184,11 @@
     </div>
   </div>
 
-  <!-- Footer Section -->
-  <footer class="auth-footer text-center py-3">
-    <p class="footer-text mb-0">© 2023 i-Trends, All Rights Reserved.</p>
+  <footer class="auth-footer">
+    <p class="footer-text mb-0">© 2025 i-Trends. All rights reserved.</p>
     <p>
       <a class="text-decoration-none">Privacy Policy</a> |
       <a class="text-decoration-none">Terms of Service</a>
     </p>
   </footer>
-</div>
+</main>

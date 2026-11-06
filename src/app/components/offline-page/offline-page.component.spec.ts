@@ -8,7 +8,7 @@ describe('OfflinePageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [OfflinePageComponent]
+      imports: [OfflinePageComponent]
     });
     fixture = TestBed.createComponent(OfflinePageComponent);
     component = fixture.componentInstance;

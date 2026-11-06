@@ -1,9 +1,9 @@
-<app-top-navbar *ngIf="!isDetailViewVisible" ></app-top-navbar>
+<app-top-navbar *ngIf="!isAuthRoute"></app-top-navbar>
 
 <app-spinner [show]="(ui.loading$ | async) ?? false"></app-spinner>
 
 <app-toaster [show]="(ui.toast$ | async)?.show ?? false" [title]="(ui.toast$ | async)?.title ?? ''"
-  [message]="(ui.toast$ | async)?.message ?? ''">
+  [message]="(ui.toast$ | async)?.message ?? ''" (dismiss)="ui.hideToast()">
 </app-toaster>
 
 
@@ -11,4 +11,4 @@
   <router-outlet></router-outlet>
 </div>
 
-<app-bottom-navbar *ngIf="!isDetailViewVisible"></app-bottom-navbar>
+<app-bottom-navbar *ngIf="!isAuthRoute"></app-bottom-navbar>

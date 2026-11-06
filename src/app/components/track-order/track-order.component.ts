@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, NgOptimizedImage],
   selector: 'app-track-order',
   templateUrl: './track-order.component.html',
   styleUrls: ['./track-order.component.css']

@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 
 import { AuthComponent } from './auth.component';
 
@@ -8,7 +10,8 @@ describe('AuthComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AuthComponent]
+      imports: [AuthComponent],
+      providers: [provideAnimations(), provideRouter([])]
     });
     fixture = TestBed.createComponent(AuthComponent);
     component = fixture.componentInstance;
@@ -18,4 +21,5 @@ describe('AuthComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

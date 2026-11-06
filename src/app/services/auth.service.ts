@@ -149,6 +149,10 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
+  isAuthenticated(): boolean {
+    return Boolean(localStorage.getItem('jwtToken') && localStorage.getItem('user'));
+  }
+
   // (Optional) Use this to save user after login
   setCurrentUser(user: any) {
     localStorage.setItem('user', JSON.stringify(user));

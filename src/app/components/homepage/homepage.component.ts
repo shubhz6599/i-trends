@@ -1,24 +1,16 @@
-import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { ImagePreloaderService } from 'src/app/services/image-preloader.service';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { SharedStateService } from 'src/app/services/shared-state.service';
-import { UiService } from 'src/app/services/ui.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, NgOptimizedImage, RouterLink],
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
 })
-export class HomepageComponent implements OnInit, AfterViewInit {
-  isMenuOpen = false; // State to track menu visibility
-  isLoading = true; // State to track image loading for placeholders
-  imagesLoaded = 0;
-  totalImages = 2;
-  cartCount = 0;
-  private navLinks!: HTMLElement;
-  private scrollLeftBtn!: HTMLElement;
-  private scrollRightBtn!: HTMLElement;
+export class HomepageComponent implements OnInit {
   images = [
     {
      front: 'https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/Metal%2FCompressed%20Rounded%2FDSC_0094.jpg?alt=media&token=6695b486-bdab-47cd-8c37-473f881a6133',
@@ -120,88 +112,113 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       backLoaded: false,
     }
 
+  ].map(image => ({
+    ...image,
+    imageWidth: image.title === 'Contact Lenses' ? 1094 : image.title === 'Unisex Sports & Swimming' ? 800 : 1200,
+    imageHeight: image.title === 'Contact Lenses' ? 616 : image.title === 'Unisex Sports & Swimming' ? 800 : 800
+  }));
+  featuredStyles = [
+    {
+      title: 'Modern square',
+      description: 'A confident shape made for everyday.',
+      image: this.images[1].front,
+      category: 'Square'
+    },
+    {
+      title: 'Easygoing round',
+      description: 'A softer silhouette with plenty of character.',
+      image: this.images[4].front,
+      category: 'Rounded Frames'
+    },
+    {
+      title: 'A little extra character',
+      description: 'A distinctive frame made to stand out.',
+      image: this.images[5].front,
+      category: 'Husler Frames'
+    },
+    {
+      title: 'A little cat-eye charm',
+      description: 'A lifted silhouette with a point of view.',
+      image: this.images[8].front,
+      category: 'Cat Eye Frames'
+    },
+    {
+      title: 'Made for little adventures',
+      description: 'Comfortable frames for curious young eyes.',
+      image: this.images[7].front,
+      category: 'Kids Sunglasses & Frames'
+    },
+    {
+      title: 'Made to move',
+      description: 'Comfort-first frames for days in motion.',
+      image: this.images[10].front,
+      category: 'Unisex Sports & Swimming'
+    }
+  ];
+  motionCards = [
+    {
+      eyebrow: 'EVERYDAY ICON',
+      title: 'The frame that feels like you',
+      description: 'Lightweight specs, ready to go wherever the day takes you.',
+      image: this.images[0].front,
+      imageAlt: 'Lightweight metal eyeglass frames',
+      imageWidth: 1200,
+      imageHeight: 800,
+      category: 'Metal Frames',
+      action: 'Explore eyeglasses'
+    },
+    {
+      eyebrow: 'SUN ON YOUR SIDE',
+      title: 'Make room for brighter days',
+      description: 'Find sunglasses that bring a little more style outdoors.',
+      image: this.images[6].front,
+      imageAlt: 'Unisex sunglasses',
+      imageWidth: 1200,
+      imageHeight: 800,
+      category: 'Unisex Sunglasses',
+      action: 'Explore sunglasses'
+    },
+    {
+      eyebrow: 'A CLEARER ROUTINE',
+      title: 'Comfort in every blink',
+      description: 'Discover contact lenses for a simple, comfortable view.',
+      image: this.images[9].front,
+      imageAlt: 'Contact lens product',
+      imageWidth: 1094,
+      imageHeight: 616,
+      category: 'Contact Lenses',
+      action: 'Explore contact lenses'
+    }
+  ];
+  spotlightCards = [
+    {
+      eyebrow: 'A SHAPE WITH PRESENCE',
+      title: 'Think outside the square.',
+      description: 'A confident oversized silhouette with room for personality.',
+      image: this.images[2].front,
+      imageAlt: 'Oversized square eyeglass frames',
+      imageWidth: 1200,
+      imageHeight: 800,
+      category: '12X Square Frames',
+      action: 'Explore 12X square'
+    },
+    {
+      eyebrow: 'BARELY-THERE COMFORT',
+      title: 'A lighter way to see.',
+      description: 'Refined rimless frames that keep the focus on you.',
+      image: this.images[3].front,
+      imageAlt: 'Lightweight rimless eyeglass frames',
+      imageWidth: 1200,
+      imageHeight: 800,
+      category: 'Rim Less Frames',
+      action: 'Explore rimless frames'
+    }
   ];
   searchQuery: string = '';
-  constructor(private router: Router, private imagePreloader: ImagePreloaderService, private ngZone: NgZone, private cdr: ChangeDetectorRef, private authService: AuthService,
-    private sharedStateService : SharedStateService,
-    private uiService:UiService
-  ) { }
+  constructor(private router: Router, private sharedStateService: SharedStateService) { }
 
   ngOnInit(): void {
     this.sharedStateService.setDetailViewVisible(false);
-
-    this.imagePreloader.lazyLoadHomePageImages();
-
-    // this.imagePreloader.preloadCategoryImages('Square');
-
-
-    // this.checkImageCache();
-    this.fetchCartItems()
-  }
-
-  fetchCartItems(): void {
-    this.uiService.showLoading()
-    this.authService.getCart().subscribe(
-      (response) => {
-        this.uiService.hideLoading()
-
-        if (response.cart.items.length > 0) {
-          this.cartCount = response.cart.items.length;
-        } else {
-          this.cartCount = 0;
-        }
-      },
-      (error) => {
-        this.uiService.hideLoading()
-      }
-    );
-  }
-
-  ngAfterViewInit(): void {
-    this.observeCards();
-    this.initImageFlipper();
-    this.navLinks = document.querySelector('.nav-links') as HTMLElement;
-    this.scrollLeftBtn = document.querySelector('.scroll-left') as HTMLElement;
-    this.scrollRightBtn = document.querySelector('.scroll-right') as HTMLElement;
-
-    if (this.navLinks) {
-      this.setupScrollButtons();
-      // Initial check
-      setTimeout(() => this.checkScrollPosition(), 100);
-    }
-  }
-  private setupScrollButtons() {
-    // Check on scroll
-    this.navLinks.addEventListener('scroll', () => this.checkScrollPosition());
-
-    // Button click handlers
-    if (this.scrollLeftBtn) {
-      this.scrollLeftBtn.addEventListener('click', () => {
-        this.navLinks.scrollBy({ left: -200, behavior: 'smooth' });
-      });
-    }
-
-    if (this.scrollRightBtn) {
-      this.scrollRightBtn.addEventListener('click', () => {
-        this.navLinks.scrollBy({ left: 200, behavior: 'smooth' });
-      });
-    }
-  }
-
-  private checkScrollPosition() {
-    const { scrollLeft, scrollWidth, clientWidth } = this.navLinks;
-    const atStart = scrollLeft <= 0;
-    const atEnd = scrollLeft >= scrollWidth - clientWidth - 1;
-
-    if (this.scrollLeftBtn) {
-      atStart ? this.scrollLeftBtn.classList.remove('active')
-        : this.scrollLeftBtn.classList.add('active');
-    }
-
-    if (this.scrollRightBtn) {
-      atEnd ? this.scrollRightBtn.classList.remove('active')
-        : this.scrollRightBtn.classList.add('active');
-    }
   }
 
   onSearch(): void {
@@ -213,13 +230,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   }
 
   navigate(categoryId: string): void {
-    if (categoryId === 'bumper-discount') {
-      this.imagePreloader.preloadBumperDiscountImages(); // Preload selected category images
-    } else if (categoryId === 'all-products') {
-      this.imagePreloader.preloadAllProductsImages(); // Preload all category images
-    } else {
-      this.imagePreloader.preloadCategoryImages(categoryId); // Preload selected category images
-    }
     if(categoryId !== 'Contact Lenses'){
       this.router.navigateByUrl(`category/${categoryId}`); // Redirect to specific category
     }else{
@@ -229,75 +239,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
   }
 
 
-  onImageLoaded(index: number, side: 'front' | 'back'): void {
-
-    this.ngZone.run(() => {
-      const image = this.images[index];
-
-      if (side === 'front') {
-        image.frontLoaded = true;
-      } else {
-        image.backLoaded = true;
-      }
-
-      // Check if both images are loaded
-      if (image.frontLoaded && image.backLoaded) {
-        image.loaded = true;
-      }
-    });
-    this.cdr.detectChanges()
-  }
-
-  initImageFlipper() {
-    const flippers = document.querySelectorAll('.image-flipper');
-
-    Array.from(flippers).forEach((flipper: Element) => {
-      const images = flipper.querySelectorAll('.flipper-image');
-      if (images.length !== 2) return; // Ensure we have exactly 2 images
-
-      const frontImg = images[0] as HTMLElement;
-      const backImg = images[1] as HTMLElement;
-      let showFront = true;
-
-      setInterval(() => {
-        if (showFront) {
-          frontImg.style.opacity = '0';
-          backImg.style.opacity = '1';
-        } else {
-          frontImg.style.opacity = '1';
-          backImg.style.opacity = '0';
-        }
-        showFront = !showFront;
-      }, 1000);
-    });
-  }
-
-  observeCards(): void {
-    const cards = document.querySelectorAll('.hover-trigger');
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('hover-trigger-active');
-          } else {
-            entry.target.classList.remove('hover-trigger-active');
-          }
-        });
-      },
-      {
-        threshold: 0.5, // Adjust this value to control when the effect triggers
-      }
-    );
-
-    cards.forEach((card) => {
-      observer.observe(card);
-    });
-  }
-
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
   navigateToStoreLocation(): void {
     const googleMapsLink = 'https://www.google.com/maps/dir//Shop+No+3,+Ground+floor,+i-trends,+Sr.+No+296,+Porwal+Rd,+near+DY+Patil+University+Road,+Lohegaon,+Pune,+Maharashtra+411047/@18.6141551,73.9071623,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x3bc2c700594eff49:0x4978255b63aab10e!2m2!1d73.9120332!2d18.6141552!3e0?entry=ttu&g_ep=EgoyMDI1MDQwOC4wIKXMDSoASAFQAw%3D%3D';
     window.open(googleMapsLink, '_blank'); // Opens the link in a new tab

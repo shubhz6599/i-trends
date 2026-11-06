@@ -1,154 +1,250 @@
-<nav class="snav">
-  <div class="nav-links-container">
-    <button class="scroll-btn scroll-left" aria-label="Scroll left">
-      <i class="bi bi-chevron-left"></i>
-    </button>
-    <div class="nav-links">
-      <p  (click)="navigate('all-products')">EYEGLASSES</p>
-      <p routerLink="/contact-lenses">CONTACT LENSES</p>
-      <p>ACCESSORIES</p>
-      <p routerLink="/book-online-consultation">HOME EYE-TEST</p>
-      <p (click)="navigateToStoreLocation()">STORE LOCATION</p>
-    </div>
-    <button class="scroll-btn scroll-right" aria-label="Scroll right">
-      <i class="bi bi-chevron-right"></i>
-    </button>
-  </div>
-</nav>
+<main class="storefront">
+  <nav class="category-nav" aria-label="Shop categories">
+    <button type="button" (click)="navigate('all-products')">Eyeglasses</button>
+    <a routerLink="/contact-lenses">Contact lenses</a>
+    <button type="button" (click)="navigate('all-products')">Accessories</button>
+    <a routerLink="/book-online-consultation">Home eye-test</a>
+    <a (click)="navigateToStoreLocation()">Find a store</a>
+  </nav>
 
-<div class="container1Main">
-  <div class="card m-auto hover-trigger">
-    <div class="imgBx">
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">EYEWEAR, MADE PERSONAL</span>
+      <h1>See the world<br>in your own style.</h1>
+      <p>Thoughtful frames, everyday comfort and lenses made for the way you see.</p>
+      <div class="hero-actions">
+        <button type="button" class="button button-dark" (click)="navigate('all-products')">
+          Find your frames <i class="bi bi-arrow-up-right"></i>
+        </button>
+        <a routerLink="/contact-lenses" class="text-link">Shop contact lenses <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="offer-note"><i class="bi bi-stars"></i> A complimentary lens upgrade on your first pair</div>
+    </div>
+    <div class="hero-art">
+      <span class="hero-orbit" aria-hidden="true"></span>
       <img
-        src="https://static.vecteezy.com/system/resources/thumbnails/045/948/372/small_2x/modern-eyeglasses-isolated-on-background-png.png"
-        alt="Trending_Eye_Frame">
+        ngSrc="https://static.vecteezy.com/system/resources/thumbnails/045/948/372/small_2x/modern-eyeglasses-isolated-on-background-png.png"
+        alt="Modern tortoiseshell eyeglasses"
+        width="1050"
+        height="700"
+        priority>
     </div>
+  </section>
 
-    <div class="contentBx">
-      <h2>Trendy Specs</h2>
-      <p>Stylish, durable eyewear designed to match your personality and make a statement.</p>
-      <div class="offer">
-        <marquee id="exclusiveOffer" scrollamount="3" onmouseover="this.stop()" onmouseout="this.start()">
-          <strong>*Exclusive Offer:</strong> Get a free lens upgrade with your first purchase!
-        </marquee>
+  <section class="spotlight-section" aria-label="Discover more eyewear styles">
+    <button
+      type="button"
+      class="spotlight-card"
+      *ngFor="let card of spotlightCards; let i = index"
+      [class.spotlight-card-second]="i === 1"
+      (click)="navigate(card.category)"
+      [attr.aria-label]="card.action + ': ' + card.title">
+      <span class="spotlight-copy">
+        <span class="spotlight-eyebrow">{{ card.eyebrow }}</span>
+        <strong>{{ card.title }}</strong>
+        <span class="spotlight-description">{{ card.description }}</span>
+        <span class="spotlight-action">{{ card.action }} <i class="bi bi-arrow-up-right"></i></span>
+      </span>
+      <span class="spotlight-art" aria-hidden="true">
+        <span class="spotlight-orbit"></span>
+        <span class="spotlight-platform"></span>
+        <img [ngSrc]="card.image" [alt]="card.imageAlt" [width]="card.imageWidth" [height]="card.imageHeight" loading="lazy" decoding="async">
+        <span class="spotlight-index">0{{ i + 1 }}</span>
+      </span>
+    </button>
+  </section>
+
+  <section class="motion-showcase" aria-labelledby="motion-showcase-title">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">A LITTLE MORE DIMENSION</span>
+        <h2 id="motion-showcase-title">Find your next favourite view</h2>
+        <p>Three ways to make the world look a little more you.</p>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="trans2 hover-trigger" (click)="navigate('bumper-discount')">
-  <article>
-    <figure class="">
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fitrend-removebg-preview.png?alt=media&token=556aeb4b-373c-4859-ab14-4a22e8b45bfa"
-        alt="">
-      <div class="cardDetails">
-        <h4>Specs at prices  that you <span style="font-weight: bold;"><br> never expected</span></h4>
-        <button class="trans2Btn">Buy Now</button>
-      </div>
-    </figure>
-  </article>
-</div>
-
-<div class="cart">
-  <h2 class="section-heading">
-    <span>Shop by</span> <strong>Category</strong>
-  </h2>
-  <div class="card" *ngFor="let image of images; let i = index">
-    <div class="image-flipper" [ngClass]="{ 'visible': image.loaded, 'hidden': !image.loaded }">
-      <img [src]="image.front" class="flipper-image front" (load)="onImageLoaded(i, 'front')" alt="Square Frame Front">
-      <img [src]="image.back" class="flipper-image back" (load)="onImageLoaded(i, 'back')" alt="Square Frame Back">
+    <div class="motion-showcase-grid">
+      <button
+        type="button"
+        class="motion-card"
+        *ngFor="let card of motionCards; let i = index"
+        [class.motion-card-sun]="i === 1"
+        [class.motion-card-lens]="i === 2"
+        (click)="navigate(card.category)"
+        [attr.aria-label]="card.action + ': ' + card.title">
+        <span class="motion-card-stage" aria-hidden="true">
+          <span class="motion-card-orbit"></span>
+          <span class="motion-card-shadow"></span>
+          <img [ngSrc]="card.image" [alt]="card.imageAlt" [width]="card.imageWidth" [height]="card.imageHeight" loading="lazy" decoding="async">
+          <span class="motion-card-spark motion-card-spark-one"></span>
+          <span class="motion-card-spark motion-card-spark-two"></span>
+        </span>
+        <span class="motion-card-copy">
+          <span class="motion-card-eyebrow">{{ card.eyebrow }}</span>
+          <strong>{{ card.title }}</strong>
+          <span class="motion-card-description">{{ card.description }}</span>
+          <span class="motion-card-action">{{ card.action }} <i class="bi bi-arrow-up-right"></i></span>
+        </span>
+      </button>
     </div>
-    <div class="placeholder" *ngIf="!image.loaded"></div>
-    <p *ngIf="image.loaded">{{ image.title }}</p>
-    <button class="exploreBtn" *ngIf="image.loaded" (click)="navigate(image.category)">EXPLORE</button>
-  </div>
-</div>
+  </section>
 
+  <section class="featured-section" aria-labelledby="featured-title">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">THE FRAME EDIT</span>
+        <h2 id="featured-title">A little more you, in every frame</h2>
+        <p>Find a shape that fits your day, your style and your point of view.</p>
+      </div>
+      <button type="button" class="text-link" (click)="navigate('all-products')">
+        Shop all eyewear <i class="bi bi-arrow-right"></i>
+      </button>
+    </div>
 
-<div class="maincardDoctor hover-trigger">
-  <div class="imgBox">
-    <img src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2FGanesh.png?alt=media&token=7fdf2e4e-863c-4c4b-b28d-690b58bf669c" alt="Specs" class="mouse"
-      loading="lazy">
-  </div>
-  <div class="contentBox">
-    <h3>Book Experts Consultation</h3>
-    <h3>At Just</h3>
-    <h2 class="price">300<span>*</span></h2>
-    <a routerLink="/book-online-consultation" class="buy">Book Now</a>
-  </div>
-</div>
+    <div class="featured-grid">
+      <button
+        type="button"
+        class="featured-card showcase-3d"
+        *ngFor="let style of featuredStyles"
+        (click)="navigate('all-products')"
+        [attr.aria-label]="'Explore all eyewear: ' + style.title">
+        <span class="featured-image">
+          <img [ngSrc]="style.image" [alt]="style.title" width="1200" height="800" loading="lazy" decoding="async">
+          <span class="featured-arrow" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
+        </span>
+        <span class="featured-copy">
+          <strong>{{ style.title }}</strong>
+          <span>{{ style.description }}</span>
+        </span>
+      </button>
+    </div>
+  </section>
 
+  @defer (on viewport) {
+    <section class="category-section" aria-labelledby="category-title">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">A FRAME FOR EVERY YOU</span>
+          <h2 id="category-title">Find your kind of frame</h2>
+        </div>
+        <button type="button" class="text-link" (click)="navigate('all-products')">
+          Explore everything <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
 
-<div class="main" (click)="navigate('Contact Lenses')">
-  <img width="100%" src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fframe%209.jpg?alt=media&token=54bb2db0-bf90-4cdd-a681-959fc750f069" loading="lazy">
-</div>
+      <div class="category-grid">
+        <button type="button" class="category-card showcase-3d" *ngFor="let image of images" (click)="navigate(image.category)">
+          <div class="category-image">
+            <img
+              [ngSrc]="image.front"
+              [alt]="image.title"
+              [width]="image.imageWidth"
+              [height]="image.imageHeight"
+              loading="lazy"
+              decoding="async">
+            <img
+              class="category-image-back"
+              [ngSrc]="image.back"
+              [alt]="image.title + ' alternate view'"
+              [width]="image.imageWidth"
+              [height]="image.imageHeight"
+              loading="lazy"
+              decoding="async">
+            <span class="category-arrow" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
+          </div>
+          <div class="category-meta">
+            <h3>{{ image.title }}</h3>
+            <span>Explore</span>
+          </div>
+        </button>
+      </div>
+    </section>
+  } @placeholder {
+    <div class="category-section-placeholder" aria-hidden="true"></div>
+  }
 
+  <section class="promo-section" (click)="navigate('bumper-discount')">
+    <div class="promo-copy">
+      <span class="eyebrow">A LITTLE MORE STYLE FOR LESS</span>
+      <h2>Good frames.<br>Even better prices.</h2>
+      <button type="button" class="button button-light" (click)="navigate('bumper-discount')">
+        Shop the offer <i class="bi bi-arrow-up-right"></i>
+      </button>
+    </div>
+    <img
+      ngSrc="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fitrend-removebg-preview.png?alt=media&token=556aeb4b-373c-4859-ab14-4a22e8b45bfa"
+      alt="Featured i-Trends eyewear"
+      width="680"
+      height="520"
+      loading="lazy"
+      decoding="async">
+    <span class="promo-stamp" aria-hidden="true">A better<br>point of view</span>
+  </section>
 
-<div class="main hidedesktop" (click)="navigate('all-products')">
-  <img
-    src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fframe%202.jpg?alt=media&token=afc2347e-7622-4cf6-89ba-104d9c7adc63"
-    loading="lazy"
-    width="100%"
-    >
-</div>
+  <section class="consult-section">
+    <div class="consult-image">
+      <img
+        ngSrc="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2FGanesh.png?alt=media&token=7fdf2e4e-863c-4c4b-b28d-690b58bf669c"
+        alt="Eye-care consultation"
+        width="640"
+        height="480"
+        loading="lazy"
+        decoding="async">
+    </div>
+    <div class="consult-copy">
+      <span class="eyebrow">CARE THAT COMES TO YOU</span>
+      <h2>A clearer view starts with an expert.</h2>
+      <p>Book a convenient at-home eye consultation with our team.</p>
+      <div class="consult-price">₹300 <span>per consultation</span></div>
+      <a routerLink="/book-online-consultation" class="button button-light">
+        Book a consultation <i class="bi bi-arrow-up-right"></i>
+      </a>
+    </div>
+  </section>
 
+  <section class="campaign-section">
+    <button type="button" class="campaign-card campaign-wide showcase-3d" (click)="navigate('Contact Lenses')">
+      <img
+        ngSrc="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fframe%209.jpg?alt=media&token=54bb2db0-bf90-4cdd-a681-959fc750f069"
+        alt="Explore contact lenses"
+        width="900"
+        height="600"
+        loading="lazy"
+        decoding="async">
+      <span>Contact lenses <i class="bi bi-arrow-up-right"></i></span>
+    </button>
+    <button type="button" class="campaign-card showcase-3d" (click)="navigate('all-products')">
+      <img
+        ngSrc="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fframe%2010.jpg?alt=media&token=6f9cb2ff-83c9-4d73-9f64-15b7b4315d7a"
+        alt="Eyewear styled for the season"
+        width="900"
+        height="600"
+        loading="lazy"
+        decoding="async">
+      <span>Style that goes places <i class="bi bi-arrow-up-right"></i></span>
+    </button>
+    <button type="button" class="campaign-card showcase-3d" (click)="navigate('all-products')">
+      <img
+        ngSrc="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fframe%204.jpg?alt=media&token=4073306b-8f97-454b-bd8e-b78c0d714ea7"
+        alt="Comfortable flexible eyewear"
+        width="900"
+        height="600"
+        loading="lazy"
+        decoding="async">
+      <span>Comfort in every detail <i class="bi bi-arrow-up-right"></i></span>
+    </button>
+  </section>
 
-
-
-<div class="banner" (click)="navigate('all-products')">
-  <h2>As Seen At New York Fashion Week</h2>
-  <div class="img">
-    <img src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fframe%2010.jpg?alt=media&token=6f9cb2ff-83c9-4d73-9f64-15b7b4315d7a">
-  </div>
-</div>
-
-<div class="banner" (click)="navigate('all-products')">
-  <h2>FIND THE PERFECT FIT</h2>
-  <div class="two-img">
-    <img src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fframe.jpg?alt=media&token=65c0e5ce-e172-4264-b5b9-ca4079b326f9" width="100%">
-    <img src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fframe%2011%20(1).jpg?alt=media&token=d693cda1-d417-411e-98e1-bd6e3f6ad282" width="100%">
-  </div>
-</div>
-
-<div class="banner" (click)="navigate('all-products')">
-  <h2>Introducing Flexible Wear</h2>
-  <div class="img">
-    <img width="100%" src="https://firebasestorage.googleapis.com/v0/b/i-trends-85dd4.firebasestorage.app/o/MainAssets%2Fframe%204.jpg?alt=media&token=4073306b-8f97-454b-bd8e-b78c0d714ea7">
-  </div>
-</div>
-
-<!-- <div class="banner">
-  <h2>OUR BRANDS</h2>
-  <div class="img">
-    <img src="https://static1.lenskart.com/media/desktop/img/Aug21/Desktop/VC-Banner.jpg">
-  </div>
-</div> -->
-
-<!-- <div class="main-img">
-  <img src="https://static1.lenskart.com/media/desktop/img/Aug21/25-Aug/LK-AIR-Banner.jpg">
-</div> -->
-
-<div class="footer">
-  <div class="list">
-    <ul>
-      <li>
-        <h2>SERVICES</h2><br><br>
-        <a (click)="navigateToStoreLocation()">Visit Store</a><br><br>
-        <a routerLink="/buying-guide" class="textAnchor">Buying Guide</a><br><br>
-      </li>
-    </ul>
-  </div>
-
-  <div class="list">
-    <ul>
-      <li>
-        <h2>ABOUT US</h2><br><br>
-        <a routerLink="/know-more-about-us">Know More About Us</a><br><br>
-        <a class="textAnchor" href="https://www.instagram.com/i_trends_official?igsh=MTl2MDltZno1NzAzYg==">Follow
-          Us</a><br><br>
-        <a routerLink="/feedback">Feedback</a><br><br>
-      </li>
-    </ul>
-  </div>
-</div>
+  <footer class="store-footer">
+    <a class="footer-brand" routerLink="/">i-trends<span>®</span></a>
+    <p>Everyday eyewear, thoughtfully chosen.</p>
+    <nav aria-label="Customer links">
+      <a (click)="navigateToStoreLocation()">Visit a store</a>
+      <a routerLink="/buying-guide">Buying guide</a>
+      <a routerLink="/know-more-about-us">About us</a>
+      <a routerLink="/feedback">Feedback</a>
+      <a href="https://www.instagram.com/i_trends_official?igsh=MTl2MDltZno1NzAzYg==" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </nav>
+    <small>© 2025 i-Trends. All rights reserved.</small>
+  </footer>
+</main>

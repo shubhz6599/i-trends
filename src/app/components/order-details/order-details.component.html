@@ -29,7 +29,8 @@
       <h3>Products</h3>
       <div class="products-list">
         <div *ngFor="let item of orderDetails.items" class="product-item">
-          <img [src]="item.imageUrl || item.img" alt="{{ item.name }}" class="product-image" />
+          <img [ngSrc]="item.imageUrl || item.img" alt="{{ item.name }}" class="product-image"
+            width="360" height="280" loading="lazy" decoding="async">
           <div class="product-info">
             <h4>{{ item.name }}</h4>
             <p>{{ item.description }}</p>

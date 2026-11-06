@@ -1,235 +1,209 @@
-/* Container for the bottom navigation */
-.container {
-  display: flex;
+:host {
+  display: block;
+}
+
+.bottom-nav a,
+.bottom-nav a:hover,
+.bottom-nav a:focus-visible {
+  text-decoration: none;
+}
+
+.bottom-nav {
   position: fixed;
+  z-index: 1040;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  padding: 0 0;
-}
-
-/* Bottom navigation bar */
-.bottom-nav {
-  background: linear-gradient(45deg, #ffffff, #f9f9f9);
-  /* Gradient background for modern look */
-  width: 100%;
-  max-width: 400px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0.3rem 0.5rem;
-  /* Reduced padding */
-}
-
-/* Hide radio buttons */
-.bottom-nav input {
   display: none;
+  width: 100%;
+  justify-content: stretch;
+  align-items: center;
+  padding: 8px 8px max(8px, env(safe-area-inset-bottom));
+  border-top: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+  box-shadow: 0 -8px 28px color-mix(in srgb, var(--text) 10%, transparent);
+  backdrop-filter: blur(20px);
 }
 
-/* Navigation icons */
-.bottom-nav label {
-  cursor: pointer;
-  width: 4rem;
-  /* Reduced width */
-  height: 4rem;
-  /* Reduced height */
+.bottom-nav-link {
+  position: relative;
   display: flex;
+  min-width: 0;
+  min-height: 58px;
+  flex: 1 1 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #7a7a7a;
-  /* Default dull color */
-  position: relative;
-  transition: all 0.3s ease;
+  gap: 5px;
+  padding: 6px 2px;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 140ms ease, background 140ms ease;
 }
 
-/* Icon styling */
-.bottom-nav i {
-  font-size: 1.5rem;
-  /* Reduced icon size */
-  color: #7a7a7a;
-  transition: all 0.3s ease;
+.bottom-nav > .bottom-nav-link,
+.contact-nav-item {
+  flex: 1 1 0;
 }
 
-/* Navigation text */
-.bottom-nav .nav-text {
-  font-size: 0.7rem;
-  /* Reduced text size */
-  margin-top: 0.2rem;
-  /* Reduced margin between icon and text */
-  color: #7a7a7a;
-  transition: all 0.3s ease;
+.bottom-nav > .bottom-nav-link,
+.contact-nav-item > .bottom-nav-link {
+  width: 100%;
 }
 
-/* Hover effect */
-.bottom-nav label:hover {
-  color: #1abc9c;
-  /* Amazon-style teal hover color */
-}
-
-.bottom-nav label:hover i {
-  transform: scale(1.1);
-  /* Slightly enlarge icon */
-  color: #1abc9c;
-  /* Change icon color on hover */
-}
-
-.bottom-nav label:hover .nav-text {
-  font-weight: bold;
-  color: #1abc9c;
-}
-
-/* Active state */
-.bottom-nav input:checked+label {
-  color: #1abc9c;
-  /* Teal color for active state */
-}
-
-.bottom-nav input:checked+label i {
-  background: linear-gradient(45deg, #1abc9c, #16a085);
-  /* Gradient background for active icons */
-  -webkit-background-clip: text;
-  /* Apply gradient to icon */
-  color: transparent;
-  /* Hide default icon color */
-  transform: scale(1.15);
-  /* Slightly enlarge the icon */
-}
-
-.bottom-nav input:checked+label .nav-text {
-  font-weight: bold;
-  /* Bold text for active state */
-  color: #1abc9c;
-  /* Teal color for active text */
-}
-
-/* Active pulse effect */
-.bottom-nav input:checked+label::before {
-  content: "";
-  position: absolute;
-  width: 80%;
-  /* Reduced size for pulse effect */
-  height: 80%;
-  background: rgba(26, 188, 156, 0.2);
-  /* Semi-transparent teal */
-  border-radius: 50%;
-  z-index: -1;
-  animation: pulse 1.5s infinite;
-  /* Pulse animation */
-}
-
-@keyframes pulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(1.2);
-    opacity: 0.7;
-  }
-}
-
-/* Responsive styling */
-@media (max-width: 768px) {
-  .container {
-    display: flex;
-    /* Show bottom navigation on mobile */
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    display: none;
-    /* Hide bottom navigation on desktop screens */
-  }
-}
-
-/* Half-circle options styling */
-.half-circle-options {
-  position: absolute;
-  bottom: 4rem;
-  left: 50%;
-  transform: translateX(-50%);
+.contact-nav-item {
   display: flex;
-  justify-content: space-around;
-  width: 15rem;
-  height: 4rem;
-  background: white;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 999;
-  padding: 0.5rem;
+  min-width: 0;
 }
 
-/* Buttons for Call, Mail, WhatsApp */
+.bottom-nav-link:hover,
+.bottom-nav-link.active,
+.bottom-nav-link[aria-expanded='true'] {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+.bottom-nav-link.active::before {
+  position: absolute;
+  top: 3px;
+  width: 18px;
+  height: 3px;
+  border-radius: 99px;
+  background: currentColor;
+  content: '';
+}
+
+.bottom-nav-link:disabled {
+  background: transparent;
+  color: var(--brand);
+  cursor: default;
+  opacity: 0.72;
+}
+
+.bottom-nav-link:disabled:hover {
+  background: transparent;
+}
+
+.bottom-nav-link i {
+  color: currentColor;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.bottom-nav-link .nav-text {
+  color: currentColor;
+  font-size: 0.66rem;
+  font-weight: 650;
+  line-height: 1.15;
+}
+
+.contact-nav-item {
+  position: relative;
+}
+
+.contact-popover {
+  position: fixed;
+  z-index: 1100;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  left: 8px;
+  width: min(320px, calc(100vw - 16px));
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--surface) 97%, transparent);
+  box-shadow: var(--shadow-md);
+  animation: contact-popover-in 180ms ease both;
+}
+
+.contact-popover-heading {
+  display: grid;
+  gap: 3px;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.contact-popover-heading strong {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+}
+
+.contact-popover-heading span {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.contact-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
 .option-btn {
   display: flex;
+  min-width: 0;
+  min-height: 64px;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: #f9f9f9;
-  border: none;
-  border-radius: 50%;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--page);
+  color: var(--brand);
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.option-btn:active {
-  transform: scale(1.1);
-  background-color: #1abc9c;
-  /* Teal color on active */
+  font-size: 0.68rem;
+  font-weight: 650;
+  transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
 }
 
 .option-btn i {
-  font-size: 1.2rem;
-  color: #7a7a7a;
+  font-size: 1.1rem;
 }
 
-.option-btn span {
-  font-size: 0.7rem;
-  margin-top: 0.2rem;
-  color: #7a7a7a;
+.option-btn:hover {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  transform: translateY(-1px);
 }
 
-.half-circle-options::before {
-  content: '';
-  position: absolute;
-  bottom: -0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1rem;
-  height: 1rem;
-  background: white;
-  border-radius: 50%;
-  z-index: 998;
+@keyframes contact-popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-/* Responsive styling */
-@media (max-width: 768px) {
-  .container {
+@media (max-width: 767.98px) {
+  .bottom-nav {
     display: flex;
-    /* Show bottom navigation on mobile */
   }
 
-  .option-btn:active {
-    transform: scale(1.1);
-    background-color: #1abc9c;
-    /* Teal color on active */
+  .bottom-nav-link:hover {
+    background: transparent;
+    color: var(--muted);
+  }
+
+  .bottom-nav-link.active:hover,
+  .bottom-nav-link[aria-expanded='true']:hover {
+    background: var(--brand-soft);
+    color: var(--brand);
   }
 }
 
-@media (min-width: 768px) {
-  .container {
-    display: none;
-    /* Hide bottom navigation on desktop screens */
+@media (prefers-reduced-motion: reduce) {
+  .contact-popover,
+  .option-btn {
+    animation: none;
+    transition: none;
   }
 }

@@ -8,7 +8,7 @@ describe('AccountPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AccountPageComponent]
+      imports: [AccountPageComponent]
     });
     fixture = TestBed.createComponent(AccountPageComponent);
     component = fixture.componentInstance;

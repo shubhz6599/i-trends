@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { TrackOrderComponent } from './track-order.component';
 
@@ -8,7 +9,8 @@ describe('TrackOrderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TrackOrderComponent]
+      imports: [TrackOrderComponent],
+      providers: [provideRouter([])]
     });
     fixture = TestBed.createComponent(TrackOrderComponent);
     component = fixture.componentInstance;

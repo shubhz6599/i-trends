@@ -1,36 +1,62 @@
-<div class="orders-container">
-  <div class="header-bar">
-    <button class="btn btn-back" routerLink="/">
+<main class="orders-container">
+  <header class="orders-heading">
+    <a class="back-link" routerLink="/" aria-label="Back to home">
       <i class="bi bi-arrow-left"></i>
-    </button>
-    <h1>Your Orders</h1>
-  </div>
-
-  <div *ngIf="orders.length === 0" class="no-orders">
-    <p>No orders found.</p>
-  </div>
-
-  <div *ngFor="let order of orders" class="order-card">
-    <div class="order-header">
-      <span>Order ID: <strong>{{ order._id }}</strong></span>
-      <span class="order-status" [ngStyle]="{'color': getStatusColor(order.status)}">{{ order.status }}</span>
+    </a>
+    <div>
+      <span class="eyebrow">YOUR PURCHASES, AT A GLANCE</span>
+      <h1>My orders</h1>
     </div>
+  </header>
 
-    <div class="products">
-      <div *ngFor="let item of order.items" class="product-item">
-        <img [src]="item.imageUrl || item.img" alt="{{ item.name }}" class="product-image" />
-        <div class="product-info">
-          <h3>{{ item.name }}</h3>
-          <p *ngIf="item.variant">Variant: {{ item.variant }}</p>
-          <p>Quantity: {{ item.quantity }}</p>
-          <p>Price: ₹{{ item.price || item.actualPrice }}</p>
+  <section *ngIf="orders.length === 0" class="no-orders">
+    <div class="orders-empty-icon" aria-hidden="true"><i class="bi bi-box-seam"></i></div>
+    <span class="eyebrow">NOTHING TO TRACK JUST YET</span>
+    <h2>Your orders will find a home here.</h2>
+    <p>Once you find your next favourite pair, you can follow its journey from this page.</p>
+    <a class="shop-link" routerLink="/category/all-products">
+      Explore frames <i class="bi bi-arrow-up-right"></i>
+    </a>
+  </section>
+
+  <section *ngIf="orders.length > 0" class="order-list" aria-label="Order history">
+    <article *ngFor="let order of orders" class="order-card showcase-3d">
+      <header class="order-header">
+        <div>
+          <span class="order-label">ORDER NUMBER</span>
+          <strong>{{ order._id }}</strong>
+        </div>
+        <span class="order-status" [ngStyle]="{'color': getStatusColor(order.status)}">
+          <span class="status-dot"></span>{{ order.status }}
+        </span>
+      </header>
+
+      <div class="products">
+        <div *ngFor="let item of order.items" class="product-item">
+          <div class="product-image-wrap">
+            <img [ngSrc]="item.imageUrl || item.img" [alt]="item.name" class="product-image"
+              width="360" height="280" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <h2>{{ item.name }}</h2>
+            <p *ngIf="item.variant">Variant: {{ item.variant }}</p>
+            <div class="product-meta">
+              <span>Qty {{ item.quantity }}</span>
+              <span>₹{{ item.price || item.actualPrice }}</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="order-summary">
-      <span><strong>Total: ₹{{ order.totalAmount }}</strong></span>
-      <button class="view-btn" (click)="viewOrderDetails(order._id)">View Details</button>
-    </div>
-  </div>
-</div>
+      <footer class="order-summary">
+        <div>
+          <span class="order-label">ORDER TOTAL</span>
+          <strong>₹{{ order.totalAmount }}</strong>
+        </div>
+        <button type="button" class="view-btn" (click)="viewOrderDetails(order._id)">
+          View order <i class="bi bi-arrow-right"></i>
+        </button>
+      </footer>
+    </article>
+  </section>
+</main>

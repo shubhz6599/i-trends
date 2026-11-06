@@ -1,36 +1,51 @@
-<div class="explorer-container">
+<main class="explorer-container">
+  <p class="payment-message" *ngIf="paymentMsg">{{paymentMsg}}</p>
 
-  <p class="mt-3" *ngIf="paymentMsg">{{paymentMsg}}</p>
-
-  <div class="category-header d-flex align-items-center" *ngIf="!selectedProduct">
-    <button class="backBtn me-3" (click)="goBack()">
+  <header class="catalog-header" *ngIf="!selectedProduct">
+    <button type="button" class="backBtn" (click)="goBack()" aria-label="Go back">
       <i class="bi bi-arrow-left"></i>
     </button>
-    <h1 class="cursiveFont mb-0 fg2">
-      <span *ngIf="isBumperDiscountView">Bumper Discount Products</span>
-      <span *ngIf="isAllProductsView">All Products</span>
-      <span *ngIf="currentCategory && !isBumperDiscountView && !isAllProductsView">{{currentCategory.name}}</span>
-    </h1>
-    <button class="filter-btn ms-auto btn" (click)="toggleFilterPanel()">Filters</button>
-  </div>
+    <div class="catalog-title">
+      <span class="eyebrow">FIND YOUR EVERYDAY PAIR</span>
+      <h1>
+        <span *ngIf="isBumperDiscountView">Bumper Discount Products</span>
+        <span *ngIf="isAllProductsView">All Products</span>
+        <span *ngIf="currentCategory && !isBumperDiscountView && !isAllProductsView">{{currentCategory.name}}</span>
+      </h1>
+    </div>
+    <span class="catalog-count">{{filteredProducts.length}} styles</span>
+    <button type="button" class="filter-btn" (click)="toggleFilterPanel()" [attr.aria-expanded]="isFilterPanelVisible">
+      <i class="bi bi-sliders"></i> Filters
+    </button>
+  </header>
 
-
-  <div class="filter-panel" [class.active]="isFilterPanelVisible">
+  <div class="catalog-backdrop" *ngIf="isFilterPanelVisible" (click)="toggleFilterPanel()"></div>
+  <aside class="filter-panel" [class.active]="isFilterPanelVisible" aria-label="Product filters">
     <div class="filter-header">
-      <h3>Filters</h3>
-      <button type="button" class="btn-close" aria-label="Close" (click)="toggleFilterPanel()"></button>
+      <div>
+        <span class="eyebrow">MAKE IT YOURS</span>
+        <h2>Filters</h2>
+      </div>
+      <button type="button" class="filter-close" aria-label="Close filters" (click)="toggleFilterPanel()">
+        <i class="bi bi-x-lg"></i>
+      </button>
     </div>
 
     <div class="selected-filters" *ngIf="selectedFilters.length > 0">
-      <h4>Selected Filters</h4>
-      <div class="selected-filter" *ngFor="let filter of selectedFilters; let i = index">
+      <div class="filter-section-heading">
+        <h3>Selected</h3>
+        <button type="button" (click)="resetFilters()">Clear all</button>
+      </div>
+      <div class="selected-filter" *ngFor="let filter of selectedFilters">
         <span>{{ filter.label }}</span>
-        <button class="remove-filter-btn" (click)="removeFilter(filter)">✖</button>
+        <button type="button" class="remove-filter-btn" (click)="removeFilter(filter)" [attr.aria-label]="'Remove ' + filter.label">
+          <i class="bi bi-x"></i>
+        </button>
       </div>
     </div>
 
     <div class="filter-section">
-      <h4>Sort</h4>
+      <h3>Sort by</h3>
       <select id="sortSelect" [(ngModel)]="selectedSort" (change)="sortProducts(selectedSort)">
         <option value="lowToHigh">Price: Low to High</option>
         <option value="highToLow">Price: High to Low</option>
@@ -38,148 +53,215 @@
     </div>
 
     <div class="filter-section">
-      <h4>Price Range</h4>
-      <div *ngFor="let range of priceRanges" class="price-option" (click)="filterByPrice(range)">
-        <span>{{range.label}}</span>
-      </div>
+      <h3>Price range</h3>
+      <button type="button" *ngFor="let range of priceRanges" class="filter-choice"
+        [class.selected]="isFilterSelected(range.label)" [attr.aria-pressed]="isFilterSelected(range.label)"
+        (click)="filterByPrice(range)">
+        {{range.label}}
+      </button>
     </div>
 
     <div class="filter-section">
-      <h4>Ratings</h4>
-      <div *ngFor="let rating of ratingsOptions" class="rating-option" (click)="filterByRating(rating)">
-        <span>{{rating}} ★ & Up</span>
-      </div>
+      <h3>Customer rating</h3>
+      <button type="button" *ngFor="let rating of ratingsOptions" class="filter-choice"
+        [class.selected]="isFilterSelected(rating + ' ★ & Up')" [attr.aria-pressed]="isFilterSelected(rating + ' ★ & Up')"
+        (click)="filterByRating(rating)">
+        {{rating}} <i class="bi bi-star-fill"></i> &amp; up
+      </button>
     </div>
 
     <div class="filter-section">
-      <h4>Discounts</h4>
-      <div *ngFor="let discount of discountOptions" class="discount-option" (click)="filterByDiscount(discount)">
-        <span>{{discount}}% or more</span>
-      </div>
+      <h3>Discount</h3>
+      <button type="button" *ngFor="let discount of discountOptions" class="filter-choice"
+        [class.selected]="isFilterSelected(discount + '% or more')" [attr.aria-pressed]="isFilterSelected(discount + '% or more')"
+        (click)="filterByDiscount(discount)">
+        {{discount}}% or more
+      </button>
     </div>
 
     <div class="filter-section">
-      <h4>Color Options</h4>
-      <div class="color-options">
-        <div *ngFor="let color of availableColors" class="color-option" (click)="filterByColor(color.name)">
-          <div class="color-shade" [style.backgroundColor]="color.colorCode"></div>
-          <span>{{color.name}}</span>
-        </div>
+      <h3>Color</h3>
+      <div class="color-filter-options">
+        <button type="button" *ngFor="let color of availableColors" class="color-filter-option"
+          [class.selected]="isFilterSelected(color.name)" [attr.aria-pressed]="isFilterSelected(color.name)"
+          (click)="filterByColor(color.name)">
+          <span class="color-shade" [style.backgroundColor]="color.colorCode"></span>
+          {{color.name}}
+        </button>
       </div>
     </div>
 
-    <button class="btn btn-outline-secondary customResetBtn w-100" (click)="resetFilters()">Clear all filters</button>
-    <button class="btn btn-outline-primary customResetBtn custommg  w-100 mt-2 mb-5" (click)="applyFilters()">Search</button>
-  </div>
+    <div class="filter-actions">
+      <button type="button" class="clear-filters" (click)="resetFilters()">Clear filters</button>
+      <button type="button" class="apply-filters" (click)="applyFilters()">Show {{filteredProducts.length}} products</button>
+    </div>
+  </aside>
 
   <div class="search-result-message" *ngIf="searchResultMessage && !selectedProduct">
-    <p class="professional-message">{{ searchResultMessage }}</p>
+    <p>{{ searchResultMessage }}</p>
   </div>
   <div class="main-content" [class.hidden]="isFilterPanelVisible">
-    <div class="category-banner" *ngIf="currentCategoryImage && !selectedProduct">
-      <div class="category-banner-content">
-        <img [src]="currentCategoryImage" alt="N.A." class="category-image animated-banner" />
+    <section class="sale-banner" *ngIf="isBumperDiscountView && !selectedProduct" aria-labelledby="sale-banner-title">
+      <div class="sale-banner-copy">
+        <span class="sale-kicker"><i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> THE I-TRENDS SALE</span>
+        <h2 id="sale-banner-title">A better view.<br><span>Even better prices.</span></h2>
+        <p>Find your next favourite pair among our selected special-price styles.</p>
+        <a class="sale-banner-cta" href="#sale-products">
+          Explore the sale <i class="bi bi-arrow-down-right" aria-hidden="true"></i>
+        </a>
+        <span class="sale-style-count">{{ filteredProducts.length }} styles to explore</span>
       </div>
-    </div>
-    <div class="products-grid" *ngIf="!selectedProduct">
-      <div class="product-card" *ngFor="let product of filteredProducts; let i = index"
-        (click)="selectProduct(product)">
-        <div *ngIf="product.bumperdiscount && isBumperDiscountView" class="bumper-discount-badge">
-          <div class="discount-pulse"></div>
-          <div class="discount-content">
-            <i class="bi bi-lightning-charge-fill discount-icon"></i>
-            <span class="discount-text">BUMPER DISCOUNT!</span>
-            <i class="bi bi-arrow-right-circle-fill discount-arrow"></i>
-          </div>
-        </div>
+      <div class="sale-banner-art" aria-hidden="true">
+        <span class="sale-halo"></span>
+        <span class="sale-burst">SALE</span>
+        <span class="sale-platform"></span>
+        <img
+          *ngIf="filteredProducts.length && filteredProducts[0].variants.length"
+          [ngSrc]="filteredProducts[0].variants[0].images[0]"
+          alt=""
+          width="640"
+          height="480"
+          priority
+          decoding="async">
+        <i *ngIf="!filteredProducts.length" class="bi bi-eyeglasses sale-fallback-icon"></i>
+      </div>
+    </section>
 
-        <div class="image-container"
-          [ngClass]="{ 'visible': product.variants[0].imagesLoaded, 'hidden': !product.variants[0].imagesLoaded }">
-          <img [src]="product.variants[0].images[0]" [alt]="product.name" loading="lazy" (load)="onImageLoaded(i)">
-        </div>
-        <div class="placeholder" *ngIf="!product.variants[0].imagesLoaded">
-          <p class="customC">Loading...</p>
-        </div>
-        <div class="product-info cursiveFont">
-          <h3 class="fw-600 text-body-secondary">{{product.name}}</h3>
-          <p class="price"><del> ₹{{product.basePrice}}</del></p>
-          <div class="color-options justify-content-center">
-            <span *ngFor="let variant of product.variants" class="color-dot" [style.background]="variant.colorCode"
-              [title]="variant.color"></span>
-          </div>
-        </div>
-      </div>
+    <div class="category-banner" *ngIf="currentCategoryImage && !selectedProduct && !isBumperDiscountView">
+      <img [ngSrc]="currentCategoryImage" alt="" class="category-image" width="1600" height="500" priority decoding="async">
     </div>
+    <section class="products-grid" [attr.id]="isBumperDiscountView ? 'sale-products' : null" *ngIf="!selectedProduct" aria-label="Products">
+      <button type="button" class="product-card showcase-3d" *ngFor="let product of filteredProducts; let i = index; trackBy: trackByProductId"
+        (click)="selectProduct(product)" [attr.aria-label]="'View ' + product.name">
+        <span *ngIf="product.bumperdiscount && isBumperDiscountView" class="bumper-discount-badge">
+          <i class="bi bi-lightning-charge-fill"></i> Bumper deal
+        </span>
+        <span class="product-image">
+          <img [ngSrc]="product.variants[0].images[0]" [alt]="product.name"
+            width="640" height="480"
+            [priority]="i === 0"
+            decoding="async"
+            (load)="onImageLoaded(product)" (error)="onProductImageError(product)">
+          <span class="placeholder" *ngIf="!product.variants[0].imagesLoaded">Loading frame…</span>
+          <span class="placeholder image-error" *ngIf="failedImageUrls.has(product.variants[0].images[0])">Image unavailable</span>
+          <span class="product-view" aria-hidden="true"><i class="bi bi-arrow-up-right"></i></span>
+        </span>
+        <span class="product-info">
+          <span class="product-name">{{product.name}}</span>
+          <span class="price-line">
+            <strong>₹{{getDiscountedPrice(product)}}</strong>
+            <del *ngIf="product.basePriceWithDiscount > 0">₹{{product.basePrice}}</del>
+          </span>
+          <span class="product-savings" *ngIf="product.basePriceWithDiscount > 0">
+            Save ₹{{product.basePriceWithDiscount}} <span>View details</span>
+          </span>
+          <span class="product-swatches" aria-label="Available colors">
+            <span *ngFor="let variant of product.variants" class="color-dot" [style.background]="variant.colorCode" [title]="variant.color"></span>
+          </span>
+        </span>
+      </button>
+    </section>
   </div>
 
   <div class="mDiv" *ngIf="selectedProduct && selectedVariant">
-    <div class="card">
-      <nav (click)="resetSelections()">
-        <i class="bi bi-arrow-left"></i>
-        Back to Collection
-      </nav>
-      <div class="grid-container">
+    <article class="product-detail">
+      <button type="button" class="back-to-collection" (click)="resetSelections()">
+        <i class="bi bi-arrow-left"></i> Back to collection
+      </button>
+      <div class="product-detail-grid">
         <div class="photo">
           <div class="image-loading" *ngIf="!imageLoaded">
             <div class="loading-spinner"></div>
             <div class="loading-message">{{currentLoadingMessage}}</div>
           </div>
-          <img [src]="currentMainImage || selectedVariant.images[0]" [alt]="selectedProduct.name" (load)="onImageLoad()"
-            [class.loaded]="imageLoaded" loading="lazy">
+          <img [ngSrc]="currentMainImage || selectedVariant.images[0]" [alt]="selectedProduct.name"
+            width="1000" height="800" priority (load)="onImageLoad()" [class.loaded]="imageLoaded" decoding="async">
 
           <div class="image-thumbnails" *ngIf="selectedVariant.images.length > 1">
-            <div *ngFor="let img of selectedVariant.images; let i = index" class="thumbnail"
-              [class.active]="currentMainImage === img" [class.loaded]="imageLoaded" (click)="setMainImage(img)">
-              <img class="mt-10" [src]="img" [alt]="'Thumbnail ' + (i+1)" loading="lazy">
-            </div>
+            <button type="button" *ngFor="let img of selectedVariant.images; let i = index" class="thumbnail"
+              [class.active]="currentMainImage === img" (click)="setMainImage(img)"
+              [attr.aria-label]="'Show product image ' + (i + 1)">
+              <img class="mt-10" [ngSrc]="img" [alt]="'Thumbnail ' + (i+1)" width="100" height="80" loading="lazy" decoding="async">
+            </button>
           </div>
 
           <div class="image-dots" *ngIf="selectedVariant.images.length > 1">
-            <span *ngFor="let img of selectedVariant.images; let i = index" [class.active]="currentMainImage === img"
-              (click)="setMainImage(img)"></span>
+            <button type="button" *ngFor="let img of selectedVariant.images; let i = index"
+              [class.active]="currentMainImage === img" (click)="setMainImage(img)"
+              [attr.aria-label]="'Show product image ' + (i + 1)"></button>
           </div>
         </div>
 
         <div class="description">
-          <h2>{{selectedProduct.name}}</h2>
-          <h4>{{currentCategory?.name}}</h4>
-          <div class="color-options">
-            <span *ngFor="let variant of selectedProduct.variants" class="color-option"
-              [style.backgroundColor]="variant.colorCode" (click)="selectVariant(variant)"></span>
+          <span class="eyebrow">{{currentCategory?.name}}</span>
+          <h1>{{selectedProduct.name}}</h1>
+          <div class="variant-selector">
+            <span>Color: <strong>{{selectedVariant.color}}</strong></span>
+            <div class="color-options">
+              <button type="button" *ngFor="let variant of selectedProduct.variants" class="color-option"
+                [style.backgroundColor]="variant.colorCode" [class.active]="variant === selectedVariant"
+                (click)="selectVariant(variant)" [attr.aria-label]="'Choose ' + variant.color"
+                [attr.aria-pressed]="variant === selectedVariant"></button>
+            </div>
           </div>
 
-          <div class="price-display" #priceDisplay>
-            <div *ngIf="showOriginalPrice" class="price-step" @priceStep>
-              <span class="original-price">
-                ₹{{getOriginalPrice()}}
-                <span class="strike-through"></span>
-              </span>
+          <div class="price-display">
+            <div class="price-current">
+              <span class="final-price">₹{{getDiscountedPrice(selectedProduct)}}</span>
+              <span class="price-caption">Frame price</span>
             </div>
-
-            <div *ngIf="showDiscountPercent" class="price-step" @priceStep>
-              <span class="discount-percent">
-                {{discountPercent}}% OFF
-              </span>
-            </div>
-
-            <div *ngIf="showFinalPrice" class="price-step" @priceStep>
-              <span class="final-price">
-                ₹
-                <span *ngFor="let digit of getFinalPriceDigits(); let i = index" class="digit"
-                  [style.animation-delay]="i * 100 + 'ms'">
-                  {{digit}}
-                </span>
-              </span>
+            <div class="price-original" *ngIf="selectedProduct.basePriceWithDiscount > 0">
+              <del class="original-price">₹{{selectedProduct.basePrice}}</del>
+              <span class="discount-percent">{{discountPercent | number:'1.0-0'}}% off</span>
+              <span class="price-saving">You save ₹{{selectedProduct.basePriceWithDiscount}}</span>
             </div>
           </div>
 
           <p>{{selectedProduct.description}}</p>
-          <button class="btn btn-primary customBtn" (click)="openModal()">Select Lenses</button>
+          <button *ngIf="supportsVirtualTryOn" type="button" class="try-on-trigger" (click)="openTryOn()">
+            <i class="bi bi-camera-video" aria-hidden="true"></i>
+            Try it on live
+          </button>
+          <button type="button" class="customBtn" (click)="openModal()">
+            Choose lenses <i class="bi bi-arrow-right"></i>
+          </button>
         </div>
       </div>
-    </div>
+    </article>
   </div>
-</div>
+
+  <div class="try-on-backdrop" *ngIf="isTryOnOpen" (click)="closeTryOn()">
+    <section class="try-on-dialog" role="dialog" aria-modal="true" aria-labelledby="try-on-title"
+      (click)="$event.stopPropagation()">
+      <header class="try-on-header">
+        <div>
+          <span class="eyebrow">LIVE VIRTUAL PREVIEW</span>
+          <h2 id="try-on-title">Try on {{selectedProduct?.name}}</h2>
+        </div>
+        <button type="button" class="try-on-close" aria-label="Close virtual try-on" (click)="closeTryOn()">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </header>
+      <div class="try-on-stage">
+        <video #tryOnVideo autoplay muted playsinline aria-label="Live camera preview"></video>
+        <canvas #tryOnCanvas aria-hidden="true"></canvas>
+        <div class="try-on-message" *ngIf="isTryOnLoading || tryOnStatus || tryOnError">
+          <p *ngIf="isTryOnLoading">Loading the on-device face tracker…</p>
+          <p *ngIf="!isTryOnLoading && tryOnStatus">{{tryOnStatus}}</p>
+          <p class="try-on-error" *ngIf="tryOnError" role="alert">{{tryOnError}}</p>
+          <button *ngIf="tryOnError" type="button" class="try-on-retry" (click)="openTryOn()">
+            Try again
+          </button>
+        </div>
+      </div>
+      <p class="try-on-privacy" *ngIf="!tryOnError">
+        <i class="bi bi-shield-check" aria-hidden="true"></i>
+        Camera video is processed on this device and is never uploaded. Camera access ends when you close this preview.
+      </p>
+      <p class="try-on-disclaimer" *ngIf="!tryOnError">The selected frame is shown as a live preview; fit may differ from the real-world result.</p>
+    </section>
+  </div>
+</main>
 
 <div class="modal fade" id="lensModal" tabindex="-1" aria-labelledby="lensModalLabel" style="overflow-y: auto;"
   aria-hidden="true">
@@ -401,8 +483,8 @@
           <div class="order-summary-card card mb-3">
             <div class="row g-0">
               <div class="col-12 col-md-4 position-relative">
-                <img [src]="selectedVariant.images[0]" class="img-fluid w-100 product-image"
-                  alt="{{ selectedProduct?.name || 'Product Image' }}" />
+                <img [ngSrc]="selectedVariant.images[0]" class="img-fluid w-100 product-image"
+                  alt="{{ selectedProduct?.name || 'Product Image' }}" width="640" height="480" loading="lazy" decoding="async">
                 <div class="badge-overlay">
                   <span class="badge bg-primary small">Selected</span>
                 </div>
@@ -463,7 +545,7 @@
 
       </div>
       <div class="modal-footer text-center py-2">
-        <p class="m-0 w-100 text-muted">© All rights reserved @i-trends-2025</p>
+        <p class="m-0 w-100 text-muted">© All rights reserved &#64;i-trends-2025</p>
       </div>
     </div>
   </div>

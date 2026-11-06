@@ -8,7 +8,7 @@ describe('BuyingGuideComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BuyingGuideComponent]
+      imports: [BuyingGuideComponent]
     });
     fixture = TestBed.createComponent(BuyingGuideComponent);
     component = fixture.componentInstance;

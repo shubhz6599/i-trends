@@ -8,7 +8,7 @@ describe('FeedbackFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FeedbackFormComponent]
+      imports: [FeedbackFormComponent]
     });
     fixture = TestBed.createComponent(FeedbackFormComponent);
     component = fixture.componentInstance;

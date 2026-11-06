@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UiService } from 'src/app/services/ui.service';
 import { environment } from 'src/environments/environment';
-declare var Razorpay: any;
+import { SpinnerComponent } from '../spinner/spinner.component';
+import { RazorpayService } from 'src/app/services/razorpay.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, NgOptimizedImage, RouterLink, SpinnerComponent],
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.css'],
@@ -14,7 +18,12 @@ export class CartPageComponent implements OnInit {
   cartItems: any[] = [];
   totalAmount: number = 0;
 
-  constructor(private authService: AuthService, private router: Router, public uiService: UiService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public uiService: UiService,
+    private razorpayService: RazorpayService
+  ) { }
 
   ngOnInit(): void {
     this.fetchCartItems();
@@ -128,8 +137,13 @@ export class CartPageComponent implements OnInit {
             color: "#3399cc"
           }
         };
-        const razorpay = new Razorpay(options);
-        razorpay.open();
+        this.razorpayService.openCheckout(options).then(() => {
+          this.uiService.hideLoading();
+        }).catch(error => {
+          this.uiService.hideLoading();
+          this.uiService.showToast('Payment unavailable', 'Unable to open the payment gateway. Please try again.');
+          console.error('Unable to open Razorpay checkout', error);
+        });
       }
     });
   }

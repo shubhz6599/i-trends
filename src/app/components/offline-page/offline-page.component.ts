@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ConnectionService } from 'src/app/services/connection.service';
 
 @Component({
+  standalone: true,
   selector: 'app-offline-page',
   templateUrl: './offline-page.component.html',
   styleUrls: ['./offline-page.component.css']
